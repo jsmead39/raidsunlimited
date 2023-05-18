@@ -201,21 +201,21 @@ Resources:
                 - logs:PutLogEvents
                 - cloudwatch:PutMetricData
               Resource: '*'
-        - PolicyName: 'AccessPlaylistsTable'
+        - PolicyName: 'AccessUsersTable'
           PolicyDocument:
             Version: '2012-10-17'
             Statement:
             - Effect: Allow
               Action: dynamodb:*
-              Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/playlists"
+              Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/users"
                 
-        - PolicyName: 'AccessAlbumTracksTable'
+        - PolicyName: 'AccessRaidEventsTable'
           PolicyDocument:
             Version: '2012-10-17'
             Statement:
             - Effect: Allow
               Action: dynamodb:*
-              Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/album_tracks"
+              Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/raid_events"
 
   #-----------------------------------------------------
   # Lambda Functions Configuration
