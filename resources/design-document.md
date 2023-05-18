@@ -266,8 +266,8 @@ Attributes : email, preferredRoles
 • raidId (Partition key): String<p>
 • Date (GSI): Date
 
-Attributes : raidId, raidName, date, time, server, raidSize, requiredRoles, participants, raidObjective, List - 
-Feedback (userId, rating, comments)
+Attributes : raidId, raidName, date, time, server, raidSize, requiredRoles, participants, raidObjective, List - ,
+Feedback (userId, rating, comments)  ,  raidOwner
 
 
 **UserRaidsTable : This table allows us to fetch all raids a user has signed up for, and all users that have signed up for a particular raid.**
