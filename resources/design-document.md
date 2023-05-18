@@ -1,5 +1,5 @@
 Project Title Design
-1. Problem Statement
+## 1. Problem Statement
 
 Create a platform specifically for World of Warcraft Classic players to schedule and join raids hosted by other 
  users. The platform will serve as a centralized system for players to coordinate and participate in raiding activities within the game.
@@ -8,9 +8,7 @@ Create a platform specifically for World of Warcraft Classic players to schedule
 
    
 
-2. Top Questions to Resolve in Review
-   
-List the most important questions you have about your design, or things that you are still debating internally that you might like help working through.
+## 2. Top Questions to Resolve in Review
 
 API Integration : Can we leverage any existing World of Warcraft API's to pull data?
 
@@ -25,8 +23,8 @@ How can we design the platform to handle an increasing number of raids and users
 
 What features can we offer that would make users want to use our platform as opposed to another form of organization?
 
-3. Use Cases
-This is where we work backwards from the customer and define what our customers would like to do (and why). You may also include use cases for yourselves (as developers), or for the organization providing the product to customers.
+## 3. Use Cases
+
 
 U1. As a new Wow classic player on the platform, I want to setup a profile with my game details and raid preferences 
 so that I can be matched with appropriate raids.
@@ -62,8 +60,7 @@ U11. As a Wow classic player, I want to be able to remove myself from a raid sig
 
 
 
-4. Project Scope
-Clarify which parts of the problem you intend to solve. It helps reviewers know what questions to ask to make sure you are solving for what you say and stops discussions from getting sidetracked by aspects you do not intend to handle in your design.
+## 4. Project Scope
 
 4.1. In Scope
 Which parts of the problem defined in Sections 1 and 2 will you solve with this design? This should include the base functionality of your product. What pieces are required for your product to work?
@@ -87,8 +84,8 @@ overall rating(i.e. scale of 1 to 5)
 
 The functionality described above should be what your design is focused on. You do not need to include the design for any out of scope features or expansions.
 
-4.2. Out of Scope
-Based on your problem description in Sections 1 and 2, are there any aspects you are not planning to solve? Do potential expansions or related problems occur to you that you want to explicitly say you are not worrying about now? Feel free to put anything here that you think your team can't accomplish in the unit, but would love to do with more time.
+## 4.2. Out of Scope
+
 
 Raid Notification and Reminders:  Automated notifications such as rad details, starting times, changes to the raid, 
 or roster approval would help.  This could be complex and would not have time so currently out of scope.
@@ -108,13 +105,12 @@ Feedback:  Player feedback on the platform for future enhancements would be idea
 
 The functionality here does not need to be accounted for in your design.
 
-5. Proposed Architecture Overview
-Describe broadly how you are proposing to solve for the requirements you described in Section 2. This may include class diagram(s) showing what components you are planning to build. You should argue why this architecture (organization of components) is reasonable. That is, why it represents a good data flow and a good separation of concerns. Where applicable, argue why this architecture satisfies the stated requirements.
+## 5. Proposed Architecture Overview
 
 Database: DynamoDB database will be used to store user data, raid data, and other necessary information
 
 Frontend: Frontend will be developed as a web-based interface, we will use webpack for the majority of this and use 
-HTML, CSS, and Javascrip languages.  This will communicate with the backend using RESTful APIs
+HTML, CSS, and Javascript languages.  This will communicate with the backend using RESTful APIs
 
 Backend : Lambda Functions will handle operations for user registration, raid creating, raid search, role sign-up , 
 feedback, etc.  Each Lambda will be designed to handle a specific task.
@@ -136,7 +132,7 @@ this should make it easier to manage, test, and extend as needed.
 
 ![](architecture.png)
 
-6. API
+## 6. API
 
 6.0.1 Public Models
 ```
@@ -248,9 +244,8 @@ String comments;
 * If the raid ID is not found, will throw a `RaidEventNotFoundException`.
 
 
-7.0  Tables
+## 7.0  Tables
 
-Define the DynamoDB tables you will need for the data your service will use. It may be helpful to first think of what objects your service will need, then translate that to a table structure, like with the Playlist POJO versus the playlists table in the Unit 3 project.
 
 **Users Table: (This will contain profile information, class, role, logs link, etc)** <p>
 • userId (Partition key): String
@@ -274,6 +269,11 @@ Feedback (userId, rating, comments)
 Attributes : role, confirmed.
 
 
-8.0 Pages
+## 8.0 Pages
 
-Include mock-ups of the web pages you expect to build. These can be as sophisticated as mockups/wireframes using drawing software, or as simple as hand-drawn pictures that represent the key customer-facing components of the pages. It should be clear what the interactions will be on the page, especially where customers enter and submit data. You may want to accompany the mockups with some description of behaviors of the page (e.g. “When customer submits the submit-dog-photo button, the customer is sent to the doggie detail page”)
+![](homepage.png)
+![](MyRaids.png)
+![](RaidDetails.png)
+![](RaidSearch.png)
+![](UserProfile.png)
+
