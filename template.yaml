@@ -1,14 +1,14 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: >
-  Music Playlist Service
+  RaidsUnlimited
 
 Parameters:
 
   CognitoDomain:
     Type: String
     Description: A name for the cognito Domain
-    Default: "change-this-music-playlist-service-change-this"
+
 
   S3Bucket:
     Type: String
@@ -217,167 +217,72 @@ Resources:
               Action: dynamodb:*
               Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/raid_events"
 
+        - PolicyName: 'AccessUserRaidsTable'
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: dynamodb:*
+                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/user_raid"
+
   #-----------------------------------------------------
   # Lambda Functions Configuration
   #-----------------------------------------------------
 
-  GetPlaylistLambda:
-    Type: AWS::Serverless::Function
-    Properties:
-      Role: !GetAtt AccessRole.Arn
-      CodeUri: MusicPlaylistServiceLambda
-      Handler: com.nashss.se.musicplaylistservice.lambda.GetPlaylistLambda::handleRequest
-      Runtime: java11
-      Architectures:
-        - x86_64
-      MemorySize: 512
-      Environment:
-        Variables:
-          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
-      Events:
-        MusicPlaylistService:
-          Type: Api
-          Properties:
-            Path: /playlists/{id}
-            Method: get
-            Auth:
-              Authorizer: 'NONE'
 
-  SearchPlaylistsLambda:
-    Type: AWS::Serverless::Function
-    Properties:
-      Role: !GetAtt AccessRole.Arn
-      CodeUri: MusicPlaylistServiceLambda
-      Handler: com.nashss.se.musicplaylistservice.lambda.SearchPlaylistsLambda::handleRequest
-      Runtime: java11
-      Architectures:
-        - x86_64
-      MemorySize: 512
-      Environment:
-        Variables:
-          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
-      Events:
-        MusicPlaylistService:
-          Type: Api
-          Properties:
-            Path: /playlists/search
-            Method: get
-            Auth:
-              Authorizer: 'NONE'
-
-  GetPlaylistSongsLambda:
-    Type: AWS::Serverless::Function
-    Properties:
-      Role: !GetAtt AccessRole.Arn
-      CodeUri: MusicPlaylistServiceLambda
-      Handler: com.nashss.se.musicplaylistservice.lambda.GetPlaylistSongsLambda::handleRequest
-      Runtime: java11
-      Architectures:
-        - x86_64
-      MemorySize: 512
-      Environment:
-        Variables:
-          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
-      Events:
-        MusicPlaylistService:
-          Type: Api
-          Properties:
-            Path: /playlists/{id}/songs
-            Method: get
-            Auth:
-              Authorizer: 'NONE'
-
-  CreatePlaylistLambda:
-    Type: AWS::Serverless::Function
-    Properties:
-      Role: !GetAtt AccessRole.Arn
-      CodeUri: MusicPlaylistServiceLambda
-      Handler: com.nashss.se.musicplaylistservice.lambda.CreatePlaylistLambda::handleRequest
-      Runtime: java11
-      Architectures:
-        - x86_64
-      MemorySize: 512
-      Environment:
-        Variables:
-          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
-      Events:
-        MusicPlaylistService:
-          Type: Api
-          Properties:
-            Path: /playlists
-            Method: post
-
-  UpdatePlaylistLambda:
-    Type: AWS::Serverless::Function
-    Properties:
-      Role: !GetAtt AccessRole.Arn
-      CodeUri: MusicPlaylistServiceLambda
-      Handler: com.nashss.se.musicplaylistservice.lambda.UpdatePlaylistLambda::handleRequest
-      Runtime: java11
-      Architectures:
-        - x86_64
-      MemorySize: 512
-      Environment:
-        Variables:
-          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
-      Events:
-        MusicPlaylistService:
-          Type: Api
-          Properties:
-            Path: /playlists/{id}
-            Method: put
-
-  AddSongToPlaylistLambda:
-    Type: AWS::Serverless::Function
-    Properties:
-      Role: !GetAtt AccessRole.Arn
-      CodeUri: MusicPlaylistServiceLambda
-      Handler: com.nashss.se.musicplaylistservice.lambda.AddSongToPlaylistLambda::handleRequest
-      Runtime: java11
-      Architectures:
-        - x86_64
-      MemorySize: 512
-      Environment:
-        Variables:
-          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
-      Events:
-        MusicPlaylistService:
-          Type: Api
-          Properties:
-            Path: /playlists/{id}/songs
-            Method: post
 
   #-----------------------------------------------------
   # DynamoDB Configuration
   #-----------------------------------------------------
   
-  PlaylistsTable:
+  UsersTable:
     Type: AWS::DynamoDB::Table
     Properties:
       AttributeDefinitions:
-        - AttributeName: "id"
+        - AttributeName: "userId"
           AttributeType: "S"
       KeySchema:
-        - AttributeName: "id"
+        - AttributeName: "userId"
           KeyType: "HASH"
       BillingMode: "PAY_PER_REQUEST"
-      TableName: "playlists"
+      TableName: "users"
 
-  AlbumTracksTable:
+  RaidEventsTable:
     Type: AWS::DynamoDB::Table
     Properties:
       AttributeDefinitions:
-        - AttributeName: "asin"
+        - AttributeName: "raidId"
           AttributeType: "S"
-        - AttributeName: "track_number"
+        - AttributeName: "raidDate"
           AttributeType: "N"
       KeySchema:
-        - AttributeName: "asin"
+        - AttributeName: "raidId"
           KeyType: "HASH"
-        - AttributeName: "track_number"
+      GlobalSecondaryIndexes:
+        - IndexName: "RaidDateIndex"
+          KeySchema:
+            - AttributeName: "raidDate"
+              KeyType: "HASH"
+          Projection:
+            ProjectionType: "ALL"
+      BillingMode: "PAY_PER_REQUEST"
+      TableName: "raid_events"
+
+  UserRaidTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: "userId"
+          AttributeType: "S"
+        - AttributeName: "raidId"
+          AttributeType: "S"
+      KeySchema:
+        - AttributeName: "userId"
+          KeyType: "HASH"
+        - AttributeName: "raidId"
           KeyType: "RANGE"
       BillingMode: "PAY_PER_REQUEST"
-      TableName: "album_tracks"
+      TableName: "user_raid"
 
 #-----------------------------------------------------
 # The outputs defined below will be printed
