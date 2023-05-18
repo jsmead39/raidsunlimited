@@ -1,19 +1,33 @@
 {
+  "RequestItems": {
     "user_raid": [
       {
-          "userId": "user1",
-          "raidId": "raid1",
-          "confirmed": true
+        "PutRequest": {
+          "Item": {
+            "userId": {"S": "user1"},
+            "raidId": {"S": "raid1"},
+            "confirmed": {"BOOL": true}
+          }
+        }
       },
       {
-          "userId": "user2",
-          "raidId": "raid1",
-          "confirmed": false
+        "PutRequest": {
+          "Item": {
+            "userId": {"S": "user2"},
+            "raidId": {"S": "raid1"},
+            "confirmed": {"BOOL": false}
+          }
+        }
       },
       {
-          "userId": "user1",
-          "raidId": "raid2",
-          "confirmed": true
+        "PutRequest": {
+          "Item": {
+            "userId": {"S": "user1"},
+            "raidId": {"S": "raid2"},
+            "confirmed": {"BOOL": true}
+          }
+        }
       }
     ]
+  }
 }
