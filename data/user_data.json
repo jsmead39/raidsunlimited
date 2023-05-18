@@ -1,5 +1,4 @@
 {
-  "RequestItems": {
     "users": [
       {
         "PutRequest": {
@@ -39,4 +38,3 @@
       }
     ]
   }
-}

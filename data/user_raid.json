@@ -1,5 +1,4 @@
 {
-  "RequestItems": {
     "user_raid": [
       {
         "PutRequest": {
@@ -30,4 +29,3 @@
       }
     ]
   }
-}
