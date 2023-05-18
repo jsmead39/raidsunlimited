@@ -243,6 +243,15 @@ String comments;
 * Accepts a raidId and returns a list of Feedback models for the raid.
 * If the raid ID is not found, will throw a `RaidEventNotFoundException`.
 
+6.14. User Profile Retrieval
+* Accepts `GET` requests to `/users/:userId`
+* Accepts a userId and returns the corresponding User model.
+* If the given user ID is not found, will throw a `UserProfileNotFoundException`.
+
+6.15. Get User's Raid History Endpoint
+* Accepts `GET` requests to `/users/:userId/raids`
+* Accepts a userId and returns a list of RaidEvent models the user has signed up for.
+* If the user ID is not found, will throw a `UserProfileNotFoundException`.
 
 ## 7.0  Tables
 
@@ -257,8 +266,8 @@ Attributes : email, preferredRoles
 • raidId (Partition key): String<p>
 • Date (GSI): Date
 
-Attributes : raidId, raidName, date, time, server, raidSize, requiredRoles, participants, raidObjective, List - 
-Feedback (userId, rating, comments)
+Attributes : raidId, raidName, date, time, server, raidSize, requiredRoles, participants, raidObjective, List - ,
+Feedback (userId, rating, comments)  ,  raidOwner
 
 
 **UserRaidsTable : This table allows us to fetch all raids a user has signed up for, and all users that have signed up for a particular raid.**

@@ -1,0 +1,28 @@
+{
+    "users": [
+      {
+          "userId": "user1",
+          "displayName": "DragonSlayer",
+          "email": "dragonslayer@test.com",
+          "class": "Warrior",
+          "preferredRoles": ["Tank", "DPS"],
+          "logs": "https://logs.fakesite.com/user1"
+      },
+      {
+          "userId": "user2",
+          "displayName": "MillHouseManaStorm",
+          "email": "millhouse@test.com",
+          "class": "Mage",
+          "preferredRoles": ["DPS"],
+          "logs": "https://logs.fakesite.com/user2"
+      },
+      {
+        "userId": "user3",
+        "displayName": "StabbyMcStab",
+        "email": "stabby@test.com",
+        "class": "Rogue",
+        "preferredRoles": ["DPS"],
+        "logs": "https://logs.fakesite.com/user3"
+      }
+    ]
+}

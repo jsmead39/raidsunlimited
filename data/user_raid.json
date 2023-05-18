@@ -1,0 +1,19 @@
+{
+    "user_raid": [
+      {
+          "userId": "user1",
+          "raidId": "raid1",
+          "confirmed": true
+      },
+      {
+          "userId": "user2",
+          "raidId": "raid1",
+          "confirmed": false
+      },
+      {
+          "userId": "user1",
+          "raidId": "raid2",
+          "confirmed": true
+      }
+    ]
+}

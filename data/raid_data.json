@@ -1,0 +1,53 @@
+{
+    "raid_events": [
+      {
+            "raidId": "raid1",
+            "raidName": "Ulduar",
+            "raidDate": "2023-06-17",
+            "time": "19:00",
+            "server": "Whitemane",
+            "raidSize": 10,
+            "requiredRoles": [
+                {"role": "Tank", "number": 2},
+                {"role": "Healer", "number": 2},
+                {"role": "Damage", "number": 6}
+            ],
+            "participants": [],
+            "raidObjective": "Full Clear",
+            "lootDistribution": "Open Roll",
+            "feedback": [
+                {
+                    "userId": "user1",
+                    "rating": 5,
+                    "comments": "Great raid, well organized!"
+                },
+                {
+                    "userId": "user2",
+                    "rating": 4,
+                    "comments": "Good raid but could've finished sooner if we started on time."
+                }
+            ],
+            "raidStatus": "Completed",
+            "raidOwner": "user1"
+        },
+        {
+            "raidId": "raid2",
+            "raidName": "Ulduar",
+            "raidDate": "2023-06-18",
+            "time": "19:00",
+            "server": "Whitemane",
+            "raidSize": 25,
+            "requiredRoles": [
+                {"role": "Tank", "number": 2},
+                {"role": "Healer", "number": 5},
+                {"role": "Damage", "number": 18}
+            ],
+            "participants": [],
+            "raidObjective": "Progression",
+            "lootDistribution": "GDKP",
+            "feedback": [],
+            "raidStatus": "Pending",
+            "raidOwner": "user2"
+        }
+    ]
+}
