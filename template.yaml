@@ -272,7 +272,7 @@ Resources:
         - AttributeName: "raidId"
           AttributeType: "S"
         - AttributeName: "raidDate"
-          AttributeType: "S"
+          AttributeType: "N"
       KeySchema:
         - AttributeName: "raidId"
           KeyType: "HASH"
