@@ -140,9 +140,11 @@ this should make it easier to manage, test, and extend as needed.
 // UserModel
 
 String userId;
+String displayName;
 String email;
+String class;
 List<String> preferredRoles;
-List<String> raidHistory;
+String logs;
 ```
 
 ```
@@ -151,14 +153,15 @@ List<String> raidHistory;
 
 String raidId;
 String raidName;
-String date;
+Date raidDate;
 String time;
 String server;
-Integer raidSize;
+String raidSize;
 String raidObjectives;
-List<String> requiredRoles;
+Map<String, Integer> requiredRoles;
 List<ParticpantModel> participants;
 List<FeedbackModel> feedback;
+String raidOwner;
 ```
 
 ```
@@ -259,14 +262,14 @@ String comments;
 **Users Table: (This will contain profile information, class, role, logs link, etc)** <p>
 • userId (Partition key): String
 
-Attributes : email, preferredRoles
+Attributes : email, class, preferredRoles, logs
 
 **Raids Table:  Query raids based on the date.**
 
 • raidId (Partition key): String<p>
-• Date (GSI): Date
+• Date (GSI): Number
 
-Attributes : raidId, raidName, date, time, server, raidSize, requiredRoles, participants, raidObjective, List - ,
+Attributes : raidName, date, time, server, raidSize, requiredRoles, participants, raidObjective, List - ,
 Feedback (userId, rating, comments)  ,  raidOwner
 
 

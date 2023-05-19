@@ -5,7 +5,7 @@
           "Item": {
             "raidId": {"S": "raid1"},
             "raidName": {"S": "Ulduar"},
-            "raidDate": {"S": "2023-06-17"},
+            "raidDate": {"N": "1676448000"},
             "time": {"S": "19:00"},
             "server": {"S": "Whitemane"},
             "raidSize": {"N": "10"},
@@ -31,7 +31,7 @@
           "Item": {
             "raidId": {"S": "raid2"},
             "raidName": {"S": "Ulduar"},
-            "raidDate": {"S": "2023-06-18"},
+            "raidDate": {"N": "1676534400"},
             "time": {"S": "19:00"},
             "server": {"S": "Whitemane"},
             "raidSize": {"N": "25"},
