@@ -1,14 +1,12 @@
 package raidsunlimited.dynamodb.models;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.*;
-import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import raidsunlimited.converters.FeedBackModelConverter;
 import raidsunlimited.converters.RequiredRoleModelConverter;
 import raidsunlimited.models.FeedbackModel;
 import raidsunlimited.models.RequiredRoleModel;
 
 import java.util.List;
-import java.util.Map;
 
 @DynamoDBTable(tableName = "raid_events")
 public class RaidEvent {
