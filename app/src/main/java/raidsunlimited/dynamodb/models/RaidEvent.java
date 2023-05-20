@@ -1,10 +1,11 @@
 package raidsunlimited.dynamodb.models;
 
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBIndexHashKey;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
+import com.amazonaws.services.dynamodbv2.datamodeling.*;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
+import raidsunlimited.converters.FeedBackModelConverter;
+import raidsunlimited.converters.RequiredRoleModelConverter;
+import raidsunlimited.models.FeedbackModel;
+import raidsunlimited.models.RequiredRoleModel;
 
 import java.util.List;
 import java.util.Map;
@@ -18,9 +19,9 @@ public class RaidEvent {
     private Integer raidSize;
     private String raidObjective;
     private String lootDistribution;
-    private List<Map<String, AttributeValue>> requiredRoles;
+    private List<RequiredRoleModel> requiredRoles;
     private List<String> participants;
-    private List<Map<String, AttributeValue>> feedback;
+    private List<FeedbackModel> feedback;
     private String raidOwner;
     private String raidStatus;
 
@@ -86,12 +87,13 @@ public class RaidEvent {
         this.lootDistribution = lootDistribution;
     }
 
+    @DynamoDBTypeConverted(converter = RequiredRoleModelConverter.class)
     @DynamoDBAttribute(attributeName = "requiredRoles")
-    public List<Map<String, AttributeValue>> getRequiredRoles() {
+    public List<RequiredRoleModel> getRequiredRoles() {
         return requiredRoles;
     }
 
-    public void setRequiredRoles(List<Map<String, AttributeValue>> requiredRoles) {
+    public void setRequiredRoles(List<RequiredRoleModel> requiredRoles) {
         this.requiredRoles = requiredRoles;
     }
 
@@ -104,12 +106,13 @@ public class RaidEvent {
         this.participants = participants;
     }
 
+    @DynamoDBTypeConverted(converter = FeedBackModelConverter.class)
     @DynamoDBAttribute(attributeName = "feedback")
-    public List<Map<String, AttributeValue>> getFeedback() {
+    public List<FeedbackModel> getFeedback() {
         return feedback;
     }
 
-    public void setFeedback(List<Map<String, AttributeValue>> feedback) {
+    public void setFeedback(List<FeedbackModel> feedback) {
         this.feedback = feedback;
     }
 
