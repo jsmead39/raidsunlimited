@@ -3,6 +3,7 @@ package raidsunlimited.activity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import raidsunlimited.activity.requests.CreateRaidRequest;
+import raidsunlimited.activity.results.CreateRaidResult;
 import raidsunlimited.converters.ModelConverter;
 import raidsunlimited.dynamodb.RaidDao;
 import raidsunlimited.dynamodb.models.RaidEvent;
@@ -28,7 +29,7 @@ public class CreateRaidActivity {
         this.raidDao = raidDao;
     }
 
-    public CreateRaidActivity handleRequest(final CreateRaidRequest createRaidRequest) {
+    public CreateRaidResult handleRequest(final CreateRaidRequest createRaidRequest) {
         log.info("Received CreateRaidActivity Request{}", createRaidRequest);
 
 
@@ -52,7 +53,7 @@ public class CreateRaidActivity {
         RaidModel raidModel = new ModelConverter().toRaidModel(raidEvent);
 
         return CreateRaidResult.builder()
-                .withRaidEvent(raidModel)
+                .withRaid(raidModel)
                 .build();
     }
 
