@@ -7,6 +7,9 @@ import raidsunlimited.models.RaidModel;
 import raidsunlimited.models.RequiredRoleModel;
 
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -47,8 +50,8 @@ public class ModelConverter {
     }
 
     private String convertLongToDate(Long epoch) {
-        Date date = new Date(epoch);
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        return format.format(date);
+        Instant instant = Instant.ofEpochMilli(epoch);
+        ZonedDateTime convertedDate = ZonedDateTime.ofInstant(instant, ZoneId.of("America/Los_Angeles"));
+        return convertedDate.toLocalDate().toString();
     }
 }

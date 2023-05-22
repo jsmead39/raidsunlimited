@@ -12,6 +12,10 @@ import raidsunlimited.utils.ServiceUtils;
 
 import javax.inject.Inject;
 import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
@@ -59,7 +63,8 @@ public class CreateRaidActivity {
 
     private Long parseDateToLong(String dateString) {
         try {
-            Instant dateInstant = Instant.parse(dateString);
+            LocalDate date = LocalDate.parse(dateString, DateTimeFormatter.ISO_LOCAL_DATE);
+            Instant dateInstant = date.atStartOfDay(ZoneId.of("America/Los_Angeles")).toInstant();
             return dateInstant.toEpochMilli();
         } catch (DateTimeParseException e) {
             throw new IllegalArgumentException("Invalid date format");
