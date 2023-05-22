@@ -6,21 +6,21 @@ import java.util.Objects;
 public class RaidModel {
     private final String raidId;
     private final String raidName;
-    private final Long raidDate;
+    private final String raidDate;
     private final String time;
     private final Integer raidSize;
     private final String raidObjective;
     private final String lootDistribution;
     private final List<RequiredRoleModel> requiredRoles;
-    private final List<ParticipantModel> participants;
+    private final List<String> participants;
     private final List<FeedbackModel> feedback;
     private final String raidOwner;
     private final String raidStatus;
 
-    private RaidModel(String raidId, String raidName, Long raidDate, String time, Integer raidSize,
+    private RaidModel(String raidId, String raidName, String raidDate, String time, Integer raidSize,
                       String raidObjective,
                      String lootDistribution, List<RequiredRoleModel> requiredRoles,
-                     List<ParticipantModel> participants, List<FeedbackModel> feedback, String raidOwner,
+                     List<String> participants, List<FeedbackModel> feedback, String raidOwner,
                      String raidStatus) {
         this.raidId = raidId;
         this.raidName = raidName;
@@ -44,7 +44,7 @@ public class RaidModel {
         return raidName;
     }
 
-    public Long getRaidDate() {
+    public String getRaidDate() {
         return raidDate;
     }
 
@@ -68,7 +68,7 @@ public class RaidModel {
         return requiredRoles;
     }
 
-    public List<ParticipantModel> getParticipants() {
+    public List<String> getParticipants() {
         return participants;
     }
 
@@ -113,13 +113,13 @@ public class RaidModel {
     public static class Builder {
         private String raidId;
         private String raidName;
-        private Long raidDate;
+        private String raidDate;
         private String time;
         private Integer raidSize;
         private String raidObjective;
         private String lootDistribution;
         private List<RequiredRoleModel> requiredRoles;
-        private List<ParticipantModel> participants;
+        private List<String> participants;
         private List<FeedbackModel> feedback;
         private String raidOwner;
         private String raidStatus;
@@ -134,7 +134,7 @@ public class RaidModel {
             return this;
         }
 
-        public Builder withRaidDate(Long raidDate) {
+        public Builder withRaidDate(String raidDate) {
             this.raidDate = raidDate;
             return this;
         }
@@ -164,7 +164,7 @@ public class RaidModel {
             return this;
         }
 
-        public Builder withParticipant(List<ParticipantModel> participant) {
+        public Builder withParticipant(List<String> participant) {
             this.participants = participant;
             return this;
         }

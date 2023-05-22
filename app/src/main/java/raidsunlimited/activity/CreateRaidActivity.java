@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import raidsunlimited.activity.requests.CreateRaidRequest;
 import raidsunlimited.converters.FeedBackModelConverter;
+import raidsunlimited.converters.ModelConverter;
 import raidsunlimited.dynamodb.models.RaidEvent;
 import raidsunlimited.models.RaidModel;
 import raidsunlimited.utils.ServiceUtils;
@@ -48,7 +49,7 @@ public class CreateRaidActivity {
 
         raidDao.saveRaid(raidEvent);
 
-        RaidModel raidModel = new FeedBackModelConverter().toRaidModel(raidEvent);
+        RaidModel raidModel = new ModelConverter().toRaidModel(raidEvent);
 
         return CreateRaidResult.builder()
                 .withRaidEvent(raidModel)
