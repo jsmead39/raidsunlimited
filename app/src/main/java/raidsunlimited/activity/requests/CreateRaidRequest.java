@@ -8,9 +8,8 @@ import java.util.List;
 
 @JsonDeserialize(builder = CreateRaidRequest.Builder.class)
 public class CreateRaidRequest {
-    private final String raidId;
     private final String raidName;
-    private final Long raidDate;
+    private final String raidDate;
     private final String time;
     private final Integer raidSize;
     private final String raidObjective;
@@ -18,10 +17,9 @@ public class CreateRaidRequest {
     private final List<RequiredRoleModel> requiredRoles;
     private final String raidOwner;
 
-    private CreateRaidRequest(String raidId, String raidName, Long raidDate, String time, Integer raidSize,
+    private CreateRaidRequest(String raidName, String raidDate, String time, Integer raidSize,
                              String raidObjective, String lootDistribution, List<RequiredRoleModel> requiredRoles,
                              String raidOwner) {
-        this.raidId = raidId;
         this.raidName = raidName;
         this.raidDate = raidDate;
         this.time = time;
@@ -32,15 +30,12 @@ public class CreateRaidRequest {
         this.raidOwner = raidOwner;
     }
 
-    public String getRaidId() {
-        return raidId;
-    }
 
     public String getRaidName() {
         return raidName;
     }
 
-    public Long getRaidDate() {
+    public String getRaidDate() {
         return raidDate;
     }
 
@@ -72,7 +67,6 @@ public class CreateRaidRequest {
     @Override
     public String toString() {
         return "CreateRaidRequest{" +
-                "raidId='" + raidId + '\'' +
                 ", raidName='" + raidName + '\'' +
                 ", raidDate=" + raidDate +
                 ", time='" + time + '\'' +
@@ -92,9 +86,8 @@ public class CreateRaidRequest {
 
     @JsonPOJOBuilder
     public static class Builder {
-        private String raidId;
         private String raidName;
-        private Long raidDate;
+        private String raidDate;
         private String time;
         private Integer raidSize;
         private String raidObjective;
@@ -102,16 +95,11 @@ public class CreateRaidRequest {
         private List<RequiredRoleModel> requiredRoles;
         private String raidOwner;
 
-        public Builder withRaidId(String raidId) {
-            this.raidId = raidId;
-            return this;
-        }
-
         public Builder withRaidName(String raidName) {
             this.raidName = raidName;
             return this;
         }
-        public Builder withRaidDate(Long raidDate) {
+        public Builder withRaidDate(String raidDate) {
             this.raidDate = raidDate;
             return this;
         }
@@ -142,7 +130,7 @@ public class CreateRaidRequest {
         }
 
         public CreateRaidRequest build() {
-            return new CreateRaidRequest(raidId, raidName, raidDate, time, raidSize, raidObjective, lootDistribution,
+            return new CreateRaidRequest(raidName, raidDate, time, raidSize, raidObjective, lootDistribution,
                     requiredRoles, raidOwner);
         }
     }
