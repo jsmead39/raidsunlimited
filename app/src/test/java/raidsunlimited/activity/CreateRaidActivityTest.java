@@ -62,5 +62,12 @@ class CreateRaidActivityTest {
         assertNotNull(result.getRaid().getRaidId());
         assertEquals(inputName, result.getRaid().getRaidName());
         assertEquals(inputDate, result.getRaid().getRaidDate());
+        assertEquals(inputTime, result.getRaid().getTime());
+        assertEquals(inputRaidSize, result.getRaid().getRaidSize());
+        assertEquals(inputRaidObjective, result.getRaid().getRaidObjective());
+        assertEquals(inputLootDistribution, result.getRaid().getLootDistribution());
+        assertEquals(inputRoles, result.getRaid().getRequiredRoles());
+        assertEquals(inputRaidOwner, result.getRaid().getRaidOwner());
+        assertEquals("Pending", result.getRaid().getRaidStatus());
     }
 }
