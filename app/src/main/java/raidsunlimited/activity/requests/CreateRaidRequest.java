@@ -14,11 +14,11 @@ public class CreateRaidRequest {
     private final Integer raidSize;
     private final String raidObjective;
     private final String lootDistribution;
-    private final List<RequiredRoleModel> requiredRoles;
+    private final List<String> requiredRoles;
     private final String raidOwner;
 
     private CreateRaidRequest(String raidName, String raidDate, String time, Integer raidSize,
-                             String raidObjective, String lootDistribution, List<RequiredRoleModel> requiredRoles,
+                             String raidObjective, String lootDistribution, List<String> requiredRoles,
                              String raidOwner) {
         this.raidName = raidName;
         this.raidDate = raidDate;
@@ -55,7 +55,7 @@ public class CreateRaidRequest {
         return lootDistribution;
     }
 
-    public List<RequiredRoleModel> getRequiredRoles() {
+    public List<String> getRequiredRoles() {
         return requiredRoles;
     }
 
@@ -92,7 +92,7 @@ public class CreateRaidRequest {
         private Integer raidSize;
         private String raidObjective;
         private String lootDistribution;
-        private List<RequiredRoleModel> requiredRoles;
+        private List<String> requiredRoles;
         private String raidOwner;
 
         public Builder withRaidName(String raidName) {
@@ -120,7 +120,7 @@ public class CreateRaidRequest {
             this.lootDistribution = lootDistribution;
             return this;
         }
-        public Builder withRequiredRoles(List<RequiredRoleModel> requiredRoles) {
+        public Builder withRequiredRoles(List<String> requiredRoles) {
             this.requiredRoles = requiredRoles;
             return this;
         }

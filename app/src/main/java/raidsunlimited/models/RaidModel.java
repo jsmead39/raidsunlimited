@@ -11,7 +11,7 @@ public class RaidModel {
     private final Integer raidSize;
     private final String raidObjective;
     private final String lootDistribution;
-    private final List<RequiredRoleModel> requiredRoles;
+    private final List<String> requiredRoles;
     private final List<String> participants;
     private final List<FeedbackModel> feedback;
     private final String raidOwner;
@@ -19,7 +19,7 @@ public class RaidModel {
 
     private RaidModel(String raidId, String raidName, String raidDate, String time, Integer raidSize,
                       String raidObjective,
-                     String lootDistribution, List<RequiredRoleModel> requiredRoles,
+                     String lootDistribution, List<String> requiredRoles,
                      List<String> participants, List<FeedbackModel> feedback, String raidOwner,
                      String raidStatus) {
         this.raidId = raidId;
@@ -64,7 +64,7 @@ public class RaidModel {
         return lootDistribution;
     }
 
-    public List<RequiredRoleModel> getRequiredRoles() {
+    public List<String> getRequiredRoles() {
         return requiredRoles;
     }
 
@@ -118,7 +118,7 @@ public class RaidModel {
         private Integer raidSize;
         private String raidObjective;
         private String lootDistribution;
-        private List<RequiredRoleModel> requiredRoles;
+        private List<String> requiredRoles;
         private List<String> participants;
         private List<FeedbackModel> feedback;
         private String raidOwner;
@@ -159,7 +159,7 @@ public class RaidModel {
             return this;
         }
 
-        public Builder withRequiredRoles(List<RequiredRoleModel> requiredRoles) {
+        public Builder withRequiredRoles(List<String> requiredRoles) {
             this.requiredRoles = requiredRoles;
             return this;
         }

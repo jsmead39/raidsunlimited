@@ -23,15 +23,6 @@ public class ModelConverter {
             participants = new ArrayList<>();
         }
 
-        List<FeedbackModel> feedback = raidEvent.getFeedback();
-        if (feedback == null) {
-            feedback = new ArrayList<>();
-        }
-
-        List<RequiredRoleModel> requiredRoles = raidEvent.getRequiredRoles();
-        if (requiredRoles == null) {
-            requiredRoles = new ArrayList<>();
-        }
 
         return RaidModel.builder()
                 .withRaidId(raidEvent.getRaidId())
@@ -41,9 +32,9 @@ public class ModelConverter {
                 .withRaidSize(raidEvent.getRaidSize())
                 .withRaidObjective(raidEvent.getRaidObjective())
                 .withLootDistribution(raidEvent.getLootDistribution())
-                .withRequiredRoles(requiredRoles)
+                .withRequiredRoles(raidEvent.getRequiredRoles())
                 .withParticipant(participants)
-                .withFeedback(feedback)
+                .withFeedback(new ArrayList<>())
                 .withRaidOwner(raidEvent.getRaidOwner())
                 .withRaidStatus(raidEvent.getRaidStatus())
                 .build();

@@ -1,10 +1,6 @@
 package raidsunlimited.dynamodb.models;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.*;
-import raidsunlimited.converters.FeedBackModelConverter;
-import raidsunlimited.converters.RequiredRoleModelConverter;
-import raidsunlimited.models.FeedbackModel;
-import raidsunlimited.models.RequiredRoleModel;
 
 import java.util.List;
 
@@ -17,9 +13,9 @@ public class RaidEvent {
     private Integer raidSize;
     private String raidObjective;
     private String lootDistribution;
-    private List<RequiredRoleModel> requiredRoles;
+    private List<String> requiredRoles;
     private List<String> participants;
-    private List<FeedbackModel> feedback;
+    private List<String> feedback;
     private String raidOwner;
     private String raidStatus;
 
@@ -85,13 +81,12 @@ public class RaidEvent {
         this.lootDistribution = lootDistribution;
     }
 
-    @DynamoDBTypeConverted(converter = RequiredRoleModelConverter.class)
     @DynamoDBAttribute(attributeName = "requiredRoles")
-    public List<RequiredRoleModel> getRequiredRoles() {
+    public List<String> getRequiredRoles() {
         return requiredRoles;
     }
 
-    public void setRequiredRoles(List<RequiredRoleModel> requiredRoles) {
+    public void setRequiredRoles(List<String> requiredRoles) {
         this.requiredRoles = requiredRoles;
     }
 
@@ -104,13 +99,12 @@ public class RaidEvent {
         this.participants = participants;
     }
 
-    @DynamoDBTypeConverted(converter = FeedBackModelConverter.class)
     @DynamoDBAttribute(attributeName = "feedback")
-    public List<FeedbackModel> getFeedback() {
+    public List<String> getFeedback() {
         return feedback;
     }
 
-    public void setFeedback(List<FeedbackModel> feedback) {
+    public void setFeedback(List<String> feedback) {
         this.feedback = feedback;
     }
 
