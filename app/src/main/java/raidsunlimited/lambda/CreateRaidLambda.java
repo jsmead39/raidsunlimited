@@ -13,8 +13,10 @@ public class CreateRaidLambda
         return super.runActivity(
                 () -> {
                     CreateRaidRequest unauthenticatedRequest = input.fromBody(CreateRaidRequest.class);
-                    return input.fromUserClaims(claims ->
-                            CreateRaidRequest.builder()
+                    return input.fromUserClaims(claims -> {
+                                    String raidOwner = claims.containsKey("email") ? claims.get("email") :
+                                            unauthenticatedRequest.getRaidOwner();
+                            return CreateRaidRequest.builder()
                                     .withRaidName(unauthenticatedRequest.getRaidName())
                                     .withRaidDate(unauthenticatedRequest.getRaidDate())
                                     .withTime(unauthenticatedRequest.getTime())
@@ -22,8 +24,9 @@ public class CreateRaidLambda
                                     .withRaidObjective(unauthenticatedRequest.getRaidObjective())
                                     .withLootDistribution(unauthenticatedRequest.getLootDistribution())
                                     .withRequiredRoles(unauthenticatedRequest.getRequiredRoles())
-                                    .withRaidOwner(claims.get("email"))
-                                    .build());
+                                    .withRaidOwner(raidOwner)
+                                    .build();
+                    });
                 },
                 (request, serviceComponent) ->
                         serviceComponent.provideCreateRaidActivity().handleRequest(request)
