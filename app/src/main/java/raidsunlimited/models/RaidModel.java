@@ -1,6 +1,8 @@
 package raidsunlimited.models;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class RaidModel {
@@ -11,7 +13,7 @@ public class RaidModel {
     private final Integer raidSize;
     private final String raidObjective;
     private final String lootDistribution;
-    private final List<String> requiredRoles;
+    private final Map<String, Integer> requiredRoles;
     private final List<String> participants;
     private final List<FeedbackModel> feedback;
     private final String raidOwner;
@@ -19,7 +21,7 @@ public class RaidModel {
 
     private RaidModel(String raidId, String raidName, String raidDate, String time, Integer raidSize,
                       String raidObjective,
-                     String lootDistribution, List<String> requiredRoles,
+                     String lootDistribution, Map<String, Integer> requiredRoles,
                      List<String> participants, List<FeedbackModel> feedback, String raidOwner,
                      String raidStatus) {
         this.raidId = raidId;
@@ -64,7 +66,7 @@ public class RaidModel {
         return lootDistribution;
     }
 
-    public List<String> getRequiredRoles() {
+    public Map<String, Integer> getRequiredRoles() {
         return requiredRoles;
     }
 
@@ -118,7 +120,7 @@ public class RaidModel {
         private Integer raidSize;
         private String raidObjective;
         private String lootDistribution;
-        private List<String> requiredRoles;
+        private Map<String, Integer> requiredRoles;
         private List<String> participants;
         private List<FeedbackModel> feedback;
         private String raidOwner;
@@ -159,7 +161,7 @@ public class RaidModel {
             return this;
         }
 
-        public Builder withRequiredRoles(List<String> requiredRoles) {
+        public Builder withRequiredRoles(Map<String, Integer> requiredRoles) {
             this.requiredRoles = requiredRoles;
             return this;
         }
@@ -170,7 +172,7 @@ public class RaidModel {
         }
 
         public Builder withFeedback(List<FeedbackModel> feedback) {
-            this.feedback = feedback;
+            this.feedback = feedback != null ? feedback : new ArrayList<>();
             return this;
         }
 

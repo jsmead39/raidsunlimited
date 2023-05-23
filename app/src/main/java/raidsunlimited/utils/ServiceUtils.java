@@ -6,13 +6,19 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.regex.Pattern;
 
 public class ServiceUtils {
-    private static final Pattern INVALID_CHARACTER_PATTERN = Pattern.compile("[\"'\\\\]");
     static final int RAIDEVENT_ID_LENGTH = 5;
+    private static final Pattern INVALID_CHARACTER_PATTERN = Pattern.compile("[\"'\\\\]");
+
 
     private ServiceUtils() {
 
     }
 
+    /**
+     *
+     * @param stringToValidate Input string
+     * @return return true if String is valid,  false if it contains any invalid characters
+     */
     public static boolean isValidString(String stringToValidate) {
         if (StringUtils.isBlank(stringToValidate)) {
             return false;
@@ -21,6 +27,10 @@ public class ServiceUtils {
         }
     }
 
+    /**
+     * Generates a randomalphanumeric Id
+     * @return randomId as a String
+     */
     public static String generateRandomId() {
         return RandomStringUtils.randomAlphanumeric(5);
     }

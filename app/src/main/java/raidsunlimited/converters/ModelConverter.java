@@ -10,19 +10,13 @@ import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class ModelConverter {
 
     public RaidModel toRaidModel(RaidEvent raidEvent) {
         String formattedDate = convertLongToDate(raidEvent.getRaidDate());
-        List<String> participants = raidEvent.getParticipants();
-        if (participants == null) {
-            participants = new ArrayList<>();
-        }
-
+        Map<String, Integer> requiredRoles = convertListToMap(raidEvent.getRequiredRoles());
 
         return RaidModel.builder()
                 .withRaidId(raidEvent.getRaidId())
@@ -32,9 +26,9 @@ public class ModelConverter {
                 .withRaidSize(raidEvent.getRaidSize())
                 .withRaidObjective(raidEvent.getRaidObjective())
                 .withLootDistribution(raidEvent.getLootDistribution())
-                .withRequiredRoles(raidEvent.getRequiredRoles())
-                .withParticipant(participants)
-                .withFeedback(new ArrayList<>())
+                .withRequiredRoles(requiredRoles)
+                .withParticipant(raidEvent.getParticipants())
+                .withFeedback(raidEvent.getFeedback())
                 .withRaidOwner(raidEvent.getRaidOwner())
                 .withRaidStatus(raidEvent.getRaidStatus())
                 .build();
@@ -44,5 +38,18 @@ public class ModelConverter {
         Instant instant = Instant.ofEpochMilli(epoch);
         ZonedDateTime convertedDate = ZonedDateTime.ofInstant(instant, ZoneId.of("America/Los_Angeles"));
         return convertedDate.toLocalDate().toString();
+    }
+
+    private Map<String, Integer> convertListToMap(List<String> roles) {
+        Map<String, Integer> result = new HashMap<>();
+        for (String entry : roles) {
+            String[] split = entry.split(" ");
+            if (split.length == 2) {
+                String role = split[0];
+                int value = Integer.parseInt(split[1]);
+                result.put(role, value);
+            }
+        }
+        return result;
     }
 }

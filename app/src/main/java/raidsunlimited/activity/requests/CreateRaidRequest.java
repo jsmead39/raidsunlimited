@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import raidsunlimited.models.RequiredRoleModel;
 
 import java.util.List;
+import java.util.Map;
 
 @JsonDeserialize(builder = CreateRaidRequest.Builder.class)
 public class CreateRaidRequest {
@@ -14,11 +15,11 @@ public class CreateRaidRequest {
     private final Integer raidSize;
     private final String raidObjective;
     private final String lootDistribution;
-    private final List<String> requiredRoles;
+    private final Map<String, Integer> requiredRoles;
     private final String raidOwner;
 
     private CreateRaidRequest(String raidName, String raidDate, String time, Integer raidSize,
-                             String raidObjective, String lootDistribution, List<String> requiredRoles,
+                             String raidObjective, String lootDistribution, Map<String, Integer> requiredRoles,
                              String raidOwner) {
         this.raidName = raidName;
         this.raidDate = raidDate;
@@ -55,7 +56,7 @@ public class CreateRaidRequest {
         return lootDistribution;
     }
 
-    public List<String> getRequiredRoles() {
+    public Map<String, Integer> getRequiredRoles() {
         return requiredRoles;
     }
 
@@ -92,7 +93,7 @@ public class CreateRaidRequest {
         private Integer raidSize;
         private String raidObjective;
         private String lootDistribution;
-        private List<String> requiredRoles;
+        private Map<String, Integer> requiredRoles;
         private String raidOwner;
 
         public Builder withRaidName(String raidName) {
@@ -120,7 +121,7 @@ public class CreateRaidRequest {
             this.lootDistribution = lootDistribution;
             return this;
         }
-        public Builder withRequiredRoles(List<String> requiredRoles) {
+        public Builder withRequiredRoles(Map<String, Integer> requiredRoles) {
             this.requiredRoles = requiredRoles;
             return this;
         }

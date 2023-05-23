@@ -18,6 +18,8 @@ import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class CreateRaidActivity {
     private final Logger log = LogManager.getLogger();
@@ -36,6 +38,9 @@ public class CreateRaidActivity {
     public CreateRaidResult handleRequest(final CreateRaidRequest createRaidRequest) {
         log.info("Received CreateRaidActivity Request{}", createRaidRequest);
 
+        List<String> requiredRoles = createRaidRequest.getRequiredRoles().entrySet().stream()
+                .map(entry -> entry.getKey() + " " + entry.getValue())
+                .collect(Collectors.toList());
 
 
         RaidEvent raidEvent = new RaidEvent();
@@ -46,7 +51,7 @@ public class CreateRaidActivity {
         raidEvent.setRaidSize(createRaidRequest.getRaidSize());
         raidEvent.setRaidObjective(createRaidRequest.getRaidObjective());
         raidEvent.setLootDistribution(createRaidRequest.getLootDistribution());
-        raidEvent.setRequiredRoles(createRaidRequest.getRequiredRoles());
+        raidEvent.setRequiredRoles(requiredRoles);
         raidEvent.setParticipants(new ArrayList<>());
         raidEvent.setFeedback(new ArrayList<>());
         raidEvent.setRaidOwner(createRaidRequest.getRaidOwner());
