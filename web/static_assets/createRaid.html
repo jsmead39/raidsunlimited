@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script type="text/javascript" src="assets/createRaid.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body class="background">
+    <header class="header" id="header"></header>
+    <div class="card">
+        <h2>Create Raid</h2>
+        <form class="card-content" id="create-raid-form">
+            <p class="hidden error" id="error-message"></p>
+            <p class="form-field">
+                <label>Raid Name</label>
+                <input type="text" required class="validated-field" id="raid-name" placeholder="Enter Raid Name"
+                       autofocus>
+            </p>
+            <p class="form-field">
+                <label>Sever</label>
+                <input type="text" required id="raid-sever">
+            </p>
+            <p class="form-field">
+                <label>Raid Date</label>
+                <input type="date" required id="raid-date">
+            </p>
+            <p class="form-field">
+                <label>Raid Time</label>
+                <input type="time" required id="raid-time">
+            </p>
+            <p class="form-field">
+                <label>Raid Size</label>
+                <input type="numer" required id="raid-size" placeholder="Enter Raid Size">
+            </p>
+            <p class="form-field">
+                <label>Raid Objective</label>
+                <input type="text" required id="raid-objective" placeholder="i.e Progression/Farm">
+            </p>
+            <p class="form-field">
+                <label>Loot Distribution</label>
+                <input type="text" required id="loot-distribution" placeholder="MS/OS, GDKP, Soft-Reserve">
+            </p>
+            <p class="form-field">
+                <label>Required Roles</label>
+            <div class="role-field">
+                <label for="dps-input">DPS</label>
+                <input type="number" required id="dps-input" class="role-input" placeholder="Number">
+            </div>
+            <div class="role-field">
+                <label for="healer-input">Healer</label>
+                <input type="number" required id="healer-input" class="role-input" placeholder="Number">
+            </div>
+            <div class="role-field">
+                <label for="tank-input">Tank</label>
+                <input type="number" required id="tank-input" class="role-input" placeholder="Number">
+            </div>
+            </p>
+            <p>
+                <a href="#" class="button" id="create">Create Raid</a>
+            </p>
+        </form>
+    </div>
+</body>
+
+</html>
