@@ -26,36 +26,36 @@ What features can we offer that would make users want to use our platform as opp
 ## 3. Use Cases
 
 
-U1. As a new Wow classic player on the platform, I want to setup a profile with my game details and raid preferences 
+U1. As a user on the platform, I want to setup a profile with my game details and raid preferences 
 so that I can be matched with appropriate raids.
 
-U2. As a raid organizer, I want to be able to create a new raid event when I log into the platform so that others 
+U2. As a user, I want to be able to create a new raid event when I log into the platform so that others 
 may sign up for my raids.
 
-U3. As a raid organizer, I want to be able to update event details, so that I can communicate changes or important 
+U3. As a user, I want to be able to update event details, so that I can communicate changes or important 
 information to participants.
 
-U4. As a wow classic player I want to be able to search for raids based on specific criteria when I log into the 
+U4. As a user I want to be able to search for raids based on specific criteria when I log into the 
 platform so I can find raids that fit my availability and in-game goals.
 
-U5. As a raid participant I want to be able to sign up for specific roles in game, so that I am joining raids that 
+U5. As a user I want to be able to sign up for specific roles in game, so that I am joining raids that 
 fit my preferred role.
 
-U6. As a raid participant, I want to provide feedback after a specific raid, so that players can gauge the quality 
+U6. As a user, I want to provide feedback after a specific raid, so that players can gauge the quality 
 of the raid the and leader's performance.
 
 U7. As a developer I want to ensure the platform is secure and privacy-respecting, such that user feel comfortable 
 providing feedback in an anonymous capacity as to not be harmed by the community.
 
-U8. As a raid participant, I want to be able to see the type of loot distribution the raid will use(GDKP or Open roll),
+U8. As a user, I want to be able to see the type of loot distribution the raid will use(GDKP or Open roll),
 so that I can 
 sign up for the type of raids I desire.
 
-U9. As a raid organizer I want to be able to delete a raid so that I can cancel a raid for unforeseen circumstances.
+U9. As a user I want to be able to delete a raid so that I can cancel a raid for unforeseen circumstances.
 
-U10. As a raid organizer, I want to be able to review the queue of players who have signed up for my raid, and approve or reject their participation based on their profiles and needs of the raid so I can create a balanced composition.
+U10. As a user, I want to be able to review the queue of players who have signed up for my raid, and approve or reject their participation based on their profiles and needs of the raid so I can create a balanced composition.
 
-U11. As a Wow classic player, I want to be able to remove myself from a raid sign up queue so that I can communicate that I won't be able to attend a raid.
+U11. As a user, I want to be able to remove myself from a raid sign up queue so that I can communicate that I won't be able to attend a raid.
 
 
 

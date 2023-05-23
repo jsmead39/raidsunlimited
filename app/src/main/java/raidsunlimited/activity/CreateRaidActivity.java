@@ -10,16 +10,18 @@ import raidsunlimited.dynamodb.models.RaidEvent;
 import raidsunlimited.models.RaidModel;
 import raidsunlimited.utils.ServiceUtils;
 
-import javax.inject.Inject;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import java.util.stream.Collectors;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+
+import javax.inject.Inject;
+
 
 public class CreateRaidActivity {
     private final Logger log = LogManager.getLogger();
@@ -27,7 +29,7 @@ public class CreateRaidActivity {
 
 
     /**
-     * Instantiates a new CreateRaidActivity
+     * Instantiates a new CreateRaidActivity.
      * @param raidDao RaidDao to access the raid_event table
      */
     @Inject
@@ -35,6 +37,11 @@ public class CreateRaidActivity {
         this.raidDao = raidDao;
     }
 
+    /**
+     * Handles the creation of a Raid and stores it calls to DynamoDB to store it.
+     * @param createRaidRequest this is the request object passed in by our lambda
+     * @return a CreateRaidResult that will be passed back to our front end
+     */
     public CreateRaidResult handleRequest(final CreateRaidRequest createRaidRequest) {
         log.info("Received CreateRaidActivity Request{}", createRaidRequest);
 

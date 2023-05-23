@@ -2,9 +2,7 @@ package raidsunlimited.activity.requests;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
-import raidsunlimited.models.RequiredRoleModel;
 
-import java.util.List;
 import java.util.Map;
 
 @JsonDeserialize(builder = CreateRaidRequest.Builder.class)

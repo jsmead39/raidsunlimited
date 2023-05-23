@@ -1,19 +1,23 @@
 package raidsunlimited.converters;
 
 import raidsunlimited.dynamodb.models.RaidEvent;
-import raidsunlimited.models.FeedbackModel;
-import raidsunlimited.models.ParticipantModel;
 import raidsunlimited.models.RaidModel;
-import raidsunlimited.models.RequiredRoleModel;
 
-import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 
 public class ModelConverter {
 
+    /**
+     *
+     * @param raidEvent A raidEventObject.
+     * @return a RaidModel representation to be passed back to front end
+     */
     public RaidModel toRaidModel(RaidEvent raidEvent) {
         String formattedDate = convertLongToDate(raidEvent.getRaidDate());
         Map<String, Integer> requiredRoles = convertListToMap(raidEvent.getRequiredRoles());

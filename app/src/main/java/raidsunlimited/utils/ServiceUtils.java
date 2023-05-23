@@ -28,7 +28,7 @@ public class ServiceUtils {
     }
 
     /**
-     * Generates a randomalphanumeric Id
+     * Generates a randomalphanumeric Id.
      * @return randomId as a String
      */
     public static String generateRandomId() {

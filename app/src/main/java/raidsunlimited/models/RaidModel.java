@@ -88,8 +88,12 @@ public class RaidModel {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         RaidModel raidModel = (RaidModel) o;
         return Objects.equals(raidId, raidModel.raidId) && Objects.equals(raidName, raidModel.raidName) &&
                 Objects.equals(raidDate, raidModel.raidDate) && Objects.equals(time, raidModel.time) &&
@@ -104,7 +108,8 @@ public class RaidModel {
 
     @Override
     public int hashCode() {
-        return Objects.hash(raidId, raidName, raidDate, time, raidSize, raidObjective, lootDistribution, requiredRoles, participants, feedback, raidOwner, raidStatus);
+        return Objects.hash(raidId, raidName, raidDate, time, raidSize, raidObjective, lootDistribution,
+                requiredRoles, participants, feedback, raidOwner, raidStatus);
     }
 
     //CHECKSTYLE:OFF:Builder

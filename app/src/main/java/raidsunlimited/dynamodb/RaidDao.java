@@ -8,7 +8,8 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 /**
- * Accesses data for a raidevent using {@link raidsunlimited.dynamodb.models.RaidEvent} to represent the model in DynamoDB.
+ * Accesses data for a raidevent using {@link raidsunlimited.dynamodb.models.RaidEvent} to represent the model in
+ * DynamoDB.
  */
 @Singleton
 public class RaidDao {
@@ -26,6 +27,11 @@ public class RaidDao {
         this.metricsPublisher = metricsPublisher;
     }
 
+    /**
+     *
+     * @param raidEvent the raidEvent objected to be saved in DynamoDB.
+     * @return a representation of the raidEvent
+     */
     public RaidEvent saveRaid(RaidEvent raidEvent) {
         this.dynamoDBMapper.save(raidEvent);
         return raidEvent;

@@ -9,7 +9,7 @@ import javax.inject.Singleton;
 public interface ServiceComponent {
 
     /**
-     * Provides the relevant activity
+     * Provides the relevant activity.
      * @return CreateRaidActivity
      */
     CreateRaidActivity provideCreateRaidActivity();

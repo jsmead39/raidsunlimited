@@ -7,9 +7,7 @@ import raidsunlimited.activity.requests.CreateRaidRequest;
 import raidsunlimited.activity.results.CreateRaidResult;
 import raidsunlimited.dynamodb.RaidDao;
 import raidsunlimited.dynamodb.models.RaidEvent;
-import raidsunlimited.models.RequiredRoleModel;
 
-import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;

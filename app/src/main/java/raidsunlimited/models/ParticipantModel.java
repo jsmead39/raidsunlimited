@@ -33,8 +33,12 @@ public class ParticipantModel {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         ParticipantModel that = (ParticipantModel) o;
         return Objects.equals(userId, that.userId) && Objects.equals(displayName, that.displayName) &&
                 Objects.equals(participantClass, that.participantClass) && Objects.equals(role, that.role);

@@ -11,12 +11,12 @@ public class CreateRaidLambda
     @Override
     public LambdaResponse handleRequest(AuthenticatedLambdaRequest<CreateRaidRequest> input, Context context) {
         return super.runActivity(
-                () -> {
-                    CreateRaidRequest unauthenticatedRequest = input.fromBody(CreateRaidRequest.class);
-                    return input.fromUserClaims(claims -> {
-                                    String raidOwner = claims.containsKey("email") ? claims.get("email") :
+            () -> {
+                CreateRaidRequest unauthenticatedRequest = input.fromBody(CreateRaidRequest.class);
+                return input.fromUserClaims(claims -> {
+                    String raidOwner = claims.containsKey("email") ? claims.get("email") :
                                             unauthenticatedRequest.getRaidOwner();
-                            return CreateRaidRequest.builder()
+                    return CreateRaidRequest.builder()
                                     .withRaidName(unauthenticatedRequest.getRaidName())
                                     .withRaidDate(unauthenticatedRequest.getRaidDate())
                                     .withTime(unauthenticatedRequest.getTime())
@@ -26,9 +26,9 @@ public class CreateRaidLambda
                                     .withRequiredRoles(unauthenticatedRequest.getRequiredRoles())
                                     .withRaidOwner(raidOwner)
                                     .build();
-                    });
-                },
-                (request, serviceComponent) ->
+                });
+            },
+            (request, serviceComponent) ->
                         serviceComponent.provideCreateRaidActivity().handleRequest(request)
         );
     }
