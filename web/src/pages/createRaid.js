@@ -12,7 +12,7 @@ class CreateRaid extends BindingClass {
         super();
         this.bindClassMethods(['mount', 'submit', 'redirectToViewRaid'], this);
         this.dataStore = new DataStore();
-        this.dataStore.addChangeListener(this.redirectToViewPlaylist);
+        this.dataStore.addChangeListener(this.redirectToViewRaid);
         this.header = new Header(this.dataStore);
     }
 
@@ -45,7 +45,7 @@ class CreateRaid extends BindingClass {
         const raidName = document.getElementById('raid-name').value;
         const raidServer = document.getElementById('raid-server').value;
         const raidDate = document.getElementById('raid-date').value;
-        const time = document.getElementById('time').value;
+        const time = document.getElementById('raid-time').value;
         const raidSize = document.getElementById('raid-size').value;
         const raidObjective = document.getElementById('raid-objective').value;
         const lootDistribution = document.getElementById('loot-distribution').value;
@@ -59,8 +59,8 @@ class CreateRaid extends BindingClass {
             Healer: healer,
             Tank: tank
         };
-        const raid = await this.client.createRaid(raidName, raidServer, raidDate, time, raidSize, raidObjective,
-            lootDistribution, requiredRoles, (error) => {
+        const raid = await this.client.createRaid(raidName, raidServer, raidDate, time, raidSize,
+            raidObjective, lootDistribution, requiredRoles, (error) => {
                 createButton.innerText = origButtonText;
                 errorMessageDisplay.innerText = `Error: ${error.message}`;
                 errorMessageDisplay.classList.remove('hidden');
