@@ -53,6 +53,7 @@ public class CreateRaidActivity {
         RaidEvent raidEvent = new RaidEvent();
         raidEvent.setRaidId(ServiceUtils.generateRandomId());
         raidEvent.setRaidName(createRaidRequest.getRaidName());
+        raidEvent.setRaidServer(createRaidRequest.getRaidServer());
         raidEvent.setRaidDate(parseDateToLong(createRaidRequest.getRaidDate()));
         raidEvent.setTime(createRaidRequest.getTime());
         raidEvent.setRaidSize(createRaidRequest.getRaidSize());

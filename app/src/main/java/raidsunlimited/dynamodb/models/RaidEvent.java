@@ -8,11 +8,13 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 import raidsunlimited.models.FeedbackModel;
 
 import java.util.List;
+import java.util.Objects;
 
 @DynamoDBTable(tableName = "raid_events")
 public class RaidEvent {
     private String raidId;
     private String raidName;
+    private String raidServer;
     private Long raidDate;
     private String time;
     private Integer raidSize;
@@ -40,6 +42,15 @@ public class RaidEvent {
 
     public void setRaidName(String raidName) {
         this.raidName = raidName;
+    }
+
+    @DynamoDBAttribute(attributeName = "raidServer")
+    public String getRaidServer() {
+        return raidServer;
+    }
+
+    public void setRaidServer(String raidServer) {
+        this.raidServer = raidServer;
     }
 
     @DynamoDBIndexHashKey(globalSecondaryIndexName = "RaidDateIndex", attributeName = "raidDate")
@@ -129,5 +140,29 @@ public class RaidEvent {
 
     public void setRaidStatus(String raidStatus) {
         this.raidStatus = raidStatus;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        RaidEvent raidEvent = (RaidEvent) o;
+        return Objects.equals(raidId, raidEvent.raidId) && Objects.equals(raidName, raidEvent.raidName) &&
+                Objects.equals(raidServer, raidEvent.raidServer) && Objects.equals(raidDate, raidEvent.raidDate) &&
+                Objects.equals(time, raidEvent.time) && Objects.equals(raidSize, raidEvent.raidSize) &&
+                Objects.equals(raidObjective, raidEvent.raidObjective) &&
+                Objects.equals(lootDistribution, raidEvent.lootDistribution) &&
+                Objects.equals(requiredRoles, raidEvent.requiredRoles) &&
+                Objects.equals(participants, raidEvent.participants) && Objects.equals(feedback, raidEvent.feedback) &&
+                Objects.equals(raidOwner, raidEvent.raidOwner) && Objects.equals(raidStatus, raidEvent.raidStatus);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(raidId, raidName, raidServer, raidDate, time, raidSize, raidObjective, lootDistribution, requiredRoles, participants, feedback, raidOwner, raidStatus);
     }
 }

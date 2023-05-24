@@ -28,6 +28,7 @@ class CreateRaidActivityTest {
     @Test
     public void handleRequest_validInput_createsNewRaidEvent() {
         String inputName = "test";
+        String inputServer = "Whitemane";
         String inputDate = "2023-06-30";
         String inputTime = "19:00";
         Integer inputRaidSize = 25;
@@ -41,6 +42,7 @@ class CreateRaidActivityTest {
         //Build request
         CreateRaidRequest request = CreateRaidRequest.builder()
                 .withRaidName(inputName)
+                .withRaidServer(inputServer)
                 .withRaidDate(inputDate)
                 .withTime(inputTime)
                 .withRaidSize(inputRaidSize)
@@ -59,6 +61,7 @@ class CreateRaidActivityTest {
 
         assertNotNull(result.getRaid().getRaidId());
         assertEquals(inputName, result.getRaid().getRaidName());
+        assertEquals(inputServer, result.getRaid().getRaidServer());
         assertEquals(inputDate, result.getRaid().getRaidDate());
         assertEquals(inputTime, result.getRaid().getTime());
         assertEquals(inputRaidSize, result.getRaid().getRaidSize());

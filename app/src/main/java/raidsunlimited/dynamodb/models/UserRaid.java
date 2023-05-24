@@ -5,6 +5,8 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBRangeKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 
+import java.util.Objects;
+
 @DynamoDBTable(tableName = "user_raid")
 public class UserRaid {
 
@@ -37,5 +39,23 @@ public class UserRaid {
 
     public void setConfirmed(Boolean confirmed) {
         this.confirmed = confirmed;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        UserRaid userRaid = (UserRaid) o;
+        return Objects.equals(userId, userRaid.userId) && Objects.equals(raidId, userRaid.raidId) &&
+                Objects.equals(confirmed, userRaid.confirmed);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userId, raidId, confirmed);
     }
 }

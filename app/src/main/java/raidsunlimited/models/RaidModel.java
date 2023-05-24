@@ -8,6 +8,7 @@ import java.util.Objects;
 public class RaidModel {
     private final String raidId;
     private final String raidName;
+    private final String raidServer;
     private final String raidDate;
     private final String time;
     private final Integer raidSize;
@@ -19,13 +20,14 @@ public class RaidModel {
     private final String raidOwner;
     private final String raidStatus;
 
-    private RaidModel(String raidId, String raidName, String raidDate, String time, Integer raidSize,
+    private RaidModel(String raidId, String raidName, String raidServer, String raidDate, String time, Integer raidSize,
                       String raidObjective,
                      String lootDistribution, Map<String, Integer> requiredRoles,
                      List<String> participants, List<FeedbackModel> feedback, String raidOwner,
                      String raidStatus) {
         this.raidId = raidId;
         this.raidName = raidName;
+        this.raidServer = raidServer;
         this.raidDate = raidDate;
         this.time = time;
         this.raidSize = raidSize;
@@ -44,6 +46,10 @@ public class RaidModel {
 
     public String getRaidName() {
         return raidName;
+    }
+
+    public String getRaidServer() {
+        return raidServer;
     }
 
     public String getRaidDate() {
@@ -97,6 +103,7 @@ public class RaidModel {
         RaidModel raidModel = (RaidModel) o;
         return Objects.equals(raidId, raidModel.raidId) && Objects.equals(raidName, raidModel.raidName) &&
                 Objects.equals(raidDate, raidModel.raidDate) && Objects.equals(time, raidModel.time) &&
+                Objects.equals(raidServer, raidModel.raidServer) &&
                 Objects.equals(raidSize, raidModel.raidSize) &&
                 Objects.equals(raidObjective, raidModel.raidObjective) &&
                 Objects.equals(lootDistribution, raidModel.lootDistribution) &&
@@ -108,7 +115,7 @@ public class RaidModel {
 
     @Override
     public int hashCode() {
-        return Objects.hash(raidId, raidName, raidDate, time, raidSize, raidObjective, lootDistribution,
+        return Objects.hash(raidId, raidName, raidServer, raidDate, time, raidSize, raidObjective, lootDistribution,
                 requiredRoles, participants, feedback, raidOwner, raidStatus);
     }
 
@@ -120,6 +127,7 @@ public class RaidModel {
     public static class Builder {
         private String raidId;
         private String raidName;
+        private String raidServer;
         private String raidDate;
         private String time;
         private Integer raidSize;
@@ -138,6 +146,11 @@ public class RaidModel {
 
         public Builder withRaidName(String raidName) {
             this.raidName = raidName;
+            return this;
+        }
+
+        public Builder withRaidServer(String raidServer) {
+            this.raidServer = raidServer;
             return this;
         }
 
@@ -192,8 +205,8 @@ public class RaidModel {
         }
 
         public RaidModel build() {
-            return new RaidModel(raidId, raidName, raidDate, time, raidSize, raidObjective, lootDistribution,
-                    requiredRoles, participants, feedback, raidOwner, raidStatus);
+            return new RaidModel(raidId, raidName, raidServer, raidDate, time, raidSize, raidObjective,
+                    lootDistribution, requiredRoles, participants, feedback, raidOwner, raidStatus);
         }
     }
 }

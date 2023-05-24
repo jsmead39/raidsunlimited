@@ -18,6 +18,7 @@ public class CreateRaidLambda
                                             unauthenticatedRequest.getRaidOwner();
                     return CreateRaidRequest.builder()
                                     .withRaidName(unauthenticatedRequest.getRaidName())
+                                    .withRaidServer(unauthenticatedRequest.getRaidServer())
                                     .withRaidDate(unauthenticatedRequest.getRaidDate())
                                     .withTime(unauthenticatedRequest.getTime())
                                     .withRaidSize(unauthenticatedRequest.getRaidSize())

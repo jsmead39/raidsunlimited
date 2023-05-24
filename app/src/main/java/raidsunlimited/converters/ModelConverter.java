@@ -25,6 +25,7 @@ public class ModelConverter {
         return RaidModel.builder()
                 .withRaidId(raidEvent.getRaidId())
                 .withRaidName(raidEvent.getRaidName())
+                .withRaidServer(raidEvent.getRaidServer())
                 .withRaidDate(formattedDate)
                 .withTime(raidEvent.getTime())
                 .withRaidSize(raidEvent.getRaidSize())
