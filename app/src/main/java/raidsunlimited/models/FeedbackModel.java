@@ -27,10 +27,15 @@ public class FeedbackModel {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         FeedbackModel that = (FeedbackModel) o;
-        return Objects.equals(userId, that.userId) && Objects.equals(rating, that.rating) && Objects.equals(comments, that.comments);
+        return Objects.equals(userId, that.userId) && Objects.equals(rating, that.rating) &&
+                Objects.equals(comments, that.comments);
     }
 
     @Override

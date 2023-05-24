@@ -1,23 +1,26 @@
 package raidsunlimited.dynamodb.models;
 
-import com.amazonaws.services.dynamodbv2.datamodeling.*;
-import raidsunlimited.converters.FeedBackModelConverter;
-import raidsunlimited.converters.RequiredRoleModelConverter;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBIndexHashKey;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
+
 import raidsunlimited.models.FeedbackModel;
-import raidsunlimited.models.RequiredRoleModel;
 
 import java.util.List;
+import java.util.Objects;
 
 @DynamoDBTable(tableName = "raid_events")
 public class RaidEvent {
     private String raidId;
     private String raidName;
+    private String raidServer;
     private Long raidDate;
     private String time;
     private Integer raidSize;
     private String raidObjective;
     private String lootDistribution;
-    private List<RequiredRoleModel> requiredRoles;
+    private List<String> requiredRoles;
     private List<String> participants;
     private List<FeedbackModel> feedback;
     private String raidOwner;
@@ -39,6 +42,15 @@ public class RaidEvent {
 
     public void setRaidName(String raidName) {
         this.raidName = raidName;
+    }
+
+    @DynamoDBAttribute(attributeName = "raidServer")
+    public String getRaidServer() {
+        return raidServer;
+    }
+
+    public void setRaidServer(String raidServer) {
+        this.raidServer = raidServer;
     }
 
     @DynamoDBIndexHashKey(globalSecondaryIndexName = "RaidDateIndex", attributeName = "raidDate")
@@ -85,13 +97,12 @@ public class RaidEvent {
         this.lootDistribution = lootDistribution;
     }
 
-    @DynamoDBTypeConverted(converter = RequiredRoleModelConverter.class)
     @DynamoDBAttribute(attributeName = "requiredRoles")
-    public List<RequiredRoleModel> getRequiredRoles() {
+    public List<String> getRequiredRoles() {
         return requiredRoles;
     }
 
-    public void setRequiredRoles(List<RequiredRoleModel> requiredRoles) {
+    public void setRequiredRoles(List<String> requiredRoles) {
         this.requiredRoles = requiredRoles;
     }
 
@@ -104,7 +115,6 @@ public class RaidEvent {
         this.participants = participants;
     }
 
-    @DynamoDBTypeConverted(converter = FeedBackModelConverter.class)
     @DynamoDBAttribute(attributeName = "feedback")
     public List<FeedbackModel> getFeedback() {
         return feedback;
@@ -130,5 +140,29 @@ public class RaidEvent {
 
     public void setRaidStatus(String raidStatus) {
         this.raidStatus = raidStatus;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        RaidEvent raidEvent = (RaidEvent) o;
+        return Objects.equals(raidId, raidEvent.raidId) && Objects.equals(raidName, raidEvent.raidName) &&
+                Objects.equals(raidServer, raidEvent.raidServer) && Objects.equals(raidDate, raidEvent.raidDate) &&
+                Objects.equals(time, raidEvent.time) && Objects.equals(raidSize, raidEvent.raidSize) &&
+                Objects.equals(raidObjective, raidEvent.raidObjective) &&
+                Objects.equals(lootDistribution, raidEvent.lootDistribution) &&
+                Objects.equals(requiredRoles, raidEvent.requiredRoles) &&
+                Objects.equals(participants, raidEvent.participants) && Objects.equals(feedback, raidEvent.feedback) &&
+                Objects.equals(raidOwner, raidEvent.raidOwner) && Objects.equals(raidStatus, raidEvent.raidStatus);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(raidId, raidName, raidServer, raidDate, time, raidSize, raidObjective, lootDistribution, requiredRoles, participants, feedback, raidOwner, raidStatus);
     }
 }

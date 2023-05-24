@@ -1,10 +1,10 @@
 package raidsunlimited.lambda;
 
-import raidsunlimited.dependency.DaggerServiceComponent;
-import raidsunlimited.dependency.ServiceComponent;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import raidsunlimited.dependency.DaggerServiceComponent;
+import raidsunlimited.dependency.ServiceComponent;
 
 import java.util.function.BiFunction;
 import java.util.function.Supplier;

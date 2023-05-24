@@ -1,11 +1,12 @@
 package raidsunlimited.dependency;
 
-import raidsunlimited.dynamodb.DynamoDbClientProvider;
-
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+
 import dagger.Module;
 import dagger.Provides;
+
+import raidsunlimited.dynamodb.DynamoDbClientProvider;
 
 import javax.inject.Singleton;
 
