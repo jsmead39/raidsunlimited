@@ -15,7 +15,7 @@ export default class RaidsUnlimitedClient extends BindingClass {
     constructor(props = {}) {
         super();
 
-        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout'];
+        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'createRaid'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();
@@ -71,6 +71,42 @@ export default class RaidsUnlimitedClient extends BindingClass {
         return await this.authenticator.getUserToken();
     }
 
+    /**
+     * Create a new raid owned by the current user.
+     * @param raidName The name of the raid instance.
+     * @param raidServer the server of the raid.
+     * @param raidDate the date of the raid.
+     * @param time The time of the raid in PST.
+     * @param raidSize The size of the raid.
+     * @param raidObjective The objective of the raid.
+     * @param lootDistribution The loot type of the raid.
+     * @param requiredRoles The required roles with number values.
+     * @param errorCallback (Optional) A function to execute if the call fails.
+     * @returns The raid that has been created.
+     */
+    async createRaid(raidName, raidServer, raidDate, time, raidSize, raidObjective,
+               lootDistribution, requiredRoles, errorCallback){
+        try {
+            const token = await this.getTokenOrThrow("You must be logged in to create a raid.")
+            const response = await this.axiosClient.post(`raidevents`, {
+                raidName: raidName,
+                raidServer: raidServer,
+                raidDate: raidDate,
+                time: time,
+                raidSize: raidSize,
+                raidObjective: raidObjective,
+                lootDistribution: lootDistribution,
+                requiredRoles: requiredRoles,
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            return response.data.raid;
+        } catch (error) {
+            this.handleError(error, errorCallback)
+        }
+    }
 
     /**
      * Helper method to log the error and run any error functions.

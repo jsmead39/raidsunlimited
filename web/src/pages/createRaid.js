@@ -51,7 +51,8 @@ class CreateRaid extends BindingClass {
         const lootDistribution = document.getElementById('loot-distribution').value;
         const dps = document.getElementById('dps-input').value;
         const healer = document.getElementById('healer-input').value;
-        const tank = document.getElementById('tank-input');
+        const tank = document.getElementById('tank-input').value;
+
 
         const requiredRoles = {
             DPS: dps,
