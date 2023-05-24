@@ -19,7 +19,7 @@ public class GetRaidLambda
         return super.runActivity(
                 () -> input.fromPath(path ->
                         GetRaidRequest.builder()
-                                .withRaidId(path.get("id"))
+                                .withRaidId(path.get("raidId"))
                                 .build()),
                 (request, serviceComponent) ->
                         serviceComponent.provideGetRaidActivity().handleRequest(request)
