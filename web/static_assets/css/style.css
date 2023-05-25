@@ -67,9 +67,6 @@
     color: var(--error-color);
 }
 
-.card-content {
-    max-width: 500px;
-}
 
 .card-content .form-field {
     display: flex;
@@ -146,4 +143,8 @@ a {
 .raid-server-status {
     width: 100%;
     margin-top: 10px;
+}
+
+.card-content {
+    max-width: 1000px;
 }

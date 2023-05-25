@@ -73,8 +73,10 @@ class CreateRaid extends BindingClass {
      */
     redirectToViewRaid() {
         const raid = this.dataStore.get('raid');
+        console.log("log the raid");
+        console.log(raid);
         if (raid != null) {
-            window.location.href = `/raid.html?id=${raid.id}`;
+            window.location.href = `/viewRaid.html?id=${raid.raidId}`;
         }
     }
 }

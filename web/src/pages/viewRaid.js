@@ -20,17 +20,23 @@ class ViewRaid extends BindingClass {
      * Once the client is loaded, get the raid metadata and participant list.
      */
     async clientLoaded() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const raidId = urlParams.get('raidId');
-        document.getElementById('raid-name').innerText = "Loading Raid ...";
-        const raid = await this.client.getRaid(raidId);
-        this.dataStore.set('raid', raid);
+        try {
+            const urlParams = new URLSearchParams(window.location.search);
+
+            const raidId = urlParams.get('id');
+            document.getElementById('raid-name').innerText = "Loading Raid ...";
+            const raid = await this.client.getRaid(raidId);
+            console.log("Raid object receive: ", raid);
+            this.dataStore.set('raid', raid);
+        } catch (error) {
+            console.error("Error loading client data: ", error);
+        }
     }
 
     /**
      * Add the header to the page and load the RaidClient
      */
-    mount() {
+    async mount() {
         this.header.addHeaderToPage();
 
         this.client = new RaidsUnlimitedClient();
@@ -38,19 +44,19 @@ class ViewRaid extends BindingClass {
     }
 
     addRaidToPage() {
-        const raid = this.dataStore.get('raid');
-        if (raid == null) {
+        const raidModel = this.dataStore.get('raid');
+        if (raidModel == null) {
             return;
         }
 
-        document.getElementById('raid-name').innerText = "Raid Name: " + raid.raidName;
-        document.getElementById('raid-size').innerText = "Raid Size: " + raid.raidSize;
-        document.getElementById('raid-date').innerText = "Raid Date: " + raid.raidDate;
-        document.getElementById('raid-time').innerText = "Raid Time: " + raid.time;
-        document.getElementById('raid-server').innerText = "Server: " + raid.raidServer;
-        document.getElementById('raid-status').innerText = "Raid Status: " + raid.raidStatus;
+        document.getElementById('raid-name').innerText = "Raid Name: " + raidModel.raidName;
+        document.getElementById('raid-size').innerText = "Raid Size: " + raidModel.raidSize;
+        document.getElementById('raid-date').innerText = "Raid Date: " + raidModel.raidDate;
+        document.getElementById('raid-time').innerText = "Raid Time: " + raidModel.time;
+        document.getElementById('raid-server').innerText = "Server: " + raidModel.raidServer;
+        document.getElementById('raid-status').innerText = "Raid Status: " + raidModel.raidStatus;
 
-        const participants = raid.participants;
+        const participants = raidModel.participants;
         if (participants == null) {
             return;
         }
@@ -63,6 +69,7 @@ class ViewRaid extends BindingClass {
                     <td>${participant.displayName}</td>
                     <td>${participant.participantClass}</td>
                     <td>${participant.role}</td>
+                </tr>
                 `;
         }
         document.getElementById('participant-table').innerHTML = participantHtml;

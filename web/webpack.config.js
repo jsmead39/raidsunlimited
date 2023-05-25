@@ -24,6 +24,7 @@ module.exports = {
   },
   entry: {
     createRaid: path.resolve(__dirname, 'src', 'pages', 'createRaid.js'),
+    viewRaid: path.resolve(__dirname, 'src', 'pages', 'viewRaid.js'),
     searchPlaylists: path.resolve(__dirname, 'src', 'pages', 'searchPlaylists.js'),
   },
   output: {
