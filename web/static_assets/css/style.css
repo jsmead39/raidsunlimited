@@ -135,3 +135,15 @@ a {
     color: var(--tertiary-color);
     text-decoration: none;
 }
+
+/* my css stuff */
+.raid-details-flex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.raid-server-status {
+    width: 100%;
+    margin-top: 10px;
+}

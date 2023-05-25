@@ -17,7 +17,7 @@ class CreateRaid extends BindingClass {
     }
 
         /**
-         * Add the header to the page and load the MusicPlaylistClient.
+         * Add the header to the page and load the RaidClient.
          */
     mount() {
         document.getElementById('create').addEventListener('click', this.submit);
