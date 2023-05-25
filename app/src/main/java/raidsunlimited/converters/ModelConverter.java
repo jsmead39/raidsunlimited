@@ -1,6 +1,7 @@
 package raidsunlimited.converters;
 
 import raidsunlimited.dynamodb.models.RaidEvent;
+import raidsunlimited.models.FeedbackModel;
 import raidsunlimited.models.RaidModel;
 
 import java.time.Instant;
@@ -21,6 +22,8 @@ public class ModelConverter {
     public RaidModel toRaidModel(RaidEvent raidEvent) {
         String formattedDate = convertLongToDate(raidEvent.getRaidDate());
         Map<String, Integer> requiredRoles = convertListToMap(raidEvent.getRequiredRoles());
+        List<FeedbackModel> feedback = FeedbackConverter.toFeedbackModelList(raidEvent.getFeedback());
+
 
         return RaidModel.builder()
                 .withRaidId(raidEvent.getRaidId())
@@ -33,7 +36,7 @@ public class ModelConverter {
                 .withLootDistribution(raidEvent.getLootDistribution())
                 .withRequiredRoles(requiredRoles)
                 .withParticipant(raidEvent.getParticipants())
-                .withFeedback(raidEvent.getFeedback())
+                .withFeedback(feedback)
                 .withRaidOwner(raidEvent.getRaidOwner())
                 .withRaidStatus(raidEvent.getRaidStatus())
                 .build();

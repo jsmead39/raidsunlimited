@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import raidsunlimited.activity.requests.GetRaidRequest;
 import raidsunlimited.activity.results.GetRaidResult;
+import raidsunlimited.converters.FeedbackConverter;
 import raidsunlimited.converters.ModelConverter;
 import raidsunlimited.dynamodb.RaidDao;
 import raidsunlimited.dynamodb.models.RaidEvent;
@@ -43,6 +44,7 @@ class GetRaidActivityTest {
         Integer expectedRaidSize = 25;
         String expectedRaidObjective = "Farm";
         String expectedLootDistribution = "GDKP";
+        List<String> expectedFeedback = List.of("test@test.com 5 Great raid overall!");
         List<String> expectedRequiredRoles = List.of("Tank 2", "Healer 2", "Dps 21");
         String expectedRaidOwner = "test@test.com";
 
@@ -56,6 +58,7 @@ class GetRaidActivityTest {
         raidEvent.setRaidObjective(expectedRaidObjective);
         raidEvent.setLootDistribution(expectedLootDistribution);
         raidEvent.setRequiredRoles(expectedRequiredRoles);
+        raidEvent.setFeedback(expectedFeedback);
         raidEvent.setRaidOwner(expectedRaidOwner);
 
         when(raidDao.getRaid(expectedRaidId)).thenReturn(raidEvent);
@@ -78,6 +81,7 @@ class GetRaidActivityTest {
         assertEquals(expectedRaidObjective, raidModel.getRaidObjective());
         assertEquals(expectedLootDistribution, raidModel.getLootDistribution());
         assertEquals(convertListToMap(expectedRequiredRoles), raidModel.getRequiredRoles());
+        assertEquals(FeedbackConverter.toFeedbackModelList(expectedFeedback), raidModel.getFeedback());
     }
 
     private String convertLongToDate(Long epoch) {

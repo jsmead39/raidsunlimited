@@ -39,6 +39,11 @@ public class RaidDao {
         return raidEvent;
     }
 
+    /**
+     *
+     * @param id the raidEvent Id to be retrieved from the DynamoDB.
+     * @return an instance of a RaidEvent with all the fields from the database.
+     */
     public RaidEvent getRaid(String id) {
         RaidEvent raid = this.dynamoDBMapper.load(RaidEvent.class, id);
 
