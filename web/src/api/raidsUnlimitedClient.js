@@ -109,6 +109,23 @@ export default class RaidsUnlimitedClient extends BindingClass {
     }
 
     /**
+     * Gets the raid for the given ID.
+     * @param id Unique identifier for a raid
+     * @param errorCallback (Optional) A function to execute if the call fails.
+     * @returns The raid's metadata.
+     */
+    async getRaid(raidId, errorCallback) {
+        try {
+            const response = await this.axiosClient.get(`raidevents/${raidId}`);
+            console.log(response.data);
+            return response.data.raidModel;
+
+        } catch (error) {
+            this.handleError(error, errorCallback)
+        }
+    }
+
+    /**
      * Helper method to log the error and run any error functions.
      * @param error The error received from the server.
      * @param errorCallback (Optional) A function to execute if the call fails.

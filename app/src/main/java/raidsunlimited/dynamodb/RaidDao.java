@@ -2,6 +2,8 @@ package raidsunlimited.dynamodb;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import raidsunlimited.dynamodb.models.RaidEvent;
+import raidsunlimited.exceptions.RaidEventNotFoundException;
+import raidsunlimited.metrics.MetricsConstants;
 import raidsunlimited.metrics.MetricsPublisher;
 
 import javax.inject.Inject;
@@ -35,5 +37,21 @@ public class RaidDao {
     public RaidEvent saveRaid(RaidEvent raidEvent) {
         this.dynamoDBMapper.save(raidEvent);
         return raidEvent;
+    }
+
+    /**
+     *
+     * @param id the raidEvent Id to be retrieved from the DynamoDB.
+     * @return an instance of a RaidEvent with all the fields from the database.
+     */
+    public RaidEvent getRaid(String id) {
+        RaidEvent raid = this.dynamoDBMapper.load(RaidEvent.class, id);
+
+        if (raid == null) {
+            metricsPublisher.addCount(MetricsConstants.GETRAID_RAIDNOTFOUND_COUNT, 1);
+            throw new RaidEventNotFoundException("No raid exists with id " + id);
+        }
+        metricsPublisher.addCount(MetricsConstants.GETRAID_RAIDNOTFOUND_COUNT, 0);
+        return raid;
     }
 }

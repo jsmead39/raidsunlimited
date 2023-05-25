@@ -22,7 +22,7 @@ public class RaidEvent {
     private String lootDistribution;
     private List<String> requiredRoles;
     private List<String> participants;
-    private List<FeedbackModel> feedback;
+    private List<String> feedback;
     private String raidOwner;
     private String raidStatus;
 
@@ -116,11 +116,11 @@ public class RaidEvent {
     }
 
     @DynamoDBAttribute(attributeName = "feedback")
-    public List<FeedbackModel> getFeedback() {
+    public List<String> getFeedback() {
         return feedback;
     }
 
-    public void setFeedback(List<FeedbackModel> feedback) {
+    public void setFeedback(List<String> feedback) {
         this.feedback = feedback;
     }
 
