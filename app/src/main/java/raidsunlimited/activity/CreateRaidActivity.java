@@ -78,7 +78,7 @@ public class CreateRaidActivity {
         try {
             LocalDate date = LocalDate.parse(dateString, DateTimeFormatter.ISO_LOCAL_DATE);
             Instant dateInstant = date.atStartOfDay(ZoneId.of("America/Los_Angeles")).toInstant();
-            return dateInstant.toEpochMilli();
+            return dateInstant.getEpochSecond();
         } catch (DateTimeParseException e) {
             throw new IllegalArgumentException("Invalid date format");
         }

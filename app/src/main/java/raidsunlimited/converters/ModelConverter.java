@@ -43,7 +43,7 @@ public class ModelConverter {
     }
 
     private String convertLongToDate(Long epoch) {
-        Instant instant = Instant.ofEpochMilli(epoch);
+        Instant instant = Instant.ofEpochSecond(epoch);
         ZonedDateTime convertedDate = ZonedDateTime.ofInstant(instant, ZoneId.of("America/Los_Angeles"));
         return convertedDate.toLocalDate().toString();
     }

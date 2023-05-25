@@ -39,7 +39,7 @@ class GetRaidActivityTest {
         String expectedRaidId ="testId";
         String expectedName = "test";
         String expectedServer = "Whitemane";
-        Long expectedDate = 1676534400L;
+        Long expectedDate = 1674460800L;
         String expectedTime = "19:00";
         Integer expectedRaidSize = 25;
         String expectedRaidObjective = "Farm";
@@ -85,7 +85,7 @@ class GetRaidActivityTest {
     }
 
     private String convertLongToDate(Long epoch) {
-        Instant instant = Instant.ofEpochMilli(epoch);
+        Instant instant = Instant.ofEpochSecond(epoch);
         ZonedDateTime convertedDate = ZonedDateTime.ofInstant(instant, ZoneId.of("America/Los_Angeles"));
         return convertedDate.toLocalDate().toString();
     }
