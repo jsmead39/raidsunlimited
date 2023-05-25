@@ -148,3 +148,22 @@ a {
 .card-content {
     max-width: 1000px;
 }
+
+.oval-box {
+    width: 200px;
+    height: 100px;
+    background: #ddd;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+
+.content-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
