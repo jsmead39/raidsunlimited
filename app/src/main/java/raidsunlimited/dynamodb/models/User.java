@@ -3,6 +3,9 @@ package raidsunlimited.dynamodb.models;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConverted;
+import raidsunlimited.converters.GameCharacterConverter;
+import raidsunlimited.models.GameCharacter;
 
 import java.util.List;
 import java.util.Objects;
@@ -12,8 +15,7 @@ public class User {
     private String userId;
     private String displayName;
     private String email;
-    private String playerClass;
-    private List<String> preferredRoles;
+    private List<GameCharacter> gameCharacterList;
     private String logs;
 
     @DynamoDBHashKey(attributeName = "userId")
@@ -43,22 +45,14 @@ public class User {
         this.email = email;
     }
 
-    @DynamoDBAttribute(attributeName = "class")
-    public String getPlayerClass() {
-        return playerClass;
+    @DynamoDBAttribute(attributeName = "charactersList")
+    @DynamoDBTypeConverted(converter = GameCharacterConverter.class)
+    public List<GameCharacter> getGameCharacterList() {
+        return gameCharacterList;
     }
 
-    public void setPlayerClass(String playerClass) {
-        this.playerClass = playerClass;
-    }
-
-    @DynamoDBAttribute(attributeName = "preferredRoles")
-    public List<String> getPreferredRoles() {
-        return preferredRoles;
-    }
-
-    public void setPreferredRoles(List<String> preferredRoles) {
-        this.preferredRoles = preferredRoles;
+    public void setGameCharacterList(List<GameCharacter> gameCharacterList) {
+        this.gameCharacterList = gameCharacterList;
     }
 
     @DynamoDBAttribute(attributeName = "logs")
@@ -70,6 +64,7 @@ public class User {
         this.logs = logs;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -79,17 +74,14 @@ public class User {
             return false;
         }
         User user = (User) o;
-        return Objects.equals(userId, user.userId) &&
-                Objects.equals(displayName, user.displayName) &&
-                Objects.equals(email, user.email) &&
-                Objects.equals(playerClass, user.playerClass) &&
-                Objects.equals(preferredRoles, user.preferredRoles) &&
+        return Objects.equals(userId, user.userId) && Objects.equals(displayName, user.displayName) &&
+                Objects.equals(email, user.email) && Objects.equals(gameCharacterList, user.gameCharacterList) &&
                 Objects.equals(logs, user.logs);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId, displayName, email, playerClass, preferredRoles, logs);
+        return Objects.hash(userId, displayName, email, gameCharacterList, logs);
     }
 
     @Override
@@ -98,8 +90,7 @@ public class User {
                 "userId='" + userId + '\'' +
                 ", displayName='" + displayName + '\'' +
                 ", email='" + email + '\'' +
-                ", playerClass='" + playerClass + '\'' +
-                ", preferredRoles=" + preferredRoles +
+                ", gameCharacterList=" + gameCharacterList +
                 ", logs='" + logs + '\'' +
                 '}';
     }
