@@ -10,7 +10,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 /**
- * Accesses data for a raidevent using {@link raidsunlimited.dynamodb.models.RaidEvent} to represent the model in
+ * Accesses data for a raidevent using {@link RaidEvent} to represent the model in
  * DynamoDB.
  */
 @Singleton
