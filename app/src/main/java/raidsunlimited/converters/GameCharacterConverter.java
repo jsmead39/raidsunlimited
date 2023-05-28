@@ -16,14 +16,15 @@ public class GameCharacterConverter implements DynamoDBTypeConverter<String, Lis
         try {
             return objectMapper.writeValueAsString(gameCharacterList);
         } catch (JsonProcessingException e) {
-            throw new IllegalArgumentException("Error convertering List<GameCharacter> to string", e);
+            throw new IllegalArgumentException("Error converting List<GameCharacter> to string", e);
         }
     }
 
     @Override
     public List<GameCharacter> unconvert(String gameCharactersJson) {
         try {
-            return objectMapper.readValue(gameCharactersJson, new TypeReference<List<GameCharacter>>() {});
+            return objectMapper.readValue(gameCharactersJson, new TypeReference<>() {
+            });
         } catch (JsonProcessingException e) {
             throw new IllegalArgumentException("Error converting JSON string to List<GameCharacter>", e);
         }
