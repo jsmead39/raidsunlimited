@@ -21,8 +21,8 @@ public class CreateProfileActivity {
         this.userDao = userDao;
     }
 
-    public CreateProfileResult(final CreateProfileRequest createProfileRequest) {
+    public CreateProfileResult handleRequest(final CreateProfileRequest createProfileRequest) {
         return CreateProfileResult.builder()
-                .builder();
+                .build();
     }
 }

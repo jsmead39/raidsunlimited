@@ -53,8 +53,8 @@ public class CreateProfileResult {
     }
 
     //CHECKSTYLE:OFF:Builder
-    public static CreateRaidResult.Builder builder() {
-        return new CreateRaidResult.Builder();
+    public static Builder builder() {
+        return new Builder();
     }
 
     public static class Builder {

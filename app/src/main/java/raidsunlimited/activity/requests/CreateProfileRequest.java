@@ -14,7 +14,7 @@ public class CreateProfileRequest {
     private final List<GameCharacter> charactersList;
     private final String logs;
 
-    public CreateProfileRequest(String userId, String displayName, String email, List<GameCharacter> charactersList,
+    private CreateProfileRequest(String userId, String displayName, String email, List<GameCharacter> charactersList,
                                 String logs) {
         this.userId = userId;
         this.displayName = displayName;
@@ -44,8 +44,8 @@ public class CreateProfileRequest {
     }
 
     //CHECKSTYLE:OFF:Builder
-    public static CreateRaidRequest.Builder builder() {
-        return new CreateRaidRequest.Builder();
+    public static Builder builder() {
+        return new Builder();
 
     }
 

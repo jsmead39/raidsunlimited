@@ -1,6 +1,7 @@
 package raidsunlimited.dependency;
 
 import dagger.Component;
+import raidsunlimited.activity.CreateProfileActivity;
 import raidsunlimited.activity.CreateRaidActivity;
 import raidsunlimited.activity.GetRaidActivity;
 
@@ -20,5 +21,11 @@ public interface ServiceComponent {
      * @return GetRaidActivity
      */
     GetRaidActivity provideGetRaidActivity();
+
+    /**
+     * Provides the relevant activity
+     * @return GetRaidActivity
+     */
+    CreateProfileActivity provideCreateProfileActivity();
 
 }
