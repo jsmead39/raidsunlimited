@@ -6,6 +6,8 @@ import raidsunlimited.models.GameCharacter;
 
 import java.util.List;
 
+import static raidsunlimited.utils.CollectionUtils.copyToList;
+
 @JsonDeserialize(builder = CreateProfileRequest.Builder.class)
 public class CreateProfileRequest {
     private final String userId;
@@ -36,7 +38,7 @@ public class CreateProfileRequest {
     }
 
     public List<GameCharacter> getCharactersList() {
-        return charactersList;
+        return copyToList(charactersList);
     }
 
     public String getLogs() {
@@ -74,7 +76,7 @@ public class CreateProfileRequest {
         }
 
         public Builder withGameCharacters(List<GameCharacter> gameCharacters) {
-            this.gameCharacters = gameCharacters;
+            this.gameCharacters = copyToList(gameCharacters);
             return this;
         }
 
