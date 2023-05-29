@@ -8,6 +8,7 @@ import raidsunlimited.converters.ModelConverter;
 import raidsunlimited.dynamodb.UserDao;
 import raidsunlimited.dynamodb.models.User;
 import raidsunlimited.models.ProfileModel;
+import raidsunlimited.utils.ServiceUtils;
 
 import javax.inject.Inject;
 
@@ -34,7 +35,7 @@ public class CreateProfileActivity {
 
 
         User user = new User();
-        user.setUserId(createProfileRequest.getUserId());
+        user.setUserId(ServiceUtils.generateRandomId());
         user.setDisplayName(createProfileRequest.getDisplayName());
         user.setEmail(createProfileRequest.getEmail());
         user.setGameCharacterList(createProfileRequest.getCharactersList());
