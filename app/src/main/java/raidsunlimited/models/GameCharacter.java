@@ -1,16 +1,19 @@
 package raidsunlimited.models;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Objects;
 
 public class GameCharacter {
-    private String charName;
-    private String specialization;
-    private String role;
+    private final String charName;
+    private final String specialization;
+    private final String role;
 
-    public GameCharacter() {
-
-    }
-    public GameCharacter(String charName, String specialization, String role) {
+    @JsonCreator
+    private GameCharacter(@JsonProperty("charName")String charName,
+                          @JsonProperty("specialization") String specialization,
+                          @JsonProperty("role") String role) {
         this.charName = charName;
         this.specialization = specialization;
         this.role = role;
@@ -71,11 +74,7 @@ public class GameCharacter {
         }
 
         public GameCharacter build() {
-            GameCharacter gameCharacter = new GameCharacter();
-            gameCharacter.charName = this.charName;
-            gameCharacter.specialization = this.specialization;
-            gameCharacter.role = this.role;
-            return gameCharacter;
+            return new GameCharacter(charName, specialization, role);
         }
     }
 }
