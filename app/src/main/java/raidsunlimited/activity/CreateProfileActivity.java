@@ -7,6 +7,7 @@ import raidsunlimited.activity.results.CreateProfileResult;
 import raidsunlimited.converters.ModelConverter;
 import raidsunlimited.dynamodb.UserDao;
 import raidsunlimited.dynamodb.models.User;
+import raidsunlimited.exceptions.UserProfileCreationException;
 import raidsunlimited.models.ProfileModel;
 import raidsunlimited.utils.ServiceUtils;
 
@@ -33,6 +34,9 @@ public class CreateProfileActivity {
     public CreateProfileResult handleRequest(final CreateProfileRequest createProfileRequest) {
         log.info("Received CreateProfileActivity Request: {}", createProfileRequest);
 
+        if (userDao.existsByEmail(createProfileRequest.getEmail())) {
+            throw new UserProfileCreationException("A profile with this email already exists");
+        }
 
         User user = new User();
         user.setUserId(ServiceUtils.generateRandomId());
