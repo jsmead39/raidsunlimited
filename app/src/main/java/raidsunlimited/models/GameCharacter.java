@@ -3,10 +3,13 @@ package raidsunlimited.models;
 import java.util.Objects;
 
 public class GameCharacter {
-    private final String charName;
-    private final String specialization;
-    private final String role;
+    private String charName;
+    private String specialization;
+    private String role;
 
+    public GameCharacter() {
+
+    }
     public GameCharacter(String charName, String specialization, String role) {
         this.charName = charName;
         this.specialization = specialization;
@@ -43,8 +46,8 @@ public class GameCharacter {
         return Objects.hash(charName, specialization, role);
     }
 
-    public static FeedbackModel.Builder builder() {
-        return new FeedbackModel.Builder();
+    public static Builder builder() {
+        return new Builder();
     }
 
     public static class Builder {
@@ -68,7 +71,11 @@ public class GameCharacter {
         }
 
         public GameCharacter build() {
-            return new GameCharacter(charName, specialization, role);
+            GameCharacter gameCharacter = new GameCharacter();
+            gameCharacter.charName = this.charName;
+            gameCharacter.specialization = this.specialization;
+            gameCharacter.role = this.role;
+            return gameCharacter;
         }
     }
 }

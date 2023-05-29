@@ -49,7 +49,7 @@ public class CreateProfileRequest {
     public static class Builder {
         private String displayName;
         private String email;
-        private List<GameCharacter> gameCharacters;
+        private List<GameCharacter> charactersList;
         private String logs;
 
         public Builder withDisplayName(String displayName) {
@@ -62,8 +62,8 @@ public class CreateProfileRequest {
             return this;
         }
 
-        public Builder withGameCharacters(List<GameCharacter> gameCharacters) {
-            this.gameCharacters = copyToList(gameCharacters);
+        public Builder withCharactersList(List<GameCharacter> gameCharacters) {
+            this.charactersList= copyToList(gameCharacters);
             return this;
         }
 
@@ -73,7 +73,7 @@ public class CreateProfileRequest {
         }
 
         public CreateProfileRequest build() {
-            return new CreateProfileRequest(displayName, email, gameCharacters, logs);
+            return new CreateProfileRequest(displayName, email, charactersList, logs);
         }
     }
 }

@@ -19,7 +19,7 @@ public class CreateProfileLambda
                         return CreateProfileRequest.builder()
                                 .withDisplayName(unauthenticatedRequest.getDisplayName())
                                 .withEmail(profileOwner)
-                                .withGameCharacters(unauthenticatedRequest.getCharactersList())
+                                .withCharactersList(unauthenticatedRequest.getCharactersList())
                                 .withLogs(unauthenticatedRequest.getLogs())
                                 .build();
                     });
