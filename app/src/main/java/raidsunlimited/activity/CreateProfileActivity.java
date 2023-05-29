@@ -4,7 +4,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import raidsunlimited.activity.requests.CreateProfileRequest;
 import raidsunlimited.activity.results.CreateProfileResult;
+import raidsunlimited.converters.ModelConverter;
 import raidsunlimited.dynamodb.UserDao;
+import raidsunlimited.dynamodb.models.User;
+import raidsunlimited.models.ProfileModel;
 
 import javax.inject.Inject;
 
@@ -22,7 +25,21 @@ public class CreateProfileActivity {
     }
 
     public CreateProfileResult handleRequest(final CreateProfileRequest createProfileRequest) {
+        log.info("Received CreateProfileActivity Request: {}", createProfileRequest);
+
+        User user = new User();
+        user.setUserId(createProfileRequest.getUserId());
+        user.setDisplayName(createProfileRequest.getDisplayName());
+        user.setEmail(createProfileRequest.getEmail());
+        user.setGameCharacterList(createProfileRequest.getCharactersList());
+        user.setLogs(createProfileRequest.getLogs());
+
+        userDao.saveUser(user);
+
+        ProfileModel profileModel = new ModelConverter().toProfileModel(user);
+
         return CreateProfileResult.builder()
+                .withProfile(profileModel)
                 .build();
     }
 }
