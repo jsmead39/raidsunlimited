@@ -15,11 +15,8 @@ public class CreateProfileLambda
                 () -> {
                     CreateProfileRequest unauthenticatedRequest = input.fromBody(CreateProfileRequest.class);
                     return input.fromUserClaims(claims -> {
-                        String profileOwner = claims.containsKey("email") ? claims.get("email") :
-                                unauthenticatedRequest.getEmail();
-                        String userId = claims.get("name");
+                        String profileOwner = claims.get("email");
                         return CreateProfileRequest.builder()
-                                .withUserId(userId)
                                 .withDisplayName(unauthenticatedRequest.getDisplayName())
                                 .withEmail(profileOwner)
                                 .withGameCharacters(unauthenticatedRequest.getCharactersList())

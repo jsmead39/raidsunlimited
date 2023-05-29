@@ -10,23 +10,17 @@ import static raidsunlimited.utils.CollectionUtils.copyToList;
 
 @JsonDeserialize(builder = CreateProfileRequest.Builder.class)
 public class CreateProfileRequest {
-    private final String userId;
     private final String displayName;
     private final String email;
     private final List<GameCharacter> charactersList;
     private final String logs;
 
-    private CreateProfileRequest(String userId, String displayName, String email, List<GameCharacter> charactersList,
+    private CreateProfileRequest(String displayName, String email, List<GameCharacter> charactersList,
                                 String logs) {
-        this.userId = userId;
         this.displayName = displayName;
         this.email = email;
         this.charactersList = charactersList;
         this.logs = logs;
-    }
-
-    public String getUserId() {
-        return userId;
     }
 
     public String getDisplayName() {
@@ -53,17 +47,10 @@ public class CreateProfileRequest {
 
     @JsonPOJOBuilder
     public static class Builder {
-        private String userId;
         private String displayName;
         private String email;
         private List<GameCharacter> gameCharacters;
         private String logs;
-
-
-        public Builder withUserId(String userId) {
-            this.userId = userId;
-            return this;
-        }
 
         public Builder withDisplayName(String displayName) {
             this.displayName = displayName;
@@ -86,7 +73,7 @@ public class CreateProfileRequest {
         }
 
         public CreateProfileRequest build() {
-            return new CreateProfileRequest(userId, displayName, email, gameCharacters, logs);
+            return new CreateProfileRequest(displayName, email, gameCharacters, logs);
         }
     }
 }
