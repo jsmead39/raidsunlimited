@@ -6,6 +6,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import raidsunlimited.models.GameCharacter;
 
+import java.util.Collections;
 import java.util.List;
 
 public class GameCharacterConverter implements DynamoDBTypeConverter<String, List<GameCharacter>> {
@@ -22,6 +23,9 @@ public class GameCharacterConverter implements DynamoDBTypeConverter<String, Lis
 
     @Override
     public List<GameCharacter> unconvert(String gameCharactersJson) {
+        if (gameCharactersJson == null | gameCharactersJson.isEmpty()) {
+            return Collections.emptyList();
+        }
         try {
             return objectMapper.readValue(gameCharactersJson, new TypeReference<>() {
             });

@@ -24,8 +24,14 @@ public class CreateProfileActivity {
         this.userDao = userDao;
     }
 
+    /**
+     * Handled the creation of a user profile and stores it in DynamoDB.
+     * @param createProfileRequest request object containing the user profile information.
+     * @return createProfileResult result object containing the API defined {@link ProfileModel}
+     */
     public CreateProfileResult handleRequest(final CreateProfileRequest createProfileRequest) {
         log.info("Received CreateProfileActivity Request: {}", createProfileRequest);
+
 
         User user = new User();
         user.setUserId(createProfileRequest.getUserId());
