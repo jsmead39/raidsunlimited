@@ -34,6 +34,12 @@ public class CreateProfileActivity {
     public CreateProfileResult handleRequest(final CreateProfileRequest createProfileRequest) {
         log.info("Received CreateProfileActivity Request: {}", createProfileRequest);
 
+        //DisplayName can only contain alphanumeric characters.
+        if (!ServiceUtils.isValidString(createProfileRequest.getDisplayName())) {
+            throw new UserProfileCreationException("Display name [" + createProfileRequest.getDisplayName() +
+                    "] contains illegal characters");
+        }
+        //Exception if the user already has a profile
         if (userDao.existsByEmail(createProfileRequest.getEmail())) {
             throw new UserProfileCreationException("A profile with this email already exists");
         }

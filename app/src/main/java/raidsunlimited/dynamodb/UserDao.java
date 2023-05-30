@@ -1,23 +1,19 @@
 package raidsunlimited.dynamodb;
 
-
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
-import com.amazonaws.services.dynamodbv2.model.ScanRequest;
-import com.amazonaws.services.dynamodbv2.model.ScanResult;
 import raidsunlimited.dynamodb.models.User;
 import raidsunlimited.metrics.MetricsPublisher;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
- * Accesses data for a user using {@link raidsunlimited.dynamodb.models.User} to represent the model in
+ * Accesses data for a user using {@link User} to represent the model in
  * DynamoDB.
  */
 @Singleton

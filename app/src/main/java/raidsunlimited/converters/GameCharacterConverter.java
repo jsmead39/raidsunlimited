@@ -23,7 +23,7 @@ public class GameCharacterConverter implements DynamoDBTypeConverter<String, Lis
 
     @Override
     public List<GameCharacter> unconvert(String gameCharactersJson) {
-        if (gameCharactersJson == null | gameCharactersJson.isEmpty()) {
+        if (gameCharactersJson == null || gameCharactersJson.isEmpty()) {
             return Collections.emptyList();
         }
         try {
