@@ -26,6 +26,7 @@ module.exports = {
     createRaid: path.resolve(__dirname, 'src', 'pages', 'createRaid.js'),
     viewRaid: path.resolve(__dirname, 'src', 'pages', 'viewRaid.js'),
     homepage: path.resolve(__dirname, 'src', 'pages', 'homepage.js'),
+    profile: path.resolve(__dirname, 'src', 'pages', 'profile.js')
   },
   output: {
     path: path.resolve(__dirname, 'build', 'assets'),

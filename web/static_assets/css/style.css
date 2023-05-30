@@ -167,3 +167,11 @@ a {
     flex-direction: column;
     text-align: center;
 }
+
+.character-list {
+    list-style: none;
+}
+
+.character-list li {
+    margin-bottom: 5px;
+}
