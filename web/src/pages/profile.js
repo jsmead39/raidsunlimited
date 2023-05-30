@@ -10,15 +10,16 @@ import DataStore from '../util/DataStore';
 class Profile extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['mount', 'submitProfile', 'addCharacter', 'submitCharacter', 'getCharacterList'], this);
+        this.bindClassMethods(['mount', 'submitProfile', 'addCharacter', 'submitCharacter', ], this);
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
+        this.charactersList = [];
     }
 
     /**
      * Add the header to the page and load the RaidClient.
      */
-    mount() {
+     mount() {
         document.getElementById('create').addEventListener('click', this.submitProfile);
 
         this.header.addHeaderToPage();
@@ -28,6 +29,8 @@ class Profile extends BindingClass {
         this.addCharacter();
 
     }
+
+
 
     /**
      * Method to run when the user profile submit button is pressed. Call the RaidEventService to create the
@@ -40,12 +43,12 @@ class Profile extends BindingClass {
         errorMessageDisplay.innerText = ``;
         errorMessageDisplay.classList.add('hidden');
 
-        const changeButton = document.getElementById('change');
+        const changeButton = document.getElementById('create');
         const origButtonText = changeButton.innerText;
-        changeButton.innerText = 'Loading...';
+
 
         const displayName = document.getElementById('displayName').value;
-        const charactersList = this.getCharacterList();
+        const charactersList = this.charactersList;
         const logs = document.getElementById('warcraftLogsLink').value;
 
         const profile = await this.client.createProfile(displayName, charactersList, logs, (error) => {
@@ -53,7 +56,10 @@ class Profile extends BindingClass {
             errorMessageDisplay.innerText = `Error: ${error.message}`;
             errorMessageDisplay.classList.remove('hidden');
         });
+
         this.dataStore.set('profile', profile);
+        const successPopup = document.getElementById('successPopup');
+        successPopup.classList.remove('hidden');
     }
 
     async submitCharacter(evt) {
@@ -79,6 +85,7 @@ class Profile extends BindingClass {
             thead.appendChild(headerRow);
             characterTable.appendChild(thead)
             document.getElementById('characterList').appendChild(characterTable);
+
         }
 
         //Add a character to our table
@@ -93,7 +100,12 @@ class Profile extends BindingClass {
         tbody.appendChild(dataRow);
 
 
-        console.log(characterList);
+        this.charactersList.push({
+            charName: charName,
+            charClass: charClass,
+            specialization: specialization,
+            role: role
+        });
 
         document.getElementById('characterName').value = '';
         document.getElementById('characterClass').value = '';
@@ -115,28 +127,6 @@ class Profile extends BindingClass {
 
             characterForm.addEventListener('submit', this.submitCharacter);
         }
-    }
-
-    getCharacterList() {
-        const characterList = document.getElementById('characterList');
-        const rows = characterList.querySelectorAll('table');
-        let charactersList = [];
-
-        for (let i = 0; i < rows.length; i++) {
-            const row = rows[i];
-            const charName = row.getAttribute('date-name');
-            const charClass = row.getAttribute('data-class');
-            const specialization = row.getAttribute('data-specialization');
-            const role = row.getAttribute('data-role');
-
-            charactersList.push({
-                charName: charName,
-                charClass: charClass,
-                specialization: specialization,
-                role: role
-            });
-        }
-        return charactersList;
     }
 }
 
