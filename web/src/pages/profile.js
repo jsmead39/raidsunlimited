@@ -56,6 +56,10 @@ class Profile extends BindingClass {
                 messageText.classList.add('success');
             }
 
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 5000);
+
             messagePopup.classList.remove('hidden');
             this.dataStore.set('profile', response.data.profile);
         } catch (error) {
