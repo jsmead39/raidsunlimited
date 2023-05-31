@@ -11,9 +11,6 @@ public class GetRaidRequest {
         return raidId;
     }
 
-    public void setRaidId(String raidId) {
-        this.raidId = raidId;
-    }
 
     @Override
     public String toString() {

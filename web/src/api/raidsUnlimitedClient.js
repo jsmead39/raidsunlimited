@@ -5,7 +5,7 @@ import Authenticator from "./authenticator";
 /**
  * Client to call the RaidsUnlimitedService.
  *
- * This could be a great place to explore Mixins. Currently the client is being loaded multiple times on each page,
+ * This could be a great place to explore Mixins. Currently, the client is being loaded multiple times on each page,
  * which we could avoid using inheritance or Mixins.
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes#Mix-ins
  * https://javascript.info/mixins
@@ -16,7 +16,7 @@ export default class RaidsUnlimitedClient extends BindingClass {
         super();
 
         const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'createRaid', 'getRaid',
-             'createProfile'];
+             'createProfile', 'getProfile', 'getProfileByEmail'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();
@@ -72,11 +72,19 @@ export default class RaidsUnlimitedClient extends BindingClass {
         return await this.authenticator.getUserToken();
     }
 
+    /**
+     * Create a new user profile.
+     * @param displayName The display name for the user.
+     * @param charactersList A list of character objects.  Each object contains the character details.
+     * @param logs URL for the Warcraft Logs link.
+     * @param errorCallback (Optional) A function to execute if the call fails.
+     * @returns A user profile that has been created.
+     */
     async createProfile(displayName, charactersList, logs, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("You must be logged in to create a " +
                 "profile.")
-            const response = await this.axiosClient.post('users', {
+            return await this.axiosClient.post('users', {
                 displayName: displayName,
                 charactersList: charactersList,
                 logs: logs
@@ -85,10 +93,35 @@ export default class RaidsUnlimitedClient extends BindingClass {
                     Authorization: `Bearer ${token}`
                 }
             });
-            return response;
         } catch (error) {
             this.handleError(error, errorCallback)
             throw error;
+        }
+    }
+
+    async getProfile(userId, errorCallback) {
+        try {
+            const response = await this.axiosClient.get(`users/${userId}`);
+            console.log(response.data);
+            return response.data.profileModel;
+
+        } catch (error) {
+            this.handleError(error, errorCallback)
+        }
+    }
+
+    async getProfileByEmail(email, errorCallback) {
+        try {
+            const token = await this.getTokenOrThrow("User is not logged in");
+            const response = await this.axiosClient.get(`users/profile`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            return response.data;
+        } catch (error) {
+            console.log("Error in getProfileByEmail: ", error);
+            this.handleError(error, errorCallback)
         }
     }
 
@@ -131,7 +164,7 @@ export default class RaidsUnlimitedClient extends BindingClass {
 
     /**
      * Gets the raid for the given ID.
-     * @param id Unique identifier for a raid
+     * @param raidId Unique identifier for a raid
      * @param errorCallback (Optional) A function to execute if the call fails.
      * @returns The raid's metadata.
      */

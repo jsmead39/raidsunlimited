@@ -156,6 +156,7 @@ a {
 }
 
 .content-center {
+    padding-top: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -194,3 +195,20 @@ a {
 .error {
     color: red;
 }
+
+.form-group h3, .form-group h2 {
+    padding-right: 20px;
+    display: inline-block;
+}
+
+.profile-setup {
+    display: none;
+    font-size: 24px;
+    color: white;
+    position: fixed;
+    left: 50%;
+    text-align: center;
+    transform: translate(-50%);
+    background-color: black;
+}
+
