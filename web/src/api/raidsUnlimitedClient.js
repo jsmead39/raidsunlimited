@@ -15,7 +15,8 @@ export default class RaidsUnlimitedClient extends BindingClass {
     constructor(props = {}) {
         super();
 
-        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'createRaid', 'getRaid'];
+        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'createRaid', 'getRaid',
+             'createProfile'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();
@@ -69,6 +70,26 @@ export default class RaidsUnlimitedClient extends BindingClass {
         }
 
         return await this.authenticator.getUserToken();
+    }
+
+    async createProfile(displayName, charactersList, logs, errorCallback) {
+        try {
+            const token = await this.getTokenOrThrow("You must be logged in to create a " +
+                "profile.")
+            const response = await this.axiosClient.post('users', {
+                displayName: displayName,
+                charactersList: charactersList,
+                logs: logs
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            return response;
+        } catch (error) {
+            this.handleError(error, errorCallback)
+            throw error;
+        }
     }
 
     /**

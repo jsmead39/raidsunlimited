@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 public class ServiceUtils {
     static final int RAIDEVENT_ID_LENGTH = 5;
-    private static final Pattern INVALID_CHARACTER_PATTERN = Pattern.compile("[\"'\\\\]");
+    private static final Pattern INVALID_CHARACTER_PATTERN = Pattern.compile("[^a-zA-Z0-9]");
 
 
     private ServiceUtils() {
@@ -32,6 +32,6 @@ public class ServiceUtils {
      * @return randomId as a String
      */
     public static String generateRandomId() {
-        return RandomStringUtils.randomAlphanumeric(5);
+        return RandomStringUtils.randomAlphanumeric(RAIDEVENT_ID_LENGTH);
     }
 }

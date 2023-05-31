@@ -1,7 +1,9 @@
 package raidsunlimited.converters;
 
 import raidsunlimited.dynamodb.models.RaidEvent;
+import raidsunlimited.dynamodb.models.User;
 import raidsunlimited.models.FeedbackModel;
+import raidsunlimited.models.ProfileModel;
 import raidsunlimited.models.RaidModel;
 
 import java.time.Instant;
@@ -15,7 +17,7 @@ import java.util.Map;
 public class ModelConverter {
 
     /**
-     *
+     * Convert a RaidEvent object from the RaidEvent table to a RaidModel object.
      * @param raidEvent A raidEventObject.
      * @return a RaidModel representation to be passed back to front end
      */
@@ -41,6 +43,22 @@ public class ModelConverter {
                 .withRaidStatus(raidEvent.getRaidStatus())
                 .build();
     }
+
+    /**
+     * Convert a User object from the User table to a ProfileModel object.
+     * @param user the User object from the User table.
+     * @return A ProfileModel representation of the user profile.
+     */
+    public ProfileModel toProfileModel(User user) {
+        return ProfileModel.builder()
+                .withUserId(user.getUserId())
+                .withDisplayName(user.getDisplayName())
+                .withEmail(user.getEmail())
+                .withCharacterList(user.getGameCharacterList())
+                .withLogs(user.getLogs())
+                .build();
+    }
+
 
     private String convertLongToDate(Long epoch) {
         Instant instant = Instant.ofEpochSecond(epoch);
