@@ -79,7 +79,7 @@ public class UserDao {
         User user = this.dynamoDBMapper.load(User.class, id);
 
         if (user == null) {
-            metricsPublisher.addCount((MetricsConstants.GETPROFILE_PROFILENOTFOUND_COUNT, 1);
+            metricsPublisher.addCount(MetricsConstants.GETPROFILE_PROFILENOTFOUND_COUNT, 1);
             throw new UserProfileNotFoundException("No profile exists with id " + id);
         }
         metricsPublisher.addCount(MetricsConstants.GETPROFILE_PROFILENOTFOUND_COUNT, 0);
@@ -107,8 +107,8 @@ public class UserDao {
 
 
         if (results.isEmpty()) {
-            metricsPublisher.addCount((MetricsConstants.GETPROFILE_PROFILENOTFOUND_COUNT, 1);
-            throw new UserProfileNotFoundException("No profile exists with id " + id);
+            metricsPublisher.addCount(MetricsConstants.GETPROFILE_PROFILENOTFOUND_COUNT, 1);
+            throw new UserProfileNotFoundException("No profile exists with email " + email);
         }
         metricsPublisher.addCount(MetricsConstants.GETPROFILE_PROFILENOTFOUND_COUNT, 0);
         return results.get(0);
