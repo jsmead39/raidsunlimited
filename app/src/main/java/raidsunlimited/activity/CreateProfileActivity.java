@@ -40,7 +40,7 @@ public class CreateProfileActivity {
         //DisplayName can only contain alphanumeric characters.
         if (!ServiceUtils.isValidString(createProfileRequest.getDisplayName())) {
             throw new UserProfileCreationException("Display name [" + createProfileRequest.getDisplayName() +
-                    "] contains illegal characters");
+                    "] contains illegal characters.  Only letters and numbers are allowed.");
         }
         //Exception if the user already has a profile
         if (userDao.existsByEmail(createProfileRequest.getEmail())) {
