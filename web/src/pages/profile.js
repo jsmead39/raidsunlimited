@@ -37,30 +37,37 @@ class Profile extends BindingClass {
      * raid.
      */
     async submitProfile(evt) {
-        evt.preventDefault()
-
-        const errorMessageDisplay = document.getElementById('error-message');
-        errorMessageDisplay.innerText = ``;
-        errorMessageDisplay.classList.add('hidden');
+        evt.preventDefault();
 
         const changeButton = document.getElementById('create');
         const origButtonText = changeButton.innerText;
-
+        const messagePopup = document.getElementById('messagePopup');
+        const messageText = document.getElementById('messageText');
 
         const displayName = document.getElementById('displayName').value;
         const charactersList = this.charactersList;
         const logs = document.getElementById('warcraftLogsLink').value;
 
-        const profile = await this.client.createProfile(displayName, charactersList, logs, (error) => {
-            changeButton.innerText = origButtonText;
-            errorMessageDisplay.innerText = `Error: ${error.message}`;
-            errorMessageDisplay.classList.remove('hidden');
-        });
+        try {
+            const response = await this.client.createProfile(displayName, charactersList, logs);
 
-        this.dataStore.set('profile', profile);
-        const successPopup = document.getElementById('successPopup');
-        successPopup.classList.remove('hidden');
+            if (response.status === 200) {
+                messageText.innerText = 'Profile successfully created';
+                messageText.classList.add('success');
+            }
+
+            messagePopup.classList.remove('hidden');
+            this.dataStore.set('profile', response.data.profile);
+        } catch (error) {
+            changeButton.innerText = origButtonText;
+            messageText.innerText = `Error: ${error.message}`;
+            messageText.classList.add('error');
+            messagePopup.classList.remove('hidden');
+        }
     }
+
+
+
 
     async submitCharacter(evt) {
         evt.preventDefault();

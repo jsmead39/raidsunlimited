@@ -85,9 +85,10 @@ export default class RaidsUnlimitedClient extends BindingClass {
                     Authorization: `Bearer ${token}`
                 }
             });
-            return response.data.profile;
+            return response;
         } catch (error) {
             this.handleError(error, errorCallback)
+            throw error;
         }
     }
 
