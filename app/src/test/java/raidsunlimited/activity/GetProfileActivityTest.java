@@ -8,8 +8,6 @@ import raidsunlimited.activity.requests.GetProfileRequest;
 import raidsunlimited.activity.results.GetProfileResult;
 import raidsunlimited.dynamodb.UserDao;
 import raidsunlimited.dynamodb.models.User;
-import raidsunlimited.models.ProfileModel;
-
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;

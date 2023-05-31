@@ -65,7 +65,7 @@ U11. As a user, I want to be able to remove myself from a raid sign up queue so 
 4.1. In Scope
 Which parts of the problem defined in Sections 1 and 2 will you solve with this design? This should include the base functionality of your product. What pieces are required for your product to work?
 
-User Registration and Profile Management:  Users will be able to create and manage their profiles, including game 
+User Registration and CreateProfile Management:  Users will be able to create and manage their profiles, including game 
 details and raid preferences.
 
 Raid Creation and Management: Raid organizers will be able to create and manage raid events.  This will includes 
@@ -182,12 +182,12 @@ Integer rating;
 String comments;
 ```
 
-6.1. User Profile Creation Endpoint
+6.1. User CreateProfile Creation Endpoint
 * Accepts `POST` requests to `/users`
 * Accepts a User model and creates a new user profile.
 * If the user profile cannot be created, will throw a `UserProfileCreationException`.
 
-6.2. User Profile Update Endpoint
+6.2. User CreateProfile Update Endpoint
 * Accepts `PUT` requests to `/users/:userId`
 * Accepts a userId and User model with updated information and updates the user's profile.
 * If the user profile is not found, will throw a `UserProfileNotFoundException`.
@@ -246,7 +246,7 @@ String comments;
 * Accepts a raidId and returns a list of Feedback models for the raid.
 * If the raid ID is not found, will throw a `RaidEventNotFoundException`.
 
-6.14. User Profile Retrieval
+6.14. User CreateProfile Retrieval
 * Accepts `GET` requests to `/users/:userId`
 * Accepts a userId and returns the corresponding User model.
 * If the given user ID is not found, will throw a `UserProfileNotFoundException`.

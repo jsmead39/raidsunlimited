@@ -5,9 +5,9 @@ import DataStore from '../util/DataStore';
 
 
 /**
- * Logic needed for the User Profile page of the website.
+ * Logic needed for the User CreateProfile page of the website.
  */
-class Profile extends BindingClass {
+class CreateProfile extends BindingClass {
     constructor() {
         super();
         this.bindClassMethods(['mount', 'submitProfile', 'addCharacter', 'submitCharacter', ], this);
@@ -52,7 +52,7 @@ class Profile extends BindingClass {
             const response = await this.client.createProfile(displayName, charactersList, logs);
 
             if (response.status === 200) {
-                messageText.innerText = 'Profile successfully created';
+                messageText.innerText = 'CreateProfile successfully created';
                 messageText.classList.add('success');
             }
 
@@ -86,6 +86,7 @@ class Profile extends BindingClass {
         if (!characterTable) {
             characterTable = document.createElement('table');
             characterTable.setAttribute('id', 'characterTable');
+            // noinspection DuplicatedCode
             const thead = document.createElement('thead');
             const headerRow = document.createElement('tr');
             ['Name', 'Class', 'Specialization', 'Role'].forEach(header => {
@@ -149,7 +150,7 @@ class Profile extends BindingClass {
  * Main method to run when the page contents have loaded.
  */
 const main = async () => {
-    const userProfile = new Profile();
+    const userProfile = new CreateProfile();
     userProfile.mount();
 };
 
