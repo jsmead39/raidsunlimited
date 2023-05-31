@@ -4,31 +4,52 @@ import BindingClass from '../util/bindingClass';
 import DataStore from '../util/DataStore';
 
 /**
- * Logic needed for the view raid page of the website.
+ * Logic needed for the homepage of the website.
  */
 class Homepage extends BindingClass {
     constructor() {
         super();
 
-        // this.bindClassMethods(['mount'], this);
+        this.bindClassMethods(['mount', 'loadUserProfile'], this);
 
         // Create a enw datastore with an initial "empty" state.
-        // this.dataStore = new DataStore(EMPTY_DATASTORE_STATE);
-        // this.header = new Header(this.dataStore);
+        this.dataStore = new DataStore();
+        this.header = new Header(this.dataStore);
         this.header = new Header();
-        // this.dataStore.addChangeListener(this.displaySearchResults);
         console.log("Homepage constructor");
     }
 
     mount() {
         this.header.addHeaderToPage();
+        this.client = new RaidsUnlimitedClient();
+        this.loadUserProfile();
+    }
+
+    async loadUserProfile() {
+        const identity = await this.client.getIdentity();
+        const email = identity.email;
+        try {
+            const response = await this.client.getProfileByEmail(email);
+            this.dataStore.set('profile', response.profileModel);
+
+            const profileSetupMessage = document.getElementById('profileSetupMessage');
+            const profileModel = response.profileModel;
+
+            if (profileModel.userId) {
+                profileSetupMessage.classList.add('hidden');
+            } else {
+                profileSetupMessage.classList.remove('hidden');
+            }
+        } catch (error) {
+            console.error("User is not logged in to retrieve a profile", error);
+        }
     }
 }
 
 
 const main = async () => {
     const homePage = new Homepage()
-    homePage.mount();
+    await homePage.mount();
 };
 
 window.addEventListener('DOMContentLoaded', main);

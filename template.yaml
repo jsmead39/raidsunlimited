@@ -338,7 +338,7 @@ Resources:
         RaidsUnlimited:
           Type: Api
           Properties:
-            Path: /users/email/{email}
+            Path: /users/profile
             Method: get
 
   #-----------------------------------------------------
