@@ -10,14 +10,27 @@ import static raidsunlimited.utils.CollectionUtils.copyToList;
 
 @JsonDeserialize(builder = UpdateProfileRequest.Builder.class)
 public class UpdateProfileRequest {
+    private final String userId;
+    private final String email;
     private final String displayName;
     private final List<GameCharacter> charactersList;
     private final String logs;
 
-    private UpdateProfileRequest(String displayName, List<GameCharacter> charactersList, String logs) {
+    private UpdateProfileRequest(String userId, String email, String displayName, List<GameCharacter> charactersList,
+                                 String logs) {
+        this.userId = userId;
+        this.email = email;
         this.displayName = displayName;
         this.charactersList = charactersList;
         this.logs = logs;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public String getDisplayName() {
@@ -35,7 +48,9 @@ public class UpdateProfileRequest {
     @Override
     public String toString() {
         return "UpdateProfileRequest{" +
-                "displayName='" + displayName + '\'' +
+                "userId='" + userId + '\'' +
+                ", email='" + email + '\'' +
+                ", displayName='" + displayName + '\'' +
                 ", charactersList=" + charactersList +
                 ", logs='" + logs + '\'' +
                 '}';
@@ -49,9 +64,21 @@ public class UpdateProfileRequest {
 
     @JsonPOJOBuilder
     public static class Builder {
+        private String userId;
+        private String email;
         private String displayName;
         private List<GameCharacter> charactersList;
         private String logs;
+
+        public Builder withUserId(String userId) {
+            this.userId = userId;
+            return this;
+        }
+
+        public Builder withEmail(String email) {
+            this.email = email;
+            return this;
+        }
 
         public Builder withDisplayName(String displayName) {
             this.displayName = displayName;
@@ -69,7 +96,7 @@ public class UpdateProfileRequest {
         }
 
         public UpdateProfileRequest build() {
-            return new UpdateProfileRequest(displayName, charactersList, logs);
+            return new UpdateProfileRequest(userId, email, displayName, charactersList, logs);
         }
     }
 }

@@ -7,6 +7,7 @@ import raidsunlimited.activity.results.CreateProfileResult;
 import raidsunlimited.converters.ModelConverter;
 import raidsunlimited.dynamodb.UserDao;
 import raidsunlimited.dynamodb.models.User;
+import raidsunlimited.exceptions.InvalidAttributeValueException;
 import raidsunlimited.exceptions.UserProfileCreationException;
 import raidsunlimited.models.ProfileModel;
 import raidsunlimited.utils.ServiceUtils;
@@ -39,7 +40,7 @@ public class CreateProfileActivity {
         }
         //DisplayName can only contain alphanumeric characters.
         if (!ServiceUtils.isValidString(createProfileRequest.getDisplayName())) {
-            throw new UserProfileCreationException("Display name [" + createProfileRequest.getDisplayName() +
+            throw new InvalidAttributeValueException("Display name [" + createProfileRequest.getDisplayName() +
                     "] contains illegal characters.  Only letters and numbers are allowed.");
         }
         //Exception if the user already has a profile
