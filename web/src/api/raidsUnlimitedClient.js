@@ -122,7 +122,7 @@ export default class RaidsUnlimitedClient extends BindingClass {
     async getProfile(userId, errorCallback) {
         try {
             const response = await this.axiosClient.get(`users/${userId}`);
-            return response.data.profileModel;
+            return response.data;
 
         } catch (error) {
             this.handleError(error, errorCallback)

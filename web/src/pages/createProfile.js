@@ -10,7 +10,7 @@ import DataStore from '../util/DataStore';
 class CreateProfile extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['mount', 'submitProfile', 'addCharacter', 'submitCharacter', ], this);
+        this.bindClassMethods(['mount', 'submitProfile', 'addCharacter', 'submitCharacter'], this);
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
         this.charactersList = [];

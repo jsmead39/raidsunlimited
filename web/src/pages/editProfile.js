@@ -19,10 +19,12 @@ class EditProfile extends BindingClass {
     /**
      * Add the header to the page and load the RaidClient
      */
-    async mount() {
-        await this.header.addHeaderToPage();
+    mount() {
+        document.getElementById('create').addEventListener('click', this.updateProfile);
+        this.header.addHeaderToPage();
         this.client = new RaidsUnlimitedClient();
-        await this.loadProfile();
+        this.loadProfile();
+        this.addCharacter();
     }
 
     async loadProfile() {
@@ -31,21 +33,24 @@ class EditProfile extends BindingClass {
         const userId = urlParams.get('id');
 
         const response = await this.client.getProfile(userId);
-        this.charactersList = response.charactersList;
-        this.dataStore.set('profile', response);
+        if (response.profileModel.characterList != null) {
+            this.charactersList = response.profileModel.characterList;
+        }
+        this.dataStore.set('profile', response.profileModel);
+        console.log("loadProfile  after response", response.profileModel.characterList);
 
-        document.getElementById('email').innerText = response.email;
-        document.getElementById('displayName').innerText = response.displayName;
-        document.getElementById('warcraftLink').href = response.logs;
-        document.getElementById('warcraftLogsLink').innerText = "Link to Warcraft Logs";
+        console.log("loadProfile this.charactersList", this.charactersList)
 
+        document.getElementById('email').value = response.profileModel.email;
+        document.getElementById('displayName').value = response.profileModel.displayName;
+        document.getElementById('warcraftLogsLink').value = response.profileModel.logs;
+        // document.getElementById('warcraftLogsLink').value = "Link to Warcraft Logs";
 
         //need to create a table here if it doesn't exist
-        let charactersTable = document.getElementById('characterTable');
-        if (!charactersTable) {
-            charactersTable = document.createElement('table');
-            charactersTable.setAttribute('id', 'characterTable');
-
+        let characterTable = document.getElementById('characterTable');
+        if (!characterTable) {
+            characterTable = document.createElement('table');
+            characterTable.setAttribute('id', 'characterTable');
             // noinspection DuplicatedCode
             const thead = document.createElement('thead');
             const headerRow = document.createElement('tr');
@@ -55,9 +60,27 @@ class EditProfile extends BindingClass {
                 headerRow.appendChild(th);
             });
             thead.appendChild(headerRow);
-            charactersTable.appendChild(thead)
-            document.getElementById('characterList').appendChild(charactersTable);
+            characterTable.appendChild(thead)
+            document.getElementById('characterList').appendChild(characterTable);
+        }
 
+        //create table body
+        let tbody = characterTable.getElementsByTagName('tbody')[0];
+        if (!tbody) {
+            tbody = document.createElement('tbody');
+            characterTable.appendChild(tbody);
+        }
+
+        if (response.profileModel.characterList != null) {
+            response.profileModel.characterList.forEach(character => {
+                const tr = document.createElement('tr');
+                ['charName', 'charClass', 'specialization', 'role'].forEach(field => {
+                    const td = document.createElement('td');
+                    td.textContent = character[field];
+                    tr.appendChild(td);
+                });
+                tbody.appendChild(tr);
+            });
         }
     }
 
@@ -74,11 +97,13 @@ class EditProfile extends BindingClass {
         const userId = profileData.userId;
         // const email = document.getElementById('email').value;
         const displayName = document.getElementById('displayName').value;
-        const charactersList = this.charactersList;
+        // const charactersList = this.charactersList;
+        console.log("Character List in updateProfile", this.charactersList);
         const logs = document.getElementById('warcraftLogsLink').value;
 
         try {
-            const response = await this.client.updateProfile(userId, displayName, charactersList, logs);
+            const response = await this.client.updateProfile(userId, displayName, this.charactersList,
+                logs);
 
             if (response.status === 200) {
                 messageText.innerText = 'Profile successfully created';
@@ -92,6 +117,7 @@ class EditProfile extends BindingClass {
             messagePopup.classList.remove('hidden');
             this.dataStore.set('profile', response.data.profile);
         } catch (error) {
+            console.log(error);
             changeButton.innerText = origButtonText;
             messageText.innerText = `Error: ${error.message}`;
             messageText.classList.add('error');
@@ -99,7 +125,7 @@ class EditProfile extends BindingClass {
         }
     }
 
-    async submitCharacter(evt) {
+    submitCharacter(evt) {
         evt.preventDefault();
 
         const charName = document.getElementById('characterName').value;
@@ -136,7 +162,7 @@ class EditProfile extends BindingClass {
             dataRow.appendChild(td);
         });
         tbody.appendChild(dataRow);
-
+        console.log("Characters List", this.charactersList);
 
         this.charactersList.push({
             charName: charName,
@@ -144,6 +170,7 @@ class EditProfile extends BindingClass {
             specialization: specialization,
             role: role
         });
+        console.log("submitCharacter this.charactersList", this.charactersList);
 
         document.getElementById('characterName').value = '';
         document.getElementById('characterClass').value = '';
@@ -166,6 +193,14 @@ class EditProfile extends BindingClass {
             characterForm.addEventListener('submit', this.submitCharacter);
         }
     }
-
-
 }
+
+/**
+ * Main method to run when the page contents have loaded.
+ */
+const main = async () => {
+    const userProfile = new EditProfile();
+    userProfile.mount();
+};
+
+window.addEventListener('DOMContentLoaded', main);

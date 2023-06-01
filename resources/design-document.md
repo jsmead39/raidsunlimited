@@ -208,7 +208,7 @@ String comments;
 * If the raid event is not found, will throw a `RaidEventNotFoundException`.
 
 6.6. Get Raid Event Endpoint
-* Accepts GET requests to `/raidevents/:raidId`
+* Accepts `GET` requests to `/raidevents/:raidId`
 * Accepts a raidId and returns the corresponding RaidEvent model.
 * If the given raid ID is not found, will throw a `RaidEventNotFoundException`.
 
