@@ -6,7 +6,7 @@ import DataStore from "../util/DataStore";
 /**
  * Logic needed for the view profile page of the website.
  */
-class CreateProfile extends BindingClass {
+class ViewProfile extends BindingClass {
     constructor() {
         super();
         this.bindClassMethods(['loadProfile', 'mount'], this);
@@ -76,7 +76,7 @@ class CreateProfile extends BindingClass {
  * Main method to run when the page contents have loaded.
  */
 const main = async() => {
-    const userProfile = new CreateProfile();
+    const userProfile = new ViewProfile();
     userProfile.mount();
 };
 window.addEventListener('DOMContentLoaded', main);
