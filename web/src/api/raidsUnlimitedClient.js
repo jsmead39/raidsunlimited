@@ -102,7 +102,6 @@ export default class RaidsUnlimitedClient extends BindingClass {
     async getProfile(userId, errorCallback) {
         try {
             const response = await this.axiosClient.get(`users/${userId}`);
-            console.log(response.data);
             return response.data.profileModel;
 
         } catch (error) {
@@ -120,8 +119,8 @@ export default class RaidsUnlimitedClient extends BindingClass {
             });
             return response.data;
         } catch (error) {
-            console.log("Error in getProfileByEmail: ", error);
             this.handleError(error, errorCallback)
+            return null;
         }
     }
 

@@ -201,8 +201,8 @@ a {
     display: inline-block;
 }
 
-.profile-setup {
-    display: none;
+.profile-visible {
+    display: block;
     font-size: 24px;
     color: white;
     position: fixed;
@@ -210,5 +210,9 @@ a {
     text-align: center;
     transform: translate(-50%);
     background-color: black;
+}
+
+.profile-hidden {
+    display: none;
 }
 
