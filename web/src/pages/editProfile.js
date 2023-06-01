@@ -37,9 +37,6 @@ class EditProfile extends BindingClass {
             this.charactersList = response.profileModel.characterList;
         }
         this.dataStore.set('profile', response.profileModel);
-        console.log("loadProfile  after response", response.profileModel.characterList);
-
-        console.log("loadProfile this.charactersList", this.charactersList)
 
         document.getElementById('email').value = response.profileModel.email;
         document.getElementById('displayName').value = response.profileModel.displayName;
@@ -98,7 +95,6 @@ class EditProfile extends BindingClass {
         // const email = document.getElementById('email').value;
         const displayName = document.getElementById('displayName').value;
         // const charactersList = this.charactersList;
-        console.log("Character List in updateProfile", this.charactersList);
         const logs = document.getElementById('warcraftLogsLink').value;
 
         try {
@@ -162,7 +158,6 @@ class EditProfile extends BindingClass {
             dataRow.appendChild(td);
         });
         tbody.appendChild(dataRow);
-        console.log("Characters List", this.charactersList);
 
         this.charactersList.push({
             charName: charName,
@@ -170,7 +165,6 @@ class EditProfile extends BindingClass {
             specialization: specialization,
             role: role
         });
-        console.log("submitCharacter this.charactersList", this.charactersList);
 
         document.getElementById('characterName').value = '';
         document.getElementById('characterClass').value = '';
