@@ -72,10 +72,31 @@ class EditProfile extends BindingClass {
         const profileData = this.dataStore.get('profile');
 
         const userId = profileData.userId;
-        const email = document.getElementById('email').value;
+        // const email = document.getElementById('email').value;
         const displayName = document.getElementById('displayName').value;
         const charactersList = this.charactersList;
         const logs = document.getElementById('warcraftLogsLink').value;
+
+        try {
+            const response = await this.client.updateProfile(userId, displayName, charactersList, logs);
+
+            if (response.status === 200) {
+                messageText.innerText = 'Profile successfully created';
+                messageText.classList.add('success');
+            }
+
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 5000);
+
+            messagePopup.classList.remove('hidden');
+            this.dataStore.set('profile', response.data.profile);
+        } catch (error) {
+            changeButton.innerText = origButtonText;
+            messageText.innerText = `Error: ${error.message}`;
+            messageText.classList.add('error');
+            messagePopup.classList.remove('hidden');
+        }
     }
 
     async submitCharacter(evt) {

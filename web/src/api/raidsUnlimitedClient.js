@@ -16,7 +16,7 @@ export default class RaidsUnlimitedClient extends BindingClass {
         super();
 
         const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'createRaid', 'getRaid',
-             'createProfile', 'getProfile', 'getProfileByEmail'];
+             'createProfile', 'getProfile', 'getProfileByEmail', 'updateProfile'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();
@@ -99,6 +99,26 @@ export default class RaidsUnlimitedClient extends BindingClass {
         }
     }
 
+    async updateProfile(userId, displayName, charactersList, logs, errorCallback) {
+        try {
+            const token = await this.getTokenOrThrow("You must be logged in to update your " +
+                "profile.")
+            return await this.axiosClient.put('users/{userId}', {
+                userId: userId,
+                displayName: displayName,
+                charactersList: charactersList,
+                logs: logs
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+        } catch (error) {
+            this.handleError(error, errorCallback)
+            throw error;
+        }
+    }
+
     async getProfile(userId, errorCallback) {
         try {
             const response = await this.axiosClient.get(`users/${userId}`);
@@ -108,6 +128,8 @@ export default class RaidsUnlimitedClient extends BindingClass {
             this.handleError(error, errorCallback)
         }
     }
+
+
 
     async getProfileByEmail(email, errorCallback) {
         try {
