@@ -8,7 +8,6 @@ import raidsunlimited.activity.results.UpdateProfileResult;
 import raidsunlimited.converters.ModelConverter;
 import raidsunlimited.dynamodb.UserDao;
 import raidsunlimited.dynamodb.models.User;
-import raidsunlimited.exceptions.InvalidAttributeChangeException;
 import raidsunlimited.exceptions.InvalidAttributeValueException;
 import raidsunlimited.metrics.MetricsConstants;
 import raidsunlimited.metrics.MetricsPublisher;
@@ -72,14 +71,9 @@ public class UpdateProfileActivity {
             throw new SecurityException("You must own a profile to update it.");
         }
 
-        //Check if the userID is being changed
-        if (!user.getUserId().equals(updateProfileRequest.getUserId())) {
-            throw new InvalidAttributeChangeException("Cannot change the userId");
-        }
-
         user.setDisplayName(updateProfileRequest.getDisplayName());
         user.setLogs(updateProfileRequest.getLogs());
-        user.setGameCharacterList(user.getGameCharacterList());
+        user.setCharactersList(updateProfileRequest.getCharactersList());
         user = userDao.saveUser(user);
 
 

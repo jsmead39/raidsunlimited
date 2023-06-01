@@ -41,6 +41,7 @@ class CreateProfile extends BindingClass {
             if (!charactersTable) {
                 charactersTable = document.createElement('table');
                 charactersTable.setAttribute('id', 'characterTable');
+
                 // noinspection DuplicatedCode
                 const thead = document.createElement('thead');
                 const headerRow = document.createElement('tr');
@@ -57,7 +58,7 @@ class CreateProfile extends BindingClass {
 
             const tbody = charactersTable.querySelector('tbody') ||
                 charactersTable.appendChild(document.createElement('tbody'));
-            response.characterList.forEach(character => {
+            response["characterList"].forEach(character => {
                 const dataRow = document.createElement('tr');
                 [character.charName, character.charClass, character.specialization, character.role].forEach(value => {
                     const td = document.createElement('td');

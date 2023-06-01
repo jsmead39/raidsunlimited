@@ -6,20 +6,7 @@
           "userId": {"S": "user1"},
           "displayName": {"S": "DragonSlayer"},
           "email": {"S": "dragonslayer@test.com"},
-          "characterList": {"L": [
-            {"M": {
-              "name": {"S": "Character 1"},
-              "class": {"S": "Warrior"},
-              "specialization": {"S": "Fury"},
-              "role": {"S": "DPS"}
-            }},
-            {"M": {
-              "name": {"S": "Character 2"},
-              "class": {"S": "Mage"},
-              "specialization": {"S": "Frost"},
-              "role": {"S": "DPS"}
-            }}
-          ]},
+          "charactersList": {"S": "[{\"charName\": \"Character 1\",\"charClass\": \"Warrior\",\"specialization\": \"Fury\",\"role\": \"DPS\"},{\"charName\": \"Character 2\",\"charClass\": \"Mage\",\"specialization\": \"Frost\",\"role\": \"DPS\"}]"},
           "logs": {"S": "https://logs.fakesite.com/user1"}
         }
       }
@@ -30,20 +17,7 @@
           "userId": {"S": "user2"},
           "displayName": {"S": "MillHouseManaStorm"},
           "email": {"S": "millhouse@test.com"},
-          "characterList": {"L": [
-            {"M": {
-              "name": {"S": "Character 1"},
-              "class": {"S": "Warlock"},
-              "specialization": {"S": "Destruction"},
-              "role": {"S": "DPS"}
-            }},
-            {"M": {
-              "name": {"S": "Character 2"},
-              "class": {"S": "Priest"},
-              "specialization": {"S": "Shadow"},
-              "role": {"S": "Healer"}
-            }}
-          ]},
+          "charactersList": {"S": "[{\"charName\": \"Character 1\",\"charClass\": \"Warlock\",\"specialization\": \"Destruction\",\"role\": \"DPS\"},{\"charName\": \"Character 2\",\"charClass\": \"Priest\",\"specialization\": \"Shadow\",\"role\": \"Healer\"}]"},
           "logs": {"S": "https://logs.fakesite.com/user2"}
         }
       }
@@ -54,20 +28,7 @@
           "userId": {"S": "user3"},
           "displayName": {"S": "StabbyMcStab"},
           "email": {"S": "stabby@test.com"},
-          "characterList": {"L": [
-            {"M": {
-              "name": {"S": "Character 1"},
-              "class": {"S": "Rogue"},
-              "specialization": {"S": "Assassination"},
-              "role": {"S": "DPS"}
-            }},
-            {"M": {
-              "name": {"S": "Character 2"},
-              "class": {"S": "Druid"},
-              "specialization": {"S": "Restoration"},
-              "role": {"S": "Healer"}
-            }}
-          ]},
+          "charactersList": {"S": "[{\"charName\": \"Character 1\",\"charClass\": \"Rogue\",\"specialization\": \"Assassination\",\"role\": \"DPS\"},{\"charName\": \"Character 2\",\"charClass\": \"Druid\",\"specialization\": \"Restoration\",\"role\": \"Healer\"}]"},
           "logs": {"S": "https://logs.fakesite.com/user3"}
         }
       }
@@ -78,20 +39,7 @@
           "userId": {"S": "user4"},
           "displayName": {"S": "ShadowHunter"},
           "email": {"S": "shadowhunter@test.com"},
-          "characterList": {"L": [
-            {"M": {
-              "name": {"S": "Character 1"},
-              "class": {"S": "Hunter"},
-              "specialization": {"S": "Beast Mastery"},
-              "role": {"S": "DPS"}
-            }},
-            {"M": {
-              "name": {"S": "Character 2"},
-              "class": {"S": "Shaman"},
-              "specialization": {"S": "Restoration"},
-              "role": {"S": "Healer"}
-            }}
-          ]},
+          "charactersList": {"S": "[{\"charName\": \"Character 1\",\"charClass\": \"Hunter\",\"specialization\": \"Beast Mastery\",\"role\": \"DPS\"},{\"charName\": \"Character 2\",\"charClass\": \"Shaman\",\"specialization\": \"Restoration\",\"role\": \"Healer\"}]"},
           "logs": {"S": "https://logs.fakesite.com/user4"}
         }
       }
@@ -102,20 +50,7 @@
           "userId": {"S": "user5"},
           "displayName": {"S": "HolyPaladin"},
           "email": {"S": "holypaladin@test.com"},
-          "characterList": {"L": [
-            {"M": {
-              "name": {"S": "Character 1"},
-              "class": {"S": "Paladin"},
-              "specialization": {"S": "Holy"},
-              "role": {"S": "Healer"}
-            }},
-            {"M": {
-              "name": {"S": "Character 2"},
-              "class": {"S": "Warrior"},
-              "specialization": {"S": "Protection"},
-              "role": {"S": "Tank"}
-            }}
-          ]},
+          "charactersList": {"S": "[{\"charName\": \"Character 1\",\"charClass\": \"Paladin\",\"specialization\": \"Holy\",\"role\": \"Healer\"},{\"charName\": \"Character 2\",\"charClass\": \"Warrior\",\"specialization\": \"Protection\",\"role\": \"Tank\"}]"},
           "logs": {"S": "https://logs.fakesite.com/user5"}
         }
       }

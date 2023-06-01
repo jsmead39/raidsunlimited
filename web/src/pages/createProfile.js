@@ -52,7 +52,7 @@ class CreateProfile extends BindingClass {
             const response = await this.client.createProfile(displayName, charactersList, logs);
 
             if (response.status === 200) {
-                messageText.innerText = 'CreateProfile successfully created';
+                messageText.innerText = 'Profile successfully created';
                 messageText.classList.add('success');
             }
 

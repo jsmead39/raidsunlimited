@@ -111,28 +111,5 @@ class UpdateProfileActivityTest {
             verify(metricsPublisher).addCount(MetricsConstants.UPDATEPROFILE_INVALIDATTRIBUTECHANGE_COUNT, 1);
         }
     }
-
-    @Test
-    public void handleRequest_userIdNotMatch_throwsInvalidAttributeChangeException() {
-        // GIVEN
-        String userId = "testId";
-        UpdateProfileRequest request = UpdateProfileRequest.builder()
-                .withUserId(userId)
-                .withDisplayName("Test1")
-                .withEmail("test@test.com")
-                .withLogs("www.testlogs.com")
-                .build();
-
-        User differentUserIdUser = new User();
-        differentUserIdUser.setUserId("differentId");
-        differentUserIdUser.setDisplayName("Test2");
-        differentUserIdUser.setEmail("test@test.com");
-        differentUserIdUser.setLogs("www.testlogs.com");;
-
-        when(userDao.getUserById(userId)).thenReturn(differentUserIdUser);
-
-        // WHEN + THEN
-        assertThrows(InvalidAttributeChangeException.class, () -> updateProfileActivity.handleRequest(request));
-    }
 }
 

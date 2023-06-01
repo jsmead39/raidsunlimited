@@ -54,7 +54,7 @@ public class ModelConverter {
                 .withUserId(user.getUserId())
                 .withDisplayName(user.getDisplayName())
                 .withEmail(user.getEmail())
-                .withCharacterList(user.getGameCharacterList())
+                .withCharacterList(user.getCharactersList())
                 .withLogs(user.getLogs())
                 .build();
     }

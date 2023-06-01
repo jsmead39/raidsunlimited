@@ -57,7 +57,7 @@ public class CreateProfileActivity {
         user.setUserId(ServiceUtils.generateRandomId());
         user.setDisplayName(createProfileRequest.getDisplayName());
         user.setEmail(createProfileRequest.getEmail());
-        user.setGameCharacterList(createProfileRequest.getCharactersList());
+        user.setCharactersList(createProfileRequest.getCharactersList());
         user.setLogs(createProfileRequest.getLogs());
 
         userDao.saveUser(user);
