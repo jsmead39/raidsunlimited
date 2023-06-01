@@ -182,12 +182,12 @@ Integer rating;
 String comments;
 ```
 
-6.1. User CreateProfile Creation Endpoint
+6.1. User CreateProfile Endpoint
 * Accepts `POST` requests to `/users`
 * Accepts a User model and creates a new user profile.
 * If the user profile cannot be created, will throw a `UserProfileCreationException`.
 
-6.2. User CreateProfile Update Endpoint
+6.2. User UpdateProfile Endpoint
 * Accepts `PUT` requests to `/users/:userId`
 * Accepts a userId and User model with updated information and updates the user's profile.
 * If the user profile is not found, will throw a `UserProfileNotFoundException`.
@@ -246,12 +246,12 @@ String comments;
 * Accepts a raidId and returns a list of Feedback models for the raid.
 * If the raid ID is not found, will throw a `RaidEventNotFoundException`.
 
-6.14. User CreateProfile Retrieval
+6.14. User GetProfile Endpoint
 * Accepts `GET` requests to `/users/:userId`
 * Accepts a userId and returns the corresponding User model.
 * If the given user ID is not found, will throw a `UserProfileNotFoundException`.
 
-6.15. Get User's Raid History Endpoint
+6.15. Get Raid History Endpoint
 * Accepts `GET` requests to `/users/:userId/raids`
 * Accepts a userId and returns a list of RaidEvent models the user has signed up for.
 * If the user ID is not found, will throw a `UserProfileNotFoundException`.
