@@ -29,6 +29,8 @@ export default class Header extends BindingClass {
         const header = document.getElementById('header');
         header.appendChild(siteTitle);
         header.appendChild(userInfo);
+
+
     }
 
     createSiteTitle() {
@@ -52,7 +54,21 @@ export default class Header extends BindingClass {
             ? this.createLogoutButton(currentUser)
             : this.createLoginButton();
 
+        // let childContent;
+        // if (currentUser) {
+        //     childContent = this.createLogoutButton();
+        //
+        //     const profile = await this.getProfileByEmail(currentUser.email);
+        //     if (profile && profile.profileModel.userId) {
+        //         const editProfileButton = this.createEditProfileButton(profile.profileModel.userId);
+        //         userInfo.appendChild(editProfileButton);
+        //     }
+        // } else {
+        //     childContent = this.createLoginButton();
+        // }
+
         userInfo.appendChild(childContent);
+        console.log(currentUser);
 
         return userInfo;
     }
@@ -77,4 +93,22 @@ export default class Header extends BindingClass {
 
         return button;
     }
+
+    // async getProfileByEmail(email) {
+    //     try {
+    //         const profile = await this.client.getProfileByEmail(email);
+    //         return profile;
+    //     } catch (error) {
+    //         console.error("Failed to retrieve profile", error);
+    //         return null;
+    //     }
+    // }
+
+    // createEditProfileButton(userId) {
+    //     const button = document.createElement('a');
+    //     button.classList.add('button');
+    //     button.href = `/editProfile.html?id=${userId}`;
+    //     button.innerText = "Edit Profile";
+    //     return button;
+    // }
 }

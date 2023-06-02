@@ -31,8 +31,8 @@ class ViewProfile extends BindingClass {
 
             const response = await this.client.getProfile(userId);
 
-            document.getElementById('displayName').innerText = response.displayName;
-            document.getElementById('warcraftLink').href = response.logs;
+            document.getElementById('displayName').innerText = response.profileModel.displayName;
+            document.getElementById('warcraftLink').href = response.profileModel.logs;
             document.getElementById('warcraftLogsLink').innerText = "Link to Warcraft Logs";
 
 
@@ -58,7 +58,8 @@ class ViewProfile extends BindingClass {
 
             const tbody = charactersTable.querySelector('tbody') ||
                 charactersTable.appendChild(document.createElement('tbody'));
-            response["characterList"].forEach(character => {
+            console.log(response);
+            response.profileModel.characterList.forEach(character => {
                 const dataRow = document.createElement('tr');
                 [character.charName, character.charClass, character.specialization, character.role].forEach(value => {
                     const td = document.createElement('td');
