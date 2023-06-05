@@ -10,7 +10,8 @@ export default class Header extends BindingClass {
 
         const methodsToBind = [
             'addHeaderToPage', 'createSiteTitle', 'createUserInfoForHeader',
-            'createLoginButton', 'createLoginButton', 'createLogoutButton'
+            'createLoginButton', 'createLoginButton', 'createLogoutButton', 'getProfileByEmail',
+            'createEditProfileButton'
         ];
         this.bindClassMethods(methodsToBind, this);
 
@@ -28,7 +29,7 @@ export default class Header extends BindingClass {
 
         const header = document.getElementById('header');
         header.appendChild(siteTitle);
-        header.appendChild(userInfo);
+        header.appendChild(await userInfo);
 
 
     }
@@ -46,32 +47,33 @@ export default class Header extends BindingClass {
         return siteTitle;
     }
 
-    createUserInfoForHeader(currentUser) {
+     createUserInfoForHeader(currentUser) {
         const userInfo = document.createElement('div');
         userInfo.classList.add('user');
 
-        const childContent = currentUser
-            ? this.createLogoutButton(currentUser)
-            : this.createLoginButton();
+        if (currentUser) {
+            const logoutButton = this.createLogoutButton(currentUser);
+            userInfo.appendChild(logoutButton);
 
-        // let childContent;
-        // if (currentUser) {
-        //     childContent = this.createLogoutButton();
-        //
-        //     const profile = await this.getProfileByEmail(currentUser.email);
-        //     if (profile && profile.profileModel.userId) {
-        //         const editProfileButton = this.createEditProfileButton(profile.profileModel.userId);
-        //         userInfo.appendChild(editProfileButton);
-        //     }
-        // } else {
-        //     childContent = this.createLoginButton();
-        // }
-
-        userInfo.appendChild(childContent);
-        console.log(currentUser);
+            // Try to get the user's profile by their email.
+            //
+            this.client.getProfileByEmail(currentUser.email).then(profile => {
+                console.log("profile in createUserInfoForHeader", profile);
+                if (profile && profile.profileModel.userId) {
+                    // The user has a profile. Create the "edit profile" button.
+                    const editProfileButton = this.createEditProfileButton(profile.profileModel.userId);
+                    console.log(editProfileButton);
+                    userInfo.appendChild(editProfileButton);
+                }
+            });
+        } else {
+            const loginButton = this.createLoginButton();
+            userInfo.appendChild(loginButton);
+        }
 
         return userInfo;
     }
+
 
     createLoginButton() {
         return this.createButton('Login', this.client.login);
@@ -94,21 +96,22 @@ export default class Header extends BindingClass {
         return button;
     }
 
-    // async getProfileByEmail(email) {
-    //     try {
-    //         const profile = await this.client.getProfileByEmail(email);
-    //         return profile;
-    //     } catch (error) {
-    //         console.error("Failed to retrieve profile", error);
-    //         return null;
-    //     }
-    // }
+    async getProfileByEmail(email) {
+        try {
+            const profile = await this.client.getProfileByEmail(email);
+            return profile;
+        } catch (error) {
+            console.error("Failed to retrieve profile", error);
+            return null;
+        }
+    }
 
-    // createEditProfileButton(userId) {
-    //     const button = document.createElement('a');
-    //     button.classList.add('button');
-    //     button.href = `/editProfile.html?id=${userId}`;
-    //     button.innerText = "Edit Profile";
-    //     return button;
-    // }
+    createEditProfileButton(userId) {
+        const button = document.createElement('a');
+        button.classList.add('button');
+        button.href = `/editProfile.html?id=${userId}`;
+        button.innerText = "Edit Profile";
+        console.log("Edit Profile completed");
+        return button;
+    }
 }
