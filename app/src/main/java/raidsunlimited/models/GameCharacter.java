@@ -1,10 +1,12 @@
 package raidsunlimited.models;
 
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBDocument;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Objects;
 
+@DynamoDBDocument
 public class GameCharacter {
     private final String charName;
     private final String charClass;

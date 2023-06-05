@@ -6,7 +6,7 @@ import DataStore from "../util/DataStore";
 /**
  * Logic needed for the view profile page of the website.
  */
-class CreateProfile extends BindingClass {
+class ViewProfile extends BindingClass {
     constructor() {
         super();
         this.bindClassMethods(['loadProfile', 'mount'], this);
@@ -31,8 +31,8 @@ class CreateProfile extends BindingClass {
 
             const response = await this.client.getProfile(userId);
 
-            document.getElementById('displayName').innerText = response.displayName;
-            document.getElementById('warcraftLink').href = response.logs;
+            document.getElementById('displayName').innerText = response.profileModel.displayName;
+            document.getElementById('warcraftLink').href = response.profileModel.logs;
             document.getElementById('warcraftLogsLink').innerText = "Link to Warcraft Logs";
 
 
@@ -41,6 +41,7 @@ class CreateProfile extends BindingClass {
             if (!charactersTable) {
                 charactersTable = document.createElement('table');
                 charactersTable.setAttribute('id', 'characterTable');
+
                 // noinspection DuplicatedCode
                 const thead = document.createElement('thead');
                 const headerRow = document.createElement('tr');
@@ -57,7 +58,8 @@ class CreateProfile extends BindingClass {
 
             const tbody = charactersTable.querySelector('tbody') ||
                 charactersTable.appendChild(document.createElement('tbody'));
-            response.characterList.forEach(character => {
+            console.log(response);
+            response.profileModel.characterList.forEach(character => {
                 const dataRow = document.createElement('tr');
                 [character.charName, character.charClass, character.specialization, character.role].forEach(value => {
                     const td = document.createElement('td');
@@ -75,7 +77,7 @@ class CreateProfile extends BindingClass {
  * Main method to run when the page contents have loaded.
  */
 const main = async() => {
-    const userProfile = new CreateProfile();
+    const userProfile = new ViewProfile();
     userProfile.mount();
 };
 window.addEventListener('DOMContentLoaded', main);

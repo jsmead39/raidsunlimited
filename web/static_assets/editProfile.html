@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <script type="text/javascript" src="assets/profile.js"></script>
+    <script type="text/javascript" src="assets/editProfile.js"></script>
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
@@ -13,35 +13,31 @@
     <div id="messagePopup" class="hidden">
         <p id="messageText"></p>
     </div>
-
-
     <div id="editUserProfile" class="dialog-block">
         <h2 id="editUserProfile-title" class="dialog-title">
-            Create Profile
+            Edit User Profile
         </h2>
 
         <div class="dialog-content">
             <form id="userProfileForm">
                 <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" readonly>
+                </div>
+                <div class="form-group">
                     <label for="displayName">Display Name</label>
                     <input type="text" id="displayName" name="displayName">
                 </div>
-
                 <div class="form-group">
                     <label for="warcraftLogsLink">Warcraft Logs Link</label>
                     <input type="url" id="warcraftLogsLink" name="warcraftLogsLink">
                 </div>
-
-
                 <div class="form-group" id="charactersSection">
                     <label>List of Characters</label>
                     <button type="button" id="addCharacterButton">Add a Character</button>
                     <div id="characterList" class="character-list">
-
                     </div>
                 </div>
-
-
             </form>
 
             <div id="characterFormContainer" class="hidden">
@@ -60,9 +56,20 @@
                     <button type="submit">Save Character</button>
                 </form>
             </div>
-            <p>
-                <a href="#" class="button" id="create">Create Profile</a>
-            </p>
+            <div class="form-group">
+                <input type="submit" id="create" value="Update">
+            </div>
+        </div>
+    </div>
+
+    <div id="raidHistory" class="dialog-block">
+        <h2 id="raidHistory-title" class="dialog-title">
+            Raid History
+        </h2>
+        <div class="dialog-content">
+            <ul id="raids">
+
+            </ul>
         </div>
     </div>
 </body>

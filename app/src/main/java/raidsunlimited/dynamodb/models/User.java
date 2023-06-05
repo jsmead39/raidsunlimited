@@ -15,7 +15,7 @@ public class User {
     private String userId;
     private String displayName;
     private String email;
-    private List<GameCharacter> gameCharacterList;
+    private List<GameCharacter> charactersList;
     private String logs;
 
     @DynamoDBHashKey(attributeName = "userId")
@@ -47,12 +47,12 @@ public class User {
 
     @DynamoDBAttribute(attributeName = "charactersList")
     @DynamoDBTypeConverted(converter = GameCharacterConverter.class)
-    public List<GameCharacter> getGameCharacterList() {
-        return gameCharacterList;
+    public List<GameCharacter> getCharactersList() {
+        return charactersList;
     }
 
-    public void setGameCharacterList(List<GameCharacter> gameCharacterList) {
-        this.gameCharacterList = gameCharacterList;
+    public void setCharactersList(List<GameCharacter> charactersList) {
+        this.charactersList = charactersList;
     }
 
     @DynamoDBAttribute(attributeName = "logs")
@@ -75,13 +75,13 @@ public class User {
         }
         User user = (User) o;
         return Objects.equals(userId, user.userId) && Objects.equals(displayName, user.displayName) &&
-                Objects.equals(email, user.email) && Objects.equals(gameCharacterList, user.gameCharacterList) &&
+                Objects.equals(email, user.email) && Objects.equals(charactersList, user.charactersList) &&
                 Objects.equals(logs, user.logs);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId, displayName, email, gameCharacterList, logs);
+        return Objects.hash(userId, displayName, email, charactersList, logs);
     }
 
     @Override
@@ -90,7 +90,7 @@ public class User {
                 "userId='" + userId + '\'' +
                 ", displayName='" + displayName + '\'' +
                 ", email='" + email + '\'' +
-                ", gameCharacterList=" + gameCharacterList +
+                ", gameCharacterList=" + charactersList +
                 ", logs='" + logs + '\'' +
                 '}';
     }

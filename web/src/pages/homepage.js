@@ -29,17 +29,15 @@ class Homepage extends BindingClass {
         const identity = await this.client.getIdentity();
         const email = identity.email;
         try {
-            const response = await this.client.getProfileByEmail(email);
-            this.dataStore.set('profile', response.profileModel);
-
             const profileSetupMessage = document.getElementById('profileSetupMessage');
-            const profileModel = response.profileModel;
-
-            if (profileModel.userId) {
-                profileSetupMessage.classList.add('hidden');
+            const response = await this.client.getProfileByEmail(email);
+            if (response) {
+                this.dataStore.set('profile', response);
             } else {
-                profileSetupMessage.classList.remove('hidden');
+                profileSetupMessage.classList.remove('profile-hidden');
+                profileSetupMessage.classList.add('profile-visible');
             }
+            console.log("Userprofile in loadUserProfile", response);
         } catch (error) {
             console.error("User is not logged in to retrieve a profile", error);
         }

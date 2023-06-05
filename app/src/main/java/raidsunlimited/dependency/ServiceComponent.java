@@ -1,10 +1,7 @@
 package raidsunlimited.dependency;
 
 import dagger.Component;
-import raidsunlimited.activity.CreateProfileActivity;
-import raidsunlimited.activity.CreateRaidActivity;
-import raidsunlimited.activity.GetProfileActivity;
-import raidsunlimited.activity.GetRaidActivity;
+import raidsunlimited.activity.*;
 
 import javax.inject.Singleton;
 @Singleton
@@ -35,4 +32,9 @@ public interface ServiceComponent {
      */
     GetProfileActivity provideGetProfileActivity();
 
+    /**
+     * Provides the relevant activity
+     * @return GetProfileActivity
+     */
+    UpdateProfileActivity provideUpdateProfileActivity();
 }

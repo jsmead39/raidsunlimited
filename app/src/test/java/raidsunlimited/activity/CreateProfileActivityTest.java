@@ -7,6 +7,7 @@ import raidsunlimited.activity.requests.CreateProfileRequest;
 import raidsunlimited.activity.results.CreateProfileResult;
 import raidsunlimited.dynamodb.UserDao;
 import raidsunlimited.dynamodb.models.User;
+import raidsunlimited.exceptions.InvalidAttributeValueException;
 import raidsunlimited.exceptions.UserProfileCreationException;
 import raidsunlimited.models.GameCharacter;
 
@@ -103,7 +104,7 @@ class CreateProfileActivityTest {
                 .build();
 
         //WHEN + THEN
-        assertThrows(UserProfileCreationException.class, () -> createProfileActivity.handleRequest(request),
+        assertThrows(InvalidAttributeValueException.class, () -> createProfileActivity.handleRequest(request),
                 "Display name [testUser!] contains illegal characters. Only letters and numbers are allowed.");
     }
 

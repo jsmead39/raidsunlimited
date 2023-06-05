@@ -23,16 +23,7 @@
     padding: 4px 20px;
 }
 
-.button {
-  background-color: var(--tertiary-color);
-  border: none;
-  color: var(--secondary-color);
-  padding: 6px 8px 4px 8px;
-  text-align: center;
-  font-weight: bold;
-  text-decoration: none;
-  cursor: pointer;
-}
+
 
 .button-group {
     display: flex;
@@ -201,8 +192,8 @@ a {
     display: inline-block;
 }
 
-.profile-setup {
-    display: none;
+.profile-visible {
+    display: block;
     font-size: 24px;
     color: white;
     position: fixed;
@@ -210,5 +201,30 @@ a {
     text-align: center;
     transform: translate(-50%);
     background-color: black;
+}
+
+.profile-hidden {
+    display: none;
+}
+
+.user {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.button {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #000;
+    border-radius: 4px;
+    text-decoration: none;
+    background-color: #f0f0f0;
+    color: #000;
+    display: inline-block;
+}
+
+.button:hover {
+    background-color: gray;
 }
 
