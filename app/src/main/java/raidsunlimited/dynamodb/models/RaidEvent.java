@@ -1,10 +1,8 @@
 package raidsunlimited.dynamodb.models;
 
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBIndexHashKey;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
+import com.amazonaws.services.dynamodbv2.datamodeling.*;
 
+import raidsunlimited.converters.ParticipantModelConverter;
 import raidsunlimited.models.FeedbackModel;
 
 import java.util.List;
@@ -106,6 +104,7 @@ public class RaidEvent {
         this.requiredRoles = requiredRoles;
     }
 
+    @DynamoDBTypeConverted(converter = ParticipantModelConverter.class)
     @DynamoDBAttribute(attributeName = "participants")
     public List<String> getParticipants() {
         return participants;
