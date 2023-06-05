@@ -9,7 +9,7 @@ import DataStore from "../util/DataStore";
 class ViewRaid extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['clientLoaded', 'mount', 'addRaidToPage'], this);
+        this.bindClassMethods(['clientLoaded', 'mount', 'addRaidToPage', 'displayCharacters', 'handleCharacterSelection'], this);
         this.dataStore = new DataStore();
         this.dataStore.addChangeListener(this.addRaidToPage);
         this.header = new Header(this.dataStore);
@@ -41,6 +41,8 @@ class ViewRaid extends BindingClass {
 
         this.client = new RaidsUnlimitedClient();
         this.clientLoaded();
+
+        document.getElementById('signup-btn').addEventListener('click', (event) => this.displayCharacters(event));
     }
 
     addRaidToPage() {
@@ -73,6 +75,37 @@ class ViewRaid extends BindingClass {
                 `;
         }
         document.getElementById('participant-table').innerHTML = participantHtml;
+    }
+
+    displayCharacters(event) {
+        const profileModel = this.header.dataStore.get('profileModel');
+
+        console.log("DisplayCharacters Method ProfileModle", profileModel);
+        if (!profileModel) {
+            console.error("Profile model not loaded yet");
+            return;
+        }
+        console.log("before dropdown");
+        const dropdown = document.getElementById('character-dropdown');
+        dropdown.innerHTML = '';
+        console.log("after dropdown")
+        profileModel.characterList.forEach(character => {
+            const characterElement = document.createElement('div');
+            characterElement.innerText = `${character.charName} - ${character.charClass} - ${character.specialization} - ${character.role}`;
+            characterElement.classList.add('character-option');
+            characterElement.addEventListener('click', () => {
+                this.handleCharacterSelection(character);
+            });
+            dropdown.appendChild(characterElement);
+        });
+
+        dropdown.style.left = event.clientX + 'px';
+        dropdown.style.top = event.clientY + 'px';
+        dropdown.style.display = 'block';
+    }
+
+    handleCharacterSelection(character) {
+        console.log(character);
     }
 }
 
