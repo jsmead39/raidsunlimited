@@ -228,3 +228,22 @@ a {
     background-color: gray;
 }
 
+.raid-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 50%;
+
+}
+
+.signup-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    color: #000;
+}
+
+
+

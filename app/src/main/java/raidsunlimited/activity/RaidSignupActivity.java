@@ -71,9 +71,10 @@ public class RaidSignupActivity {
             participantsList = new ArrayList<>();
 
         }
+
         for (ParticipantModel participant : participantsList) {
             if(participant.getUserId().equals(userId)) {
-                throw new RaidSignupException("User with id " + userId + "is already signed up");
+                throw new RaidSignupException("User with id " + userId + " is already signed up");
             }
         }
         log.error(participantsList);
