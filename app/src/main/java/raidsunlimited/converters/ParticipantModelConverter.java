@@ -26,7 +26,7 @@ public class ParticipantModelConverter implements DynamoDBTypeConverter<String, 
     @Override
     public List<ParticipantModel> unconvert(String participantJson) {
         if (participantJson == null || participantJson.isEmpty()) {
-            return null;
+            return Collections.emptyList();
         }
         try {
             return objectMapper.readValue(participantJson, new TypeReference<List<ParticipantModel>>() {});
