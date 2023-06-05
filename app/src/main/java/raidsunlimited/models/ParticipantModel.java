@@ -1,14 +1,23 @@
 package raidsunlimited.models;
 
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBDocument;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Objects;
 
+@DynamoDBDocument
 public class ParticipantModel {
     private final String userId;
     private final String displayName;
     private final String participantClass;
     private final String role;
 
-    private ParticipantModel(String userId, String displayName, String participantClass, String role) {
+    @JsonCreator
+    private ParticipantModel(@JsonProperty("userId")String userId,
+                             @JsonProperty("displayName")String displayName,
+                             @JsonProperty("participantClass")String participantClass,
+                             @JsonProperty("role")String role) {
         this.userId = userId;
         this.displayName = displayName;
         this.participantClass = participantClass;

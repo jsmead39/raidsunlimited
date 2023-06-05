@@ -1,22 +1,22 @@
 package raidsunlimited.activity.results;
 
-import raidsunlimited.models.ParticipantModel;
+import raidsunlimited.models.RaidModel;
 
 public class RaidSignupResult {
-    private final ParticipantModel participantModel;
+    private final RaidModel raidModel;
 
-    public RaidSignupResult(ParticipantModel participantModel) {
-        this.participantModel = participantModel;
+    public RaidSignupResult(RaidModel raidModel) {
+        this.raidModel = raidModel;
     }
 
-    public ParticipantModel getParticipantModel() {
-        return participantModel;
+    public RaidModel getraidModel() {
+        return raidModel;
     }
 
     @Override
     public String toString() {
         return "RaidSignupResult{" +
-                "participantModel=" + participantModel +
+                "raidModel=" + raidModel +
                 '}';
     }
 
@@ -26,15 +26,15 @@ public class RaidSignupResult {
     }
 
     public static class Builder {
-        private ParticipantModel participantModel;
+        private RaidModel raidModel;
 
-        public Builder withParticipantModel(ParticipantModel participantModel) {
-            this.participantModel = participantModel;
+        public Builder withRaidModel(RaidModel raidModel) {
+            this.raidModel = raidModel;
             return this;
         }
 
         public RaidSignupResult build() {
-            return new RaidSignupResult(participantModel);
+            return new RaidSignupResult(raidModel);
         }
     }
 }

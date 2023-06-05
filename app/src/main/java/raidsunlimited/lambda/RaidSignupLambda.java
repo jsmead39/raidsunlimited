@@ -2,6 +2,7 @@ package raidsunlimited.lambda;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
+
 import raidsunlimited.activity.requests.RaidSignupRequest;
 import raidsunlimited.activity.results.RaidSignupResult;
 
@@ -24,5 +25,6 @@ public class RaidSignupLambda
                 (request, serviceComponent) ->
                         serviceComponent.provideRaidSignupActivity().handleRequest(request)
         );
+
     }
 }

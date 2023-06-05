@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import raidsunlimited.models.GameCharacter;
 
-@JsonDeserialize
+@JsonDeserialize(builder = RaidSignupRequest.Builder.class)
 public class RaidSignupRequest {
     private final String raidId;
     private final String userId;
