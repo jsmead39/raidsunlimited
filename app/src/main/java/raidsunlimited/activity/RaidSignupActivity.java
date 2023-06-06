@@ -64,10 +64,21 @@ public class RaidSignupActivity {
         }
 
         UserRaid userRaid = userRaidDao.getUserRaid(userId, raidId);
+        List<ParticipantModel> participantsList = raid.getParticipants();
 
         //check if the user is signed up for the raid
         if (userRaid != null) {
             throw new RaidSignupException("User with id " + userId + " is already signed up");
+        }
+
+        if (participantsList != null) {
+            for (ParticipantModel participant : participantsList) {
+                if (participant.getUserId().equals(userId)) {
+                    throw new RaidSignupException("User with id " + userId + " is already signed up");
+                }
+            }
+        } else {
+            participantsList = new ArrayList<>();
         }
 
         UserRaid newUserRaid = new UserRaid();
@@ -81,10 +92,6 @@ public class RaidSignupActivity {
         //Create a new participantModel for the user
         ParticipantModel newParticipant = new ModelConverter().toParticipantModel(raidSignupRequest);
         //Add participant to the raid
-        List<ParticipantModel> participantsList = raid.getParticipants();
-        if (participantsList == null) {
-            participantsList = new ArrayList<>();
-        }
         participantsList.add(newParticipant);
 
 
