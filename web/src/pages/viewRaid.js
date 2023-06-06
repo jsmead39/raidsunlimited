@@ -13,7 +13,6 @@ class ViewRaid extends BindingClass {
         this.dataStore = new DataStore();
         this.dataStore.addChangeListener(this.addRaidToPage);
         this.header = new Header(this.dataStore);
-        console.log("viewRaid constructor");
     }
 
     /**
@@ -26,7 +25,6 @@ class ViewRaid extends BindingClass {
             const raidId = urlParams.get('id');
             document.getElementById('raid-name').innerText = "Loading Raid ...";
             const raid = await this.client.getRaid(raidId);
-            console.log("Raid object receive: ", raid);
             this.dataStore.set('raid', raid);
         } catch (error) {
             console.error("Error loading client data: ", error);
@@ -42,7 +40,8 @@ class ViewRaid extends BindingClass {
         this.client = new RaidsUnlimitedClient();
         this.clientLoaded();
 
-        document.getElementById('signup-btn').addEventListener('click', (event) => this.displayCharacters(event));
+        document.getElementById('signup-btn').addEventListener('click', (event) =>
+            this.displayCharacters(event));
     }
 
     addRaidToPage() {
@@ -70,26 +69,25 @@ class ViewRaid extends BindingClass {
                 <tr>
                     <td>${participant.displayName}</td>
                     <td>${participant.participantClass}</td>
+                    <td>${participant.participantSpecialization}</td>
                     <td>${participant.role}</td>
                     
                 </tr>
                 `;
         }
-        document.getElementById('participant-table').innerHTML = participantHtml;
+        document.getElementById('participant-table').innerHTML += participantHtml;
     }
 
     displayCharacters(event) {
         const profileModel = this.header.dataStore.get('profileModel');
 
-        console.log("DisplayCharacters Method ProfileModle", profileModel);
         if (!profileModel) {
             console.error("Profile model not loaded yet");
             return;
         }
-        console.log("before dropdown");
+
         const dropdown = document.getElementById('character-dropdown');
         dropdown.innerHTML = '';
-        console.log("after dropdown")
         profileModel.characterList.forEach(character => {
             const characterElement = document.createElement('div');
             characterElement.innerText = `${character.charName} - ${character.charClass} - ${character.specialization} - ${character.role}`;
@@ -105,8 +103,27 @@ class ViewRaid extends BindingClass {
         dropdown.style.display = 'block';
     }
 
-    handleCharacterSelection(character) {
-        console.log(character);
+    async handleCharacterSelection(character) {
+        const raidModel = this.dataStore.get('raid');
+        const profileModel = this.header.dataStore.get('profileModel');
+
+        const raidId = raidModel.raidId;
+        const userId = profileModel.userId;
+        const displayName = profileModel.displayName;
+
+        const dropdown = document.getElementById('character-dropdown');
+        try {
+            dropdown.style.display = 'none';
+            const raid = await this.client.raidSignup(raidId, userId, displayName, character);
+            this.dataStore.set('raid', raid);
+
+            setTimeout(() => {
+                this.clientLoaded();
+            }, 3000);  // Delay of 3 seconds
+        } catch (error) {
+            console.error(`Error: ${error.message}`);
+            dropdown.style.display = 'none';
+        }
     }
 }
 

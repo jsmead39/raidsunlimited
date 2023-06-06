@@ -192,11 +192,29 @@ export default class RaidsUnlimitedClient extends BindingClass {
     async getRaid(raidId, errorCallback) {
         try {
             const response = await this.axiosClient.get(`raidevents/${raidId}`);
-            console.log(response.data);
             return response.data.raidModel;
-
         } catch (error) {
             this.handleError(error, errorCallback)
+        }
+    }
+
+    async raidSignup(raidId, userId, displayName, gameCharacter, errorCallBack) {
+        try {
+            const token = await this.getTokenOrThrow("You must be logged in to signup for a raid.")
+            const response = await this.axiosClient.post(`raidevents/${raidId}/signup`, {
+                raidId: raidId,
+                userId: userId,
+                displayName: displayName,
+                gameCharacter: gameCharacter,
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            console.log("raidSignup response", response.data);
+            return response.data;
+        } catch (error) {
+            this.handleError(error, errorCallBack)
         }
     }
 

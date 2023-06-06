@@ -59,15 +59,11 @@ export default class Header extends BindingClass {
             // Try to get the user's profile by their email.
             //
             this.client.getProfileByEmail(currentUser.email).then(profile => {
-                console.log("profile in createUserInfoForHeader", profile);
                 if (profile && profile.profileModel.userId) {
                     // The user has a profile. Create the "edit profile" button.
                     const editProfileButton = this.createEditProfileButton(profile.profileModel.userId);
-                    console.log(editProfileButton);
                     userInfo.appendChild(editProfileButton);
                     this.dataStore.set('profileModel', profile.profileModel);
-                    console.log("After datastore set", profile.profileModel);
-                    console.log("ProfileModel", this.dataStore.get('profileModel'));
                 }
             });
         } else {
@@ -115,7 +111,6 @@ export default class Header extends BindingClass {
         button.classList.add('button');
         button.href = `/editProfile.html?id=${userId}`;
         button.innerText = "Edit Profile";
-        console.log("Edit Profile completed");
         return button;
     }
 }
