@@ -71,6 +71,7 @@ class ViewRaid extends BindingClass {
                     <td>${participant.displayName}</td>
                     <td>${participant.participantClass}</td>
                     <td>${participant.role}</td>
+                    
                 </tr>
                 `;
         }

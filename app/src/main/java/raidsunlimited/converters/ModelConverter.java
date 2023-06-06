@@ -67,6 +67,7 @@ public class ModelConverter {
                 .withUserId(raidSignupRequest.getUserId())
                 .withDisplayName(raidSignupRequest.getDisplayName())
                 .withParticipantClass(raidSignupRequest.getGameCharacter().getCharClass())
+                .withParticipantSpecialization(raidSignupRequest.getGameCharacter().getSpecialization())
                 .withRole(raidSignupRequest.getGameCharacter().getRole())
                 .build();
     }
