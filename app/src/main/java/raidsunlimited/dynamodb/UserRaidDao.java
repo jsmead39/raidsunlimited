@@ -39,5 +39,13 @@ public class UserRaidDao {
         return userRaid;
     }
 
-
+    /**
+     * Retrieves a record from the user_raid table using userId and raidId
+     * @param userId the user ID
+     * @param raidId the raid ID
+     * @return the UserRaid object representing the retrieved record, or null if no record exists
+     */
+    public UserRaid getUserRaid(String userId, String raidId) {
+        return dynamoDBMapper.load(UserRaid.class, userId, raidId);
+    }
 }
