@@ -7,7 +7,9 @@ import raidsunlimited.activity.results.RaidSignupResult;
 import raidsunlimited.converters.ModelConverter;
 import raidsunlimited.dynamodb.RaidDao;
 import raidsunlimited.dynamodb.UserDao;
+import raidsunlimited.dynamodb.UserRaidDao;
 import raidsunlimited.dynamodb.models.RaidEvent;
+import raidsunlimited.dynamodb.models.UserRaid;
 import raidsunlimited.exceptions.RaidEventNotFoundException;
 import raidsunlimited.exceptions.RaidSignupException;
 import raidsunlimited.exceptions.UserProfileNotFoundException;
@@ -23,15 +25,17 @@ public class RaidSignupActivity {
     private final Logger log = LogManager.getLogger();
     private final RaidDao raidDao;
     private final UserDao userDao;
+    private final UserRaidDao userRaidDao;
 
     /**
      * Instantiates a new CreateProfileActivity.
      * @param raidDao RaidDao to access the raid table.
      */
     @Inject
-    public RaidSignupActivity(RaidDao raidDao, UserDao userDao) {
+    public RaidSignupActivity(RaidDao raidDao, UserDao userDao, UserRaidDao userRaidDao) {
         this.userDao = userDao;
         this.raidDao = raidDao;
+        this.userRaidDao = userRaidDao;
     }
 
     /**
@@ -52,36 +56,35 @@ public class RaidSignupActivity {
         if (raidId == null || raidId.isEmpty()) {
             throw new RaidSignupException("Raid ID and User ID must be provided");
         }
-        log.info("After raidId Null Check");
         //Retrieve raidEvent from table using raidId
-        log.info(raidId);
         RaidEvent raid = raidDao.getRaid(raidId);
-        log.info("After retrieve raid");
         //check if raid exists
         if (raid == null) {
             throw new RaidEventNotFoundException("No raid exists with id " + raidId);
         }
 
-        log.info(raid);
+        UserRaid userRaid = userRaidDao.getUserRaid(userId, raidId);
 
-        //Check if user is signed up
-        List<ParticipantModel> participantsList = raid.getParticipants();
-
-        if (participantsList == null) {
-            participantsList = new ArrayList<>();
-
+        //check if the user is signed up for the raid
+        if (userRaid != null) {
+            throw new RaidSignupException("User with id " + userId + " is already signed up");
         }
 
-        for (ParticipantModel participant : participantsList) {
-            if(participant.getUserId().equals(userId)) {
-                throw new RaidSignupException("User with id " + userId + " is already signed up");
-            }
-        }
-        log.error(participantsList);
+        UserRaid newUserRaid = new UserRaid();
+        newUserRaid.setUserId(userId);
+        newUserRaid.setRaidId(raidId);
+        newUserRaid.setConfirmed(false);
+
+        userRaidDao.saveToEvent(newUserRaid);
+
+
         //Create a new participantModel for the user
         ParticipantModel newParticipant = new ModelConverter().toParticipantModel(raidSignupRequest);
-        log.info(newParticipant);
         //Add participant to the raid
+        List<ParticipantModel> participantsList = raid.getParticipants();
+        if (participantsList == null) {
+            participantsList = new ArrayList<>();
+        }
         participantsList.add(newParticipant);
 
 
