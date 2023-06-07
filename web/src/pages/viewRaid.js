@@ -119,7 +119,7 @@ class ViewRaid extends BindingClass {
 
             setTimeout(() => {
                 this.clientLoaded();
-            }, 3000);  // Delay of 3 seconds
+            }, 5000);  // Delay of 5 seconds
         } catch (error) {
             console.error(`Error: ${error.message}`);
             dropdown.style.display = 'none';

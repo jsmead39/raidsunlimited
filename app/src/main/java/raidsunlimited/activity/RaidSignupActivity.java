@@ -56,8 +56,10 @@ public class RaidSignupActivity {
         if (raidId == null || raidId.isEmpty()) {
             throw new RaidSignupException("Raid ID and User ID must be provided");
         }
+
         //Retrieve raidEvent from table using raidId
         RaidEvent raid = raidDao.getRaid(raidId);
+
         //check if raid exists
         if (raid == null) {
             throw new RaidEventNotFoundException("No raid exists with id " + raidId);
@@ -88,12 +90,11 @@ public class RaidSignupActivity {
 
         userRaidDao.saveToEvent(newUserRaid);
 
-
         //Create a new participantModel for the user
         ParticipantModel newParticipant = new ModelConverter().toParticipantModel(raidSignupRequest);
+
         //Add participant to the raid
         participantsList.add(newParticipant);
-
 
         raid.setParticipants(participantsList);
         //Save the updated raid to the DB
