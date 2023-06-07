@@ -29,6 +29,12 @@ public class GetAllRaidsActivity {
     }
 
 
+    /**
+     * This method is responsible for handling a request to retrieve all raids.
+     * It fetches all raid events from the database and converts them into {@link RaidModel} objects.
+     * @param getAllRaidsRequest the request object containing any necessary data.
+     * @return the result containing all the raid models that were converted.
+     */
     public GetAllRaidsResult handleRequest(final GetAllRaidsRequest getAllRaidsRequest) {
         log.info("Received GetAllRaidsRequest {}", getAllRaidsRequest);
 
