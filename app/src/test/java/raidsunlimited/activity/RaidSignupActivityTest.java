@@ -10,6 +10,8 @@ import raidsunlimited.dynamodb.UserRaidDao;
 import raidsunlimited.dynamodb.models.RaidEvent;
 import raidsunlimited.dynamodb.models.User;
 import raidsunlimited.dynamodb.models.UserRaid;
+import raidsunlimited.exceptions.RaidEventNotFoundException;
+import raidsunlimited.exceptions.RaidSignupException;
 import raidsunlimited.exceptions.UserProfileNotFoundException;
 import raidsunlimited.models.GameCharacter;
 
@@ -113,5 +115,54 @@ class RaidSignupActivityTest {
 
         //WHEN + THEN
         assertThrows(UserProfileNotFoundException.class, () -> raidSignupActivity.handleRequest(request));
+    }
+
+    @Test
+    public void handleRequest_nonExistentRaid_throwsException() {
+        GameCharacter character = new GameCharacter.Builder()
+                .withCharName("Test")
+                .withCharClass("TestClass")
+                .withSpecialization("TestSpec")
+                .withRole("TestRole")
+                .build();
+
+        RaidSignupRequest request = RaidSignupRequest.builder()
+                .withUserId("test")
+                .withRaidId("nullRaid")
+                .withGameCharacter(character)
+                .build();
+
+
+        when(userDao.getUserById(request.getUserId())).thenReturn(new User());
+        when(raidDao.getRaid(request.getRaidId())).thenReturn(null);
+
+        assertThrows(RaidEventNotFoundException.class, () -> raidSignupActivity.handleRequest(request));
+    }
+
+    @Test
+    public void handleRequest_userSignedUp_throwsException() {
+        GameCharacter character = new GameCharacter.Builder()
+                .withCharName("Test")
+                .withCharClass("TestClass")
+                .withSpecialization("TestSpec")
+                .withRole("TestRole")
+                .build();
+
+        RaidSignupRequest request = RaidSignupRequest.builder()
+                .withUserId("test")
+                .withRaidId("testRaid")
+                .withGameCharacter(character)
+                .build();
+
+        UserRaid userRaid = new UserRaid();
+        userRaid.setUserId("test");
+        userRaid.setRaidId("testRaid");
+        userRaid.setConfirmed(true);
+
+        when(userDao.getUserById(request.getUserId())).thenReturn(new User());
+        when(raidDao.getRaid(request.getRaidId())).thenReturn(new RaidEvent());
+        when(userRaidDao.getUserRaid(request.getUserId(), request.getRaidId())).thenReturn(userRaid);
+
+        assertThrows(RaidSignupException.class, () -> raidSignupActivity.handleRequest(request));
     }
 }

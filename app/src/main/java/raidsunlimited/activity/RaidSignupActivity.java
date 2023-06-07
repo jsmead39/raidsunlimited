@@ -46,7 +46,10 @@ public class RaidSignupActivity {
      */
     public RaidSignupResult handleRequest(final RaidSignupRequest raidSignupRequest) {
         log.info("Received RaidSignupActivity Request: {}", raidSignupRequest);
-        log.info(raidSignupRequest.getGameCharacter().getCharClass());
+
+        Optional.ofNullable(raidSignupRequest.getGameCharacter())
+                .orElseThrow(() -> new RaidSignupException("A character must be provided to sign up for an event"));
+
         String raidId = Optional.ofNullable(raidSignupRequest.getRaidId())
                 .filter(s -> !s.isEmpty())
                 .orElseThrow(() -> new RaidSignupException("Raid ID must be provided"));
@@ -55,12 +58,8 @@ public class RaidSignupActivity {
                 .filter(s -> !s.isEmpty())
                 .orElseThrow(() -> new RaidSignupException("User ID must be provided"));
 
-        Optional.ofNullable(raidSignupRequest.getGameCharacter())
-                .orElseThrow(() -> new RaidSignupException("A character must be provided to sign up for an event"));
-
         Optional.ofNullable(userDao.getUserById(userId))
                 .orElseThrow(() -> new UserProfileNotFoundException("This user with ID " + userId + "does not exist."));
-
 
         //Retrieve raidEvent from table using raidId
         //check if raid exists
