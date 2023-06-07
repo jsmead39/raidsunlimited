@@ -15,9 +15,11 @@ class ViewRaid extends BindingClass {
     }
 
     /**
-     * Once the client is loaded, get the raid metadata.
+     * Once the client is loaded, get the raids list metadata.
      */
     async clientLoaded() {
+        const raids = await this.client.getAllRaids();
+        this.dataStore.set('raids', raids);
 
     }
 
