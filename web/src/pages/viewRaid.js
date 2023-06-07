@@ -62,6 +62,9 @@ class ViewRaid extends BindingClass {
             return;
         }
 
+        const participantTableBody = document.getElementById('participant-table-body');
+        participantTableBody.innerHTML = '';
+
         let participantHtml = '';
         let participant;
         for (participant of participants) {
@@ -75,14 +78,23 @@ class ViewRaid extends BindingClass {
                 </tr>
                 `;
         }
-        document.getElementById('participant-table').innerHTML += participantHtml;
+        participantTableBody.innerHTML += participantHtml;
     }
 
     displayCharacters(event) {
         const profileModel = this.header.dataStore.get('profileModel');
 
+        const messagePopup = document.getElementById('messagePopup');
+        const messageText = document.getElementById('messageText');
+
         if (!profileModel) {
-            console.error("Profile model not loaded yet");
+            messageText.innerText = 'You must be logged in and have a profile to sign up for an raid';
+            messageText.classList.add('error');
+            messagePopup.classList.remove('hidden');
+            setTimeout(() => {
+                messagePopup.classList.add('hidden');
+            }, 5000);
+            console.error("User does not have a profile");
             return;
         }
 
@@ -107,6 +119,8 @@ class ViewRaid extends BindingClass {
         const raidModel = this.dataStore.get('raid');
         const profileModel = this.header.dataStore.get('profileModel');
 
+        const messagePopup = document.getElementById('messagePopup');
+        const messageText = document.getElementById('messageText');
         const raidId = raidModel.raidId;
         const userId = profileModel.userId;
         const displayName = profileModel.displayName;
@@ -114,15 +128,36 @@ class ViewRaid extends BindingClass {
         const dropdown = document.getElementById('character-dropdown');
         try {
             dropdown.style.display = 'none';
-            const raid = await this.client.raidSignup(raidId, userId, displayName, character);
+            const raid = await this.client.raidSignup(raidId, userId, displayName, character, (error) => {
+                if (error.message.includes("already signed up")) {
+                    messageText.innerText = "You are already signed up for this event";
+                } else {
+                    messageText.innerText = 'An error occurred when signing up';
+                }
+                messageText.classList.add('error');
+                messagePopup.classList.remove('hidden');
+                console.error(`Error: ${error.message}`);
+                dropdown.style.display = 'none';
+
+                setTimeout(() => {
+                    messagePopup.classList.add('hidden');
+                    this.clientLoaded();
+                }, 5000);  // Delay of 5 seconds
+
+
+            });
             this.dataStore.set('raid', raid);
 
-            setTimeout(() => {
-                this.clientLoaded();
-            }, 5000);  // Delay of 5 seconds
+            if(raid) {
+                setTimeout(() => {
+                    messageText.innerText = 'Signup successful';
+                    messageText.classList.add('success');
+                    messagePopup.classList.remove('hidden');
+                    this.clientLoaded();
+                }, 5000);  // Delay of 5 seconds
+            }
         } catch (error) {
-            console.error(`Error: ${error.message}`);
-            dropdown.style.display = 'none';
+            console.error(`An unexpected error occurred: ${error.message}`);
         }
     }
 }

@@ -13,7 +13,8 @@ public class RaidSignupLambda
     public LambdaResponse handleRequest(AuthenticatedLambdaRequest<RaidSignupRequest> input, Context context) {
         return super.runActivity(
                 () -> {
-                    RaidSignupRequest unauthenticatedRequest = input.fromBody(RaidSignupRequest.class);
+                    return input.fromUserClaims(claim -> {
+                        RaidSignupRequest unauthenticatedRequest = input.fromBody(RaidSignupRequest.class);
                         return RaidSignupRequest.builder()
                                 .withRaidId(unauthenticatedRequest.getRaidId())
                                 .withUserId(unauthenticatedRequest.getUserId())
@@ -21,10 +22,10 @@ public class RaidSignupLambda
                                 .withGameCharacter(unauthenticatedRequest.getGameCharacter())
                                 .build();
 
+                    });
                 },
                 (request, serviceComponent) ->
                         serviceComponent.provideRaidSignupActivity().handleRequest(request)
         );
-
     }
 }

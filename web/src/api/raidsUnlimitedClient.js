@@ -211,10 +211,9 @@ export default class RaidsUnlimitedClient extends BindingClass {
                     Authorization: `Bearer ${token}`
                 }
             });
-            console.log("raidSignup response", response.data);
             return response.data;
         } catch (error) {
-            this.handleError(error, errorCallBack)
+            this.handleError(error, errorCallBack);
         }
     }
 
