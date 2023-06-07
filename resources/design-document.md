@@ -142,8 +142,7 @@ this should make it easier to manage, test, and extend as needed.
 String userId;
 String displayName;
 String email;
-String class;
-List<String> preferredRoles;
+List<GameCharacters> characterList;
 String logs;
 ```
 
@@ -162,6 +161,7 @@ Map<String, Integer> requiredRoles;
 List<ParticpantModel> participants;
 List<FeedbackModel> feedback;
 String raidOwner;
+String raidStatus;
 ```
 
 ```
@@ -169,8 +169,10 @@ String raidOwner;
 //ParticipantModel
 
 String userId;
+String displayName;
+String participantClass;
+String participanSpecialization;
 String role;
-Boolean confirmed;
 ```
 
 ```
@@ -212,9 +214,9 @@ String comments;
 * Accepts a raidId and returns the corresponding RaidEvent model.
 * If the given raid ID is not found, will throw a `RaidEventNotFoundException`.
 
-6.7. Raid Search Endpoint
-* Accepts `POST` requests to `/raidevents/search`
-* Accepts SearchCriteria model and returns a list of RaidEvent models that match the criteria.
+6.7. Get all Raids Endpoint
+* Accepts `GET` requests to `/raidevents/`
+* Accepts a GET request to the endpoint and returns all raids in the database
 
 6.8. Raid Sign Up Endpoint
 * Accepts `POST` requests to `/raidevents/:raidId/signup`
@@ -261,16 +263,18 @@ String comments;
 
 **Users Table: (This will contain profile information, class, role, logs link, etc)** <p>
 • userId (Partition key): String
+• EmailIndex (GSI) : String
 
-Attributes : email, class, preferredRoles, logs
+
+Attributes : displayName, charactersList, email, logs
 
 **Raids Table:  Query raids based on the date.**
 
 • raidId (Partition key): String<p>
 • Date (GSI): Number
 
-Attributes : raidName, date, time, server, raidSize, requiredRoles, participants, raidObjective, List - ,
-Feedback (userId, rating, comments)  ,  raidOwner
+Attributes : raidName, date, time, server, raidSize, requiredRoles, participants, raidObjective, ,Feedback (userId, 
+rating, comments)  ,  raidOwner
 
 
 **UserRaidsTable : This table allows us to fetch all raids a user has signed up for, and all users that have signed up for a particular raid.**
