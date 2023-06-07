@@ -19,6 +19,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.openMocks;
@@ -93,6 +94,7 @@ class RaidSignupActivityTest {
         //THEN-
         verify(raidDao).saveRaid(any(RaidEvent.class));
         verify(userRaidDao).saveToEvent(any(UserRaid.class));
+        verify(userRaidDao).getUserRaid(anyString(), anyString());
     }
 
     @Test
