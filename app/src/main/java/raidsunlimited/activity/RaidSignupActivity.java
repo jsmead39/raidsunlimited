@@ -19,6 +19,7 @@ import raidsunlimited.models.RaidModel;
 import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 public class RaidSignupActivity {
@@ -46,41 +47,33 @@ public class RaidSignupActivity {
     public RaidSignupResult handleRequest(final RaidSignupRequest raidSignupRequest) {
         log.info("Received RaidSignupActivity Request: {}", raidSignupRequest);
         log.info(raidSignupRequest.getGameCharacter().getCharClass());
-        String raidId = raidSignupRequest.getRaidId();
-        String userId = raidSignupRequest.getUserId();
+        String raidId = Optional.ofNullable(raidSignupRequest.getRaidId())
+                .filter(s -> !s.isEmpty())
+                .orElseThrow(() -> new RaidSignupException("Raid ID must be provided"));
 
-        if (userDao.getUserById(userId) == null || userId.isEmpty()) {
-            throw new UserProfileNotFoundException("This user with ID " + userId + "does not exist.");
-        }
+        String userId = Optional.ofNullable(raidSignupRequest.getUserId())
+                .filter(s -> !s.isEmpty())
+                .orElseThrow(() -> new RaidSignupException("User ID must be provided"));
 
-        if (raidId == null || raidId.isEmpty()) {
-            throw new RaidSignupException("Raid ID and User ID must be provided");
-        }
+        Optional.ofNullable(raidSignupRequest.getGameCharacter())
+                .orElseThrow(() -> new RaidSignupException("A character must be provided to sign up for an event"));
+
+        Optional.ofNullable(userDao.getUserById(userId))
+                .orElseThrow(() -> new UserProfileNotFoundException("This user with ID " + userId + "does not exist."));
+
 
         //Retrieve raidEvent from table using raidId
-        RaidEvent raid = raidDao.getRaid(raidId);
-
         //check if raid exists
-        if (raid == null) {
-            throw new RaidEventNotFoundException("No raid exists with id " + raidId);
-        }
+        RaidEvent raid = Optional.ofNullable(raidDao.getRaid(raidId))
+                .orElseThrow(() -> new RaidEventNotFoundException("No raid exists with id " + raidId));
+
 
         UserRaid userRaid = userRaidDao.getUserRaid(userId, raidId);
-        List<ParticipantModel> participantsList = raid.getParticipants();
+        List<ParticipantModel> participantsList = Optional.ofNullable(raid.getParticipants()).orElseGet(ArrayList::new);
 
         //check if the user is signed up for the raid
-        if (userRaid != null) {
+        if (userRaid != null || participantsList.stream().anyMatch(p -> p.getUserId().equals(userId))) {
             throw new RaidSignupException("User with id " + userId + " is already signed up");
-        }
-
-        if (participantsList != null) {
-            for (ParticipantModel participant : participantsList) {
-                if (participant.getUserId().equals(userId)) {
-                    throw new RaidSignupException("User with id " + userId + " is already signed up");
-                }
-            }
-        } else {
-            participantsList = new ArrayList<>();
         }
 
         UserRaid newUserRaid = new UserRaid();
@@ -95,8 +88,8 @@ public class RaidSignupActivity {
 
         //Add participant to the raid
         participantsList.add(newParticipant);
-
         raid.setParticipants(participantsList);
+
         //Save the updated raid to the DB
         raidDao.saveRaid(raid);
 
