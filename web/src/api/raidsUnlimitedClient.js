@@ -16,7 +16,7 @@ export default class RaidsUnlimitedClient extends BindingClass {
         super();
 
         const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'createRaid', 'getRaid',
-             'createProfile', 'getProfile', 'getProfileByEmail', 'updateProfile'];
+             'createProfile', 'getProfile', 'getProfileByEmail', 'updateProfile', 'getAllRaids'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();
@@ -194,13 +194,23 @@ export default class RaidsUnlimitedClient extends BindingClass {
             const response = await this.axiosClient.get(`raidevents/${raidId}`);
             return response.data.raidModel;
         } catch (error) {
-            this.handleError(error, errorCallback)
+            this.handleError(error, errorCallback);
+        }
+    }
+
+    async getAllRaids(errorCallback) {
+        try {
+            const response = await this.axiosClient.get(`raidevents`);
+            console.log(response);
+            return response.data.raidModel
+        } catch (error) {
+            this.handleError(error, errorCallback);
         }
     }
 
     async raidSignup(raidId, userId, displayName, gameCharacter, errorCallBack) {
         try {
-            const token = await this.getTokenOrThrow("You must be logged in to signup for a raid.")
+            const token = await this.getTokenOrThrow("You must be logged in to signup for a raid.");
             const response = await this.axiosClient.post(`raidevents/${raidId}/signup`, {
                 raidId: raidId,
                 userId: userId,
