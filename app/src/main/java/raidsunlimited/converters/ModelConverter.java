@@ -57,6 +57,7 @@ public class ModelConverter {
 
         for (RaidEvent raidEvent : raidEvents) {
             RaidModel raidModel = toRaidModel(raidEvent);
+            raidModels.add(raidModel);
         }
 
         return raidModels;
