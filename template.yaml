@@ -361,6 +361,26 @@ Resources:
             Path: /users/{userId}
             Method: put
 
+  RaidSignupLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      Role: !GetAtt AccessRole.Arn
+      CodeUri: app
+      Handler: raidsunlimited.lambda.RaidSignupLambda::handleRequest
+      Runtime: java11
+      Architectures:
+        - x86_64
+      MemorySize: 512
+      Environment:
+        Variables:
+          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
+      Events:
+        RaidsUnlimited:
+          Type: Api
+          Properties:
+            Path: /raidevents/{raidId}/signup
+            Method: post
+
   #-----------------------------------------------------
   # DynamoDB Configuration
   #-----------------------------------------------------

@@ -228,3 +228,41 @@ a {
     background-color: gray;
 }
 
+.raid-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 50%;
+
+}
+
+.signup-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    color: #000;
+}
+
+.character-dropdown {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.character-option {
+    color: black;
+    padding: 12px 16px;
+    display: block;
+}
+
+.character-option:hover {
+    background-color: #ddd;
+}
+
+
+

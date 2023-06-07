@@ -8,8 +8,15 @@
 
 <body class="background">
     <header class="header" id="header"></header>
+    <div id="messagePopup" class="hidden">
+        <p id="messageText"></p>
+    </div>
     <div class="card">
+        <div class = "raid-header">
         <h2>Raid Details</h2>
+            <button id="signup-btn" class="signup-button">Sign Up</button>
+            <div id="character-dropdown" class="character-dropdown"></div>
+        </div>
         <div class="card-content">
             <p class="hidden error" id="error-message"></p>
             <div class="raid-details-flex" id="raid-details">
@@ -22,14 +29,19 @@
             <div id="raid-server" class="raid-server-status">Server: </div>
             <div id="raid-status" class="raid-server-status">Raid Status: </div>
             <h3>Participants</h3>
-            <table id="participant-table">
-                <tr>
-                    <th>Participant</th>
-                    <th>Class</th>
-                    <th>Spec</th>
-                    <th>Role</th>
-                    <th>Status</th>
-                </tr>
+            <table>
+                <thead id="participant-table-headers">
+                    <tr>
+                        <th>Name</th>
+                        <th>Class</th>
+                        <th>Spec</th>
+                        <th>Role</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="participant-table-body">
+
+                </tbody>
             </table>
         </div>
     </div>

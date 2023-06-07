@@ -1,17 +1,29 @@
 package raidsunlimited.models;
 
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBDocument;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Objects;
 
+@DynamoDBDocument
 public class ParticipantModel {
     private final String userId;
     private final String displayName;
     private final String participantClass;
+    private final String participantSpecialization;
     private final String role;
 
-    private ParticipantModel(String userId, String displayName, String participantClass, String role) {
+    @JsonCreator
+    private ParticipantModel(@JsonProperty("userId")String userId,
+                             @JsonProperty("displayName")String displayName,
+                             @JsonProperty("participantClass")String participantClass,
+                             @JsonProperty("participantSpecialization")String participantSpecialization,
+                             @JsonProperty("role")String role) {
         this.userId = userId;
         this.displayName = displayName;
         this.participantClass = participantClass;
+        this.participantSpecialization = participantSpecialization;
         this.role = role;
     }
 
@@ -31,22 +43,21 @@ public class ParticipantModel {
         return role;
     }
 
+    public String getParticipantSpecialization() {
+        return participantSpecialization;
+    }
+
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
         ParticipantModel that = (ParticipantModel) o;
-        return Objects.equals(userId, that.userId) && Objects.equals(displayName, that.displayName) &&
-                Objects.equals(participantClass, that.participantClass) && Objects.equals(role, that.role);
+        return Objects.equals(userId, that.userId) && Objects.equals(displayName, that.displayName) && Objects.equals(participantClass, that.participantClass) && Objects.equals(participantSpecialization, that.participantSpecialization) && Objects.equals(role, that.role);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId, displayName, participantClass, role);
+        return Objects.hash(userId, displayName, participantClass, participantSpecialization, role);
     }
 
     //CHECKSTYLE:OFF:Builder
@@ -58,6 +69,7 @@ public class ParticipantModel {
         private String userId;
         private String displayName;
         private String participantClass;
+        private String participantSpecialization;
         private String role;
 
         public Builder withUserId(String userId) {
@@ -75,13 +87,18 @@ public class ParticipantModel {
             return this;
         }
 
+        public Builder withParticipantSpecialization(String participantSpecialization) {
+            this.participantSpecialization = participantSpecialization;
+            return this;
+        }
+
         public Builder withRole(String role) {
             this.role = role;
             return this;
         }
 
         public ParticipantModel build() {
-            return new ParticipantModel(userId, displayName, participantClass, role);
+            return new ParticipantModel(userId, displayName, participantClass, participantSpecialization, role);
         }
     }
 }

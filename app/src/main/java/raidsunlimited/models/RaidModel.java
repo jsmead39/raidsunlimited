@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import static raidsunlimited.utils.CollectionUtils.copyToList;
+
 public class RaidModel {
     private final String raidId;
     private final String raidName;
@@ -15,7 +17,7 @@ public class RaidModel {
     private final String raidObjective;
     private final String lootDistribution;
     private final Map<String, Integer> requiredRoles;
-    private final List<String> participants;
+    private final List<ParticipantModel> participants;
     private final List<FeedbackModel> feedback;
     private final String raidOwner;
     private final String raidStatus;
@@ -23,7 +25,7 @@ public class RaidModel {
     private RaidModel(String raidId, String raidName, String raidServer, String raidDate, String time, Integer raidSize,
                       String raidObjective,
                      String lootDistribution, Map<String, Integer> requiredRoles,
-                     List<String> participants, List<FeedbackModel> feedback, String raidOwner,
+                     List<ParticipantModel> participants, List<FeedbackModel> feedback, String raidOwner,
                      String raidStatus) {
         this.raidId = raidId;
         this.raidName = raidName;
@@ -76,8 +78,8 @@ public class RaidModel {
         return requiredRoles;
     }
 
-    public List<String> getParticipants() {
-        return participants;
+    public List<ParticipantModel> getParticipants() {
+        return copyToList(participants);
     }
 
     public List<FeedbackModel> getFeedback() {
@@ -134,7 +136,7 @@ public class RaidModel {
         private String raidObjective;
         private String lootDistribution;
         private Map<String, Integer> requiredRoles;
-        private List<String> participants;
+        private List<ParticipantModel> participants;
         private List<FeedbackModel> feedback;
         private String raidOwner;
         private String raidStatus;
@@ -184,8 +186,8 @@ public class RaidModel {
             return this;
         }
 
-        public Builder withParticipant(List<String> participant) {
-            this.participants = participant;
+        public Builder withParticipant(List<ParticipantModel> participant) {
+            this.participants = participant != null ? copyToList(participant) : new ArrayList<>();
             return this;
         }
 

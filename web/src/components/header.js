@@ -1,5 +1,6 @@
 import RaidsUnlimitedClient from "../api/raidsUnlimitedClient";
 import BindingClass from "../util/bindingClass";
+import DataStore from "../util/DataStore";
 
 /**
  * The header component for the website.
@@ -14,7 +15,7 @@ export default class Header extends BindingClass {
             'createEditProfileButton'
         ];
         this.bindClassMethods(methodsToBind, this);
-
+        this.dataStore = new DataStore();
         this.client = new RaidsUnlimitedClient();
     }
 
@@ -58,12 +59,11 @@ export default class Header extends BindingClass {
             // Try to get the user's profile by their email.
             //
             this.client.getProfileByEmail(currentUser.email).then(profile => {
-                console.log("profile in createUserInfoForHeader", profile);
                 if (profile && profile.profileModel.userId) {
                     // The user has a profile. Create the "edit profile" button.
                     const editProfileButton = this.createEditProfileButton(profile.profileModel.userId);
-                    console.log(editProfileButton);
                     userInfo.appendChild(editProfileButton);
+                    this.dataStore.set('profileModel', profile.profileModel);
                 }
             });
         } else {
@@ -111,7 +111,6 @@ export default class Header extends BindingClass {
         button.classList.add('button');
         button.href = `/editProfile.html?id=${userId}`;
         button.innerText = "Edit Profile";
-        console.log("Edit Profile completed");
         return button;
     }
 }

@@ -37,4 +37,10 @@ public interface ServiceComponent {
      * @return GetProfileActivity
      */
     UpdateProfileActivity provideUpdateProfileActivity();
+
+    /**
+     * Provides the relevant activity
+     * @return RaidSignupActivity
+     */
+    RaidSignupActivity provideRaidSignupActivity();
 }

@@ -1,11 +1,10 @@
 package raidsunlimited.dynamodb.models;
 
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBIndexHashKey;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
+import com.amazonaws.services.dynamodbv2.datamodeling.*;
 
+import raidsunlimited.converters.ParticipantModelConverter;
 import raidsunlimited.models.FeedbackModel;
+import raidsunlimited.models.ParticipantModel;
 
 import java.util.List;
 import java.util.Objects;
@@ -21,7 +20,7 @@ public class RaidEvent {
     private String raidObjective;
     private String lootDistribution;
     private List<String> requiredRoles;
-    private List<String> participants;
+    private List<ParticipantModel> participants;
     private List<String> feedback;
     private String raidOwner;
     private String raidStatus;
@@ -107,11 +106,12 @@ public class RaidEvent {
     }
 
     @DynamoDBAttribute(attributeName = "participants")
-    public List<String> getParticipants() {
+    @DynamoDBTypeConverted(converter = ParticipantModelConverter.class)
+    public List<ParticipantModel> getParticipants() {
         return participants;
     }
 
-    public void setParticipants(List<String> participants) {
+    public void setParticipants(List<ParticipantModel> participants) {
         this.participants = participants;
     }
 
@@ -164,5 +164,24 @@ public class RaidEvent {
     @Override
     public int hashCode() {
         return Objects.hash(raidId, raidName, raidServer, raidDate, time, raidSize, raidObjective, lootDistribution, requiredRoles, participants, feedback, raidOwner, raidStatus);
+    }
+
+    @Override
+    public String toString() {
+        return "RaidEvent{" +
+                "raidId='" + raidId + '\'' +
+                ", raidName='" + raidName + '\'' +
+                ", raidServer='" + raidServer + '\'' +
+                ", raidDate=" + raidDate +
+                ", time='" + time + '\'' +
+                ", raidSize=" + raidSize +
+                ", raidObjective='" + raidObjective + '\'' +
+                ", lootDistribution='" + lootDistribution + '\'' +
+                ", requiredRoles=" + requiredRoles +
+                ", participants=" + participants +
+                ", feedback=" + feedback +
+                ", raidOwner='" + raidOwner + '\'' +
+                ", raidStatus='" + raidStatus + '\'' +
+                '}';
     }
 }

@@ -1,8 +1,10 @@
 package raidsunlimited.converters;
 
+import raidsunlimited.activity.requests.RaidSignupRequest;
 import raidsunlimited.dynamodb.models.RaidEvent;
 import raidsunlimited.dynamodb.models.User;
 import raidsunlimited.models.FeedbackModel;
+import raidsunlimited.models.ParticipantModel;
 import raidsunlimited.models.ProfileModel;
 import raidsunlimited.models.RaidModel;
 
@@ -59,6 +61,16 @@ public class ModelConverter {
                 .build();
     }
 
+    public ParticipantModel toParticipantModel(RaidSignupRequest raidSignupRequest) {
+        //Create Participant model from the request
+        return ParticipantModel.builder()
+                .withUserId(raidSignupRequest.getUserId())
+                .withDisplayName(raidSignupRequest.getDisplayName())
+                .withParticipantClass(raidSignupRequest.getGameCharacter().getCharClass())
+                .withParticipantSpecialization(raidSignupRequest.getGameCharacter().getSpecialization())
+                .withRole(raidSignupRequest.getGameCharacter().getRole())
+                .build();
+    }
 
     private String convertLongToDate(Long epoch) {
         Instant instant = Instant.ofEpochSecond(epoch);
