@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script type="text/javascript" src="assets/findRaid.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body class="background">
+<header class="header" id="header"></header>
+<div id="messagePopup" class="hidden">
+    <p id="messageText"></p>
+</div>
+<div class="card">
+    <div class = "raid-header">
+        <h2>All Raids</h2>
+    </div>
+    <div class="card-content">
+        <table>
+            <thead id="raid-table-headers">
+            <tr>
+                <th class="sortable" data-column="raid-name">Raid Name</th>
+                <th class="sortable" data-column="server">Server</th>
+                <th class="sortable" data-column="raid-date">Raid Date</th>
+                <th class="sortable" data-column="raid-time">Raid Time</th>
+                <th class="sortable" data-column="raid-objective">Raid Objective</th>
+                <th class="sortable" data-column="loot-distribution">Loot Distribution</th>
+                <th class="sortable" data-column="raid-status">Raid Status</th>
+            </tr>
+            </thead>
+            <tbody id="raid-table-body">
+
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+
+</html>
