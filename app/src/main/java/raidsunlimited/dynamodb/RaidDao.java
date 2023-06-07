@@ -1,6 +1,6 @@
 package raidsunlimited.dynamodb;
 
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+import com.amazonaws.services.dynamodbv2.datamodeling.*;
 import raidsunlimited.dynamodb.models.RaidEvent;
 import raidsunlimited.exceptions.RaidEventNotFoundException;
 import raidsunlimited.metrics.MetricsConstants;
@@ -8,6 +8,9 @@ import raidsunlimited.metrics.MetricsPublisher;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 /**
  * Accesses data for a raidevent using {@link RaidEvent} to represent the model in
@@ -53,5 +56,26 @@ public class RaidDao {
         }
         metricsPublisher.addCount(MetricsConstants.GETRAID_RAIDNOTFOUND_COUNT, 0);
         return raid;
+    }
+
+    /**
+     * Retrieves all raid events from the database and sorts them in descending order
+     * @return a List of RaidEvent objects, sorted in descending order by date.
+     */
+    public List<RaidEvent> getAllRaidEvents() {
+
+        //Scan the table for all RaidEvents
+        PaginatedScanList<RaidEvent> result = this.dynamoDBMapper.scan(RaidEvent.class, new DynamoDBScanExpression());
+
+        if (result == null) {
+            return new ArrayList<>();
+        }
+        //Convert the scan to a regular ArrayList
+        List<RaidEvent> raidEvents = new ArrayList<>(result);
+
+        //Sort the raid List descending by Date
+        raidEvents.sort(Comparator.comparing(RaidEvent::getRaidDate).reversed());
+
+        return raidEvents;
     }
 }
