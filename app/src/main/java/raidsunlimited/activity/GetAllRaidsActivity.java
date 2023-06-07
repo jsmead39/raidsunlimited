@@ -42,19 +42,13 @@ public class GetAllRaidsActivity {
                 .orElseThrow(() -> new IllegalArgumentException("Received null GetAllRaidsRequest"));
 
         List<RaidEvent> raidEvents = raidDao.getAllRaidEvents();
-        for(RaidEvent r: raidEvents) {
-            log.info(r);
-        }
 
         Optional.ofNullable(raidEvents)
                 .filter(list -> !list.isEmpty())
                 .orElseThrow(() -> new RaidEventNotFoundException("No RaidEvents retrieved from the database"));
 
         List<RaidModel> raidModels = new ModelConverter().toRaidModelList(raidEvents);
-        for (RaidModel r: raidModels) {
-            log.info(r);
-        }
-        log.error("RaidModels", raidModels);
+
         Optional.ofNullable(raidModels)
                 .filter(list -> !list.isEmpty())
                 .orElseThrow(() -> new RaidEventNotFoundException("No RaidModels converted from the RaidEvents"));
