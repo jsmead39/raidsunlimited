@@ -201,8 +201,8 @@ export default class RaidsUnlimitedClient extends BindingClass {
     async getAllRaids(errorCallback) {
         try {
             const response = await this.axiosClient.get(`raidevents`);
-            console.log(response);
-            return response.data.raidModel
+            console.log("response in get all Raids", response);
+            return response.data;
         } catch (error) {
             this.handleError(error, errorCallback);
         }
