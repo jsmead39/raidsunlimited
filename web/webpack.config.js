@@ -28,7 +28,8 @@ module.exports = {
     homepage: path.resolve(__dirname, 'src', 'pages', 'homepage.js'),
     profile: path.resolve(__dirname, 'src', 'pages', 'createProfile.js'),
     viewProfile: path.resolve(__dirname, 'src', 'pages', 'viewProfile.js'),
-    editProfile: path.resolve(__dirname, 'src', 'pages', 'editProfile.js')
+    editProfile: path.resolve(__dirname, 'src', 'pages', 'editProfile.js'),
+    findRaid: path.resolve(__dirname, 'src', 'pages', 'findRaid.js')
   },
   output: {
     path: path.resolve(__dirname, 'build', 'assets'),

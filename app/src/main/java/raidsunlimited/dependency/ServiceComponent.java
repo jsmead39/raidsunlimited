@@ -43,4 +43,10 @@ public interface ServiceComponent {
      * @return RaidSignupActivity
      */
     RaidSignupActivity provideRaidSignupActivity();
+
+    /**
+     * Provides the relevant activity
+     * @return RaidSignupActivity
+     */
+    GetAllRaidsActivity provideGetAllRaidsActivity();
 }

@@ -11,6 +11,7 @@ import raidsunlimited.models.RaidModel;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,6 +47,21 @@ public class ModelConverter {
                 .build();
     }
 
+    /**
+     * Converts a list of RaidEvent objects into a list of RaidModel objects
+     * @param raidEvents A list of RaidEvent objects to be converted.
+     * @return A list of RaidModel objects converted from the provided RaidEvent objects.
+     */
+    public List<RaidModel> toRaidModelList(List<RaidEvent> raidEvents) {
+        List<RaidModel> raidModels = new ArrayList();
+
+        for (RaidEvent raidEvent : raidEvents) {
+            RaidModel raidModel = toRaidModel(raidEvent);
+            raidModels.add(raidModel);
+        }
+
+        return raidModels;
+    }
     /**
      * Convert a User object from the User table to a ProfileModel object.
      * @param user the User object from the User table.
