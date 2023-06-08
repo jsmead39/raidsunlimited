@@ -9,7 +9,7 @@ import DataStore from "../util/DataStore";
 class FindRaid extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['clientLoaded', 'mount', 'displayRaids'], this);
+        this.bindClassMethods(['clientLoaded', 'mount', 'displayRaids', 'filterTable'], this);
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
     }
@@ -36,10 +36,32 @@ class FindRaid extends BindingClass {
 
     }
 
+    /**
+     * Provides the raid data into a table and adds filter functionality to the table.
+     *
+     * For each raid, a new table row is created and for each property of the raid a new cell is appended to the row.
+     * The row is then added to the table body.
+     *
+     * Input elements are added to each table header, and an input event listener is attached.
+     * The event listener calls the 'filterTable' method, which filters the table based on the input.
+     * @param raids An object representing the list of raidModels.
+     */
     displayRaids(raids) {
         const tableBody = document.getElementById('raid-table-body');
         tableBody.innerHTML = '';
-        console.log("raids in displayRaids", raids);
+
+        const headerRow = document.getElementById('raid-table-headers');
+
+        //get the header row from the thead element
+        Array.from(headerRow.getElementsByTagName('th')).forEach(headerCell => {
+            headerCell.innerHTML += ' <input type="text">';
+        });
+
+        //add an event listener to the header inputs
+        Array.from(headerRow.getElementsByTagName('input')).forEach(input => {
+            input.addEventListener('input', this.filterTable);
+        });
+
         raids.raidModelList.forEach(raid => {
             console.log(raid);
             const row = document.createElement('tr');
@@ -74,6 +96,31 @@ class FindRaid extends BindingClass {
 
             tableBody.appendChild(row);
         });
+    }
+
+    /**
+     * Filter the raids table based on the values of the header inputs.
+     */
+    filterTable() {
+        //get rows from the table body
+        const rows = Array.from(document.getElementById('raid-table-body')
+            .getElementsByTagName('tr'));
+
+        //get the header row
+        const headerRow = document.getElementById('raid-table-headers')
+            .getElementsByTagName('tr')[0];
+
+        //get the values of the header inputs
+        const filterValues = Array.from(headerRow.getElementsByTagName('input'))
+            .map(input => input.value.toLowerCase());
+
+        //show or hide each row depending on whether it matches the filter value
+        rows.forEach(row => {
+            const cells = Array.from(row.getElementsByTagName('td'));
+            const rowValues = cells.map(cell => cell.textContent.toLowerCase());
+            const matches = filterValues.every((filterValue, i) => !filterValue || rowValues[i].includes(filterValue));
+            row.style.display = matches ? '' : 'none';
+        })
     }
 }
 
