@@ -78,4 +78,8 @@ public class RaidDao {
 
         return raidEvents;
     }
+
+    public void deleteRaid(String raidId) {
+        this.dynamoDBMapper.delete(raidId);
+    }
 }
