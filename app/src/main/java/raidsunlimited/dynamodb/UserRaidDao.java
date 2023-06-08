@@ -54,6 +54,11 @@ public class UserRaidDao {
         return dynamoDBMapper.load(UserRaid.class, userId, raidId);
     }
 
+    /**
+     * Retrieves a list of UserRaid objects from the UserRaid table that match the raidId
+     * @param raidId The raidId matching the events to be retrieved from the table.
+     * @return a List of UserRaid objects matching the criteria specified.
+     */
     public List<UserRaid> getAllUserRaids(String raidId) {
         Map<String, AttributeValue> expressionAttributeValues = new HashMap<>();
         expressionAttributeValues.put(":raidId", new AttributeValue().withS(raidId));
@@ -65,6 +70,10 @@ public class UserRaidDao {
         return this.dynamoDBMapper.query(UserRaid.class, queryExpression);
     }
 
+    /**
+     * Deletes a UserRaid event from the database given the UserRaid object
+     * @param userRaid the object containing the UserRaid Info.
+     */
     public void deleteUserRaidEvent(UserRaid userRaid) {
         this.dynamoDBMapper.delete(userRaid);
     }
