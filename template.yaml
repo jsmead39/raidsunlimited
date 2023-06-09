@@ -403,6 +403,26 @@ Resources:
             Auth:
               Authorizer: 'NONE'
 
+  DeleteRaidEventLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      Role: !GetAtt AccessRole.Arn
+      CodeUri: app
+      Handler: raidsunlimited.lambda.DeleteRaidEventLambda::handleRequest
+      Runtime: java11
+      Architectures:
+        - x86_64
+      MemorySize: 512
+      Environment:
+        Variables:
+          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
+      Events:
+        MusicPlaylistService:
+          Type: Api
+          Properties:
+            Path: /raidevents/{raidId}
+            Method: delete
+
   #-----------------------------------------------------
   # DynamoDB Configuration
   #-----------------------------------------------------
