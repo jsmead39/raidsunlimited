@@ -9,7 +9,8 @@ import DataStore from "../util/DataStore";
 class ViewRaid extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['clientLoaded', 'mount', 'addRaidToPage', 'displayCharacters', 'handleCharacterSelection'], this);
+        this.bindClassMethods(['clientLoaded', 'mount', 'addRaidToPage', 'displayCharacters',
+            'handleCharacterSelection', 'deleteRaidEvent'], this);
         this.dataStore = new DataStore();
         this.dataStore.addChangeListener(this.addRaidToPage);
         this.header = new Header(this.dataStore);
@@ -159,6 +160,32 @@ class ViewRaid extends BindingClass {
         } catch (error) {
             console.error(`An unexpected error occurred: ${error.message}`);
         }
+    }
+
+    async deleteRaidEvent(raidId) {
+        const messagePopup = document.getElementById('messagePopup');
+        const messageText = document.getElementById('messageText');
+        const confirmation = confirm('Are you sure you want to delete this event?');
+        if (!confirmation) {
+            return;
+        }
+
+        await this.client.deleteRaidEvent(raidId, (error) => {
+            if(error) {
+                messageText.innerText = `${error.message}`;
+                messageText.classList.add('error');
+                messagePopup.classList.remove('hidden');
+                console.error(`Error: ${error.message}`);
+            } else {
+                messageText.innerText = "Raid event was successfully deleted";
+                messageText.classList.add('success');
+                messagePopup.classList.remove('hidden');
+            }
+        });
+
+        setTimeout(() => {
+            window.location.href = "index.html";
+        }, 5000);
     }
 }
 
