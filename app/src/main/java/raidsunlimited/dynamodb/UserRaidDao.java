@@ -2,6 +2,7 @@ package raidsunlimited.dynamodb;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import raidsunlimited.dynamodb.models.RaidEvent;
 import raidsunlimited.dynamodb.models.UserRaid;
@@ -63,11 +64,11 @@ public class UserRaidDao {
         Map<String, AttributeValue> expressionAttributeValues = new HashMap<>();
         expressionAttributeValues.put(":raidId", new AttributeValue().withS(raidId));
 
-        DynamoDBQueryExpression<UserRaid> queryExpression = new DynamoDBQueryExpression<UserRaid>()
-                .withKeyConditionExpression("raidId = :raidId")
+        DynamoDBScanExpression scanExpression = new DynamoDBScanExpression()
+                .withFilterExpression("raidId = :raidId")
                 .withExpressionAttributeValues(expressionAttributeValues);
 
-        return this.dynamoDBMapper.query(UserRaid.class, queryExpression);
+        return this.dynamoDBMapper.scan(UserRaid.class, scanExpression);
     }
 
     /**

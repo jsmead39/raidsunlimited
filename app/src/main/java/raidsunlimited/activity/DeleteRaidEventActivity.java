@@ -74,15 +74,11 @@ public class DeleteRaidEventActivity {
 
         raidDao.deleteRaid(raidId);
 
-
+        //retrieves all matching user_raid associates from the user_raid table and removes them as well
         List<UserRaid> userRaidList = userRaidDao.getAllUserRaids(raidId);
-        log.info("Line 79 after userRaidList retrieved", userRaidList);
         for (UserRaid u : userRaidList) {
-            log.info("line 81 before deleting");
             userRaidDao.deleteUserRaidEvent(u);
-            log.info("userRaid info deleted");
         }
-        log.info("raids deleted from UserRaid table");
 
 
         return DeleteRaidEventResult.builder()
