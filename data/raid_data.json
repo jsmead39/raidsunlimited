@@ -17,10 +17,10 @@
             ]
           },
           "participants": {"L": [
-            {"S": "{\"userId\":\"player1\",\"displayName\":\"Player 1\",\"participantClass\":\"Warrior\",\"participantSpecialization\":\"Protection\",\"role\":\"Tank\"}"},
-            {"S": "{\"userId\":\"player2\",\"displayName\":\"Player 2\",\"participantClass\":\"Priest\",\"participantSpecialization\":\"Holy\",\"role\":\"Healer\"}"},
-            {"S": "{\"userId\":\"player3\",\"displayName\":\"Player 3\",\"participantClass\":\"Mage\",\"participantSpecialization\":\"Frost\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"player4\",\"displayName\":\"Player 4\",\"participantClass\":\"Rogue\",\"participantSpecialization\":\"Assassination\",\"role\":\"DPS\"}"}
+            {"S": "{\"userId\":\"p1\",\"displayName\":\"Player 1\",\"participantClass\":\"Warrior\",\"participantSpecialization\":\"Protection\",\"role\":\"Tank\"}"},
+            {"S": "{\"userId\":\"p2\",\"displayName\":\"Player 2\",\"participantClass\":\"Priest\",\"participantSpecialization\":\"Holy\",\"role\":\"Healer\"}"},
+            {"S": "{\"userId\":\"p3\",\"displayName\":\"Player 3\",\"participantClass\":\"Mage\",\"participantSpecialization\":\"Frost\",\"role\":\"DPS\"}"},
+            {"S": "{\"userId\":\"p4\",\"displayName\":\"Player 4\",\"participantClass\":\"Rogue\",\"participantSpecialization\":\"Assassination\",\"role\":\"DPS\"}"}
           ]},
           "raidObjective": {"S": "Farm"},
           "lootDistribution": {"S": "Open Roll"},
@@ -34,29 +34,29 @@
       "PutRequest": {
         "Item": {
           "raidId": {"S": "raid2"},
-          "raidName": {"S": "Ulduar"},
+          "raidName": {"S": "Zul'Gurub"},
           "raidServer": {"S": "Whitemane"},
           "raidDate": {"N": "1676534400"},
-          "time": {"S": "19:00"},
-          "raidSize": {"N": "25"},
+          "time": {"S": "20:00"},
+          "raidSize": {"N": "20"},
           "requiredRoles": {
             "L": [
               {"S": "Tank 2"},
-              {"S": "Healer 2"},
-              {"S": "Dps 21"}
+              {"S": "Healer 5"},
+              {"S": "Dps 13"}
             ]
           },
           "participants": {"L": [
-            {"S": "{\"userId\":\"player5\",\"displayName\":\"Player 5\",\"participantClass\":\"Paladin\",\"participantSpecialization\":\"Protection\",\"role\":\"Tank\"}"},
-            {"S": "{\"userId\":\"player6\",\"displayName\":\"Player 6\",\"participantClass\":\"Shaman\",\"participantSpecialization\":\"Restoration\",\"role\":\"Healer\"}"},
-            {"S": "{\"userId\":\"player7\",\"displayName\":\"Player 7\",\"participantClass\":\"Warlock\",\"participantSpecialization\":\"Affliction\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"player8\",\"displayName\":\"Player 8\",\"participantClass\":\"Hunter\",\"participantSpecialization\":\"Marksmanship\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"player9\",\"displayName\":\"Player 9\",\"participantClass\":\"Death Knight\",\"participantSpecialization\":\"Unholy\",\"role\":\"DPS\"}"}
+            {"S": "{\"userId\":\"p5\",\"displayName\":\"Player 5\",\"participantClass\":\"Paladin\",\"participantSpecialization\":\"Protection\",\"role\":\"Tank\"}"},
+            {"S": "{\"userId\":\"p6\",\"displayName\":\"Player 6\",\"participantClass\":\"Priest\",\"participantSpecialization\":\"Holy\",\"role\":\"Healer\"}"},
+            {"S": "{\"userId\":\"p7\",\"displayName\":\"Player 7\",\"participantClass\":\"Mage\",\"participantSpecialization\":\"Fire\",\"role\":\"DPS\"}"},
+            {"S": "{\"userId\":\"p8\",\"displayName\":\"Player 8\",\"participantClass\":\"Hunter\",\"participantSpecialization\":\"Marksmanship\",\"role\":\"DPS\"}"},
+            {"S": "{\"userId\":\"p9\",\"displayName\":\"Player 9\",\"participantClass\":\"Warlock\",\"participantSpecialization\":\"Destruction\",\"role\":\"DPS\"}"}
           ]},
           "raidObjective": {"S": "Progression"},
-          "lootDistribution": {"S": "GDKP"},
+          "lootDistribution": {"S": "Loot Council"},
           "feedback": {"S": "[]"},
-          "raidStatus": {"S": "Pending"},
+          "raidStatus": {"S": "Scheduled"},
           "raidOwner": {"S": "transent2@gmail.com"}
         }
       }
@@ -65,32 +65,31 @@
       "PutRequest": {
         "Item": {
           "raidId": {"S": "raid3"},
-          "raidName": {"S": "Karazhan"},
+          "raidName": {"S": "Blackwing Lair"},
           "raidServer": {"S": "Whitemane"},
           "raidDate": {"N": "1676620800"},
-          "time": {"S": "20:00"},
-          "raidSize": {"N": "10"},
+          "time": {"S": "18:30"},
+          "raidSize": {"N": "25"},
           "requiredRoles": {
             "L": [
-              {"S": "Tank 1"},
-              {"S": "Healer 2"},
-              {"S": "Dps 7"}
+              {"S": "Tank 2"},
+              {"S": "Healer 5"},
+              {"S": "Dps 18"}
             ]
           },
           "participants": {"L": [
-            {"S": "{\"userId\":\"player1\",\"displayName\":\"Player 1\",\"participantClass\":\"Warrior\",\"participantSpecialization\":\"Protection\",\"role\":\"Tank\"}"},
-            {"S": "{\"userId\":\"player10\",\"displayName\":\"Player 10\",\"participantClass\":\"Druid\",\"participantSpecialization\":\"Feral\",\"role\":\"Tank\"}"},
-            {"S": "{\"userId\":\"player2\",\"displayName\":\"Player 2\",\"participantClass\":\"Priest\",\"participantSpecialization\":\"Holy\",\"role\":\"Healer\"}"},
-            {"S": "{\"userId\":\"player11\",\"displayName\":\"Player 11\",\"participantClass\":\"Priest\",\"participantSpecialization\":\"Discipline\",\"role\":\"Healer\"}"},
-            {"S": "{\"userId\":\"player12\",\"displayName\":\"Player 12\",\"participantClass\":\"Warrior\",\"participantSpecialization\":\"Fury\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"player3\",\"displayName\":\"Player 3\",\"participantClass\":\"Mage\",\"participantSpecialization\":\"Frost\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"player13\",\"displayName\":\"Player 13\",\"participantClass\":\"Mage\",\"participantSpecialization\":\"Fire\",\"role\":\"DPS\"}"}
+            {"S": "{\"userId\":\"p10\",\"displayName\":\"Player 10\",\"participantClass\":\"Warrior\",\"participantSpecialization\":\"Fury\",\"role\":\"Tank\"}"},
+            {"S": "{\"userId\":\"p11\",\"displayName\":\"Player 11\",\"participantClass\":\"Priest\",\"participantSpecialization\":\"Discipline\",\"role\":\"Healer\"}"},
+            {"S": "{\"userId\":\"p12\",\"displayName\":\"Player 12\",\"participantClass\":\"Mage\",\"participantSpecialization\":\"Arcane\",\"role\":\"DPS\"}"},
+            {"S": "{\"userId\":\"p13\",\"displayName\":\"Player 13\",\"participantClass\":\"Warlock\",\"participantSpecialization\":\"Affliction\",\"role\":\"DPS\"}"},
+            {"S": "{\"userId\":\"p14\",\"displayName\":\"Player 14\",\"participantClass\":\"Hunter\",\"participantSpecialization\":\"Beast Mastery\",\"role\":\"DPS\"}"},
+            {"S": "{\"userId\":\"p15\",\"displayName\":\"Player 15\",\"participantClass\":\"Rogue\",\"participantSpecialization\":\"Combat\",\"role\":\"DPS\"}"}
           ]},
-          "raidObjective": {"S": "Farm"},
-          "lootDistribution": {"S": "Master Looter"},
+          "raidObjective": {"S": "Progression"},
+          "lootDistribution": {"S": "DKP"},
           "feedback": {"S": "[]"},
-          "raidStatus": {"S": "Completed"},
-          "raidOwner": {"S": "testemail@gmail.com"}
+          "raidStatus": {"S": "Scheduled"},
+          "raidOwner": {"S": "transent2@gmail.com"}
         }
       }
     },
@@ -98,10 +97,10 @@
       "PutRequest": {
         "Item": {
           "raidId": {"S": "raid4"},
-          "raidName": {"S": "Blackwing Lair"},
+          "raidName": {"S": "Onyxia's Lair"},
           "raidServer": {"S": "Whitemane"},
           "raidDate": {"N": "1676707200"},
-          "time": {"S": "20:00"},
+          "time": {"S": "21:30"},
           "raidSize": {"N": "40"},
           "requiredRoles": {
             "L": [
@@ -111,18 +110,16 @@
             ]
           },
           "participants": {"L": [
-            {"S": "{\"userId\":\"player14\",\"displayName\":\"Player 14\",\"participantClass\":\"Paladin\",\"participantSpecialization\":\"Protection\",\"role\":\"Tank\"}"},
-            {"S": "{\"userId\":\"player15\",\"displayName\":\"Player 15\",\"participantClass\":\"Priest\",\"participantSpecialization\":\"Holy\",\"role\":\"Healer\"}"},
-            {"S": "{\"userId\":\"player16\",\"displayName\":\"Player 16\",\"participantClass\":\"Mage\",\"participantSpecialization\":\"Frost\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"player17\",\"displayName\":\"Player 17\",\"participantClass\":\"Rogue\",\"participantSpecialization\":\"Combat\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"player5\",\"displayName\":\"Player 5\",\"participantClass\":\"Paladin\",\"participantSpecialization\":\"Protection\",\"role\":\"Tank\"}"},
-            {"S": "{\"userId\":\"player6\",\"displayName\":\"Player 6\",\"participantClass\":\"Shaman\",\"participantSpecialization\":\"Restoration\",\"role\":\"Healer\"}"},
-            {"S": "{\"userId\":\"player7\",\"displayName\":\"Player 7\",\"participantClass\":\"Warlock\",\"participantSpecialization\":\"Affliction\",\"role\":\"DPS\"}"}
+            {"S": "{\"userId\":\"p16\",\"displayName\":\"Player 16\",\"participantClass\":\"Druid\",\"participantSpecialization\":\"Feral\",\"role\":\"Tank\"}"},
+            {"S": "{\"userId\":\"p17\",\"displayName\":\"Player 17\",\"participantClass\":\"Priest\",\"participantSpecialization\":\"Shadow\",\"role\":\"Healer\"}"},
+            {"S": "{\"userId\":\"p18\",\"displayName\":\"Player 18\",\"participantClass\":\"Mage\",\"participantSpecialization\":\"Fire\",\"role\":\"DPS\"}"},
+            {"S": "{\"userId\":\"p19\",\"displayName\":\"Player 19\",\"participantClass\":\"Hunter\",\"participantSpecialization\":\"Survival\",\"role\":\"DPS\"}"},
+            {"S": "{\"userId\":\"p20\",\"displayName\":\"Player 20\",\"participantClass\":\"Warrior\",\"participantSpecialization\":\"Arms\",\"role\":\"DPS\"}"}
           ]},
           "raidObjective": {"S": "Progression"},
-          "lootDistribution": {"S": "DKP"},
+          "lootDistribution": {"S": "Suicide Kings"},
           "feedback": {"S": "[]"},
-          "raidStatus": {"S": "Pending"},
+          "raidStatus": {"S": "Scheduled"},
           "raidOwner": {"S": "transent2@gmail.com"}
         }
       }
@@ -134,139 +131,7 @@
           "raidName": {"S": "Naxxramas"},
           "raidServer": {"S": "Whitemane"},
           "raidDate": {"N": "1676793600"},
-          "time": {"S": "20:30"},
-          "raidSize": {"N": "40"},
-          "requiredRoles": {
-            "L": [
-              {"S": "Tank 5"},
-              {"S": "Healer 10"},
-              {"S": "Dps 25"}
-            ]
-          },
-          "participants": {"L": [
-            {"S": "{\"userId\":\"player18\",\"displayName\":\"Player 18\",\"participantClass\":\"Warrior\",\"participantSpecialization\":\"Arms\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"player19\",\"displayName\":\"Player 19\",\"participantClass\":\"Druid\",\"participantSpecialization\":\"Restoration\",\"role\":\"Healer\"}"},
-            {"S": "{\"userId\":\"player20\",\"displayName\":\"Player 20\",\"participantClass\":\"Warlock\",\"participantSpecialization\":\"Destruction\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"player21\",\"displayName\":\"Player 21\",\"participantClass\":\"Hunter\",\"participantSpecialization\":\"Beast Mastery\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"player7\",\"displayName\":\"Player 7\",\"participantClass\":\"Warlock\",\"participantSpecialization\":\"Affliction\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"player8\",\"displayName\":\"Player 8\",\"participantClass\":\"Hunter\",\"participantSpecialization\":\"Marksmanship\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"player9\",\"displayName\":\"Player 9\",\"participantClass\":\"Death Knight\",\"participantSpecialization\":\"Unholy\",\"role\":\"DPS\"}"}
-          ]},
-          "raidObjective": {"S": "Progression"},
-          "lootDistribution": {"S": "Loot Council"},
-          "feedback": {"S": "[]"},
-          "raidStatus": {"S": "Scheduled"},
-          "raidOwner": {"S": "testemail@gmail.com"}
-        }
-      }
-    },
-    {
-      "PutRequest": {
-        "Item": {
-          "raidId": {"S": "raid6"},
-          "raidName": {"S": "Onyxia's Lair"},
-          "raidServer": {"S": "Whitemane"},
-          "raidDate": {"N": "1676880000"},
           "time": {"S": "19:30"},
-          "raidSize": {"N": "25"},
-          "requiredRoles": {
-            "L": [
-              {"S": "Tank 2"},
-              {"S": "Healer 3"},
-              {"S": "Dps 20"}
-            ]
-          },
-          "participants": {"L": [
-            {"S": "{\"userId\":\"player22\",\"displayName\":\"Player 22\",\"participantClass\":\"Paladin\",\"participantSpecialization\":\"Retribution\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"player23\",\"displayName\":\"Player 23\",\"participantClass\":\"Shaman\",\"participantSpecialization\":\"Enhancement\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"player24\",\"displayName\":\"Player 24\",\"participantClass\":\"Priest\",\"participantSpecialization\":\"Shadow\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"player25\",\"displayName\":\"Player 25\",\"participantClass\":\"Mage\",\"participantSpecialization\":\"Arcane\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"player6\",\"displayName\":\"Player 6\",\"participantClass\":\"Shaman\",\"participantSpecialization\":\"Restoration\",\"role\":\"Healer\"}"},
-            {"S": "{\"userId\":\"player26\",\"displayName\":\"Player 26\",\"participantClass\":\"Warrior\",\"participantSpecialization\":\"Protection\",\"role\":\"Tank\"}"},
-            {"S": "{\"userId\":\"player27\",\"displayName\":\"Player 27\",\"participantClass\":\"Priest\",\"participantSpecialization\":\"Holy\",\"role\":\"Healer\"}"}
-          ]},
-          "raidObjective": {"S": "Farm"},
-          "lootDistribution": {"S": "Open Roll"},
-          "feedback": {"S": "[]"},
-          "raidStatus": {"S": "Scheduled"},
-          "raidOwner": {"S": "transent2@gmail.com"}
-        }
-      }
-    },
-    {
-      "PutRequest": {
-        "Item": {
-          "raidId": {"S": "raid7"},
-          "raidName": {"S": "Black Temple"},
-          "raidServer": {"S": "Whitemane"},
-          "raidDate": {"N": "1676966400"},
-          "time": {"S": "21:00"},
-          "raidSize": {"N": "25"},
-          "requiredRoles": {
-            "L": [
-              {"S": "Tank 2"},
-              {"S": "Healer 5"},
-              {"S": "Dps 18"}
-            ]
-          },
-          "participants": {"L": [
-            {"S": "{\"userId\":\"player28\",\"displayName\":\"Player 28\",\"participantClass\":\"Rogue\",\"participantSpecialization\":\"Assassination\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"player29\",\"displayName\":\"Player 29\",\"participantClass\":\"Warlock\",\"participantSpecialization\":\"Affliction\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"player30\",\"displayName\":\"Player 30\",\"participantClass\":\"Druid\",\"participantSpecialization\":\"Guardian\",\"role\":\"Tank\"}"},
-            {"S": "{\"userId\":\"player31\",\"displayName\":\"Player 31\",\"participantClass\":\"Shaman\",\"participantSpecialization\":\"Restoration\",\"role\":\"Healer\"}"},
-            {"S": "{\"userId\":\"player27\",\"displayName\":\"Player 27\",\"participantClass\":\"Priest\",\"participantSpecialization\":\"Holy\",\"role\":\"Healer\"}"},
-            {"S": "{\"userId\":\"player32\",\"displayName\":\"Player 32\",\"participantClass\":\"Rogue\",\"participantSpecialization\":\"Outlaw\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"player33\",\"displayName\":\"Player 33\",\"participantClass\":\"Hunter\",\"participantSpecialization\":\"Survival\",\"role\":\"DPS\"}"}
-          ]},
-          "raidObjective": {"S": "Progression"},
-          "lootDistribution": {"S": "GDKP"},
-          "feedback": {"S": "[]"},
-          "raidStatus": {"S": "Completed"},
-          "raidOwner": {"S": "testemail@gmail.com"}
-        }
-      }
-    },
-    {
-      "PutRequest": {
-        "Item": {
-          "raidId": {"S": "raid8"},
-          "raidName": {"S": "Zul'Gurub"},
-          "raidServer": {"S": "Whitemane"},
-          "raidDate": {"N": "1677052800"},
-          "time": {"S": "20:30"},
-          "raidSize": {"N": "20"},
-          "requiredRoles": {
-            "L": [
-              {"S": "Tank 2"},
-              {"S": "Healer 4"},
-              {"S": "Dps 14"}
-            ]
-          },
-          "participants": {"L": [
-            {"S": "{\"userId\":\"player34\",\"displayName\":\"Player 34\",\"participantClass\":\"Mage\",\"participantSpecialization\":\"Frost\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"player35\",\"displayName\":\"Player 35\",\"participantClass\":\"Paladin\",\"participantSpecialization\":\"Protection\",\"role\":\"Tank\"}"},
-            {"S": "{\"userId\":\"player31\",\"displayName\":\"Player 31\",\"participantClass\":\"Shaman\",\"participantSpecialization\":\"Restoration\",\"role\":\"Healer\"}"},
-            {"S": "{\"userId\":\"player36\",\"displayName\":\"Player 36\",\"participantClass\":\"Priest\",\"participantSpecialization\":\"Discipline\",\"role\":\"Healer\"}"},
-            {"S": "{\"userId\":\"player37\",\"displayName\":\"Player 37\",\"participantClass\":\"Warrior\",\"participantSpecialization\":\"Fury\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"player32\",\"displayName\":\"Player 32\",\"participantClass\":\"Rogue\",\"participantSpecialization\":\"Outlaw\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"player33\",\"displayName\":\"Player 33\",\"participantClass\":\"Hunter\",\"participantSpecialization\":\"Survival\",\"role\":\"DPS\"}"}
-          ]},
-          "raidObjective": {"S": "Progression"},
-          "lootDistribution": {"S": "DKP"},
-          "feedback": {"S": "[]"},
-          "raidStatus": {"S": "Scheduled"},
-          "raidOwner": {"S": "transent2@gmail.com"}
-        }
-      }
-    },
-    {
-      "PutRequest": {
-        "Item": {
-          "raidId": {"S": "raid9"},
-          "raidName": {"S": "Temple of Ahn'Qiraj"},
-          "raidServer": {"S": "Whitemane"},
-          "raidDate": {"N": "1677139200"},
-          "time": {"S": "21:00"},
           "raidSize": {"N": "40"},
           "requiredRoles": {
             "L": [
@@ -276,217 +141,17 @@
             ]
           },
           "participants": {"L": [
-            {"S": "{\"userId\":\"player38\",\"displayName\":\"Player 38\",\"participantClass\":\"Mage\",\"participantSpecialization\":\"Fire\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"player39\",\"displayName\":\"Player 39\",\"participantClass\":\"Warrior\",\"participantSpecialization\":\"Protection\",\"role\":\"Tank\"}"},
-            {"S": "{\"userId\":\"player40\",\"displayName\":\"Player 40\",\"participantClass\":\"Priest\",\"participantSpecialization\":\"Discipline\",\"role\":\"Healer\"}"},
-            {"S": "{\"userId\":\"player41\",\"displayName\":\"Player 41\",\"participantClass\":\"Rogue\",\"participantSpecialization\":\"Assassination\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"player42\",\"displayName\":\"Player 42\",\"participantClass\":\"Warlock\",\"participantSpecialization\":\"Affliction\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"player6\",\"displayName\":\"Player 6\",\"participantClass\":\"Shaman\",\"participantSpecialization\":\"Restoration\",\"role\":\"Healer\"}"},
-            {"S": "{\"userId\":\"player27\",\"displayName\":\"Player 27\",\"participantClass\":\"Priest\",\"participantSpecialization\":\"Holy\",\"role\":\"Healer\"}"}
-          ]},
-          "raidObjective": {"S": "Progression"},
-          "lootDistribution": {"S": "Loot Council"},
-          "feedback": {"S": "[]"},
-          "raidStatus": {"S": "Pending"},
-          "raidOwner": {"S": "testemail@gmail.com"}
-        }
-      }
-    },
-    {
-      "PutRequest": {
-        "Item": {
-          "raidId": {"S": "raid10"},
-          "raidName": {"S": "Gruul's Lair"},
-          "raidServer": {"S": "Whitemane"},
-          "raidDate": {"N": "1677225600"},
-          "time": {"S": "20:30"},
-          "raidSize": {"N": "25"},
-          "requiredRoles": {
-            "L": [
-              {"S": "Tank 2"},
-              {"S": "Healer 5"},
-              {"S": "Dps 18"}
-            ]
-          },
-          "participants": {"L": [
-            {"S": "{\"userId\":\"player43\",\"displayName\":\"Player 43\",\"participantClass\":\"Druid\",\"participantSpecialization\":\"Guardian\",\"role\":\"Tank\"}"},
-            {"S": "{\"userId\":\"player44\",\"displayName\":\"Player 44\",\"participantClass\":\"Priest\",\"participantSpecialization\":\"Holy\",\"role\":\"Healer\"}"},
-            {"S": "{\"userId\":\"player45\",\"displayName\":\"Player 45\",\"participantClass\":\"Mage\",\"participantSpecialization\":\"Arcane\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"player46\",\"displayName\":\"Player 46\",\"participantClass\":\"Hunter\",\"participantSpecialization\":\"Marksmanship\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"player5\",\"displayName\":\"Player 5\",\"participantClass\":\"Paladin\",\"participantSpecialization\":\"Protection\",\"role\":\"Tank\"}"},
-            {"S": "{\"userId\":\"player6\",\"displayName\":\"Player 6\",\"participantClass\":\"Shaman\",\"participantSpecialization\":\"Restoration\",\"role\":\"Healer\"}"},
-            {"S": "{\"userId\":\"player7\",\"displayName\":\"Player 7\",\"participantClass\":\"Warlock\",\"participantSpecialization\":\"Affliction\",\"role\":\"DPS\"}"}
-          ]},
-          "raidObjective": {"S": "Farm"},
-          "lootDistribution": {"S": "GDKP"},
-          "feedback": {"S": "[]"},
-          "raidStatus": {"S": "Scheduled"},
-          "raidOwner": {"S": "transent2@gmail.com"}
-        }
-      }
-    },
-    {
-      "PutRequest": {
-        "Item": {
-          "raidId": {"S": "raid11"},
-          "raidName": {"S": "Zul'Aman"},
-          "raidServer": {"S": "Whitemane"},
-          "raidDate": {"N": "1677312000"},
-          "time": {"S": "21:00"},
-          "raidSize": {"N": "10"},
-          "requiredRoles": {
-            "L": [
-              {"S": "Tank 1"},
-              {"S": "Healer 2"},
-              {"S": "Dps 7"}
-            ]
-          },
-          "participants": {"L": [
-            {"S": "{\"userId\":\"player47\",\"displayName\":\"Player 47\",\"participantClass\":\"Warrior\",\"participantSpecialization\":\"Protection\",\"role\":\"Tank\"}"},
-            {"S": "{\"userId\":\"player48\",\"displayName\":\"Player 48\",\"participantClass\":\"Priest\",\"participantSpecialization\":\"Holy\",\"role\":\"Healer\"}"},
-            {"S": "{\"userId\":\"player49\",\"displayName\":\"Player 49\",\"participantClass\":\"Rogue\",\"participantSpecialization\":\"Assassination\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"player50\",\"displayName\":\"Player 50\",\"participantClass\":\"Warlock\",\"participantSpecialization\":\"Affliction\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"player5\",\"displayName\":\"Player 5\",\"participantClass\":\"Paladin\",\"participantSpecialization\":\"Protection\",\"role\":\"Tank\"}"},
-            {"S": "{\"userId\":\"player6\",\"displayName\":\"Player 6\",\"participantClass\":\"Shaman\",\"participantSpecialization\":\"Restoration\",\"role\":\"Healer\"}"},
-            {"S": "{\"userId\":\"player7\",\"displayName\":\"Player 7\",\"participantClass\":\"Warlock\",\"participantSpecialization\":\"Affliction\",\"role\":\"DPS\"}"}
-          ]},
-          "raidObjective": {"S": "Farm"},
-          "lootDistribution": {"S": "Open Roll"},
-          "feedback": {"S": "[]"},
-          "raidStatus": {"S": "Scheduled"},
-          "raidOwner": {"S": "testemail@gmail.com"}
-        }
-      }
-    },
-    {
-      "PutRequest": {
-        "Item": {
-          "raidId": {"S": "raid12"},
-          "raidName": {"S": "Sunwell Plateau"},
-          "raidServer": {"S": "Whitemane"},
-          "raidDate": {"N": "1677398400"},
-          "time": {"S": "20:30"},
-          "raidSize": {"N": "25"},
-          "requiredRoles": {
-            "L": [
-              {"S": "Tank 2"},
-              {"S": "Healer 5"},
-              {"S": "Dps 18"}
-            ]
-          },
-          "participants": {"L": [
-            {"S": "{\"userId\":\"player51\",\"displayName\":\"Player 51\",\"participantClass\":\"Paladin\",\"participantSpecialization\":\"Protection\",\"role\":\"Tank\"}"},
-            {"S": "{\"userId\":\"player52\",\"displayName\":\"Player 52\",\"participantClass\":\"Priest\",\"participantSpecialization\":\"Holy\",\"role\":\"Healer\"}"},
-            {"S": "{\"userId\":\"player53\",\"displayName\":\"Player 53\",\"participantClass\":\"Mage\",\"participantSpecialization\":\"Frost\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"player54\",\"displayName\":\"Player 54\",\"participantClass\":\"Rogue\",\"participantSpecialization\":\"Combat\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"player5\",\"displayName\":\"Player 5\",\"participantClass\":\"Paladin\",\"participantSpecialization\":\"Protection\",\"role\":\"Tank\"}"},
-            {"S": "{\"userId\":\"player6\",\"displayName\":\"Player 6\",\"participantClass\":\"Shaman\",\"participantSpecialization\":\"Restoration\",\"role\":\"Healer\"}"},
-            {"S": "{\"userId\":\"player7\",\"displayName\":\"Player 7\",\"participantClass\":\"Warlock\",\"participantSpecialization\":\"Affliction\",\"role\":\"DPS\"}"}
+            {"S": "{\"userId\":\"p21\",\"displayName\":\"Player 21\",\"participantClass\":\"Paladin\",\"participantSpecialization\":\"Retribution\",\"role\":\"Tank\"}"},
+            {"S": "{\"userId\":\"p22\",\"displayName\":\"Player 22\",\"participantClass\":\"Priest\",\"participantSpecialization\":\"Holy\",\"role\":\"Healer\"}"},
+            {"S": "{\"userId\":\"p23\",\"displayName\":\"Player 23\",\"participantClass\":\"Mage\",\"participantSpecialization\":\"Frost\",\"role\":\"DPS\"}"},
+            {"S": "{\"userId\":\"p24\",\"displayName\":\"Player 24\",\"participantClass\":\"Warlock\",\"participantSpecialization\":\"Destruction\",\"role\":\"DPS\"}"},
+            {"S": "{\"userId\":\"p25\",\"displayName\":\"Player 25\",\"participantClass\":\"Hunter\",\"participantSpecialization\":\"Marksmanship\",\"role\":\"DPS\"}"}
           ]},
           "raidObjective": {"S": "Progression"},
           "lootDistribution": {"S": "Loot Council"},
           "feedback": {"S": "[]"},
           "raidStatus": {"S": "Scheduled"},
           "raidOwner": {"S": "transent2@gmail.com"}
-        }
-      }
-    },
-    {
-      "PutRequest": {
-        "Item": {
-          "raidId": {"S": "raid13"},
-          "raidName": {"S": "Molten Core"},
-          "raidServer": {"S": "Whitemane"},
-          "raidDate": {"N": "1677484800"},
-          "time": {"S": "21:00"},
-          "raidSize": {"N": "40"},
-          "requiredRoles": {
-            "L": [
-              {"S": "Tank 5"},
-              {"S": "Healer 10"},
-              {"S": "Dps 25"}
-            ]
-          },
-          "participants": {"L": [
-            {"S": "{\"userId\":\"player55\",\"displayName\":\"Player 55\",\"participantClass\":\"Warrior\",\"participantSpecialization\":\"Arms\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"player56\",\"displayName\":\"Player 56\",\"participantClass\":\"Druid\",\"participantSpecialization\":\"Restoration\",\"role\":\"Healer\"}"},
-            {"S": "{\"userId\":\"player57\",\"displayName\":\"Player 57\",\"participantClass\":\"Warlock\",\"participantSpecialization\":\"Destruction\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"player58\",\"displayName\":\"Player 58\",\"participantClass\":\"Hunter\",\"participantSpecialization\":\"Beast Mastery\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"player59\",\"displayName\":\"Player 59\",\"participantClass\":\"Death Knight\",\"participantSpecialization\":\"Unholy\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"player7\",\"displayName\":\"Player 7\",\"participantClass\":\"Warlock\",\"participantSpecialization\":\"Affliction\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"player8\",\"displayName\":\"Player 8\",\"participantClass\":\"Hunter\",\"participantSpecialization\":\"Marksmanship\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"player9\",\"displayName\":\"Player 9\",\"participantClass\":\"Death Knight\",\"participantSpecialization\":\"Unholy\",\"role\":\"DPS\"}"}
-          ]},
-          "raidObjective": {"S": "Farm"},
-          "lootDistribution": {"S": "DKP"},
-          "feedback": {"S": "[]"},
-          "raidStatus": {"S": "Pending"},
-          "raidOwner": {"S": "testemail@gmail.com"}
-        }
-      }
-    },
-    {
-      "PutRequest": {
-        "Item": {
-          "raidId": {"S": "raid14"},
-          "raidName": {"S": "Naxxramas"},
-          "raidServer": {"S": "Whitemane"},
-          "raidDate": {"N": "1677571200"},
-          "time": {"S": "20:30"},
-          "raidSize": {"N": "40"},
-          "requiredRoles": {
-            "L": [
-              {"S": "Tank 5"},
-              {"S": "Healer 10"},
-              {"S": "Dps 25"}
-            ]
-          },
-          "participants": {"L": [
-            {"S": "{\"userId\":\"player60\",\"displayName\":\"Player 60\",\"participantClass\":\"Paladin\",\"participantSpecialization\":\"Retribution\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"player61\",\"displayName\":\"Player 61\",\"participantClass\":\"Shaman\",\"participantSpecialization\":\"Enhancement\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"player62\",\"displayName\":\"Player 62\",\"participantClass\":\"Priest\",\"participantSpecialization\":\"Shadow\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"player63\",\"displayName\":\"Player 63\",\"participantClass\":\"Mage\",\"participantSpecialization\":\"Arcane\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"player6\",\"displayName\":\"Player 6\",\"participantClass\":\"Shaman\",\"participantSpecialization\":\"Restoration\",\"role\":\"Healer\"}"},
-            {"S": "{\"userId\":\"player27\",\"displayName\":\"Player 27\",\"participantClass\":\"Priest\",\"participantSpecialization\":\"Holy\",\"role\":\"Healer\"}"}
-          ]},
-          "raidObjective": {"S": "Progression"},
-          "lootDistribution": {"S": "Loot Council"},
-          "feedback": {"S": "[]"},
-          "raidStatus": {"S": "Scheduled"},
-          "raidOwner": {"S": "transent2@gmail.com"}
-        }
-      }
-    },
-    {
-      "PutRequest": {
-        "Item": {
-          "raidId": {"S": "raid15"},
-          "raidName": {"S": "Onyxia's Lair"},
-          "raidServer": {"S": "Whitemane"},
-          "raidDate": {"N": "1677657600"},
-          "time": {"S": "19:30"},
-          "raidSize": {"N": "25"},
-          "requiredRoles": {
-            "L": [
-              {"S": "Tank 2"},
-              {"S": "Healer 3"},
-              {"S": "Dps 20"}
-            ]
-          },
-          "participants": {"L": [
-            {"S": "{\"userId\":\"player64\",\"displayName\":\"Player 64\",\"participantClass\":\"Mage\",\"participantSpecialization\":\"Fire\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"player65\",\"displayName\":\"Player 65\",\"participantClass\":\"Warrior\",\"participantSpecialization\":\"Protection\",\"role\":\"Tank\"}"},
-            {"S": "{\"userId\":\"player27\",\"displayName\":\"Player 27\",\"participantClass\":\"Priest\",\"participantSpecialization\":\"Holy\",\"role\":\"Healer\"}"},
-            {"S": "{\"userId\":\"player66\",\"displayName\":\"Player 66\",\"participantClass\":\"Rogue\",\"participantSpecialization\":\"Assassination\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"player67\",\"displayName\":\"Player 67\",\"participantClass\":\"Warlock\",\"participantSpecialization\":\"Affliction\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"player68\",\"displayName\":\"Player 68\",\"participantClass\":\"Hunter\",\"participantSpecialization\":\"Marksmanship\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"player69\",\"displayName\":\"Player 69\",\"participantClass\":\"Druid\",\"participantSpecialization\":\"Restoration\",\"role\":\"Healer\"}"}
-          ]},
-          "raidObjective": {"S": "Farm"},
-          "lootDistribution": {"S": "Open Roll"},
-          "feedback": {"S": "[]"},
-          "raidStatus": {"S": "Scheduled"},
-          "raidOwner": {"S": "testemail@gmail.com"}
         }
       }
     }
