@@ -231,8 +231,6 @@ export default class RaidsUnlimitedClient extends BindingClass {
         try {
             const token = await this.getTokenOrThrow("You must be logged in to delete a raid.");
             const response = await this.axiosClient.delete(`raidevents/${raidId}`, {
-                raidId: raidId,
-            }, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
