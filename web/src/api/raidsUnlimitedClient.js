@@ -224,6 +224,7 @@ export default class RaidsUnlimitedClient extends BindingClass {
             return response.data;
         } catch (error) {
             this.handleError(error, errorCallBack);
+
         }
     }
 
