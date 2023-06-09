@@ -66,6 +66,10 @@ public class RaidSignupActivity {
         RaidEvent raid = Optional.ofNullable(raidDao.getRaid(raidId))
                 .orElseThrow(() -> new RaidEventNotFoundException("No raid exists with id " + raidId));
 
+        //Check if the raid is already completed
+        if (raid.getRaidStatus().equals("Completed")) {
+            throw new RaidSignupException("You cannot signup for a raid that has already been completed");
+        }
 
         UserRaid userRaid = userRaidDao.getUserRaid(userId, raidId);
         List<ParticipantModel> participantsList = Optional.ofNullable(raid.getParticipants()).orElseGet(ArrayList::new);

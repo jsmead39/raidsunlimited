@@ -63,7 +63,7 @@ public class CreateRaidActivity {
         raidEvent.setParticipants(new ArrayList<>());
         raidEvent.setFeedback(new ArrayList<>());
         raidEvent.setRaidOwner(createRaidRequest.getRaidOwner());
-        raidEvent.setRaidStatus("Pending");
+        raidEvent.setRaidStatus("Scheduled");
 
         raidDao.saveRaid(raidEvent);
 
