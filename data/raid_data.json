@@ -16,12 +16,7 @@
               {"S": "Dps 6"}
             ]
           },
-          "participants": {"L": [
-            {"S": "{\"userId\":\"p1\",\"displayName\":\"Player 1\",\"participantClass\":\"Warrior\",\"participantSpecialization\":\"Protection\",\"role\":\"Tank\"}"},
-            {"S": "{\"userId\":\"p2\",\"displayName\":\"Player 2\",\"participantClass\":\"Priest\",\"participantSpecialization\":\"Holy\",\"role\":\"Healer\"}"},
-            {"S": "{\"userId\":\"p3\",\"displayName\":\"Player 3\",\"participantClass\":\"Mage\",\"participantSpecialization\":\"Frost\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"p4\",\"displayName\":\"Player 4\",\"participantClass\":\"Rogue\",\"participantSpecialization\":\"Assassination\",\"role\":\"DPS\"}"}
-          ]},
+          "participants": {"S": "[{\"userId\":\"p1\",\"displayName\":\"Player 1\",\"participantClass\":\"Warrior\",\"participantSpecialization\":\"Protection\",\"role\":\"Tank\"},{\"userId\":\"p2\",\"displayName\":\"Player 2\",\"participantClass\":\"Priest\",\"participantSpecialization\":\"Holy\",\"role\":\"Healer\"},{\"userId\":\"p3\",\"displayName\":\"Player 3\",\"participantClass\":\"Mage\",\"participantSpecialization\":\"Frost\",\"role\":\"DPS\"},{\"userId\":\"p4\",\"displayName\":\"Player 4\",\"participantClass\":\"Rogue\",\"participantSpecialization\":\"Assassination\",\"role\":\"DPS\"}]"},
           "raidObjective": {"S": "Farm"},
           "lootDistribution": {"S": "Open Roll"},
           "feedback": {"S": "[]"},
@@ -46,13 +41,7 @@
               {"S": "Dps 13"}
             ]
           },
-          "participants": {"L": [
-            {"S": "{\"userId\":\"p5\",\"displayName\":\"Player 5\",\"participantClass\":\"Paladin\",\"participantSpecialization\":\"Protection\",\"role\":\"Tank\"}"},
-            {"S": "{\"userId\":\"p6\",\"displayName\":\"Player 6\",\"participantClass\":\"Priest\",\"participantSpecialization\":\"Holy\",\"role\":\"Healer\"}"},
-            {"S": "{\"userId\":\"p7\",\"displayName\":\"Player 7\",\"participantClass\":\"Mage\",\"participantSpecialization\":\"Fire\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"p8\",\"displayName\":\"Player 8\",\"participantClass\":\"Hunter\",\"participantSpecialization\":\"Marksmanship\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"p9\",\"displayName\":\"Player 9\",\"participantClass\":\"Warlock\",\"participantSpecialization\":\"Destruction\",\"role\":\"DPS\"}"}
-          ]},
+          "participants": {"S": "[{\"userId\":\"p5\",\"displayName\":\"Player 5\",\"participantClass\":\"Paladin\",\"participantSpecialization\":\"Protection\",\"role\":\"Tank\"},{\"userId\":\"p6\",\"displayName\":\"Player 6\",\"participantClass\":\"Priest\",\"participantSpecialization\":\"Holy\",\"role\":\"Healer\"},{\"userId\":\"p7\",\"displayName\":\"Player 7\",\"participantClass\":\"Mage\",\"participantSpecialization\":\"Fire\",\"role\":\"DPS\"},{\"userId\":\"p8\",\"displayName\":\"Player 8\",\"participantClass\":\"Hunter\",\"participantSpecialization\":\"Marksmanship\",\"role\":\"DPS\"},{\"userId\":\"p9\",\"displayName\":\"Player 9\",\"participantClass\":\"Warlock\",\"participantSpecialization\":\"Destruction\",\"role\":\"DPS\"}]"},
           "raidObjective": {"S": "Progression"},
           "lootDistribution": {"S": "Loot Council"},
           "feedback": {"S": "[]"},
@@ -77,14 +66,7 @@
               {"S": "Dps 18"}
             ]
           },
-          "participants": {"L": [
-            {"S": "{\"userId\":\"p10\",\"displayName\":\"Player 10\",\"participantClass\":\"Warrior\",\"participantSpecialization\":\"Fury\",\"role\":\"Tank\"}"},
-            {"S": "{\"userId\":\"p11\",\"displayName\":\"Player 11\",\"participantClass\":\"Priest\",\"participantSpecialization\":\"Discipline\",\"role\":\"Healer\"}"},
-            {"S": "{\"userId\":\"p12\",\"displayName\":\"Player 12\",\"participantClass\":\"Mage\",\"participantSpecialization\":\"Arcane\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"p13\",\"displayName\":\"Player 13\",\"participantClass\":\"Warlock\",\"participantSpecialization\":\"Affliction\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"p14\",\"displayName\":\"Player 14\",\"participantClass\":\"Hunter\",\"participantSpecialization\":\"Beast Mastery\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"p15\",\"displayName\":\"Player 15\",\"participantClass\":\"Rogue\",\"participantSpecialization\":\"Combat\",\"role\":\"DPS\"}"}
-          ]},
+          "participants": {"S": "[{\"userId\":\"p10\",\"displayName\":\"Player 10\",\"participantClass\":\"Warrior\",\"participantSpecialization\":\"Fury\",\"role\":\"Tank\"},{\"userId\":\"p11\",\"displayName\":\"Player 11\",\"participantClass\":\"Priest\",\"participantSpecialization\":\"Discipline\",\"role\":\"Healer\"},{\"userId\":\"p12\",\"displayName\":\"Player 12\",\"participantClass\":\"Mage\",\"participantSpecialization\":\"Arcane\",\"role\":\"DPS\"},{\"userId\":\"p13\",\"displayName\":\"Player 13\",\"participantClass\":\"Warlock\",\"participantSpecialization\":\"Affliction\",\"role\":\"DPS\"},{\"userId\":\"p14\",\"displayName\":\"Player 14\",\"participantClass\":\"Hunter\",\"participantSpecialization\":\"Beast Mastery\",\"role\":\"DPS\"},{\"userId\":\"p15\",\"displayName\":\"Player 15\",\"participantClass\":\"Rogue\",\"participantSpecialization\":\"Combat\",\"role\":\"DPS\"}]"},
           "raidObjective": {"S": "Progression"},
           "lootDistribution": {"S": "DKP"},
           "feedback": {"S": "[]"},
@@ -109,13 +91,7 @@
               {"S": "Dps 25"}
             ]
           },
-          "participants": {"L": [
-            {"S": "{\"userId\":\"p16\",\"displayName\":\"Player 16\",\"participantClass\":\"Druid\",\"participantSpecialization\":\"Feral\",\"role\":\"Tank\"}"},
-            {"S": "{\"userId\":\"p17\",\"displayName\":\"Player 17\",\"participantClass\":\"Priest\",\"participantSpecialization\":\"Shadow\",\"role\":\"Healer\"}"},
-            {"S": "{\"userId\":\"p18\",\"displayName\":\"Player 18\",\"participantClass\":\"Mage\",\"participantSpecialization\":\"Fire\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"p19\",\"displayName\":\"Player 19\",\"participantClass\":\"Hunter\",\"participantSpecialization\":\"Survival\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"p20\",\"displayName\":\"Player 20\",\"participantClass\":\"Warrior\",\"participantSpecialization\":\"Arms\",\"role\":\"DPS\"}"}
-          ]},
+          "participants": {"S": "[{\"userId\":\"p16\",\"displayName\":\"Player 16\",\"participantClass\":\"Druid\",\"participantSpecialization\":\"Feral\",\"role\":\"Tank\"},{\"userId\":\"p17\",\"displayName\":\"Player 17\",\"participantClass\":\"Priest\",\"participantSpecialization\":\"Shadow\",\"role\":\"Healer\"},{\"userId\":\"p18\",\"displayName\":\"Player 18\",\"participantClass\":\"Mage\",\"participantSpecialization\":\"Fire\",\"role\":\"DPS\"},{\"userId\":\"p19\",\"displayName\":\"Player 19\",\"participantClass\":\"Hunter\",\"participantSpecialization\":\"Survival\",\"role\":\"DPS\"},{\"userId\":\"p20\",\"displayName\":\"Player 20\",\"participantClass\":\"Warrior\",\"participantSpecialization\":\"Arms\",\"role\":\"DPS\"}]"},
           "raidObjective": {"S": "Progression"},
           "lootDistribution": {"S": "Suicide Kings"},
           "feedback": {"S": "[]"},
@@ -140,13 +116,7 @@
               {"S": "Dps 25"}
             ]
           },
-          "participants": {"L": [
-            {"S": "{\"userId\":\"p21\",\"displayName\":\"Player 21\",\"participantClass\":\"Paladin\",\"participantSpecialization\":\"Retribution\",\"role\":\"Tank\"}"},
-            {"S": "{\"userId\":\"p22\",\"displayName\":\"Player 22\",\"participantClass\":\"Priest\",\"participantSpecialization\":\"Holy\",\"role\":\"Healer\"}"},
-            {"S": "{\"userId\":\"p23\",\"displayName\":\"Player 23\",\"participantClass\":\"Mage\",\"participantSpecialization\":\"Frost\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"p24\",\"displayName\":\"Player 24\",\"participantClass\":\"Warlock\",\"participantSpecialization\":\"Destruction\",\"role\":\"DPS\"}"},
-            {"S": "{\"userId\":\"p25\",\"displayName\":\"Player 25\",\"participantClass\":\"Hunter\",\"participantSpecialization\":\"Marksmanship\",\"role\":\"DPS\"}"}
-          ]},
+          "participants": {"S": "[{\"userId\":\"p21\",\"displayName\":\"Player 21\",\"participantClass\":\"Paladin\",\"participantSpecialization\":\"Retribution\",\"role\":\"Tank\"},{\"userId\":\"p22\",\"displayName\":\"Player 22\",\"participantClass\":\"Priest\",\"participantSpecialization\":\"Holy\",\"role\":\"Healer\"},{\"userId\":\"p23\",\"displayName\":\"Player 23\",\"participantClass\":\"Mage\",\"participantSpecialization\":\"Frost\",\"role\":\"DPS\"},{\"userId\":\"p24\",\"displayName\":\"Player 24\",\"participantClass\":\"Warlock\",\"participantSpecialization\":\"Destruction\",\"role\":\"DPS\"},{\"userId\":\"p25\",\"displayName\":\"Player 25\",\"participantClass\":\"Hunter\",\"participantSpecialization\":\"Marksmanship\",\"role\":\"DPS\"}]"},
           "raidObjective": {"S": "Progression"},
           "lootDistribution": {"S": "Loot Council"},
           "feedback": {"S": "[]"},

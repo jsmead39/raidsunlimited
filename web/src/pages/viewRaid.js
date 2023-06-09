@@ -178,15 +178,19 @@ class ViewRaid extends BindingClass {
             return;
         }
 
-        try {
-            await this.client.deleteRaidEvent(raidId, (error) => {
-                if (error) {
-                    messageText.innerText = `${error.message}`;
-                    messageText.classList.add('error');
-                    messagePopup.classList.remove('hidden');
-                    console.error(`Error: ${error.message}`);
-                }
-            });
+        await this.client.deleteRaidEvent(raidId, (error) => {
+            if (error) {
+                messageText.innerText = `${error.message}`;
+                messageText.classList.add('error');
+                messagePopup.classList.remove('hidden');
+                console.error(`An unexpected error occurred: ${error.message}`);
+
+                setTimeout(() => {
+                    messagePopup.classList.add('hidden');
+                }, 5000);
+
+                return;
+            }
 
             messageText.innerText = "Raid event was successfully deleted";
             messageText.classList.add('success');
@@ -196,10 +200,9 @@ class ViewRaid extends BindingClass {
                 messagePopup.classList.add('hidden');
                 window.location.href = "index.html";
             }, 5000);
-        } catch (error) {
-            console.error(`An unexpected error occurred: ${error.message}`);
-        }
+        });
     }
+
 }
 
 /**
