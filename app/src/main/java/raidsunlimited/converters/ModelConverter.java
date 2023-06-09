@@ -27,7 +27,7 @@ public class ModelConverter {
     public RaidModel toRaidModel(RaidEvent raidEvent) {
         String formattedDate = convertLongToDate(raidEvent.getRaidDate());
         Map<String, Integer> requiredRoles = convertListToMap(raidEvent.getRequiredRoles());
-        List<FeedbackModel> feedback = FeedbackConverter.toFeedbackModelList(raidEvent.getFeedback());
+//        List<FeedbackModel> feedback = FeedbackConverter.toFeedbackModelList(raidEvent.getFeedback());
 
 
         return RaidModel.builder()
@@ -41,7 +41,7 @@ public class ModelConverter {
                 .withLootDistribution(raidEvent.getLootDistribution())
                 .withRequiredRoles(requiredRoles)
                 .withParticipant(raidEvent.getParticipants())
-                .withFeedback(feedback)
+                .withFeedback(raidEvent.getFeedback())
                 .withRaidOwner(raidEvent.getRaidOwner())
                 .withRaidStatus(raidEvent.getRaidStatus())
                 .build();

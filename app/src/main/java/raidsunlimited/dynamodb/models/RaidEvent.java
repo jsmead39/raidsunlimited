@@ -2,6 +2,7 @@ package raidsunlimited.dynamodb.models;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.*;
 
+import raidsunlimited.converters.FeedbackModelConverter;
 import raidsunlimited.converters.ParticipantModelConverter;
 import raidsunlimited.models.FeedbackModel;
 import raidsunlimited.models.ParticipantModel;
@@ -21,7 +22,7 @@ public class RaidEvent {
     private String lootDistribution;
     private List<String> requiredRoles;
     private List<ParticipantModel> participants;
-    private List<String> feedback;
+    private List<FeedbackModel> feedback;
     private String raidOwner;
     private String raidStatus;
 
@@ -116,11 +117,12 @@ public class RaidEvent {
     }
 
     @DynamoDBAttribute(attributeName = "feedback")
-    public List<String> getFeedback() {
+    @DynamoDBTypeConverted(converter = FeedbackModelConverter.class)
+    public List<FeedbackModel> getFeedback() {
         return feedback;
     }
 
-    public void setFeedback(List<String> feedback) {
+    public void setFeedback(List<FeedbackModel> feedback) {
         this.feedback = feedback;
     }
 

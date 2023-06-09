@@ -9,6 +9,7 @@ import raidsunlimited.dynamodb.UserRaidDao;
 import raidsunlimited.dynamodb.models.RaidEvent;
 import raidsunlimited.dynamodb.models.UserRaid;
 import raidsunlimited.exceptions.InvalidAttributeException;
+import raidsunlimited.exceptions.RaidEventDeletionException;
 import raidsunlimited.exceptions.RaidEventNotFoundException;
 
 import javax.inject.Inject;
@@ -45,6 +46,7 @@ public class DeleteRaidEventActivity {
      * @return a DeleteRaidEventResult object containing the raidId of the deleted raid.
      */
     public DeleteRaidEventResult handleRequest(final DeleteRaidEventRequest deleteRaidEventRequest) {
+        log.info("HandleRequest received", deleteRaidEventRequest);
         String raidId = deleteRaidEventRequest.getRaidId();;
         String email = deleteRaidEventRequest.getEmail();
 
@@ -63,12 +65,20 @@ public class DeleteRaidEventActivity {
             throw new InvalidAttributeException("You must be the owner of a raid to delete it");
         }
 
+        //validates to see if the raid has been completed or not
+        if (raid.getRaidStatus().equals("Completed")) {
+            throw new RaidEventDeletionException("You cannot delete a raid that was already completed");
+        }
+
         //delete the raidEvent from the raidEvent table
+
         raidDao.deleteRaid(raidId);
-        log.info("raid deleted");
+
 
         List<UserRaid> userRaidList = userRaidDao.getAllUserRaids(raidId);
+        log.info("Line 79 after userRaidList retrieved", userRaidList);
         for (UserRaid u : userRaidList) {
+            log.info("line 81 before deleting");
             userRaidDao.deleteUserRaidEvent(u);
             log.info("userRaid info deleted");
         }

@@ -13,6 +13,7 @@ import raidsunlimited.dynamodb.models.UserRaid;
 import raidsunlimited.exceptions.RaidEventNotFoundException;
 import raidsunlimited.exceptions.RaidSignupException;
 import raidsunlimited.exceptions.UserProfileNotFoundException;
+import raidsunlimited.models.FeedbackModel;
 import raidsunlimited.models.GameCharacter;
 
 import java.util.List;
@@ -51,7 +52,11 @@ class RaidSignupActivityTest {
         Integer expectedRaidSize = 25;
         String expectedRaidObjective = "Farm";
         String expectedLootDistribution = "GDKP";
-        List<String> expectedFeedback = List.of("test@test.com 5 Great raid overall!");
+        FeedbackModel feedback = new FeedbackModel.Builder().withUserId("test@test.com")
+                .withRating(5)
+                .withComments("Great Raid overall!")
+                .build();
+        List<FeedbackModel> expectedFeedback = List.of(feedback);
         List<String> expectedRequiredRoles = List.of("Tank 2", "Healer 2", "Dps 21");
         String expectedRaidOwner = "test@test.com";
 
