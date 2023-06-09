@@ -55,4 +55,10 @@ public interface ServiceComponent {
      * @return DeleteRaidEventActivity
      */
     DeleteRaidEventActivity provideDeleteRaidEventActivity();
+
+    /**
+     * Provides the relevant activity
+     * @return GetRaidHistoryActivity
+     */
+    GetRaidHistoryActivity provideGetRaidHistoryActivity();
 }
