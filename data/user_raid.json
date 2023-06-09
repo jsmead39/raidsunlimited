@@ -1,31 +1,886 @@
 {
-    "user_raid": [
-      {
-        "PutRequest": {
-          "Item": {
-            "userId": {"S": "user1"},
-            "raidId": {"S": "raid1"},
-            "confirmed": {"BOOL": true}
-          }
-        }
-      },
-      {
-        "PutRequest": {
-          "Item": {
-            "userId": {"S": "user2"},
-            "raidId": {"S": "raid1"},
-            "confirmed": {"BOOL": false}
-          }
-        }
-      },
-      {
-        "PutRequest": {
-          "Item": {
-            "userId": {"S": "user1"},
-            "raidId": {"S": "raid2"},
-            "confirmed": {"BOOL": true}
-          }
+  "user_raids": [
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player1"},
+          "raidId": {"S": "raid1"},
+          "confirmed": {"BOOL": false}
         }
       }
-    ]
-  }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player2"},
+          "raidId": {"S": "raid1"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player3"},
+          "raidId": {"S": "raid2"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player4"},
+          "raidId": {"S": "raid3"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player5"},
+          "raidId": {"S": "raid4"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player5"},
+          "raidId": {"S": "raid2"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player6"},
+          "raidId": {"S": "raid2"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player7"},
+          "raidId": {"S": "raid2"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player8"},
+          "raidId": {"S": "raid2"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player9"},
+          "raidId": {"S": "raid2"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player1"},
+          "raidId": {"S": "raid3"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player10"},
+          "raidId": {"S": "raid3"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player2"},
+          "raidId": {"S": "raid3"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player11"},
+          "raidId": {"S": "raid3"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player12"},
+          "raidId": {"S": "raid3"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player3"},
+          "raidId": {"S": "raid3"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player13"},
+          "raidId": {"S": "raid3"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player14"},
+          "raidId": {"S": "raid4"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player15"},
+          "raidId": {"S": "raid4"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player16"},
+          "raidId": {"S": "raid4"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player17"},
+          "raidId": {"S": "raid4"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player18"},
+          "raidId": {"S": "raid5"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player19"},
+          "raidId": {"S": "raid5"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player20"},
+          "raidId": {"S": "raid5"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player21"},
+          "raidId": {"S": "raid5"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player7"},
+          "raidId": {"S": "raid5"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player8"},
+          "raidId": {"S": "raid5"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player9"},
+          "raidId": {"S": "raid5"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player22"},
+          "raidId": {"S": "raid6"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player23"},
+          "raidId": {"S": "raid6"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player24"},
+          "raidId": {"S": "raid6"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player25"},
+          "raidId": {"S": "raid6"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player6"},
+          "raidId": {"S": "raid6"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player26"},
+          "raidId": {"S": "raid6"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player27"},
+          "raidId": {"S": "raid6"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player28"},
+          "raidId": {"S": "raid7"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player29"},
+          "raidId": {"S": "raid7"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player30"},
+          "raidId": {"S": "raid7"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player31"},
+          "raidId": {"S": "raid7"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player27"},
+          "raidId": {"S": "raid7"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player32"},
+          "raidId": {"S": "raid7"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player33"},
+          "raidId": {"S": "raid7"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player34"},
+          "raidId": {"S": "raid8"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player35"},
+          "raidId": {"S": "raid8"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player31"},
+          "raidId": {"S": "raid8"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player36"},
+          "raidId": {"S": "raid8"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player37"},
+          "raidId": {"S": "raid8"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player32"},
+          "raidId": {"S": "raid8"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player33"},
+          "raidId": {"S": "raid8"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player38"},
+          "raidId": {"S": "raid9"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player39"},
+          "raidId": {"S": "raid9"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player40"},
+          "raidId": {"S": "raid9"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player41"},
+          "raidId": {"S": "raid9"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player42"},
+          "raidId": {"S": "raid9"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player6"},
+          "raidId": {"S": "raid9"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player27"},
+          "raidId": {"S": "raid9"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player43"},
+          "raidId": {"S": "raid10"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player44"},
+          "raidId": {"S": "raid10"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player45"},
+          "raidId": {"S": "raid10"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player46"},
+          "raidId": {"S": "raid10"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player5"},
+          "raidId": {"S": "raid10"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player6"},
+          "raidId": {"S": "raid10"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player7"},
+          "raidId": {"S": "raid10"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player47"},
+          "raidId": {"S": "raid11"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player48"},
+          "raidId": {"S": "raid11"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player49"},
+          "raidId": {"S": "raid11"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player50"},
+          "raidId": {"S": "raid11"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player5"},
+          "raidId": {"S": "raid11"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player6"},
+          "raidId": {"S": "raid11"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player7"},
+          "raidId": {"S": "raid11"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player51"},
+          "raidId": {"S": "raid12"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player52"},
+          "raidId": {"S": "raid12"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player53"},
+          "raidId": {"S": "raid12"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player54"},
+          "raidId": {"S": "raid12"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player5"},
+          "raidId": {"S": "raid12"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player6"},
+          "raidId": {"S": "raid12"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player7"},
+          "raidId": {"S": "raid12"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player55"},
+          "raidId": {"S": "raid13"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player56"},
+          "raidId": {"S": "raid13"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player57"},
+          "raidId": {"S": "raid13"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player58"},
+          "raidId": {"S": "raid13"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player59"},
+          "raidId": {"S": "raid13"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player7"},
+          "raidId": {"S": "raid13"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player8"},
+          "raidId": {"S": "raid13"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player9"},
+          "raidId": {"S": "raid13"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player60"},
+          "raidId": {"S": "raid14"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player61"},
+          "raidId": {"S": "raid14"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player62"},
+          "raidId": {"S": "raid14"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player63"},
+          "raidId": {"S": "raid14"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player6"},
+          "raidId": {"S": "raid14"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player27"},
+          "raidId": {"S": "raid14"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player64"},
+          "raidId": {"S": "raid15"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player65"},
+          "raidId": {"S": "raid15"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player27"},
+          "raidId": {"S": "raid15"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player66"},
+          "raidId": {"S": "raid15"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player67"},
+          "raidId": {"S": "raid15"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player68"},
+          "raidId": {"S": "raid15"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player69"},
+          "raidId": {"S": "raid15"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    }
+  ]
+}
