@@ -16,7 +16,7 @@ export default class RaidsUnlimitedClient extends BindingClass {
         super();
 
         const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'createRaid', 'getRaid',
-             'createProfile', 'getProfile', 'getProfileByEmail', 'updateProfile', 'getAllRaids'];
+             'createProfile', 'getProfile', 'getProfileByEmail', 'updateProfile', 'getAllRaids', 'deleteRaidEvent'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();
@@ -217,6 +217,20 @@ export default class RaidsUnlimitedClient extends BindingClass {
                 displayName: displayName,
                 gameCharacter: gameCharacter,
             }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            return response.data;
+        } catch (error) {
+            this.handleError(error, errorCallBack);
+        }
+    }
+
+    async deleteRaidEvent(raidId, errorCallBack) {
+        try {
+            const token = await this.getTokenOrThrow("You must be logged in to delete a raid.");
+            const response = await this.axiosClient.delete(`raidevents/${raidId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }

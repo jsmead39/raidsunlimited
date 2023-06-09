@@ -34,7 +34,7 @@ public interface ServiceComponent {
 
     /**
      * Provides the relevant activity
-     * @return GetProfileActivity
+     * @return UpdateProfileActivity
      */
     UpdateProfileActivity provideUpdateProfileActivity();
 
@@ -46,7 +46,13 @@ public interface ServiceComponent {
 
     /**
      * Provides the relevant activity
-     * @return RaidSignupActivity
+     * @return GetAllRaidsActivity
      */
     GetAllRaidsActivity provideGetAllRaidsActivity();
+
+    /**
+     * Provides the relevant activity
+     * @return DeleteRaidEventActivity
+     */
+    DeleteRaidEventActivity provideDeleteRaidEventActivity();
 }

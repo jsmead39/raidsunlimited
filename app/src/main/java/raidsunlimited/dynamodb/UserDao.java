@@ -6,6 +6,7 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedQueryList;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import raidsunlimited.dynamodb.models.User;
+import raidsunlimited.dynamodb.models.UserRaid;
 import raidsunlimited.exceptions.UserProfileNotFoundException;
 import raidsunlimited.metrics.MetricsConstants;
 import raidsunlimited.metrics.MetricsPublisher;

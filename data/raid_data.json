@@ -22,12 +22,12 @@
                 }
               ]
             },
-            "participants": {"S": []},
+            "participants": {"S": "[]"},
             "raidObjective": {"S": "Full Clear"},
             "lootDistribution": {"S": "Open Roll"},
-            "feedback": {"S": []},
+            "feedback": {"S": "[]"},
             "raidStatus": {"S": "Completed"},
-            "raidOwner": {"S": "user1"}
+            "raidOwner": {"S": "transent2@gmail.com"}
           }
         }
       },
@@ -53,12 +53,12 @@
                 }
               ]
             },
-            "participants": {"S": []},
+            "participants": {"S": "[]"},
             "raidObjective": {"S": "Progression"},
             "lootDistribution": {"S": "GDKP"},
-            "feedback": {"S": []},
+            "feedback": {"S": "[]"},
             "raidStatus": {"S": "Pending"},
-            "raidOwner": {"S": "user2"}
+            "raidOwner": {"S": "transent2@gmail.com"}
           }
         }
       }

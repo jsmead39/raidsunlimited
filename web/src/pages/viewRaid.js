@@ -9,7 +9,8 @@ import DataStore from "../util/DataStore";
 class ViewRaid extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['clientLoaded', 'mount', 'addRaidToPage', 'displayCharacters', 'handleCharacterSelection'], this);
+        this.bindClassMethods(['clientLoaded', 'mount', 'addRaidToPage', 'displayCharacters',
+            'handleCharacterSelection', 'deleteRaidEvent'], this);
         this.dataStore = new DataStore();
         this.dataStore.addChangeListener(this.addRaidToPage);
         this.header = new Header(this.dataStore);
@@ -34,14 +35,17 @@ class ViewRaid extends BindingClass {
     /**
      * Add the header to the page and load the RaidClient
      */
-    async mount() {
+    mount() {
+        document.getElementById('signup-btn').addEventListener('click', (event) =>
+            this.displayCharacters(event));
+
+        document.getElementById('delete-btn').addEventListener('click', this.deleteRaidEvent);
+
         this.header.addHeaderToPage();
 
         this.client = new RaidsUnlimitedClient();
         this.clientLoaded();
 
-        document.getElementById('signup-btn').addEventListener('click', (event) =>
-            this.displayCharacters(event));
     }
 
     addRaidToPage() {
@@ -149,13 +153,49 @@ class ViewRaid extends BindingClass {
             this.dataStore.set('raid', raid);
 
             if(raid) {
+                messageText.innerText = 'Signup successful';
+                messageText.classList.add('success');
+                messagePopup.classList.remove('hidden');
+
                 setTimeout(() => {
-                    messageText.innerText = 'Signup successful';
-                    messageText.classList.add('success');
-                    messagePopup.classList.remove('hidden');
+                    messageText.innerText = '';
+                    messagePopup.classList.add('hidden');
                     this.clientLoaded();
                 }, 5000);  // Delay of 5 seconds
             }
+        } catch (error) {
+            console.error(`An unexpected error occurred: ${error.message}`);
+        }
+    }
+
+    async deleteRaidEvent() {
+        const raid = this.dataStore.get('raid');
+        const raidId = raid.raidId;
+        const messagePopup = document.getElementById('messagePopup');
+        const messageText = document.getElementById('messageText');
+        const confirmation = confirm('Are you sure you want to delete this event?');
+        if (!confirmation) {
+            return;
+        }
+
+        try {
+            await this.client.deleteRaidEvent(raidId, (error) => {
+                if (error) {
+                    messageText.innerText = `${error.message}`;
+                    messageText.classList.add('error');
+                    messagePopup.classList.remove('hidden');
+                    console.error(`Error: ${error.message}`);
+                }
+            });
+
+            messageText.innerText = "Raid event was successfully deleted";
+            messageText.classList.add('success');
+            messagePopup.classList.remove('hidden');
+
+            setTimeout(() => {
+                messagePopup.classList.add('hidden');
+                window.location.href = "index.html";
+            }, 5000);
         } catch (error) {
             console.error(`An unexpected error occurred: ${error.message}`);
         }
