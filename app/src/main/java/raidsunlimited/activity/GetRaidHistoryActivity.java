@@ -6,10 +6,12 @@ import raidsunlimited.activity.requests.GetRaidHistoryRequest;
 import raidsunlimited.activity.results.GetRaidHistoryResult;
 import raidsunlimited.converters.ModelConverter;
 import raidsunlimited.dynamodb.RaidDao;
+import raidsunlimited.dynamodb.UserDao;
 import raidsunlimited.dynamodb.UserRaidDao;
 import raidsunlimited.dynamodb.models.RaidEvent;
 import raidsunlimited.dynamodb.models.UserRaid;
 import raidsunlimited.exceptions.InvalidAttributeException;
+import raidsunlimited.exceptions.UserProfileNotFoundException;
 import raidsunlimited.models.RaidModel;
 
 import java.util.ArrayList;
@@ -28,16 +30,19 @@ public class GetRaidHistoryActivity {
     private final Logger log = LogManager.getLogger();
     private final UserRaidDao userRaidDao;
     private final RaidDao raidDao;
+    private final UserDao userDao;
 
     /**
      * Instantiates a new GetRaidHistoryActivity object.
      * @param userRaidDao UserRaidDao to access the userRaid table.
      * @param raidDao RaidDao to access the raidEvent table.
+     * @param userDao UserDao to access the User table.
      */
     @Inject
-    public GetRaidHistoryActivity(UserRaidDao userRaidDao, RaidDao raidDao) {
+    public GetRaidHistoryActivity(UserRaidDao userRaidDao, RaidDao raidDao, UserDao userDao) {
         this.userRaidDao = userRaidDao;
         this.raidDao = raidDao;
+        this.userDao = userDao;
     }
 
     /**
@@ -57,6 +62,10 @@ public class GetRaidHistoryActivity {
         String userId = Optional.ofNullable(getRaidHistoryRequest.getUserId())
                 .filter(s -> !s.isEmpty())
                 .orElseThrow(() -> new InvalidAttributeException("User ID must be provided"));
+
+        if (userDao.getUserById(userId) == null) {
+            throw new UserProfileNotFoundException("The specified user with ID " + userId + " does not exist.");
+        }
 
         List<UserRaid> userRaidList = Optional.ofNullable(userRaidDao.getAllUserRaidsByUserId(userId))
                 .filter(list -> !list.isEmpty())
