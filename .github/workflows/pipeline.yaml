@@ -11,8 +11,8 @@ env:
   # STUDENTS: Set these environment variables 
   API_BASE_URL: https://cq03oq9561.execute-api.us-east-2.amazonaws.com/Prod/
   COGNITO_DOMAIN: project-classicraidsunlimited-intent.auth.us-east-2.amazoncognito.com
-  COGNITO_REDIRECT_SIGNIN:  https://d2i4smjv6x5vjf.cloudfront.net
-  COGNITO_REDIRECT_SIGNOUT: https://d2i4smjv6x5vjf.cloudfront.net
+  COGNITO_REDIRECT_SIGNIN:  https://dh3ildu3y2pga.cloudfront.net
+  COGNITO_REDIRECT_SIGNOUT: https://dh3ildu3y2pga.cloudfront.net
 
   COGNITO_USER_POOL_ID: ${{ secrets.COGNITO_USER_POOL_ID }}
   COGNITO_USER_POOL_CLIENT_ID: ${{ secrets.COGNITO_USER_POOL_CLIENT_ID }}
