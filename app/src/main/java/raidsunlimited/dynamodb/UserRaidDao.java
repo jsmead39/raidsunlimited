@@ -78,4 +78,19 @@ public class UserRaidDao {
     public void deleteUserRaidEvent(UserRaid userRaid) {
         this.dynamoDBMapper.delete(userRaid);
     }
+
+    /**
+     * Retrieves a List<UserRaid> from the database that match the userID.
+     * @param userId The userID to search for in the table.
+     * @return the list of objects containing the UserRaid Info.
+     */
+    public List<UserRaid> getAllUserRaidsByUserId(String userId) {
+        UserRaid userRaid = new UserRaid();
+        userRaid.setUserId(userId);
+
+        DynamoDBQueryExpression<UserRaid> queryExpression = new DynamoDBQueryExpression<UserRaid>()
+                .withHashKeyValues(userRaid);
+
+        return this.dynamoDBMapper.query(UserRaid.class, queryExpression);
+    }
 }
