@@ -10,7 +10,8 @@ import raidsunlimited.dynamodb.models.RaidEvent;
 
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.MockitoAnnotations.openMocks;
@@ -34,9 +35,9 @@ class CreateRaidActivityTest {
         Integer inputRaidSize = 25;
         String inputRaidObjective = "Farm";
         String inputLootDistribution = "GDKP";
-        Map<String, Integer> inputRoles = Map.of("Tank", 2
-                , "Healer", 2
-                , "Dps", 21);
+        Map<String, Integer> inputRoles = Map.of("Tank", 2,
+                "Healer", 2,
+                "Dps", 21);
         String inputRaidOwner = "test@test.com";
 
         //Build request
@@ -69,6 +70,6 @@ class CreateRaidActivityTest {
         assertEquals(inputLootDistribution, result.getRaid().getLootDistribution());
         assertEquals(inputRoles, result.getRaid().getRequiredRoles());
         assertEquals(inputRaidOwner, result.getRaid().getRaidOwner());
-        assertEquals("Pending", result.getRaid().getRaidStatus());
+        assertEquals("Scheduled", result.getRaid().getRaidStatus());
     }
 }

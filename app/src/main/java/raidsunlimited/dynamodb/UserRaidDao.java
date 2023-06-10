@@ -4,17 +4,15 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
-import raidsunlimited.dynamodb.models.RaidEvent;
 import raidsunlimited.dynamodb.models.UserRaid;
-import raidsunlimited.exceptions.RaidEventNotFoundException;
-import raidsunlimited.metrics.MetricsConstants;
 import raidsunlimited.metrics.MetricsPublisher;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
 /**
  * Accesses the user_Raid table to store information on what raids a user has signed up for and if they are confirmed.
@@ -36,9 +34,9 @@ public class UserRaidDao {
     }
 
     /**
-     * Add or updates a record in the user_raid table
+     * Add or updates a record in the user_raid table.
      * @param userRaid The userRaid objects representing the record to be added.
-     * @return
+     * @return a UserRaid object representing the saved object.
      */
     public UserRaid saveToEvent(UserRaid userRaid) {
         this.dynamoDBMapper.save(userRaid);
@@ -46,7 +44,7 @@ public class UserRaidDao {
     }
 
     /**
-     * Retrieves a record from the user_raid table using userId and raidId
+     * Retrieves a record from the user_raid table using userId and raidId.
      * @param userId the user ID
      * @param raidId the raid ID
      * @return the UserRaid object representing the retrieved record, or null if no record exists
@@ -56,7 +54,7 @@ public class UserRaidDao {
     }
 
     /**
-     * Retrieves a list of UserRaid objects from the UserRaid table that match the raidId
+     * Retrieves a list of UserRaid objects from the UserRaid table that match the raidId.
      * @param raidId The raidId matching the events to be retrieved from the table.
      * @return a List of UserRaid objects matching the criteria specified.
      */
@@ -72,7 +70,7 @@ public class UserRaidDao {
     }
 
     /**
-     * Deletes a UserRaid event from the database given the UserRaid object
+     * Deletes a UserRaid event from the database given the UserRaid object.
      * @param userRaid the object containing the UserRaid Info.
      */
     public void deleteUserRaidEvent(UserRaid userRaid) {
@@ -80,7 +78,7 @@ public class UserRaidDao {
     }
 
     /**
-     * Retrieves a List<UserRaid> from the database that match the userID.
+     * Retrieves a List of UserRaid objects from the database that match the userID.
      * @param userId The userID to search for in the table.
      * @return the list of objects containing the UserRaid Info.
      */

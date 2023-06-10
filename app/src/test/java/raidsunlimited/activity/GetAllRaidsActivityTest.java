@@ -13,7 +13,7 @@ import raidsunlimited.models.RaidModel;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.openMocks;
 
@@ -86,7 +86,7 @@ class GetAllRaidsActivityTest {
         List<RaidModel> raidModels = result.getRaidModelList();
 
         assertEquals(raidEvents.size(), raidModels.size());
-        for (int i = 0; i <raidEvents.size(); i++) {
+        for (int i = 0; i < raidEvents.size(); i++) {
             assertEquals(raidEvents.get(i).getRaidId(), raidModels.get(i).getRaidId());
         }
     }

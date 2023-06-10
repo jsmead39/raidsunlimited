@@ -17,11 +17,11 @@ public class GetProfileByEmailLambda
     public LambdaResponse handleRequest(AuthenticatedLambdaRequest<GetProfileByEmailRequest> input, Context context) {
         log.info("handleRequest");
         return super.runActivity(
-                () -> input.fromUserClaims(claims ->
+            () -> input.fromUserClaims(claims ->
                         GetProfileByEmailRequest.builder()
                                 .withEmail(claims.get("email"))
                                 .build()),
-                (request, serviceComponent) ->
+            (request, serviceComponent) ->
                         serviceComponent.provideGetProfileActivity().handleRequestByEmail(request)
         );
     }

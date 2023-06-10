@@ -58,6 +58,7 @@ public class GameCharacter {
         return Objects.hash(charName, charClass, specialization, role);
     }
 
+    //CHECKSTYLE:OFF:Builder
     public static Builder builder() {
         return new Builder();
     }

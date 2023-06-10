@@ -1,16 +1,19 @@
 package raidsunlimited.dynamodb;
 
-import com.amazonaws.services.dynamodbv2.datamodeling.*;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
+import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedScanList;
 import raidsunlimited.dynamodb.models.RaidEvent;
 import raidsunlimited.exceptions.RaidEventNotFoundException;
 import raidsunlimited.metrics.MetricsConstants;
 import raidsunlimited.metrics.MetricsPublisher;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
 /**
  * Accesses data for a raidevent using {@link RaidEvent} to represent the model in
@@ -59,7 +62,7 @@ public class RaidDao {
     }
 
     /**
-     * Retrieves all raid events from the database and sorts them in descending order
+     * Retrieves all raid events from the database and sorts them in descending order.
      * @return a List of RaidEvent objects, sorted in descending order by date.
      */
     public List<RaidEvent> getAllRaidEvents() {
@@ -79,6 +82,10 @@ public class RaidDao {
         return raidEvents;
     }
 
+    /**
+     * Deletes a raidEvent from the dynamoDB table.
+     * @param raidId the raidId specifying which object to be removed.
+     */
     public void deleteRaid(String raidId) {
         RaidEvent raid = new RaidEvent();
         raid.setRaidId(raidId);

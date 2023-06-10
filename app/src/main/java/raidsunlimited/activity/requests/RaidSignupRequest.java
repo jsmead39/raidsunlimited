@@ -11,7 +11,7 @@ public class RaidSignupRequest {
     private final String displayName;
     private final GameCharacter gameCharacter;
 
-    public RaidSignupRequest(String raidId, String userId, String displayName, GameCharacter gameCharacter) {
+    private RaidSignupRequest(String raidId, String userId, String displayName, GameCharacter gameCharacter) {
         this.raidId = raidId;
         this.userId = userId;
         this.displayName = displayName;

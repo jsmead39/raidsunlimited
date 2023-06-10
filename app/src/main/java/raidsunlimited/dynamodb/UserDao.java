@@ -6,17 +6,17 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedQueryList;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import raidsunlimited.dynamodb.models.User;
-import raidsunlimited.dynamodb.models.UserRaid;
 import raidsunlimited.exceptions.UserProfileNotFoundException;
 import raidsunlimited.metrics.MetricsConstants;
 import raidsunlimited.metrics.MetricsPublisher;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
 /**
  * Accesses data for a user using {@link User} to represent the model in

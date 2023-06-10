@@ -1,7 +1,5 @@
 package raidsunlimited.lambda;
 
-
-
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import org.apache.logging.log4j.LogManager;
@@ -19,11 +17,11 @@ public class GetRaidHistoryLambda
     public LambdaResponse handleRequest(LambdaRequest<GetRaidHistoryRequest> input, Context context) {
         log.info("handleRequest");
         return super.runActivity(
-                () -> input.fromPath(path ->
+            () -> input.fromPath(path ->
                         GetRaidHistoryRequest.builder()
                                 .withUserId(path.get("userId"))
                                 .build()),
-                (request, serviceComponent) ->
+            (request, serviceComponent) ->
                         serviceComponent.provideGetRaidHistoryActivity().handleRequest(request)
         );
     }

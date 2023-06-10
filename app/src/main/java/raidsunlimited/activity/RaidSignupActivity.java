@@ -16,10 +16,11 @@ import raidsunlimited.exceptions.UserProfileNotFoundException;
 import raidsunlimited.models.ParticipantModel;
 import raidsunlimited.models.RaidModel;
 
-import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import javax.inject.Inject;
 
 
 public class RaidSignupActivity {
@@ -30,7 +31,9 @@ public class RaidSignupActivity {
 
     /**
      * Instantiates a new CreateProfileActivity.
+     * @param userDao UserDao to access the user table.
      * @param raidDao RaidDao to access the raid table.
+     * @param userRaidDao UserRaidDao to access the userRaid table.
      */
     @Inject
     public RaidSignupActivity(RaidDao raidDao, UserDao userDao, UserRaidDao userRaidDao) {
@@ -40,7 +43,7 @@ public class RaidSignupActivity {
     }
 
     /**
-     * Handles the signup of a participant to a raidEvent in DynamoDB
+     * Handles the signup of a participant to a raidEvent in DynamoDB.
      * @param raidSignupRequest request object containing the raid Signup information
      * @return raidSignupResult result object containing the API defined {@link ParticipantModel}
      */

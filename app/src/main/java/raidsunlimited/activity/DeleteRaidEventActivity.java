@@ -12,8 +12,10 @@ import raidsunlimited.exceptions.InvalidAttributeException;
 import raidsunlimited.exceptions.RaidEventDeletionException;
 import raidsunlimited.exceptions.RaidEventNotFoundException;
 
-import javax.inject.Inject;
 import java.util.List;
+
+import javax.inject.Inject;
+
 
 public class DeleteRaidEventActivity {
     private final Logger log = LogManager.getLogger();
@@ -46,8 +48,7 @@ public class DeleteRaidEventActivity {
      * @return a DeleteRaidEventResult object containing the raidId of the deleted raid.
      */
     public DeleteRaidEventResult handleRequest(final DeleteRaidEventRequest deleteRaidEventRequest) {
-        log.info("HandleRequest received", deleteRaidEventRequest);
-        String raidId = deleteRaidEventRequest.getRaidId();;
+        String raidId = deleteRaidEventRequest.getRaidId();
         String email = deleteRaidEventRequest.getEmail();
 
         if (raidId == null || raidId.isEmpty() || email == null || email.isEmpty()) {
@@ -79,7 +80,6 @@ public class DeleteRaidEventActivity {
         for (UserRaid u : userRaidList) {
             userRaidDao.deleteUserRaidEvent(u);
         }
-
 
         return DeleteRaidEventResult.builder()
                 .withRaidId(deleteRaidEventRequest.getRaidId())

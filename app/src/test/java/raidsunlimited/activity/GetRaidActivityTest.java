@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.openMocks;
 
@@ -34,7 +34,7 @@ class GetRaidActivityTest {
 
     @Test
     void handleRequest_RaidFound_returnsRaidModel() {
-        String expectedRaidId ="testId";
+        String expectedRaidId = "testId";
         String expectedName = "test";
         String expectedServer = "Whitemane";
         Long expectedDate = 1674460800L;

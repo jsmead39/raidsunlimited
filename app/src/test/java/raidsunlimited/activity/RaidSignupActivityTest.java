@@ -18,7 +18,7 @@ import raidsunlimited.models.GameCharacter;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.verify;
@@ -44,7 +44,7 @@ class RaidSignupActivityTest {
 
     @Test
     public void handleRequest_validInput_signsUpForRaid() {
-        String expectedRaidId ="testId";
+        String expectedRaidId = "testId";
         String expectedName = "test";
         String expectedServer = "Whitemane";
         Long expectedDate = 1674460800L;
@@ -72,6 +72,7 @@ class RaidSignupActivityTest {
         raidEvent.setRequiredRoles(expectedRequiredRoles);
         raidEvent.setFeedback(expectedFeedback);
         raidEvent.setRaidOwner(expectedRaidOwner);
+        raidEvent.setRaidStatus("Scheduled");
 
         GameCharacter character = new GameCharacter.Builder()
                 .withCharName("Test")
@@ -161,13 +162,17 @@ class RaidSignupActivityTest {
                 .withGameCharacter(character)
                 .build();
 
+
         UserRaid userRaid = new UserRaid();
         userRaid.setUserId("test");
         userRaid.setRaidId("testRaid");
         userRaid.setConfirmed(true);
 
+        RaidEvent raid = new RaidEvent();
+        raid.setRaidStatus("Scheduled");
+
         when(userDao.getUserById(request.getUserId())).thenReturn(new User());
-        when(raidDao.getRaid(request.getRaidId())).thenReturn(new RaidEvent());
+        when(raidDao.getRaid(request.getRaidId())).thenReturn(raid);
         when(userRaidDao.getUserRaid(request.getUserId(), request.getRaidId())).thenReturn(userRaid);
 
         assertThrows(RaidSignupException.class, () -> raidSignupActivity.handleRequest(request));

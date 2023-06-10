@@ -10,16 +10,14 @@ import raidsunlimited.dynamodb.UserRaidDao;
 import raidsunlimited.dynamodb.models.RaidEvent;
 import raidsunlimited.dynamodb.models.UserRaid;
 import raidsunlimited.exceptions.InvalidAttributeException;
-import raidsunlimited.exceptions.RaidEventNotFoundException;
-import raidsunlimited.exceptions.RaidSignupException;
-import raidsunlimited.exceptions.UserProfileNotFoundException;
 import raidsunlimited.models.RaidModel;
 
-import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+
+import javax.inject.Inject;
 
 /**
  * Implementation of the GetRaidActivity for the RaidsUnlimited GetRaid API.
@@ -31,6 +29,11 @@ public class GetRaidHistoryActivity {
     private final UserRaidDao userRaidDao;
     private final RaidDao raidDao;
 
+    /**
+     * Instantiates a new GetRaidHistoryActivity object.
+     * @param userRaidDao UserRaidDao to access the userRaid table.
+     * @param raidDao RaidDao to access the raidEvent table.
+     */
     @Inject
     public GetRaidHistoryActivity(UserRaidDao userRaidDao, RaidDao raidDao) {
         this.userRaidDao = userRaidDao;

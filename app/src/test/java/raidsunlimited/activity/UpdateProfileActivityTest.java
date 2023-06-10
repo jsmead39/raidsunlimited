@@ -7,12 +7,12 @@ import raidsunlimited.activity.requests.UpdateProfileRequest;
 import raidsunlimited.activity.results.UpdateProfileResult;
 import raidsunlimited.dynamodb.UserDao;
 import raidsunlimited.dynamodb.models.User;
-import raidsunlimited.exceptions.InvalidAttributeChangeException;
 import raidsunlimited.exceptions.InvalidAttributeValueException;
 import raidsunlimited.metrics.MetricsConstants;
 import raidsunlimited.metrics.MetricsPublisher;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.openMocks;
@@ -20,7 +20,9 @@ import static org.mockito.MockitoAnnotations.openMocks;
 class UpdateProfileActivityTest {
     @Mock
     private UserDao userDao;
-    @Mock private MetricsPublisher metricsPublisher;
+
+    @Mock
+    private MetricsPublisher metricsPublisher;
 
     private UpdateProfileActivity updateProfileActivity;
 
