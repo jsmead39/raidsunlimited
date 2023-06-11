@@ -15,7 +15,6 @@ class Homepage extends BindingClass {
         // Create a enw datastore with an initial "empty" state.
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
-        this.header = new Header();
         console.log("Homepage constructor");
     }
 
