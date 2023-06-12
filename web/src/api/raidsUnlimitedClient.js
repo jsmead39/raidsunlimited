@@ -263,7 +263,26 @@ export default class RaidsUnlimitedClient extends BindingClass {
         }
     }
 
-    /**
+    async roleAssignment(raidId, userId, raidRole, errorCallBack) {
+        try {
+            const token = await this.getTokenOrThrow("You must be logged in to assign a role");
+            const response = await this.axiosClient.post(`raidevents/${raidId}/roleassignments`, {
+                raidId: raidId,
+                userId: userId,
+                raidRole: raidRole,
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            return response.data;
+        } catch (error) {
+            this.handleError(error, errorCallBack);
+        }
+    }
+
+
+/**
      * Helper method to log the error and run any error functions.
      * @param error The error received from the server.
      * @param errorCallback (Optional) A function to execute if the call fails.

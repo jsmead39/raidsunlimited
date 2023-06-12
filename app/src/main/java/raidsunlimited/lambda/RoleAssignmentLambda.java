@@ -5,7 +5,7 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import raidsunlimited.activity.requests.RoleAssignmentRequest;
 import raidsunlimited.activity.results.RoleAssignmentResult;
 
-public class RoleAssignmentRequestLambda
+public class RoleAssignmentLambda
         extends LambdaActivityRunner<RoleAssignmentRequest, RoleAssignmentResult>
         implements RequestHandler<AuthenticatedLambdaRequest<RoleAssignmentRequest>, LambdaResponse> {
     @Override
