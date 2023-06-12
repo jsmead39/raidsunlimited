@@ -4,8 +4,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import raidsunlimited.activity.requests.RoleAssignmentRequest;
 import raidsunlimited.activity.results.RoleAssignmentResult;
+import raidsunlimited.dynamodb.RaidDao;
 import raidsunlimited.dynamodb.UserRaidDao;
+import raidsunlimited.dynamodb.models.RaidEvent;
 import raidsunlimited.dynamodb.models.UserRaid;
+import raidsunlimited.exceptions.NotRaidOwnerException;
 import raidsunlimited.exceptions.RaidSignupException;
 
 import javax.inject.Inject;
@@ -13,14 +16,16 @@ import javax.inject.Inject;
 public class RoleAssignmentActivity {
     private final Logger log = LogManager.getLogger();
     private final UserRaidDao userRaidDao;
+    private final RaidDao raidDao;
 
     /**
      * Instantiates a new RoleAssignmentActivity
      * @param userRaidDao userRaidDao to access the userRaid table.
      */
     @Inject
-    public RoleAssignmentActivity(UserRaidDao userRaidDao) {
+    public RoleAssignmentActivity(UserRaidDao userRaidDao, RaidDao raidDao) {
         this.userRaidDao = userRaidDao;
+        this.raidDao = raidDao;
     }
 
     public RoleAssignmentResult handleRequest(final RoleAssignmentRequest roleAssignmentRequest) {
@@ -34,6 +39,12 @@ public class RoleAssignmentActivity {
         String userId = roleAssignmentRequest.getUserId();
         if (userId == null || userId.isEmpty()) {
             throw new RaidSignupException("User ID must be provided");
+        }
+
+        RaidEvent raid = raidDao.getRaid(raidId);
+
+        if (raid.getRaidOwner() != roleAssignmentRequest.getRaidOwner()) {
+            throw new NotRaidOwnerException("You must be the raid owner to approve attendees");
         }
 
         UserRaid event = userRaidDao.getUserRaid(userId, raidId);

@@ -8,11 +8,13 @@ public class RoleAssignmentRequest {
     private final String raidId;
     private final String userId;
     private final String raidRole;
+    private final String raidOwner;
 
-    private RoleAssignmentRequest(String raidId, String userId, String raidRole) {
+    private RoleAssignmentRequest(String raidId, String userId, String raidRole, String raidOwner) {
         this.raidId = raidId;
         this.userId = userId;
         this.raidRole = raidRole;
+        this.raidOwner = raidOwner;
     }
 
     public String getRaidRole() {
@@ -27,12 +29,17 @@ public class RoleAssignmentRequest {
         return userId;
     }
 
+    public String getRaidOwner() {
+        return raidOwner;
+    }
+
     @Override
     public String toString() {
         return "RoleAssignmentRequest{" +
                 "raidId='" + raidId + '\'' +
                 ", userId='" + userId + '\'' +
                 ", raidRole='" + raidRole + '\'' +
+                ", raidOwner='" + raidOwner + '\'' +
                 '}';
     }
 
@@ -46,6 +53,7 @@ public class RoleAssignmentRequest {
         private String raidId;
         private String userId;
         private String raidRole;
+        private String raidOwner;
 
         public Builder withRaidId(String raidId) {
             this.raidId = raidId;
@@ -62,8 +70,13 @@ public class RoleAssignmentRequest {
             return this;
         }
 
+        public Builder withRaidOwner(String raidOwner) {
+            this.raidOwner = raidOwner;
+            return this;
+        }
+
         public RoleAssignmentRequest build() {
-            return new RoleAssignmentRequest(raidId, userId, raidRole);
+            return new RoleAssignmentRequest(raidId, userId, raidRole, raidOwner);
         }
     }
 }
