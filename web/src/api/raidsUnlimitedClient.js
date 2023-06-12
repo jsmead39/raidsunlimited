@@ -267,7 +267,6 @@ export default class RaidsUnlimitedClient extends BindingClass {
         try {
             const token = await this.getTokenOrThrow("You must be logged in to assign a role");
             const response = await this.axiosClient.post(`raidevents/${raidId}/roleassignments`, {
-                raidId: raidId,
                 userId: userId,
                 raidRole: raidRole,
             }, {
