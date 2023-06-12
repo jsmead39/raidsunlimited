@@ -1,31 +1,184 @@
 {
-    "user_raid": [
-      {
-        "PutRequest": {
-          "Item": {
-            "userId": {"S": "user1"},
-            "raidId": {"S": "raid1"},
-            "confirmed": {"BOOL": true}
-          }
-        }
-      },
-      {
-        "PutRequest": {
-          "Item": {
-            "userId": {"S": "user2"},
-            "raidId": {"S": "raid1"},
-            "confirmed": {"BOOL": false}
-          }
-        }
-      },
-      {
-        "PutRequest": {
-          "Item": {
-            "userId": {"S": "user1"},
-            "raidId": {"S": "raid2"},
-            "confirmed": {"BOOL": true}
-          }
+  "user_raid": [
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player1"},
+          "raidId": {"S": "raid1"},
+          "confirmed": {"BOOL": false}
         }
       }
-    ]
-  }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player2"},
+          "raidId": {"S": "raid1"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player3"},
+          "raidId": {"S": "raid1"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "player4"},
+          "raidId": {"S": "raid1"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "p10"},
+          "raidId": {"S": "raid3"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "p11"},
+          "raidId": {"S": "raid3"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "p12"},
+          "raidId": {"S": "raid3"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "p13"},
+          "raidId": {"S": "raid3"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "p14"},
+          "raidId": {"S": "raid3"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "p15"},
+          "raidId": {"S": "raid3"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "p16"},
+          "raidId": {"S": "raid4"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "p17"},
+          "raidId": {"S": "raid4"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "p18"},
+          "raidId": {"S": "raid4"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "p19"},
+          "raidId": {"S": "raid4"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "p20"},
+          "raidId": {"S": "raid4"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "p21"},
+          "raidId": {"S": "raid5"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "p22"},
+          "raidId": {"S": "raid5"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "p23"},
+          "raidId": {"S": "raid5"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "p24"},
+          "raidId": {"S": "raid5"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "userId": {"S": "p25"},
+          "raidId": {"S": "raid5"},
+          "confirmed": {"BOOL": false}
+        }
+      }
+    }
+  ]
+}

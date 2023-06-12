@@ -21,11 +21,23 @@ public class GetProfileActivity {
     private final Logger log = LogManager.getLogger();
     private final UserDao userDao;
 
+    /**
+     * Instantiates a new GetProfileActivity object.
+     * @param userDao UserDao to access the users table.
+     */
     @Inject
     public GetProfileActivity(UserDao userDao) {
         this.userDao = userDao;
     }
 
+    /**
+     * Handles a GetProfileRequest by retrieving the user's profile based on the provided user ID.
+     * Converts the retrieved User object to a ProfileModel and returns it in a GetProfileResult.
+     *
+     * @param getProfileRequest a GetProfileRequest object containing the user ID of the profile to be retrieved
+     * @return a GetProfileResult object containing the ProfileModel of the retrieved user
+     * @throws IllegalArgumentException if the user ID provided in the GetProfileRequest is null
+     */
     public GetProfileResult handleRequest(final GetProfileRequest getProfileRequest) {
         log.info("Received GetProfileRequest {}", getProfileRequest);
         String requestedId = getProfileRequest.getUserId();
@@ -41,6 +53,15 @@ public class GetProfileActivity {
                 .withProfileModel(profileModel)
                 .build();
     }
+
+    /**
+     * Handles a GetProfileByEmailRequest by retrieving the user's profile based on the provided email.
+     * Converts the retrieved User object to a ProfileModel and returns it in a GetProfileResult.
+     *
+     * @param getProfileByEmailRequest a GetProfileByEmailRequest object containing the email of the profile
+     * @return a GetProfileResult object containing the ProfileModel of the retrieved user
+     * @throws IllegalArgumentException if the email provided in the GetProfileByEmailRequest is null
+     */
 
     public GetProfileResult handleRequestByEmail(final GetProfileByEmailRequest getProfileByEmailRequest) {
         log.info("Received GetProfileRequestByEmail {}", getProfileByEmailRequest);

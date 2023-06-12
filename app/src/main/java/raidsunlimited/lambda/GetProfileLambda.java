@@ -17,11 +17,11 @@ public class GetProfileLambda
     public LambdaResponse handleRequest(LambdaRequest<GetProfileRequest> input, Context context) {
         log.info("handleRequest");
         return super.runActivity(
-                () -> input.fromPath(path ->
+            () -> input.fromPath(path ->
                         GetProfileRequest.builder()
                                 .withUserId(path.get("userId"))
                                 .build()),
-                (request, serviceComponent) ->
+            (request, serviceComponent) ->
                         serviceComponent.provideGetProfileActivity().handleRequest(request)
         );
     }

@@ -14,17 +14,17 @@ public class DeleteRaidEventLambda
     @Override
     public LambdaResponse handleRequest(AuthenticatedLambdaRequest<DeleteRaidEventRequest> input, Context context) {
         return super.runActivity(
-                () -> input.fromPath(path -> {
-                        String raidId = path.get("raidId");
-                        return input.fromUserClaims(claims -> {
-                            String raidOwner = claims.get("email");
-                            return DeleteRaidEventRequest.builder()
+            () -> input.fromPath(path -> {
+                String raidId = path.get("raidId");
+                return input.fromUserClaims(claims -> {
+                    String raidOwner = claims.get("email");
+                    return DeleteRaidEventRequest.builder()
                                     .withEmail(raidOwner)
                                     .withRaidId(raidId)
                                     .build();
-                        });
-                    }),
-                    (request, serviceComponent) ->
+                });
+            }),
+            (request, serviceComponent) ->
                             serviceComponent.provideDeleteRaidEventActivity().handleRequest(request)
         );
     }

@@ -1,13 +1,10 @@
 package raidsunlimited.converters;
 
-
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConverter;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import raidsunlimited.models.FeedbackModel;
-import raidsunlimited.models.GameCharacter;
-import raidsunlimited.models.ParticipantModel;
 
 import java.util.Collections;
 import java.util.List;
@@ -30,7 +27,7 @@ public class FeedbackModelConverter implements DynamoDBTypeConverter<String, Lis
             return Collections.emptyList();
         }
         try {
-            return objectMapper.readValue(participantJson, new TypeReference<List<FeedbackModel>>() {});
+            return objectMapper.readValue(participantJson, new TypeReference<List<FeedbackModel>>() { });
         } catch (JsonProcessingException e) {
             throw new IllegalArgumentException("Error converting JSON string to ParticipantModel", e);
         }

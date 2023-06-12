@@ -1,6 +1,10 @@
 package raidsunlimited.dynamodb.models;
 
-import com.amazonaws.services.dynamodbv2.datamodeling.*;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBIndexHashKey;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConverted;
 
 import raidsunlimited.converters.FeedbackModelConverter;
 import raidsunlimited.converters.ParticipantModelConverter;
@@ -165,7 +169,8 @@ public class RaidEvent {
 
     @Override
     public int hashCode() {
-        return Objects.hash(raidId, raidName, raidServer, raidDate, time, raidSize, raidObjective, lootDistribution, requiredRoles, participants, feedback, raidOwner, raidStatus);
+        return Objects.hash(raidId, raidName, raidServer, raidDate, time, raidSize, raidObjective, lootDistribution,
+                requiredRoles, participants, feedback, raidOwner, raidStatus);
     }
 
     @Override

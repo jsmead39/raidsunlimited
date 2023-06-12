@@ -16,7 +16,8 @@ export default class RaidsUnlimitedClient extends BindingClass {
         super();
 
         const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'createRaid', 'getRaid',
-             'createProfile', 'getProfile', 'getProfileByEmail', 'updateProfile', 'getAllRaids', 'deleteRaidEvent'];
+             'createProfile', 'getProfile', 'getProfileByEmail', 'updateProfile', 'getAllRaids', 'deleteRaidEvent',
+             'getRaidHistory'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();
@@ -198,10 +199,30 @@ export default class RaidsUnlimitedClient extends BindingClass {
         }
     }
 
+    /**
+     *
+     * @param errorCallback(Optional) A function to execute if the call fails.
+     * @returns All raid objects from the database.
+     */
     async getAllRaids(errorCallback) {
         try {
             const response = await this.axiosClient.get(`raidevents`);
             console.log("response in get all Raids", response);
+            return response.data;
+        } catch (error) {
+            this.handleError(error, errorCallback);
+        }
+    }
+
+    /**
+     * Gets the raidevents for the given UserId.
+     * @param userId The userId to retrieve the raids for.
+     * @param errorCallback (Optional) A function to execute if the call fails.
+     * @returns The list of raids with their details.
+     */
+    async getRaidHistory(userId, errorCallback) {
+        try {
+            const response = await this.axiosClient.get(`users/${userId}/raids`);
             return response.data;
         } catch (error) {
             this.handleError(error, errorCallback);
@@ -224,6 +245,7 @@ export default class RaidsUnlimitedClient extends BindingClass {
             return response.data;
         } catch (error) {
             this.handleError(error, errorCallBack);
+
         }
     }
 

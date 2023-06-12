@@ -10,7 +10,7 @@ class EditProfile extends BindingClass {
     constructor() {
         super();
         this.bindClassMethods(['loadProfile', 'mount', 'addCharacter', 'updateProfile', 'submitCharacter',
-            'addCharacter'], this);
+            'addCharacter', 'loadRaidHistory'], this);
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
         this.charactersList = [];
@@ -23,7 +23,9 @@ class EditProfile extends BindingClass {
         document.getElementById('create').addEventListener('click', this.updateProfile);
         this.header.addHeaderToPage();
         this.client = new RaidsUnlimitedClient();
+
         this.loadProfile();
+        this.loadRaidHistory();
         this.addCharacter();
     }
 
@@ -171,7 +173,7 @@ class EditProfile extends BindingClass {
         document.getElementById('characterSpecialization').value = '';
         document.getElementById('characterRole').value = '';
 
-        document.getElementById('characterFormContainer').classList.add('hidden');
+        document.getElementById('characterFormContainer').style.display = "none";
     }
 
     addCharacter() {
@@ -181,12 +183,81 @@ class EditProfile extends BindingClass {
 
         if (addCharacterButton && characterFormContainer && characterForm) {
             addCharacterButton.addEventListener('click', () => {
-                characterFormContainer.classList.remove('hidden');
+                characterFormContainer.style.display = "block";
             });
 
             characterForm.addEventListener('submit', this.submitCharacter);
+
+            // Add an event listener for the 'keyup' event on the document
+            document.addEventListener('keyup', (event) => {
+                // If the 'Escape' key is pressed
+                if (event.key === 'Escape' || event.key === 'Esc' || event.keyCode === 27) {
+                    // Hide the form
+                    document.getElementById('characterFormContainer').style.display = "none";
+                }
+            });
         }
     }
+
+    async loadRaidHistory() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const userId = urlParams.get('id');
+
+        const raids = await this.client.getRaidHistory(userId);
+        if(raids) {
+            this.populateRaidList(raids);
+        }
+    }
+
+    populateRaidList(raids) {
+        const raidListElement = document.getElementById('raids');
+
+        if (raids.raidModelList.length === 0) {
+            raidListElement.innerText = 'No raids found';
+        } else {
+            // Create a table
+            const table = document.createElement('table');
+
+            // Create table header
+            const thead = document.createElement('thead');
+            const headerRow = document.createElement('tr');
+            ['Raid ID', 'Raid Name', 'Server', 'Date', 'Raid Status'].forEach(header => {
+                const th = document.createElement('th');
+                th.textContent = header;
+                headerRow.appendChild(th);
+            });
+            thead.appendChild(headerRow);
+            table.appendChild(thead);
+
+            // Create table body
+            const tbody = document.createElement('tbody');
+
+            raids.raidModelList.forEach(raid => {
+                const tr = document.createElement('tr');
+
+                // Add raidId as a hyperlink
+                const td1 = document.createElement('td');
+                const a = document.createElement('a');
+                a.innerText = raid.raidId;
+                a.href = `viewRaid.html?id=${raid.raidId}`;
+                td1.appendChild(a);
+                tr.appendChild(td1);
+
+                // Add raidName, raidServer, raidDate
+                [raid.raidName, raid.raidServer, raid.raidDate, raid.raidStatus].forEach(value => {
+                    const td = document.createElement('td');
+                    td.textContent = value;
+                    tr.appendChild(td);
+                });
+
+                tbody.appendChild(tr);
+            });
+
+            table.appendChild(tbody);
+            raidListElement.appendChild(table);
+        }
+    }
+
 }
 
 /**

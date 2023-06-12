@@ -5,7 +5,7 @@ import raidsunlimited.models.RaidModel;
 public class RaidSignupResult {
     private final RaidModel raidModel;
 
-    public RaidSignupResult(RaidModel raidModel) {
+    private RaidSignupResult(RaidModel raidModel) {
         this.raidModel = raidModel;
     }
 

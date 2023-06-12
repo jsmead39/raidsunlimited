@@ -10,9 +10,10 @@ import raidsunlimited.dynamodb.models.RaidEvent;
 import raidsunlimited.exceptions.RaidEventNotFoundException;
 import raidsunlimited.models.RaidModel;
 
-import javax.inject.Inject;
 import java.util.List;
 import java.util.Optional;
+
+import javax.inject.Inject;
 
 /**
  * Implementation of the GetRaidActivity for the RaidsUnlimited GetRaid API.
@@ -23,6 +24,10 @@ public class GetAllRaidsActivity {
     private final Logger log = LogManager.getLogger();
     private final RaidDao raidDao;
 
+    /**
+     * Instantiates a new GetAllRaidsActivity object.
+     * @param raidDao RaidDao to access the raidevent table.
+     */
     @Inject
     public GetAllRaidsActivity(RaidDao raidDao) {
         this.raidDao = raidDao;

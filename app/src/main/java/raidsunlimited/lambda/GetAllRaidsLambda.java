@@ -17,10 +17,10 @@ public class GetAllRaidsLambda
     public LambdaResponse handleRequest(LambdaRequest<GetAllRaidsRequest> input, Context context) {
         log.info("handleRequest");
         return super.runActivity(
-                () -> input.fromPath(path ->
+            () -> input.fromPath(path ->
                         GetAllRaidsRequest.builder()
                                 .build()),
-                (request, serviceComponent) ->
+            (request, serviceComponent) ->
                         serviceComponent.provideGetAllRaidsActivity().handleRequest(request)
         );
     }

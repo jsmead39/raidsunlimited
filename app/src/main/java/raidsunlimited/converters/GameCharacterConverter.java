@@ -27,7 +27,7 @@ public class GameCharacterConverter implements DynamoDBTypeConverter<String, Lis
             return Collections.emptyList();
         }
         try {
-            return objectMapper.readValue(gameCharactersJson, new TypeReference<List<GameCharacter>>() {});
+            return objectMapper.readValue(gameCharactersJson, new TypeReference<List<GameCharacter>>() { });
         } catch (JsonProcessingException e) {
             throw new IllegalArgumentException("Error converting JSON string to List<GameCharacter>", e);
         }

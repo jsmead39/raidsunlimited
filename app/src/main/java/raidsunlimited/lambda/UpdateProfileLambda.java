@@ -11,9 +11,9 @@ public class UpdateProfileLambda
     @Override
     public LambdaResponse handleRequest(AuthenticatedLambdaRequest<UpdateProfileRequest> input, Context context) {
         return super.runActivity(
-                () -> {
-                    UpdateProfileRequest unauthenticatedRequest = input.fromBody(UpdateProfileRequest.class);
-                    return input.fromUserClaims(claims ->
+            () -> {
+                UpdateProfileRequest unauthenticatedRequest = input.fromBody(UpdateProfileRequest.class);
+                return input.fromUserClaims(claims ->
                             UpdateProfileRequest.builder()
                                     .withUserId(unauthenticatedRequest.getUserId())
                                     .withDisplayName(unauthenticatedRequest.getDisplayName())
@@ -21,8 +21,8 @@ public class UpdateProfileLambda
                                     .withLogs(unauthenticatedRequest.getLogs())
                                     .withEmail(claims.get("email"))
                                     .build());
-                },
-                (request, serviceComponent) ->
+            },
+            (request, serviceComponent) ->
                         serviceComponent.provideUpdateProfileActivity().handleRequest(request)
         );
     }

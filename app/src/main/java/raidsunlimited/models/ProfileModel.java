@@ -12,7 +12,8 @@ public class ProfileModel {
     private final List<GameCharacter> characterList;
     private final String logs;
 
-    private ProfileModel(String userId, String displayName, String email, List<GameCharacter> characterList, String logs) {
+    private ProfileModel(String userId, String displayName, String email, List<GameCharacter> characterList,
+                         String logs) {
         this.userId = userId;
         this.displayName = displayName;
         this.email = email;
@@ -49,8 +50,10 @@ public class ProfileModel {
             return false;
         }
         ProfileModel profileModel = (ProfileModel) o;
-        return Objects.equals(userId, profileModel.userId) && Objects.equals(displayName, profileModel.displayName) &&
-                Objects.equals(email, profileModel.email) && Objects.equals(characterList, profileModel.characterList) &&
+        return Objects.equals(userId, profileModel.userId) &&
+                Objects.equals(displayName, profileModel.displayName) &&
+                Objects.equals(email, profileModel.email) &&
+                Objects.equals(characterList, profileModel.characterList) &&
                 Objects.equals(logs, profileModel.logs);
     }
 

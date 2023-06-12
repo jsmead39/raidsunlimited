@@ -5,7 +5,7 @@ import raidsunlimited.models.ProfileModel;
 public class CreateProfileResult {
     private final ProfileModel profileModel;
 
-    public CreateProfileResult(ProfileModel profileModel) {
+    private CreateProfileResult(ProfileModel profileModel) {
         this.profileModel = profileModel;
     }
 

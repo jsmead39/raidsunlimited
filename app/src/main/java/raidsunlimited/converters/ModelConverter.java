@@ -3,7 +3,6 @@ package raidsunlimited.converters;
 import raidsunlimited.activity.requests.RaidSignupRequest;
 import raidsunlimited.dynamodb.models.RaidEvent;
 import raidsunlimited.dynamodb.models.User;
-import raidsunlimited.models.FeedbackModel;
 import raidsunlimited.models.ParticipantModel;
 import raidsunlimited.models.ProfileModel;
 import raidsunlimited.models.RaidModel;
@@ -27,8 +26,6 @@ public class ModelConverter {
     public RaidModel toRaidModel(RaidEvent raidEvent) {
         String formattedDate = convertLongToDate(raidEvent.getRaidDate());
         Map<String, Integer> requiredRoles = convertListToMap(raidEvent.getRequiredRoles());
-//        List<FeedbackModel> feedback = FeedbackConverter.toFeedbackModelList(raidEvent.getFeedback());
-
 
         return RaidModel.builder()
                 .withRaidId(raidEvent.getRaidId())
@@ -48,12 +45,12 @@ public class ModelConverter {
     }
 
     /**
-     * Converts a list of RaidEvent objects into a list of RaidModel objects
+     * Converts a list of RaidEvent objects into a list of RaidModel objects.
      * @param raidEvents A list of RaidEvent objects to be converted.
      * @return A list of RaidModel objects converted from the provided RaidEvent objects.
      */
     public List<RaidModel> toRaidModelList(List<RaidEvent> raidEvents) {
-        List<RaidModel> raidModels = new ArrayList();
+        List<RaidModel> raidModels = new ArrayList<>();
 
         for (RaidEvent raidEvent : raidEvents) {
             RaidModel raidModel = toRaidModel(raidEvent);
@@ -77,6 +74,11 @@ public class ModelConverter {
                 .build();
     }
 
+    /**
+     * Converts a raid participant to a ParticipantModel.
+     * @param raidSignupRequest the request object containing UserId, displayName, and participant details.
+     * @return a ParticipantModel representation of the participant.
+     */
     public ParticipantModel toParticipantModel(RaidSignupRequest raidSignupRequest) {
         //Create Participant model from the request
         return ParticipantModel.builder()

@@ -16,9 +16,9 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import java.util.stream.Collectors;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
@@ -63,7 +63,7 @@ public class CreateRaidActivity {
         raidEvent.setParticipants(new ArrayList<>());
         raidEvent.setFeedback(new ArrayList<>());
         raidEvent.setRaidOwner(createRaidRequest.getRaidOwner());
-        raidEvent.setRaidStatus("Pending");
+        raidEvent.setRaidStatus("Scheduled");
 
         raidDao.saveRaid(raidEvent);
 

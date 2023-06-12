@@ -17,11 +17,11 @@ public class GetRaidLambda
     public LambdaResponse handleRequest(LambdaRequest<GetRaidRequest> input, Context context) {
         log.info("handleRequest");
         return super.runActivity(
-                () -> input.fromPath(path ->
+            () -> input.fromPath(path ->
                         GetRaidRequest.builder()
                                 .withRaidId(path.get("raidId"))
                                 .build()),
-                (request, serviceComponent) ->
+            (request, serviceComponent) ->
                         serviceComponent.provideGetRaidActivity().handleRequest(request)
         );
     }
