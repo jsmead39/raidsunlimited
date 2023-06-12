@@ -6,10 +6,15 @@ import raidsunlimited.activity.requests.GetRaidRequest;
 import raidsunlimited.activity.results.GetRaidResult;
 import raidsunlimited.converters.ModelConverter;
 import raidsunlimited.dynamodb.RaidDao;
+import raidsunlimited.dynamodb.UserRaidDao;
 import raidsunlimited.dynamodb.models.RaidEvent;
+import raidsunlimited.dynamodb.models.UserRaid;
+import raidsunlimited.models.ParticipantModel;
 import raidsunlimited.models.RaidModel;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Implementation of the GetRaidActivity for the RaidsUnlimited GetRaid API.
@@ -19,14 +24,16 @@ import javax.inject.Inject;
 public class GetRaidActivity {
     private final Logger log = LogManager.getLogger();
     private final RaidDao raidDao;
+    private final UserRaidDao userRaidDao;
 
     /**
      * Instantiates a new GetRaidActivity object.
      * @param raidDao the RaidDao to access the raidevent table.
      */
     @Inject
-    public GetRaidActivity(RaidDao raidDao) {
+    public GetRaidActivity(RaidDao raidDao, UserRaidDao userRaidDao) {
         this.raidDao = raidDao;
+        this.userRaidDao = userRaidDao;
     }
 
     /**
@@ -44,6 +51,27 @@ public class GetRaidActivity {
         log.info("Received GetRaidRequest {}", getRaidRequest);
         String requestedId = getRaidRequest.getRaidId();
         RaidEvent event = raidDao.getRaid(requestedId);
+
+        List<ParticipantModel> participantModelWithStatus = new ArrayList<>();
+        List<ParticipantModel> participants = event.getParticipants();
+        if (participants != null) {
+            for (ParticipantModel p : event.getParticipants()) {
+                UserRaid userRaid = userRaidDao.getUserRaid(p.getUserId(), requestedId);
+
+                ParticipantModel updatedParticipant = ParticipantModel.builder()
+                        .withUserId(p.getUserId())
+                        .withDisplayName(p.getDisplayName())
+                        .withParticipantClass(p.getParticipantClass())
+                        .withParticipantSpecialization(p.getParticipantSpecialization())
+                        .withRole(p.getRole())
+                        .withParticipantStatus(userRaid.isConfirmed())
+                        .build();
+
+                participantModelWithStatus.add(updatedParticipant);
+            }
+        }
+
+        event.setParticipants(participantModelWithStatus);
         RaidModel raidModel = new ModelConverter().toRaidModel(event);
 
         return GetRaidResult.builder()
