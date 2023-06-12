@@ -173,7 +173,7 @@ class EditProfile extends BindingClass {
         document.getElementById('characterSpecialization').value = '';
         document.getElementById('characterRole').value = '';
 
-        document.getElementById('characterFormContainer').classList.add('hidden');
+        document.getElementById('characterFormContainer').style.display = "none";
     }
 
     addCharacter() {
@@ -183,10 +183,19 @@ class EditProfile extends BindingClass {
 
         if (addCharacterButton && characterFormContainer && characterForm) {
             addCharacterButton.addEventListener('click', () => {
-                characterFormContainer.classList.remove('hidden');
+                characterFormContainer.style.display = "block";
             });
 
             characterForm.addEventListener('submit', this.submitCharacter);
+
+            // Add an event listener for the 'keyup' event on the document
+            document.addEventListener('keyup', (event) => {
+                // If the 'Escape' key is pressed
+                if (event.key === 'Escape' || event.key === 'Esc' || event.keyCode === 27) {
+                    // Hide the form
+                    document.getElementById('characterFormContainer').style.display = "none";
+                }
+            });
         }
     }
 
