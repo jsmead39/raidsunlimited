@@ -78,6 +78,7 @@ class ViewRaid extends BindingClass {
                     <td>${participant.participantClass}</td>
                     <td>${participant.participantSpecialization}</td>
                     <td>${participant.role}</td>
+                    <td>${participant.participantStatus ? 'Confirmed' : 'Not Confirmed'}</td>
                     <td><button class="confirm-btn" data-userid="${participant.userId}" 
                     data-raidid="${raidModel.raidId}" data-role="${participant.role}">Confirm</button></td>
                     
