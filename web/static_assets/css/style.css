@@ -1,29 +1,128 @@
 :root {
-    /* css variables: https://developer.mozilla.org/en-US/docs/Web/CSS/var */
-    --primary-color: #5D5E5E;
-    --secondary-color: #ffffff;
-    --tertiary-color: #F5881F;
-    --error-color: #EE3A23;
+    --main-bg-color: #000;
+    --main-text-color: #e1f2f5;
+    --dialog-bg-color: #001020;
+    --light-grey: #555;
+    --highlight: #e91e63;
+    --secondary-color: #8A8C8F;
+    --primary-color: #e1f2f5;
+    --tertiary-color: #46c5ff;
+    --error-color: #e91e63;
 }
 
-.background {
-    background-color: #8A8C8F;
+
+body {
     margin: 0;
-    counter-reset: section;
+    padding: 0;
+    background-color: var(--main-bg-color);
+    color: var(--main-text-color);
+    font-size: 13px;
     font-family: "Helvetica Neue",Helvetica,sans-serif;
+    line-height: 1.4;
 }
 
+/* Header */
 .header {
-    /* Flexbox: https://css-tricks.com/snippets/css/a-guide-to-flexbox/ */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: var(--primary-color);
+    border-bottom: 1px solid var(--light-grey);
+    position: fixed;
+    top: 0;
+    padding: 10px;
+    width: 100%;
+    z-index: 11000;
+    height: 100px;
+    background: var(--dialog-bg-color);
+}
+
+.header > div {
+    display: flex;
+    align-items: center;
+}
+
+.header_home {
+    font-size: 36px;
+    line-height: 40px;
+    height: 100px;
+    text-decoration: none;
     color: var(--secondary-color);
-    padding: 4px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 
+
+/* Form Dialog */
+.dialog-block {
+    background-color: var(--dialog-bg-color);
+    color: var(--main-text-color);
+    margin: 0 auto;
+    max-width: 800px;
+    padding: 40px 20px;
+    border: 1px solid var(--light-grey);
+    position: relative;
+    box-sizing: border-box;
+}
+
+.dialog-title {
+    background-color: #161616;
+    margin: 0;
+    padding: 20px;
+    color: #e1f2f5;
+    font-weight: 100;
+    font-size: 20px;
+    line-height: 1.6;
+    border-bottom: 1px solid #555;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    box-sizing: border-box;
+}
+
+.dialog-content {
+    padding-top: 60px;
+    box-sizing: border-box;
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.form-group label {
+    flex: 0 0 150px;
+    margin-right: 10px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="url"] {
+    flex: 1 1 auto;
+}
+
+.form-group-bottom-right {
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+/* Link colors */
+a:link,a:visited,.link-color {
+    color: var(--tertiary-color);
+    text-decoration: none;
+}
+
+
+.background {
+    background-color: var(--main-bg-color);
+    margin: 0;
+    counter-reset: section;
+}
 
 .button-group {
     display: flex;
@@ -45,7 +144,6 @@
     padding: 10px 20px;
 }
 
-
 .validated-field:invalid {
     outline: 2px solid var(--error-color);
 }
@@ -53,73 +151,36 @@
     color: var(--error-color);
 }
 
-
 .card-content .form-field {
     display: flex;
     flex-direction: column;
 }
 
-.tags {
-    display: flex;
-    flex-direction: row;
-}
+/* table styles */
 
-.tag {
-    font-size: 12px;
-    margin: 0 10px;
-    padding: 4px 8px;
-    background-color: var(--primary-color);
-    color: var(--secondary-color);
-    position: relative;
-    border-radius: 16px;
+table {
+    border-collapse: separate;
+    border-spacing: 2px;
 }
-
-.song {
-    padding: 2px;
-    display: flex;
-}
-
-.song .title {
-    flex: 20%;
-}
-
-.song .album {
-    flex: 80%;
-}
-
-/*
-Flexbox on a lists removes the numbers. We use a counter here to add them back.
-https://stackoverflow.com/a/34316093
-https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Lists_and_Counters/Using_CSS_counters
-*/
-.song:before {
-    counter-increment: section;
-    content: counter(section) ".";
-    position: absolute;
-    margin-left: -40px;
-}
-
-.hidden {
-    display: none;
-}
-
-/* table styles */ 
 
 th, td {
-    padding: 15px;
+    padding: 8px;
     text-align: left;
 }
 
-th {
-    border-bottom: 1px solid var(--primary-color);
+tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
 }
+
+
 
 a {
     color: var(--tertiary-color);
     text-decoration: none;
 }
 
-/* my css stuff */
 .raid-details-flex {
     display: flex;
     flex-wrap: wrap;
@@ -138,7 +199,7 @@ a {
 .oval-box {
     width: 200px;
     height: 100px;
-    background: #ddd;
+    background: var(--light-grey);
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -164,12 +225,13 @@ a {
 }
 
 #messagePopup {
+    display: none;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #fff;
-    border: 1px solid #ccc;
+    background-color: var(--primary-color);
+    border: 1px solid var(--light-grey);
     padding: 20px;
     text-align: center;
 }
@@ -184,23 +246,23 @@ a {
 }
 
 .error {
-    color: red;
+    color: var(--error-color);
 }
 
-.form-group h3, .form-group h2 {
-    padding-right: 20px;
-    display: inline-block;
-}
+/*.form-group h3, .form-group h2 {*/
+/*    padding-right: 20px;*/
+/*    display: inline-block;*/
+/*}*/
 
 .profile-visible {
     display: block;
     font-size: 24px;
-    color: white;
+    color: var(--primary-color);
     position: fixed;
     left: 50%;
     text-align: center;
     transform: translate(-50%);
-    background-color: black;
+    background-color: var(--main-bg-color);
 }
 
 .profile-hidden {
@@ -216,12 +278,13 @@ a {
 .button {
     margin-bottom: 10px;
     padding: 10px;
-    border: 1px solid #000;
+    border: 1px solid var(--main-bg-color);
     border-radius: 4px;
     text-decoration: none;
-    background-color: #f0f0f0;
-    color: #000;
+    background-color: var(--light-grey);
+    color: var(--main-bg-color);
     display: inline-block;
+    margin-right: 20px;
 }
 
 .button:hover {
@@ -233,36 +296,66 @@ a {
     justify-content: space-between;
     align-items: center;
     max-width: 50%;
-
 }
 
 .signup-button {
     padding: 10px 20px;
     font-size: 16px;
-    border: 1px solid #000;
+    border: 1px solid var(--main-bg-color);
     border-radius: 5px;
-    background-color: #f0f0f0;
-    color: #000;
+    background-color: var(--light-grey);
+    color: var(--main-bg-color);
 }
 
 .character-dropdown {
     display: none;
     position: absolute;
-    background-color: white;
+    background-color: var(--primary-color);
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
 }
 
 .character-option {
-    color: black;
+    color: var(--main-bg-color);
     padding: 12px 16px;
     display: block;
 }
 
 .character-option:hover {
-    background-color: #ddd;
+    background-color: var(--light-grey);
 }
 
+#topSection {
+    margin-top: 120px;
+}
+
+#editUserProfile {
+    text-align: center;
+    margin: 0 auto;
+    width: 800px;
+    padding: 20px;
+    background: var(--dialog-bg-color);
+    color: var(--main-text-color);
+    border: 1px solid var(--light-grey);
+}
+
+
+#characterList {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+#charactersSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.hidden {
+    display: none;
+}
 
 
