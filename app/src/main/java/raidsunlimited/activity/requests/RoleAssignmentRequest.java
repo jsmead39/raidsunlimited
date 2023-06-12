@@ -3,7 +3,7 @@ package raidsunlimited.activity.requests;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 
-@JsonDeserialize(builder = RoleAssignmentRequest.class)
+@JsonDeserialize(builder = RoleAssignmentRequest.Builder.class)
 public class RoleAssignmentRequest {
     private final String raidId;
     private final String userId;

@@ -43,7 +43,7 @@ public class RoleAssignmentActivity {
 
         RaidEvent raid = raidDao.getRaid(raidId);
 
-        if (raid.getRaidOwner() != roleAssignmentRequest.getRaidOwner()) {
+        if (!raid.getRaidOwner().equals(roleAssignmentRequest.getRaidOwner())) {
             throw new NotRaidOwnerException("You must be the raid owner to approve attendees");
         }
 
