@@ -4,10 +4,10 @@ public class RoleAssignmentResult {
     private final String raidId;
     private final String userId;
     private final String raidRole;
-    private final String status;
+    private final Boolean status;
 
 
-    private RoleAssignmentResult(String raidId, String userId, String raidRole, String status) {
+    private RoleAssignmentResult(String raidId, String userId, String raidRole, Boolean status) {
         this.raidId = raidId;
         this.userId = userId;
         this.raidRole = raidRole;
@@ -22,7 +22,7 @@ public class RoleAssignmentResult {
         return userId;
     }
 
-    public String getStatus() {
+    public Boolean getStatus() {
         return status;
     }
 
@@ -49,7 +49,7 @@ public class RoleAssignmentResult {
         private String raidId;
         private String userId;
         private String raidRole;
-        private String status;
+        private Boolean status;
 
         public Builder withRaidId(String raidId) {
             this.raidId = raidId;
@@ -61,7 +61,7 @@ public class RoleAssignmentResult {
             return this;
         }
 
-        public Builder withStatus(String status) {
+        public Builder withStatus(Boolean status) {
             this.status = status;
             return this;
         }

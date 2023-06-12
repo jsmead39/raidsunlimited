@@ -6,11 +6,9 @@ import raidsunlimited.activity.requests.RoleAssignmentRequest;
 import raidsunlimited.activity.results.RoleAssignmentResult;
 import raidsunlimited.dynamodb.UserRaidDao;
 import raidsunlimited.dynamodb.models.UserRaid;
-import raidsunlimited.exceptions.RaidEventNotFoundException;
 import raidsunlimited.exceptions.RaidSignupException;
 
 import javax.inject.Inject;
-import java.util.Optional;
 
 public class RoleAssignmentActivity {
     private final Logger log = LogManager.getLogger();
@@ -51,8 +49,8 @@ public class RoleAssignmentActivity {
         return RoleAssignmentResult.builder()
                 .withUserId(userId)
                 .withRaidId(raidId)
-                .withRaidRole(event.getRole)
-                .withStatus(event.getConfirmed())
+                .withRaidRole(event.getRole())
+                .withStatus(event.isConfirmed())
                 .build();
     }
 }
