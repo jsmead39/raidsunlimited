@@ -7,10 +7,16 @@ import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 public class RoleAssignmentRequest {
     private final String raidId;
     private final String userId;
+    private final String raidRole;
 
-    private RoleAssignmentRequest(String raidId, String userId) {
+    private RoleAssignmentRequest(String raidId, String userId, String raidRole) {
         this.raidId = raidId;
         this.userId = userId;
+        this.raidRole = raidRole;
+    }
+
+    public String getRaidRole() {
+        return raidRole;
     }
 
     public String getRaidId() {
@@ -26,6 +32,7 @@ public class RoleAssignmentRequest {
         return "RoleAssignmentRequest{" +
                 "raidId='" + raidId + '\'' +
                 ", userId='" + userId + '\'' +
+                ", raidRole='" + raidRole + '\'' +
                 '}';
     }
 
@@ -38,6 +45,7 @@ public class RoleAssignmentRequest {
     public static class Builder {
         private String raidId;
         private String userId;
+        private String raidRole;
 
         public Builder withRaidId(String raidId) {
             this.raidId = raidId;
@@ -49,8 +57,13 @@ public class RoleAssignmentRequest {
             return this;
         }
 
+        public Builder withRaidRole(String raidRole) {
+            this.raidRole = raidRole;
+            return this;
+        }
+
         public RoleAssignmentRequest build() {
-            return new RoleAssignmentRequest(raidId, userId);
+            return new RoleAssignmentRequest(raidId, userId, raidRole);
         }
     }
 }

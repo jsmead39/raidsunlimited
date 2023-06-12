@@ -3,11 +3,14 @@ package raidsunlimited.activity.results;
 public class RoleAssignmentResult {
     private final String raidId;
     private final String userId;
+    private final String raidRole;
     private final String status;
 
-    private RoleAssignmentResult(String raidId, String userId, String status) {
+
+    private RoleAssignmentResult(String raidId, String userId, String raidRole, String status) {
         this.raidId = raidId;
         this.userId = userId;
+        this.raidRole = raidRole;
         this.status = status;
     }
 
@@ -23,11 +26,16 @@ public class RoleAssignmentResult {
         return status;
     }
 
+    public String getRaidRole() {
+        return raidRole;
+    }
+
     @Override
     public String toString() {
         return "RoleAssignmentResult{" +
                 "raidId='" + raidId + '\'' +
                 ", userId='" + userId + '\'' +
+                ", raidRole='" + raidRole + '\'' +
                 ", status='" + status + '\'' +
                 '}';
     }
@@ -40,6 +48,7 @@ public class RoleAssignmentResult {
     public static class Builder {
         private String raidId;
         private String userId;
+        private String raidRole;
         private String status;
 
         public Builder withRaidId(String raidId) {
@@ -57,8 +66,13 @@ public class RoleAssignmentResult {
             return this;
         }
 
+        public Builder withRaidRole(String raidRole) {
+            this.raidRole = raidRole;
+            return this;
+        }
+
         public RoleAssignmentResult build() {
-            return new RoleAssignmentResult(raidId, userId, status);
+            return new RoleAssignmentResult(raidId, userId, raidRole, status);
         }
     }
 }
