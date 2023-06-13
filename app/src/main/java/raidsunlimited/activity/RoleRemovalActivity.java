@@ -68,6 +68,7 @@ public class RoleRemovalActivity {
         }
 
         event.setConfirmed(false);
+        log.info(event.isConfirmed());
         event.setRole("");
 
         userRaidDao.saveToEvent(event);
