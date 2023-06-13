@@ -46,6 +46,7 @@ class RoleAssignmentActivityTest {
 
         RaidEvent raid = new RaidEvent();
         raid.setRaidOwner(raidOwner);
+        raid.setRaidStatus("Scheduled");
         when(raidDao.getRaid(raidId)).thenReturn(raid);
 
         UserRaid userRaid = new UserRaid();
@@ -87,6 +88,7 @@ class RoleAssignmentActivityTest {
         String raidId = "raid1";
         RaidEvent raid = new RaidEvent();
         raid.setRaidOwner("owner1");
+        raid.setRaidStatus("Scheduled");
         when(raidDao.getRaid(raidId)).thenReturn(raid);
 
         RoleAssignmentRequest request = new RoleAssignmentRequest.Builder()
@@ -106,6 +108,7 @@ class RoleAssignmentActivityTest {
         String userId = "user1";
         RaidEvent raid = new RaidEvent();
         raid.setRaidOwner("owner1");
+        raid.setRaidStatus("Scheduled");
         when(raidDao.getRaid(raidId)).thenReturn(raid);
 
         when(userRaidDao.getUserRaid(userId, raidId)).thenReturn(null);

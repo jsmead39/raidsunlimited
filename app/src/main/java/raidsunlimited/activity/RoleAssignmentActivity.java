@@ -51,12 +51,12 @@ public class RoleAssignmentActivity {
 
         RaidEvent raid = raidDao.getRaid(raidId);
 
-        if (raid.getRaidStatus().equals("Completed")) {
-            throw new RaidEventCompletionException("You cannot modify a raid that has already been completed");
-        }
-
         if (!raid.getRaidOwner().equals(roleAssignmentRequest.getRaidOwner())) {
             throw new NotRaidOwnerException("You must be the raid owner to approve attendees");
+        }
+
+        if (raid.getRaidStatus().equals("Completed")) {
+            throw new RaidEventCompletionException("You cannot modify a raid that has already been completed");
         }
 
         UserRaid event = userRaidDao.getUserRaid(userId, raidId);
