@@ -10,7 +10,7 @@ class ViewRaid extends BindingClass {
     constructor() {
         super();
         this.bindClassMethods(['clientLoaded', 'mount', 'addRaidToPage', 'displayCharacters',
-            'handleCharacterSelection', 'deleteRaidEvent'], this);
+            'handleCharacterSelection', 'deleteRaidEvent', 'confirmUser', 'removeUser'], this);
         this.dataStore = new DataStore();
         this.dataStore.addChangeListener(this.addRaidToPage);
         this.header = new Header(this.dataStore);
@@ -72,6 +72,8 @@ class ViewRaid extends BindingClass {
         let participantHtml = '';
         let participant;
         for (participant of participants) {
+            let buttonClass = participant.participantStatus ? 'remove-btn' : 'confirm-btn';
+            let buttonText = participant.participantStatus ? 'Remove' : 'Confirm';
             participantHtml += `
                 <tr>
                     <td>${participant.displayName}</td>
@@ -79,9 +81,10 @@ class ViewRaid extends BindingClass {
                     <td>${participant.participantSpecialization}</td>
                     <td>${participant.role}</td>
                     <td>${participant.participantStatus ? 'Confirmed' : 'Not Confirmed'}</td>
-                    <td><button class="confirm-btn" data-userid="${participant.userId}" 
-                    data-raidid="${raidModel.raidId}" data-role="${participant.role}">Confirm</button></td>
-                    
+                     <td>
+                        <button class="${buttonClass}" data-userid="${participant.userId}" 
+                        data-raidid="${raidModel.raidId}" data-role="${participant.role}">${buttonText}</button>
+                     </td>             
                 </tr>
                 `;
         }
@@ -89,42 +92,97 @@ class ViewRaid extends BindingClass {
 
         //event listener for confirmation
         Array.from(document.getElementsByClassName('confirm-btn')).forEach((button) => {
-            button.addEventListener('click', async (event) => {
-                const userId = event.target.getAttribute('data-userid');
-                const raidId = event.target.getAttribute('data-raidid');
-                const role = event.target.getAttribute('data-role');
-                let statusCell = event.target.parentElement.parentElement.children[4];
-                statusCell.innerText = 'Processing...';
+            button.addEventListener('click', this.confirmUser);
+        });
 
-                const messagePopup = document.getElementById('messagePopup');
-                const messageText = document.getElementById('messageText');
-
-                try {
-                    const response = await this.client.roleAssignment(raidId, userId, role);
-                    console.log(response);
-                    // If the status in the response is 'Confirmed', update the statusCell
-                    if (response.status === true) {
-                        statusCell.innerText = 'Confirmed';
-                    } else {
-                        // In case of some other status, update the statusCell with that status
-                        statusCell.innerText = 'Not confirmed';
-                    }
-                    messagePopup.classList.add('hidden');
-                } catch (error) {
-                    // In case of error, revert the status
-                    statusCell.innerText = 'Not Confirmed';
-                    messageText.innerText = `${error.message}`;
-                    messageText.classList.add('error');
-                    messagePopup.classList.remove('hidden');
-                    console.error(`An unexpected error occurred: ${error.message}`);
-
-                    setTimeout(() => {
-                        messagePopup.classList.add('hidden');
-                    }, 5000);
-                }
-            });
+        Array.from(document.getElementsByClassName('remove-btn')).forEach((button) => {
+            button.addEventListener('click', this.removeUser);
         });
     }
+
+    async confirmUser(event) {
+        console.log("confirm button clicked")
+        const userId = event.target.getAttribute('data-userid');
+        const raidId = event.target.getAttribute('data-raidid');
+        const role = event.target.getAttribute('data-role');
+        let statusCell = event.target.parentElement.parentElement.children[4];
+        statusCell.innerText = 'Processing...';
+
+        const messagePopup = document.getElementById('messagePopup');
+        const messageText = document.getElementById('messageText');
+        console.log(userId, raidId, role);
+
+        try {
+            const response = await this.client.roleAssignment(raidId, userId, role, (error) => {
+                messageText.innerText = 'An error occurred when confirming';
+                messageText.classList.add('error');
+                messagePopup.classList.remove('hidden');
+                console.error(`Error: ${error.message}`);
+
+                setTimeout(() => {
+                    messagePopup.classList.add('hidden');
+                    this.clientLoaded();
+                }, 5000);  // Delay of 5 seconds
+            });
+
+            console.log("confirmed user response", response);
+            if (response.status === true) {
+                statusCell.innerText = 'Confirmed';
+                event.target.innerText = 'Remove';
+                event.target.classList.remove('confirm-btn');
+                event.target.classList.add('remove-btn');
+                event.target.removeEventListener('click', this.confirmUser);
+                event.target.addEventListener('click', this.removeUser)
+            } else {
+                statusCell.innerText = 'Not confirmed';
+            }
+            messagePopup.classList.add('hidden');
+        } catch (error) {
+            // Do nothing here as error is handled in error callback
+        }
+    }
+
+    async removeUser(event) {
+        console.log("=>(viewRaid.js:143) ", "remove button clicked");
+        const userId = event.target.getAttribute('data-userid');
+        const raidId = event.target.getAttribute('data-raidid');
+        let statusCell = event.target.parentElement.parentElement.children[4];
+        statusCell.innerText = 'Processing...';
+
+        console.log(userId, raidId);
+        const messagePopup = document.getElementById('messagePopup');
+        const messageText = document.getElementById('messageText');
+
+        try {
+            const response = await this.client.roleRemoval(raidId, userId, (error) => {
+                messageText.innerText = 'An error occurred when removing';
+                messageText.classList.add('error');
+                messagePopup.classList.remove('hidden');
+                console.error(`Error: ${error.message}`);
+
+                setTimeout(() => {
+                    messagePopup.classList.add('hidden');
+                    this.clientLoaded();
+                }, 5000);  // Delay of 5 seconds
+            });
+
+            console.log("remove user response", response);
+            if (response.status === false) {
+                statusCell.innerText = 'Not Confirmed';
+                event.target.innerText = 'Confirm';
+                event.target.classList.remove('remove-btn');
+                event.target.classList.add('confirm-btn');
+                event.target.removeEventListener('click', this.removeUser);
+                event.target.addEventListener('click', this.confirmUser);
+            } else {
+                statusCell.innerText = 'Confirmed';
+            }
+            messagePopup.classList.add('hidden');
+        } catch (error) {
+            // Do nothing here as error is handled in error callback
+        }
+    }
+
 
     displayCharacters(event) {
         const profileModel = this.header.dataStore.get('profileModel');

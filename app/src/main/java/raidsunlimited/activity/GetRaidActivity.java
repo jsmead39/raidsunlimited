@@ -43,6 +43,7 @@ public class GetRaidActivity {
      * raidId from the raidDao.
      * converts the RaidEvent to a RaidModel using a ModelConverter, and returns a GetRaidResult object
      * with the retrieved RaidModel.
+     * If a UserRaid object does not exist for a participant, this method will create one.
      *
      * @param getRaidRequest the GetRaidRequest object containing the raidId
      * @return a GetRaidResult object with the retrieved RaidModel

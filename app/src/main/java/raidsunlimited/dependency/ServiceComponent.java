@@ -67,4 +67,10 @@ public interface ServiceComponent {
      * @return RoleAssignmentActivity
      */
     RoleAssignmentActivity provideRoleAssignmentActivity();
+
+    /**
+     * Provides the relevant activity.
+     * @return RoleRemovalActivity
+     */
+    RoleRemovalActivity provideRoleRemovalActivity();
 }
