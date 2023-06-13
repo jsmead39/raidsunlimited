@@ -9,6 +9,7 @@ import raidsunlimited.dynamodb.UserRaidDao;
 import raidsunlimited.dynamodb.models.RaidEvent;
 import raidsunlimited.dynamodb.models.UserRaid;
 import raidsunlimited.exceptions.NotRaidOwnerException;
+import raidsunlimited.exceptions.RaidEventCompletionException;
 import raidsunlimited.exceptions.RaidSignupException;
 
 import javax.inject.Inject;
@@ -57,6 +58,10 @@ public class RoleRemovalActivity {
         }
 
         RaidEvent raid = raidDao.getRaid(raidId);
+
+        if (raid.getRaidStatus().equals("Completed")) {
+            throw new RaidEventCompletionException("You cannot modify a raid that has already been completed");
+        }
 
         if (!raid.getRaidOwner().equals(roleRemovalRequest.getRaidOwner())) {
             throw new NotRaidOwnerException("You must be the raid owner to remove attendees");
