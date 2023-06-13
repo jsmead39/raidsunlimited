@@ -17,7 +17,7 @@ export default class RaidsUnlimitedClient extends BindingClass {
 
         const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'createRaid', 'getRaid',
              'createProfile', 'getProfile', 'getProfileByEmail', 'updateProfile', 'getAllRaids', 'deleteRaidEvent',
-             'getRaidHistory'];
+             'getRaidHistory', 'roleAssignment'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();
@@ -100,6 +100,17 @@ export default class RaidsUnlimitedClient extends BindingClass {
         }
     }
 
+    /**
+     * Updates the profile of a user asynchronously.
+     *
+     * @param userId         the ID of the user whose profile will be updated
+     * @param displayName    the new display name for the user
+     * @param charactersList the list of characters associated with the user
+     * @param logs           the logs for the user
+     * @param errorCallback (Optional) the callback function to handle any errors
+     * @return a Promise that resolves to the updated user profile
+     * @throws Exception if an error occurs during the profile update
+     */
     async updateProfile(userId, displayName, charactersList, logs, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("You must be logged in to update your " +
@@ -120,6 +131,14 @@ export default class RaidsUnlimitedClient extends BindingClass {
         }
     }
 
+    /**
+     * Retrieves the profile of a user asynchronously.
+     *
+     * @param userId         the ID of the user whose profile will be retrieved
+     * @param errorCallback the callback function to handle any errors
+     * @return a Promise that resolves to the user's profile data
+     * @throws Exception if an error occurs during the profile retrieval
+     */
     async getProfile(userId, errorCallback) {
         try {
             const response = await this.axiosClient.get(`users/${userId}`);
@@ -131,7 +150,14 @@ export default class RaidsUnlimitedClient extends BindingClass {
     }
 
 
-
+    /**
+     * Retrieves the profile of a user by their email asynchronously.
+     *
+     * @param email         the email of the user whose profile will be retrieved
+     * @param errorCallback the callback function to handle any errors
+     * @return a Promise that resolves to the user's profile data
+     *         or null if the retrieval fails
+     */
     async getProfileByEmail(email, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("User is not logged in");
@@ -200,7 +226,7 @@ export default class RaidsUnlimitedClient extends BindingClass {
     }
 
     /**
-     *
+     * Retrieves all raid objects from the database asynchronously.
      * @param errorCallback(Optional) A function to execute if the call fails.
      * @returns All raid objects from the database.
      */
@@ -229,6 +255,17 @@ export default class RaidsUnlimitedClient extends BindingClass {
         }
     }
 
+    /**
+     * Signs up a user for a raid asynchronously.
+     *
+     * @param raidId         the ID of the raid event for which the user is signing up
+     * @param userId         the ID of the user signing up for the raid
+     * @param displayName    the display name of the user signing up for the raid
+     * @param gameCharacter  the game character associated with the user signing up for the raid
+     * @param errorCallBack  the callback function to handle any errors
+     * @return a Promise that resolves to the signup response data
+     * @throws Exception if an error occurs during the signup process
+     */
     async raidSignup(raidId, userId, displayName, gameCharacter, errorCallBack) {
         try {
             const token = await this.getTokenOrThrow("You must be logged in to signup for a raid.");
@@ -249,6 +286,14 @@ export default class RaidsUnlimitedClient extends BindingClass {
         }
     }
 
+    /**
+     * Deletes a raid event asynchronously.
+     *
+     * @param raidId        the ID of the raid event to be deleted
+     * @param errorCallBack the callback function to handle any errors
+     * @return a Promise that resolves to the deletion response data
+     * @throws Exception if an error occurs during the deletion process
+     */
     async deleteRaidEvent(raidId, errorCallBack) {
         try {
             const token = await this.getTokenOrThrow("You must be logged in to delete a raid.");
@@ -263,7 +308,36 @@ export default class RaidsUnlimitedClient extends BindingClass {
         }
     }
 
+
     /**
+     * Assigns a role to a user for a raid asynchronously.
+     *
+     * @param raidId         the ID of the raid event for which the role is being assigned
+     * @param userId         the ID of the user to whom the role is being assigned
+     * @param raidRole       the role being assigned to the user
+     * @param errorCallBack  the callback function to handle any errors
+     * @return a Promise that resolves to the role assignment response data
+     * @throws Exception if an error occurs during the role assignment process
+     */
+    async roleAssignment(raidId, userId, raidRole, errorCallBack) {
+        try {
+            const token = await this.getTokenOrThrow("You must be logged in to assign a role");
+            const response = await this.axiosClient.post(`raidevents/${raidId}/roleassignments`, {
+                userId: userId,
+                raidRole: raidRole,
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            return response.data;
+        } catch (error) {
+            this.handleError(error, errorCallBack);
+        }
+    }
+
+
+/**
      * Helper method to log the error and run any error functions.
      * @param error The error received from the server.
      * @param errorCallback (Optional) A function to execute if the call fails.

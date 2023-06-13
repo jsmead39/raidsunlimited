@@ -6,7 +6,9 @@ import org.mockito.Mock;
 import raidsunlimited.activity.requests.GetRaidRequest;
 import raidsunlimited.activity.results.GetRaidResult;
 import raidsunlimited.dynamodb.RaidDao;
+import raidsunlimited.dynamodb.UserRaidDao;
 import raidsunlimited.dynamodb.models.RaidEvent;
+import raidsunlimited.dynamodb.models.UserRaid;
 import raidsunlimited.models.FeedbackModel;
 import raidsunlimited.models.RaidModel;
 
@@ -18,18 +20,24 @@ import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.openMocks;
 
 class GetRaidActivityTest {
     @Mock
     private RaidDao raidDao;
+
+    @Mock
+    private UserRaidDao userRaidDao;
+
     private GetRaidActivity getRaidActivity;
 
     @BeforeEach
     void setUp() {
         openMocks(this);
-        getRaidActivity = new GetRaidActivity(raidDao);
+        getRaidActivity = new GetRaidActivity(raidDao, userRaidDao);
     }
 
     @Test
@@ -49,6 +57,10 @@ class GetRaidActivityTest {
         List<FeedbackModel> expectedFeedback = List.of(feedback);
         List<String> expectedRequiredRoles = List.of("Tank 2", "Healer 2", "Dps 21");
         String expectedRaidOwner = "test@test.com";
+
+        UserRaid mockUserRaid = mock(UserRaid.class);
+        when(mockUserRaid.isConfirmed()).thenReturn(true);
+        when(userRaidDao.getUserRaid(anyString(), anyString())).thenReturn(mockUserRaid);
 
         RaidEvent raidEvent = new RaidEvent();
         raidEvent.setRaidId(expectedRaidId);

@@ -15,6 +15,7 @@ public class UserRaid {
     private String userId;
     private String raidId;
     private Boolean confirmed;
+    private String role;
 
     @DynamoDBHashKey(attributeName = "userId")
     public String getUserId() {
@@ -34,15 +35,23 @@ public class UserRaid {
         this.raidId = raidId;
     }
 
-
     @DynamoDBAttribute(attributeName = "confirmed")
     @DynamoDBTyped(DynamoDBMapperFieldModel.DynamoDBAttributeType.BOOL)
-    public Boolean getConfirmed() {
+    public Boolean isConfirmed() {
         return confirmed;
     }
 
     public void setConfirmed(Boolean confirmed) {
         this.confirmed = confirmed;
+    }
+
+    @DynamoDBAttribute(attributeName = "raidRole")
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     @Override
@@ -55,11 +64,11 @@ public class UserRaid {
         }
         UserRaid userRaid = (UserRaid) o;
         return Objects.equals(userId, userRaid.userId) && Objects.equals(raidId, userRaid.raidId) &&
-                Objects.equals(confirmed, userRaid.confirmed);
+                Objects.equals(confirmed, userRaid.confirmed) && Objects.equals(role, userRaid.role);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId, raidId, confirmed);
+        return Objects.hash(userId, raidId, confirmed, role);
     }
 }

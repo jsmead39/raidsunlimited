@@ -78,11 +78,52 @@ class ViewRaid extends BindingClass {
                     <td>${participant.participantClass}</td>
                     <td>${participant.participantSpecialization}</td>
                     <td>${participant.role}</td>
+                    <td>${participant.participantStatus ? 'Confirmed' : 'Not Confirmed'}</td>
+                    <td><button class="confirm-btn" data-userid="${participant.userId}" 
+                    data-raidid="${raidModel.raidId}" data-role="${participant.role}">Confirm</button></td>
                     
                 </tr>
                 `;
         }
         participantTableBody.innerHTML += participantHtml;
+
+        //event listener for confirmation
+        Array.from(document.getElementsByClassName('confirm-btn')).forEach((button) => {
+            button.addEventListener('click', async (event) => {
+                const userId = event.target.getAttribute('data-userid');
+                const raidId = event.target.getAttribute('data-raidid');
+                const role = event.target.getAttribute('data-role');
+                let statusCell = event.target.parentElement.parentElement.children[4];
+                statusCell.innerText = 'Processing...';
+
+                const messagePopup = document.getElementById('messagePopup');
+                const messageText = document.getElementById('messageText');
+
+                try {
+                    const response = await this.client.roleAssignment(raidId, userId, role);
+                    console.log(response);
+                    // If the status in the response is 'Confirmed', update the statusCell
+                    if (response.status === true) {
+                        statusCell.innerText = 'Confirmed';
+                    } else {
+                        // In case of some other status, update the statusCell with that status
+                        statusCell.innerText = 'Not confirmed';
+                    }
+                    messagePopup.classList.add('hidden');
+                } catch (error) {
+                    // In case of error, revert the status
+                    statusCell.innerText = 'Not Confirmed';
+                    messageText.innerText = `${error.message}`;
+                    messageText.classList.add('error');
+                    messagePopup.classList.remove('hidden');
+                    console.error(`An unexpected error occurred: ${error.message}`);
+
+                    setTimeout(() => {
+                        messagePopup.classList.add('hidden');
+                    }, 5000);
+                }
+            });
+        });
     }
 
     displayCharacters(event) {
