@@ -17,7 +17,7 @@ export default class RaidsUnlimitedClient extends BindingClass {
 
         const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'createRaid', 'getRaid',
              'createProfile', 'getProfile', 'getProfileByEmail', 'updateProfile', 'getAllRaids', 'deleteRaidEvent',
-             'getRaidHistory', 'roleAssignment'];
+             'getRaidHistory', 'roleAssignment', 'roleRemoval'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();
@@ -336,6 +336,20 @@ export default class RaidsUnlimitedClient extends BindingClass {
         }
     }
 
+    async roleRemoval(raidId, userId, errorCallBack) {
+        try {
+            const token = await this.getTokenOrThrow("You must be logged in to assign a role");
+            const response = await this.axiosClient.post(`raidevents/${raidId}/roleremovals/${userId}`, {
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            return response.data;
+        } catch (error) {
+            this.handleError(error, errorCallBack);
+        }
+    }
 
 /**
      * Helper method to log the error and run any error functions.
