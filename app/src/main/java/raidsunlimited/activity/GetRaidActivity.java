@@ -51,12 +51,23 @@ public class GetRaidActivity {
         log.info("Received GetRaidRequest {}", getRaidRequest);
         String requestedId = getRaidRequest.getRaidId();
         RaidEvent event = raidDao.getRaid(requestedId);
+        log.info(event);
 
         List<ParticipantModel> participantModelWithStatus = new ArrayList<>();
         List<ParticipantModel> participants = event.getParticipants();
+        log.info(participants);
         if (participants != null) {
             for (ParticipantModel p : event.getParticipants()) {
                 UserRaid userRaid = userRaidDao.getUserRaid(p.getUserId(), requestedId);
+
+                if (userRaid == null) {
+                    // Create a new UserRaid object
+                    userRaid = new UserRaid();
+                    userRaid.setRaidId(requestedId);
+                    userRaid.setUserId(p.getUserId());
+                    userRaid.setConfirmed(false);
+                    userRaidDao.saveToEvent(userRaid);
+                }
 
                 ParticipantModel updatedParticipant = ParticipantModel.builder()
                         .withUserId(p.getUserId())
@@ -71,8 +82,10 @@ public class GetRaidActivity {
             }
         }
 
+        log.info(participantModelWithStatus);
         event.setParticipants(participantModelWithStatus);
         RaidModel raidModel = new ModelConverter().toRaidModel(event);
+        log.info(raidModel);
 
         return GetRaidResult.builder()
                 .withRaidModel(raidModel)
