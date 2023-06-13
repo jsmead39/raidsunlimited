@@ -167,8 +167,9 @@ jobs:
             --region ${REGION} \
             --s3-bucket ${ARTIFACTS_BUCKET} \
             --no-fail-on-empty-changeset \
-            --parameter-overrides "S3Bucket=${ARTIFACTS_BUCKET}"  \
+            --parameter-overrides "S3Bucket=${ARTIFACTS_BUCKET}" "FrontendDeployment=remote" \
             --role-arn ${CLOUDFORMATION_EXECUTION_ROLE}
+      
 
       - name: Download NPM static resources
         uses: actions/download-artifact@v2
