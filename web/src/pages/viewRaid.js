@@ -89,28 +89,39 @@ class ViewRaid extends BindingClass {
 
         //event listener for confirmation
         Array.from(document.getElementsByClassName('confirm-btn')).forEach((button) => {
-            button.addEventListener('click', (event) => {
+            button.addEventListener('click', async (event) => {
                 const userId = event.target.getAttribute('data-userid');
                 const raidId = event.target.getAttribute('data-raidid');
                 const role = event.target.getAttribute('data-role');
+                let statusCell = event.target.parentElement.parentElement.children[4];
+                statusCell.innerText = 'Processing...';
 
                 const messagePopup = document.getElementById('messagePopup');
                 const messageText = document.getElementById('messageText');
 
-                this.client.roleAssignment(raidId, userId, role, (error) => {
-                    if (error) {
-                        messageText.innerText = `${error.message}`;
-                        messageText.classList.add('error');
-                        messagePopup.classList.remove('hidden');
-                        console.error(`An unexpected error occurred: ${error.message}`);
-
-                        setTimeout(() => {
-                            messagePopup.classList.add('hidden');
-                        }, 5000);
+                try {
+                    const response = await this.client.roleAssignment(raidId, userId, role);
+                    console.log(response);
+                    // If the status in the response is 'Confirmed', update the statusCell
+                    if (response.status === true) {
+                        statusCell.innerText = 'Confirmed';
                     } else {
-                        messagePopup.classList.add('hidden');
+                        // In case of some other status, update the statusCell with that status
+                        statusCell.innerText = 'Not confirmed';
                     }
-                });
+                    messagePopup.classList.add('hidden');
+                } catch (error) {
+                    // In case of error, revert the status
+                    statusCell.innerText = 'Not Confirmed';
+                    messageText.innerText = `${error.message}`;
+                    messageText.classList.add('error');
+                    messagePopup.classList.remove('hidden');
+                    console.error(`An unexpected error occurred: ${error.message}`);
+
+                    setTimeout(() => {
+                        messagePopup.classList.add('hidden');
+                    }, 5000);
+                }
             });
         });
     }
