@@ -28,6 +28,13 @@ public class RoleAssignmentActivity {
         this.raidDao = raidDao;
     }
 
+    /**
+     * Handles a role assignment request.
+     * @param roleAssignmentRequest The role assignment request object containing the necessary information.
+     * @return The result of the role assignment.
+     * @throws RaidSignupException If the raid ID or user ID is not provided, or if the user is not signed up for the raid.
+     * @throws NotRaidOwnerException If the requestor is not the raid owner and cannot approve attendees.
+     */
     public RoleAssignmentResult handleRequest(final RoleAssignmentRequest roleAssignmentRequest) {
         log.info("Received RoleSignupActivity Request: {}", roleAssignmentRequest);
 
