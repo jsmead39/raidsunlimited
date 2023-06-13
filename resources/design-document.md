@@ -234,7 +234,7 @@ String comments;
 * If the role assignment cannot be made, will throw a `RoleAssignmentException`.
 
 6.11. Role Removal Endpoint
-* Accepts `DELETE` requests to `/raidevents/:raidId/roleassignments/:userId`
+* Accepts `POST` requests to `/raidevents/:raidId/roleremovals/:userId`
 * Accepts a raidId and a userId and removes the user's role assignment in the raid.
 * If the role assignment is not found, will throw a `RoleAssignmentNotFoundException`.
 
