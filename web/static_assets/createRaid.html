@@ -12,6 +12,14 @@
         <h2>Create Raid</h2>
         <form class="card-content" id="create-raid-form">
             <p class="hidden error" id="error-message"></p>
+            <input type="hidden" id="raid-id" value="">
+            <p class="form-field" id="raid-status-field" style="display: none;">
+                <label>Raid Status</label>
+                <select id="raid-status">
+                    <option value="Scheduled">Scheduled</option>
+                    <option value="Completed">Completed</option>
+                </select>
+            </p>
             <p class="form-field">
                 <label>Raid Name</label>
                 <input type="text" required class="validated-field" id="raid-name" placeholder="Enter Raid Name"
@@ -55,6 +63,7 @@
                 <label for="tank-input">Tank</label>
                 <input type="number" required id="tank-input" class="role-input" placeholder="Number">
             </div>
+
             </p>
             <p>
                 <a href="#" class="button" id="create">Create Raid</a>

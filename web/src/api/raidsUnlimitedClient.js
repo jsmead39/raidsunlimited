@@ -17,7 +17,7 @@ export default class RaidsUnlimitedClient extends BindingClass {
 
         const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'createRaid', 'getRaid',
              'createProfile', 'getProfile', 'getProfileByEmail', 'updateProfile', 'getAllRaids', 'deleteRaidEvent',
-             'getRaidHistory', 'roleAssignment', 'roleRemoval'];
+             'getRaidHistory', 'roleAssignment', 'roleRemoval', 'updateRaid'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();
@@ -205,6 +205,31 @@ export default class RaidsUnlimitedClient extends BindingClass {
                 }
             });
             return response.data.raid;
+        } catch (error) {
+            this.handleError(error, errorCallback)
+        }
+    }
+
+    async updateRaid(raidName, raidServer, raidDate, time, raidSize, raidObjective,
+                     lootDistribution, requiredRoles, raidOwner, raidId, raidStatus, errorCallback){
+        try {
+            const token = await this.getTokenOrThrow("You must be logged in to update the event.")
+            const response = await this.axiosClient.put(`raidevents/${raidId}`, {
+                raidName: raidName,
+                raidServer: raidServer,
+                raidDate: raidDate,
+                time: time,
+                raidSize: raidSize,
+                raidObjective: raidObjective,
+                lootDistribution: lootDistribution,
+                requiredRoles: requiredRoles,
+                raidStatus: raidStatus,
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            return response.data;
         } catch (error) {
             this.handleError(error, errorCallback)
         }
