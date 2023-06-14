@@ -41,35 +41,30 @@ public class RaidEventUpdateActivity {
     public RaidEventUpdateResult handleRequest(RaidEventUpdateRequest raidEventUpdateRequest) {
         log.info("Handle request received {}", raidEventUpdateRequest);
 
-        RaidModel raidModel = raidEventUpdateRequest.getRaidEvent();
 
-        if (!raidModel.getRaidId().equals(raidEventUpdateRequest.getRaidId())) {
-            throw new InvalidAttributeException("The raidId does not match the update request Id");
-        }
-
-        List<String> requiredRoles = raidModel.getRequiredRoles().entrySet().stream()
+        List<String> requiredRoles = raidEventUpdateRequest.getRequiredRoles().entrySet().stream()
                 .map(entry -> entry.getKey() + " " + entry.getValue())
                 .collect(Collectors.toList());
 
-        RaidEvent raidEvent = raidDao.getRaid(raidModel.getRaidId());
+        RaidEvent raidEvent = raidDao.getRaid(raidEventUpdateRequest.getRaidId());
 
         if (raidEvent == null) {
-            throw new RaidEventNotFoundException("No raid with ID " + raidModel.getRaidId() + " exists!");
+            throw new RaidEventNotFoundException("No raid with ID " + raidEventUpdateRequest.getRaidId() + " exists!");
         }
 
         if (!raidEvent.getRaidOwner().equals(raidEventUpdateRequest.getRaidOwner())) {
             throw new NotRaidOwnerException("You must be the owner of the raid to update it");
         }
 
-        raidEvent.setRaidName(raidModel.getRaidName());
-        raidEvent.setRaidServer(raidModel.getRaidServer());
-        raidEvent.setRaidDate(parseDateToLong(raidModel.getRaidDate()));
-        raidEvent.setTime(raidModel.getTime());
-        raidEvent.setRaidSize(raidModel.getRaidSize());
-        raidEvent.setRaidObjective(raidModel.getRaidObjective());
-        raidEvent.setLootDistribution(raidModel.getLootDistribution());
+        raidEvent.setRaidName(raidEventUpdateRequest.getRaidName());
+        raidEvent.setRaidServer(raidEventUpdateRequest.getRaidServer());
+        raidEvent.setRaidDate(parseDateToLong(raidEventUpdateRequest.getRaidDate()));
+        raidEvent.setTime(raidEventUpdateRequest.getTime());
+        raidEvent.setRaidSize(raidEventUpdateRequest.getRaidSize());
+        raidEvent.setRaidObjective(raidEventUpdateRequest.getRaidObjective());
+        raidEvent.setLootDistribution(raidEventUpdateRequest.getLootDistribution());
         raidEvent.setRequiredRoles(requiredRoles);
-        raidEvent.setRaidStatus(raidModel.getRaidStatus());
+        raidEvent.setRaidStatus(raidEventUpdateRequest.getRaidStatus());
 
         raidDao.saveRaid(raidEvent);
 
