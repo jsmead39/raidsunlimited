@@ -10,10 +10,12 @@ import java.util.Map;
 public class RaidEventUpdateRequest {
     private final RaidModel raidEvent;
     private final String raidOwner;
+    private final String raidId;
 
-    private RaidEventUpdateRequest(RaidModel raidEvent, String raidOwner) {
+    private RaidEventUpdateRequest(RaidModel raidEvent, String raidOwner, String raidId) {
         this.raidEvent = raidEvent;
         this.raidOwner = raidOwner;
+        this.raidId = raidId;
     }
 
     public RaidModel getRaidEvent() {
@@ -24,11 +26,16 @@ public class RaidEventUpdateRequest {
         return raidOwner;
     }
 
+    public String getRaidId() {
+        return raidId;
+    }
+
     @Override
     public String toString() {
         return "RaidEventUpdateRequest{" +
                 "raidEvent=" + raidEvent +
                 ", raidOwner='" + raidOwner + '\'' +
+                ", raidId='" + raidId + '\'' +
                 '}';
     }
 
@@ -41,6 +48,7 @@ public class RaidEventUpdateRequest {
     public static class Builder {
         private RaidModel raidEvent;
         private String raidOwner;
+        private String raidId;
 
         public Builder withRaidEvent(RaidModel raidEvent) {
             this.raidEvent = raidEvent;
@@ -52,8 +60,13 @@ public class RaidEventUpdateRequest {
             return this;
         }
 
+        public Builder withRaidId(String raidId) {
+            this.raidId = raidId;
+            return this;
+        }
+
         public RaidEventUpdateRequest build() {
-            return new RaidEventUpdateRequest(raidEvent, raidOwner);
+            return new RaidEventUpdateRequest(raidEvent, raidOwner, raidId);
         }
     }
 }
