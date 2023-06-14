@@ -13,12 +13,11 @@ public class RaidEventUpdateLambda
         return super.runActivity(
             () -> {
                 RaidEventUpdateRequest unauthenticatedRequest = input.fromBody(RaidEventUpdateRequest.class);
-                return input.fromUserClaims(claims -> {
-                    return RaidEventUpdateRequest.builder()
-                                    .withRaidOwner(claims.get("email"))
-                                    .withRaidEvent(unauthenticatedRequest.getRaidEvent())
-                                    .build();
-                });
+                return input.fromUserClaims(claims -> input.fromPath(path -> RaidEventUpdateRequest.builder()
+                        .withRaidOwner(claims.get("email"))
+                        .withRaidEvent(unauthenticatedRequest.getRaidEvent())
+                        .withRaidId(path.get("raidId"))
+                        .build()));
             },
             (request, serviceComponent) ->
                         serviceComponent.provideRaidEventUpdateActivity().handleRequest(request)
