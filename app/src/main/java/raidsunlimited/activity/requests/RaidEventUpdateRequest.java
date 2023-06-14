@@ -9,19 +9,26 @@ import java.util.Map;
 @JsonDeserialize(builder = RaidEventUpdateRequest.Builder.class)
 public class RaidEventUpdateRequest {
     private final RaidModel raidEvent;
+    private final String raidOwner;
 
-    private RaidEventUpdateRequest(RaidModel raidEvent) {
+    private RaidEventUpdateRequest(RaidModel raidEvent, String raidOwner) {
         this.raidEvent = raidEvent;
+        this.raidOwner = raidOwner;
     }
 
     public RaidModel getRaidEvent() {
         return raidEvent;
     }
 
+    public String getRaidOwner() {
+        return raidOwner;
+    }
+
     @Override
     public String toString() {
         return "RaidEventUpdateRequest{" +
                 "raidEvent=" + raidEvent +
+                ", raidOwner='" + raidOwner + '\'' +
                 '}';
     }
 
@@ -33,14 +40,20 @@ public class RaidEventUpdateRequest {
     @JsonPOJOBuilder
     public static class Builder {
         private RaidModel raidEvent;
+        private String raidOwner;
 
         public Builder withRaidEvent(RaidModel raidEvent) {
             this.raidEvent = raidEvent;
             return this;
         }
 
+        public Builder withRaidOwner(String raidOwner) {
+            this.raidOwner = raidOwner;
+            return this;
+        }
+
         public RaidEventUpdateRequest build() {
-            return new RaidEventUpdateRequest(raidEvent);
+            return new RaidEventUpdateRequest(raidEvent, raidOwner);
         }
     }
 }

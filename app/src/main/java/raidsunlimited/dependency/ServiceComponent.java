@@ -73,4 +73,10 @@ public interface ServiceComponent {
      * @return RoleRemovalActivity
      */
     RoleRemovalActivity provideRoleRemovalActivity();
+
+    /**
+     * Provides the relevant activity.
+     * @return RaidEventUpdateActivity
+     */
+    RaidEventUpdateActivity provideRaidEventUpdateActivity();
 }

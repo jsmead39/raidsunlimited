@@ -2,9 +2,9 @@ package raidsunlimited.activity.results;
 
 import raidsunlimited.models.RaidModel;
 
-public class UpdateRaidResult {
+public class RaidEventUpdateResult {
     private final RaidModel raid;
-    private UpdateRaidResult(RaidModel raid) {
+    private RaidEventUpdateResult(RaidModel raid) {
         this.raid = raid;
     }
 
@@ -32,8 +32,8 @@ public class UpdateRaidResult {
             return this;
         }
 
-        public UpdateRaidResult build() {
-            return new UpdateRaidResult(raid);
+        public RaidEventUpdateResult build() {
+            return new RaidEventUpdateResult(raid);
         }
     }
 }
