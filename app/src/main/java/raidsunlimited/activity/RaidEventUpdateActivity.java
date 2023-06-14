@@ -2,14 +2,11 @@ package raidsunlimited.activity;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import raidsunlimited.activity.requests.CreateRaidRequest;
 import raidsunlimited.activity.requests.RaidEventUpdateRequest;
-import raidsunlimited.activity.results.CreateRaidResult;
 import raidsunlimited.activity.results.RaidEventUpdateResult;
 import raidsunlimited.converters.ModelConverter;
 import raidsunlimited.dynamodb.RaidDao;
 import raidsunlimited.dynamodb.models.RaidEvent;
-import raidsunlimited.exceptions.InvalidAttributeException;
 import raidsunlimited.exceptions.NotRaidOwnerException;
 import raidsunlimited.exceptions.RaidEventNotFoundException;
 import raidsunlimited.models.RaidModel;

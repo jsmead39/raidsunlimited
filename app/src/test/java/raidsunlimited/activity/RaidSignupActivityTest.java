@@ -197,6 +197,7 @@ class RaidSignupActivityTest {
         RaidSignupRequest request = RaidSignupRequest.builder()
                 .withRaidId("testRaidId")
                 .withUserId("testUserId")
+                .withDisplayName("testDisplay")
                 .withGameCharacter(character)
                 .build();
 
@@ -205,6 +206,7 @@ class RaidSignupActivityTest {
         existingUserRaid.setRaidId("testRaidId");
 
         RaidEvent raid = new RaidEvent();
+        raid.setRaidStatus("Scheduled");
         ParticipantModel participant = new ParticipantModel.Builder().withUserId("testUserId").build();
         raid.setParticipants(List.of(participant));
 
