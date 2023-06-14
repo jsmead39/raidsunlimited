@@ -214,7 +214,7 @@ export default class RaidsUnlimitedClient extends BindingClass {
                      lootDistribution, requiredRoles, raidOwner, raidId, raidStatus, errorCallback){
         try {
             const token = await this.getTokenOrThrow("You must be logged in to update the event.")
-            const response = await this.axiosClient.put(`raidevents/${raidId}`, {
+            return await this.axiosClient.put(`raidevents/${raidId}`, {
                 raidName: raidName,
                 raidServer: raidServer,
                 raidDate: raidDate,
@@ -229,7 +229,6 @@ export default class RaidsUnlimitedClient extends BindingClass {
                     Authorization: `Bearer ${token}`
                 }
             });
-            return response.data;
         } catch (error) {
             this.handleError(error, errorCallback)
         }

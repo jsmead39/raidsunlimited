@@ -10,9 +10,10 @@ import DataStore from '../util/DataStore';
 class CreateRaid extends BindingClass {
     constructor() {
         super();
-        this.bindClassMethods(['mount', 'submit', 'redirectToViewRaid'], this);
+        this.bindClassMethods(['mount', 'submit', 'redirectToViewRaid', 'clientLoaded', 'populateRaidData',
+            'getFormValues', 'update'], this);
         this.dataStore = new DataStore();
-        this.dataStore.addChangeListener(this.redirectToViewRaid);
+        // this.dataStore.addChangeListener(this.redirectToViewRaid);
         this.header = new Header(this.dataStore);
     }
 
@@ -20,11 +21,57 @@ class CreateRaid extends BindingClass {
          * Add the header to the page and load the RaidClient.
          */
     mount() {
+        this.header.addHeaderToPage();
+        this.client = new RaidsUnlimitedClient();
+
+        this.clientLoaded();
+
         document.getElementById('create').addEventListener('click', this.submit);
 
-        this.header.addHeaderToPage();
 
-        this.client = new RaidsUnlimitedClient();
+    }
+
+    async clientLoaded() {
+        try {
+            const urlParams = new URLSearchParams(window.location.search);
+
+            const raidId = urlParams.get('id');
+
+            if (raidId) {
+                const raid = await this.client.getRaid(raidId);
+                this.populateRaidData(raid);
+                this.dataStore.set('raid', raid);
+
+                const createButton = document.getElementById('create');
+                createButton.innerText = 'Update Raid';
+                createButton.removeEventListener('click', this.submit);
+                createButton.addEventListener('click', this.update);
+            }
+        } catch (error) {
+            console.error("Error loading the raid");
+        }
+    }
+
+    populateRaidData(raid) {
+        document.getElementById('pageTitle').innerText = "Update Raid";
+        document.getElementById('raid-id').value = raid.raidId;
+        document.getElementById('raid-name').value = raid.raidName;
+        document.getElementById('raid-server').value = raid.raidServer;
+        document.getElementById('raid-date').value = raid.raidDate;
+        document.getElementById('raid-time').value = raid.time;
+        document.getElementById('raid-size').value = raid.raidSize;
+        document.getElementById('raid-objective').value = raid.raidObjective;
+        document.getElementById('loot-distribution').value = raid.lootDistribution;
+        document.getElementById('dps-input').value = raid.requiredRoles.DPS;
+        document.getElementById('healer-input').value = raid.requiredRoles.Healer;
+        document.getElementById('tank-input').value = raid.requiredRoles.Tank;
+        document.getElementById('raid-status').value = raid.raidStatus;
+
+        const raidStatusField = document.getElementById('raid-status-field');
+        raidStatusField.style.display = 'block';
+
+        const raidStatusDropdown = document.getElementById('raid-status');
+        raidStatusDropdown.value = raid.raidStatus;
     }
 
         /**
@@ -42,6 +89,76 @@ class CreateRaid extends BindingClass {
         const origButtonText = createButton.innerText;
         createButton.innerText = 'Loading...';
 
+            const {
+                raidId,
+                raidName,
+                raidServer,
+                raidDate,
+                time,
+                raidSize,
+                raidObjective,
+                lootDistribution,
+                requiredRoles,
+                raidStatus
+            } = this.getFormValues();
+
+
+            const raid = await this.client.createRaid(raidName, raidServer, raidDate, time, raidSize,
+            raidObjective, lootDistribution, requiredRoles, (error) => {
+                createButton.innerText = origButtonText;
+                errorMessageDisplay.innerText = `Error: ${error.message}`;
+                errorMessageDisplay.classList.remove('hidden');
+            });
+        this.dataStore.set('raid', raid);
+    }
+
+    async update(evt) {
+        evt.preventDefault();
+
+        const changeButton = document.getElementById('create');
+        const origButtonText = changeButton.innerText;
+        const messagePopup = document.getElementById('messagePopup');
+        const messageText = document.getElementById('messageText');
+
+        const {
+            raidId,
+            raidName,
+            raidServer,
+            raidDate,
+            time,
+            raidSize,
+            raidObjective,
+            lootDistribution,
+            requiredRoles,
+            raidStatus
+        } = this.getFormValues();
+
+        try {
+            const raid = await this.client.updateRaid(raidName, raidServer, raidDate, time, raidSize,
+                raidObjective, lootDistribution, requiredRoles, raidStatus, raidId);
+
+            if (raid.status === 200) {
+                messageText.innerText = "Raid Updated";
+                messagePopup.classList.add('success');
+                messagePopup.classList.remove('hidden');
+            }
+            this.dataStore.set('raid', raid.data);
+
+            setTimeout(() => {
+                this.redirectToViewRaid();
+            }, 5000);
+
+
+        } catch (error) {
+            changeButton.innerText = origButtonText;
+            messageText.innerText = `Error: ${error.message}`;
+            messagePopup.classList.remove('hidden');
+        }
+    }
+
+
+
+    getFormValues() {
         const raidName = document.getElementById('raid-name').value;
         const raidServer = document.getElementById('raid-server').value;
         const raidDate = document.getElementById('raid-date').value;
@@ -52,31 +169,39 @@ class CreateRaid extends BindingClass {
         const dps = document.getElementById('dps-input').value;
         const healer = document.getElementById('healer-input').value;
         const tank = document.getElementById('tank-input').value;
-
+        const status = document.getElementById('raid-status').value;
+        const raidId = document.getElementById('raid-id').value;
 
         const requiredRoles = {
             DPS: dps,
             Healer: healer,
             Tank: tank
         };
-        const raid = await this.client.createRaid(raidName, raidServer, raidDate, time, raidSize,
-            raidObjective, lootDistribution, requiredRoles, (error) => {
-                createButton.innerText = origButtonText;
-                errorMessageDisplay.innerText = `Error: ${error.message}`;
-                errorMessageDisplay.classList.remove('hidden');
-            });
-        this.dataStore.set('raid', raid);
+
+        return {
+            raidName,
+            raidServer,
+            raidDate,
+            time,
+            raidSize,
+            raidObjective,
+            lootDistribution,
+            requiredRoles,
+            status,
+            raidId
+        };
     }
+
 
     /**
      * When the raidEvent is updated in the datastore, redirect to the view raid page.
      */
     redirectToViewRaid() {
         const raid = this.dataStore.get('raid');
-        console.log("log the raid");
-        console.log(raid);
+        const raidId = raid.raid.raidId;
+
         if (raid != null) {
-            window.location.href = `/viewRaid.html?id=${raid.raidId}`;
+            window.location.href = `/viewRaid.html?id=${raidId}`;
         }
     }
 }
