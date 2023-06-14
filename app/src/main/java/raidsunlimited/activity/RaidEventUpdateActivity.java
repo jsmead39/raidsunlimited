@@ -41,11 +41,6 @@ public class RaidEventUpdateActivity {
     public RaidEventUpdateResult handleRequest(RaidEventUpdateRequest raidEventUpdateRequest) {
         log.info("Handle request received {}", raidEventUpdateRequest);
 
-
-        List<String> requiredRoles = raidEventUpdateRequest.getRequiredRoles().entrySet().stream()
-                .map(entry -> entry.getKey() + " " + entry.getValue())
-                .collect(Collectors.toList());
-
         RaidEvent raidEvent = raidDao.getRaid(raidEventUpdateRequest.getRaidId());
 
         if (raidEvent == null) {
@@ -56,15 +51,44 @@ public class RaidEventUpdateActivity {
             throw new NotRaidOwnerException("You must be the owner of the raid to update it");
         }
 
-        raidEvent.setRaidName(raidEventUpdateRequest.getRaidName());
-        raidEvent.setRaidServer(raidEventUpdateRequest.getRaidServer());
-        raidEvent.setRaidDate(parseDateToLong(raidEventUpdateRequest.getRaidDate()));
-        raidEvent.setTime(raidEventUpdateRequest.getTime());
-        raidEvent.setRaidSize(raidEventUpdateRequest.getRaidSize());
-        raidEvent.setRaidObjective(raidEventUpdateRequest.getRaidObjective());
-        raidEvent.setLootDistribution(raidEventUpdateRequest.getLootDistribution());
-        raidEvent.setRequiredRoles(requiredRoles);
-        raidEvent.setRaidStatus(raidEventUpdateRequest.getRaidStatus());
+        if (raidEventUpdateRequest.getRaidName() != null && !raidEventUpdateRequest.getRaidName().isEmpty()) {
+            raidEvent.setRaidName(raidEventUpdateRequest.getRaidName());
+        }
+
+        if (raidEventUpdateRequest.getRaidServer() != null && !raidEventUpdateRequest.getRaidServer().isEmpty()) {
+            raidEvent.setRaidServer(raidEventUpdateRequest.getRaidServer());
+        }
+
+        if (raidEventUpdateRequest.getRaidDate() != null && !raidEventUpdateRequest.getRaidDate().isEmpty()) {
+            raidEvent.setRaidDate(parseDateToLong(raidEventUpdateRequest.getRaidDate()));
+        }
+
+        if (raidEventUpdateRequest.getTime() != null && !raidEventUpdateRequest.getTime().isEmpty()) {
+            raidEvent.setTime(raidEventUpdateRequest.getTime());
+        }
+
+        if (raidEventUpdateRequest.getRaidSize() != null) {
+            raidEvent.setRaidSize(raidEventUpdateRequest.getRaidSize());
+        }
+
+        if (raidEventUpdateRequest.getRaidObjective() != null && !raidEventUpdateRequest.getRaidObjective().isEmpty()) {
+            raidEvent.setRaidObjective(raidEventUpdateRequest.getRaidObjective());
+        }
+
+        if (raidEventUpdateRequest.getLootDistribution() != null && !raidEventUpdateRequest.getLootDistribution().isEmpty()) {
+            raidEvent.setLootDistribution(raidEventUpdateRequest.getLootDistribution());
+        }
+
+        if (raidEventUpdateRequest.getRequiredRoles() != null) {
+            List<String> requiredRoles = raidEventUpdateRequest.getRequiredRoles().entrySet().stream()
+                    .map(entry -> entry.getKey() + " " + entry.getValue())
+                    .collect(Collectors.toList());
+            raidEvent.setRequiredRoles(requiredRoles);
+        }
+
+        if (raidEventUpdateRequest.getRaidStatus() != null && !raidEventUpdateRequest.getRaidStatus().isEmpty()) {
+            raidEvent.setRaidStatus(raidEventUpdateRequest.getRaidStatus());
+        }
 
         raidDao.saveRaid(raidEvent);
 
