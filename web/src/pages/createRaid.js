@@ -53,7 +53,7 @@ class CreateRaid extends BindingClass {
     }
 
     populateRaidData(raid) {
-        document.getElementById('pageTitle').innerText = "Update Raid";
+        document.getElementById('formTitle').innerText = "Update Raid";
         document.getElementById('raid-id').value = raid.raidId;
         document.getElementById('raid-name').value = raid.raidName;
         document.getElementById('raid-server').value = raid.raidServer;
@@ -74,6 +74,7 @@ class CreateRaid extends BindingClass {
         raidStatusDropdown.value = raid.raidStatus;
     }
 
+
         /**
          * Method to run when the create raid submit button is pressed. Call the RaidEventService to create the
          * raid.
@@ -81,13 +82,13 @@ class CreateRaid extends BindingClass {
     async submit(evt) {
         evt.preventDefault();
 
-        const errorMessageDisplay = document.getElementById('error-message');
-        errorMessageDisplay.innerText = ``;
-        errorMessageDisplay.classList.add('hidden');
+        const changeButton = document.getElementById('create');
+        const origButtonText = changeButton.innerText;
+        const messagePopup = document.getElementById('messagePopup');
+        const messageText = document.getElementById('messageText');
 
-        const createButton = document.getElementById('create');
-        const origButtonText = createButton.innerText;
-        createButton.innerText = 'Loading...';
+
+        changeButton.innerText = 'Loading...';
 
             const {
                 raidId,
@@ -105,11 +106,15 @@ class CreateRaid extends BindingClass {
 
             const raid = await this.client.createRaid(raidName, raidServer, raidDate, time, raidSize,
             raidObjective, lootDistribution, requiredRoles, (error) => {
-                createButton.innerText = origButtonText;
-                errorMessageDisplay.innerText = `Error: ${error.message}`;
-                errorMessageDisplay.classList.remove('hidden');
+                changeButton.innerText = origButtonText;
+                messageText.innerText = `Error: ${error.message}`;
+                messagePopup.classList.remove('hidden');
             });
         this.dataStore.set('raid', raid);
+
+            setTimeout(() => {
+                this.redirectToViewRaid();
+            }, 5000);
     }
 
     async update(evt) {
@@ -134,15 +139,15 @@ class CreateRaid extends BindingClass {
         } = this.getFormValues();
 
         try {
-            const raid = await this.client.updateRaid(raidName, raidServer, raidDate, time, raidSize,
+            const response = await this.client.updateRaid(raidName, raidServer, raidDate, time, raidSize,
                 raidObjective, lootDistribution, requiredRoles, raidStatus, raidId);
 
-            if (raid.status === 200) {
+            if (response.status === 200) {
                 messageText.innerText = "Raid Updated";
                 messagePopup.classList.add('success');
                 messagePopup.classList.remove('hidden');
             }
-            this.dataStore.set('raid', raid.data);
+            this.dataStore.set('raid', response.data.raid);
 
             setTimeout(() => {
                 this.redirectToViewRaid();
@@ -198,7 +203,8 @@ class CreateRaid extends BindingClass {
      */
     redirectToViewRaid() {
         const raid = this.dataStore.get('raid');
-        const raidId = raid.raid.raidId;
+        console.log("raid in redirect", raid);
+        const raidId = raid.raidId;
 
         if (raid != null) {
             window.location.href = `/viewRaid.html?id=${raidId}`;
