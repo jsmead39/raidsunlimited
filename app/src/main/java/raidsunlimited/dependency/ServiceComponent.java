@@ -79,4 +79,10 @@ public interface ServiceComponent {
      * @return RaidEventUpdateActivity
      */
     RaidEventUpdateActivity provideRaidEventUpdateActivity();
+
+    /**
+     * Provides the relevant activity.
+     * @return RaidWithdrawActivity
+     */
+    RaidWithdrawActivity provideRaidWithdrawActivity();
 }

@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
 
+
 <head>
+    <title>Raids Unlimited</title>
     <script type="text/javascript" src="assets/viewRaid.js"></script>
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
@@ -13,15 +15,13 @@
     <div id="messagePopup" class="hidden">
         <p id="messageText"></p>
     </div>
-    <div class="card">
-        <div class = "raid-header">
-        <h2>Raid Details</h2>
+    <div class="card hidden">
+        <h2 id="formTitle">Raid Details</h2>
             <button id="signup-btn" class="button">Sign Up</button>
             <button id="delete-btn" class="button">Delete Raid</button>
             <button id="edit-btn" class="button">Edit Raid</button>
             <div id="character-dropdown" class="character-dropdown"></div>
-        </div>
-        <div class="card-content">
+
             <p class="hidden error" id="error-message"></p>
             <div class="raid-details-flex" id="raid-details">
                 <p id="raid-name">Raid Name: </p>
