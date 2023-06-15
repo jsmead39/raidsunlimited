@@ -10,7 +10,8 @@ class ViewRaid extends BindingClass {
     constructor() {
         super();
         this.bindClassMethods(['clientLoaded', 'mount', 'addRaidToPage', 'displayCharacters',
-            'handleCharacterSelection', 'deleteRaidEvent', 'confirmUser', 'removeUser', 'redirectToEditRaid'], this);
+            'handleCharacterSelection', 'deleteRaidEvent', 'confirmUser', 'removeUser', 'redirectToEditRaid',
+            'changeSignupButton', 'withdrawEvent'], this);
         this.dataStore = new DataStore();
         this.dataStore.addChangeListener(this.addRaidToPage);
         this.header = new Header(this.dataStore);
@@ -36,8 +37,6 @@ class ViewRaid extends BindingClass {
      * Add the header to the page and load the RaidClient
      */
     mount() {
-        document.getElementById('signup-btn').addEventListener('click', (event) =>
-            this.displayCharacters(event));
 
         document.getElementById('delete-btn').addEventListener('click', this.deleteRaidEvent);
         document.getElementById('edit-btn').addEventListener('click', this.redirectToEditRaid);
@@ -74,9 +73,10 @@ class ViewRaid extends BindingClass {
         for (participant of participants) {
             let buttonClass = participant.participantStatus ? 'remove-btn' : 'confirm-btn';
             let buttonText = participant.participantStatus ? 'Remove' : 'Confirm';
+            let displayNameCapitalized = participant.displayName.charAt(0).toUpperCase() + participant.displayName.slice(1);
             participantHtml += `
                 <tr>
-                    <td>${participant.displayName}</td>
+                    <td><a href="viewProfile.html?id=${participant.userId}">${displayNameCapitalized}</a></td>
                     <td>${participant.participantClass}</td>
                     <td>${participant.participantSpecialization}</td>
                     <td>${participant.role}</td>
@@ -98,6 +98,9 @@ class ViewRaid extends BindingClass {
         Array.from(document.getElementsByClassName('remove-btn')).forEach((button) => {
             button.addEventListener('click', this.removeUser);
         });
+        this.changeSignupButton();
+        document.querySelector('.card').classList.remove('hidden');
+
     }
 
     async confirmUser(event) {
@@ -143,13 +146,11 @@ class ViewRaid extends BindingClass {
     }
 
     async removeUser(event) {
-        console.log("=>(viewRaid.js:143) ", "remove button clicked");
         const userId = event.target.getAttribute('data-userid');
         const raidId = event.target.getAttribute('data-raidid');
         let statusCell = event.target.parentElement.parentElement.children[4];
         statusCell.innerText = 'Processing...';
 
-        console.log(userId, raidId);
         const messagePopup = document.getElementById('messagePopup');
         const messageText = document.getElementById('messageText');
 
@@ -310,6 +311,56 @@ class ViewRaid extends BindingClass {
 
         if (raid != null) {
             window.location.href = `/createRaid.html?id=${raidId}`;
+        }
+    }
+
+    changeSignupButton() {
+        const signUpButton = document.getElementById('signup-btn');
+        const raidModel = this.dataStore.get('raid');
+        const profileModel = this.header.dataStore.get('profileModel');
+        const userId = profileModel.userId;
+
+
+        this.displayCharactersHandler = (event) => this.displayCharacters(event);
+        signUpButton.addEventListener('click', this.displayCharactersHandler);
+
+        if(raidModel && profileModel) {
+            const isParticipant = raidModel.participants.some(participant => participant.userId === userId);
+            if(isParticipant) {
+                signUpButton.innerText = 'Withdraw';
+                signUpButton.removeEventListener('click', this.displayCharactersHandler);
+                signUpButton.addEventListener('click', this.withdrawEvent);
+            } else {
+                signUpButton.innerText = 'Sign Up';
+                signUpButton.removeEventListener('click', this.withdrawEvent);
+                signUpButton.addEventListener('click', this.displayCharactersHandler)
+            }
+        }
+    }
+
+    async withdrawEvent() {
+        const raidModel = this.dataStore.get('raid');
+        const raidId = raidModel.raidId;
+        const userId = this.header.dataStore.get('profileModel').userId;
+
+        const messagePopup = document.getElementById('messagePopup');
+        const messageText = document.getElementById('messageText');
+
+        try {
+            const response = await this.client.raidWithdraw(raidId, userId);
+
+            if (response.status === 200) {
+                messageText.innerText = "Success";
+                messagePopup.classList.add('success');
+                messagePopup.classList.remove('hidden');
+            }
+
+            setTimeout(() => {
+                window.location.href = "index.html";
+            }, 3000);
+        } catch (error) {
+            messageText.innerText = `Error: ${error.message}`;
+            messagePopup.classList.remove('hidden');
         }
     }
 

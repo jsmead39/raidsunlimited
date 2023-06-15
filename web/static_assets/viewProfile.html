@@ -11,32 +11,34 @@
 
     <div id="topSection">PlaceHolder</div>
 
-    <section id="viewUserProfile" class="dialog-block">
+    <div id="viewUserProfile" class="dialog-block">
         <h2 id="viewUserProfile-title" class="dialog-title">
             User Profile
         </h2>
 
         <div class="dialog-content">
-            <div class="form-group">
-                <h3>User Name:</h3>
-                <h2 id ="displayName"</h2>
+            <div class="form-group" id="displayNameContainer">
+                <label for="displayName" id="displayTitle">User Name:</label>
+                <div>
+                    <span id="displayName"></span>
                 </div>
-
-                <div class="form-group">
-                    <h3 id="warcraftLogsLink">Warcraft Logs Link:</h3>
-                    <a href="#" id="warcraftLink">Link to Warcraft Logs</a>
-                </div>
-
-                <section class="form-group" id="characterSection">
-                    <h3>List of Characters</h3>
-                    <ul id="characterList" class="character-list">
-
-                    </ul>
-                </section>
             </div>
-        </section>
 
-        <section id="raidHistory" class="dialog-block">
+            <div class="form-group">
+                <label id="warcraftLogsLink">Warcraft Logs Link:</label>
+                <a id="warcraftLink" href="#"></a>
+            </div>
+
+            <div id="characterContainer" class="character-list">
+                <h2 class="list-title">Character List</h2>
+                <div id="characterList">
+
+                </div>
+            </div>
+
+        </div>
+
+        <div id="raidHistory" class="dialog-block">
             <h2 id="raidHistory-title" class="dialog-title">
                 Raid History
             </h2>
@@ -45,7 +47,7 @@
 
                 </ul>
             </div>
-        </section>
+        </div>
 </body>
 
 </html>

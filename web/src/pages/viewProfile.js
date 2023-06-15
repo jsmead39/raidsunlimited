@@ -30,10 +30,12 @@ class ViewProfile extends BindingClass {
             const userId = urlParams.get('id');
 
             const response = await this.client.getProfile(userId);
+            const logsLink = response.profileModel.logs;
 
             document.getElementById('displayName').innerText = response.profileModel.displayName;
-            document.getElementById('warcraftLink').href = response.profileModel.logs;
-            document.getElementById('warcraftLogsLink').innerText = "Link to Warcraft Logs";
+            document.getElementById('warcraftLink').href = logsLink;
+            document.getElementById('warcraftLink').innerText = logsLink;
+            // document.getElementById('warcraftLogsLink').innerText = "Link to Warcraft Logs";
 
 
             //need to create a table here if it doesn't exist

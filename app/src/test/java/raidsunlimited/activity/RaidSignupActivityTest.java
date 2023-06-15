@@ -10,7 +10,6 @@ import raidsunlimited.dynamodb.UserRaidDao;
 import raidsunlimited.dynamodb.models.RaidEvent;
 import raidsunlimited.dynamodb.models.User;
 import raidsunlimited.dynamodb.models.UserRaid;
-import raidsunlimited.exceptions.RaidEventNotFoundException;
 import raidsunlimited.exceptions.RaidSignupException;
 import raidsunlimited.exceptions.UserProfileNotFoundException;
 import raidsunlimited.models.FeedbackModel;

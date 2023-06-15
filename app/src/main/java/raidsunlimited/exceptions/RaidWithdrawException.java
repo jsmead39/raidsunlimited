@@ -2,16 +2,17 @@ package raidsunlimited.exceptions;
 
 
 /**
- * Exception to throw when an error occurs signing up for a Raid.
+ * Exception to throw when an error occurs withdrawing for a Raid.
  */
-public class RaidSignupException extends RuntimeException {
+public class RaidWithdrawException extends RuntimeException {
 
-    private static final long serialVersionUID = 7638251841106988596L;
+
+    private static final long serialVersionUID = -4841821854803251554L;
 
     /**
      * Exception with no message or cause.
      */
-    public RaidSignupException() {
+    public RaidWithdrawException() {
         super();
     }
 
@@ -19,7 +20,7 @@ public class RaidSignupException extends RuntimeException {
      * Exception with a message, but no cause.
      * @param message A descriptive message for this exception.
      */
-    public RaidSignupException(String message) {
+    public RaidWithdrawException(String message) {
         super(message);
     }
 
@@ -27,7 +28,7 @@ public class RaidSignupException extends RuntimeException {
      * Exception with no message, but with a cause.
      * @param cause The original throwable resulting in this exception.
      */
-    public RaidSignupException(Throwable cause) {
+    public RaidWithdrawException(Throwable cause) {
         super(cause);
     }
 
@@ -36,7 +37,7 @@ public class RaidSignupException extends RuntimeException {
      * @param message A descriptive message for this exception.
      * @param cause The original throwable resulting in this exception.
      */
-    public RaidSignupException(String message, Throwable cause) {
+    public RaidWithdrawException(String message, Throwable cause) {
         super(message, cause);
     }
 }
