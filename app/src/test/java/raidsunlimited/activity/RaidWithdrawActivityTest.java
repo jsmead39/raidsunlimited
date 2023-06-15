@@ -18,6 +18,7 @@ import raidsunlimited.models.ParticipantModel;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
@@ -71,6 +72,7 @@ class RaidWithdrawActivityTest {
         // THEN
         verify(userRaidDao).deleteUserRaidEvent(userRaid);
         verify(raidDao).saveRaid(any(RaidEvent.class));
+        assertEquals(0, participants.size());
     }
 
     @Test

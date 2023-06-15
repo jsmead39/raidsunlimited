@@ -90,6 +90,11 @@ public class ModelConverter {
                 .build();
     }
 
+    /**
+     * Private helper method for converting a epoch standard date to a string format.
+     * @param epoch the epoch value of the date.
+     * @return the string format of the epoch date value.
+     */
     private String convertLongToDate(Long epoch) {
         if (epoch == null) {
             return null;
