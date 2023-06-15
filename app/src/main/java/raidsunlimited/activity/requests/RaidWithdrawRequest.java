@@ -39,7 +39,7 @@ public class RaidWithdrawRequest {
         private String raidId;
         private String userId;
 
-        public Builder withRaid(String raidId) {
+        public Builder withRaidId(String raidId) {
             this.raidId = raidId;
             return this;
         }

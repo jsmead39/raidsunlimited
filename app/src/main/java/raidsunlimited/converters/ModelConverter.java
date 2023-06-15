@@ -91,12 +91,18 @@ public class ModelConverter {
     }
 
     private String convertLongToDate(Long epoch) {
+        if (epoch == null) {
+            return null;
+        }
         Instant instant = Instant.ofEpochSecond(epoch);
         ZonedDateTime convertedDate = ZonedDateTime.ofInstant(instant, ZoneId.of("America/Los_Angeles"));
         return convertedDate.toLocalDate().toString();
     }
 
     private Map<String, Integer> convertListToMap(List<String> roles) {
+        if (roles == null) {
+            return null;
+        }
         Map<String, Integer> result = new HashMap<>();
         for (String entry : roles) {
             String[] split = entry.split(" ");
