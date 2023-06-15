@@ -46,7 +46,9 @@ class CreateRaid extends BindingClass {
                 createButton.innerText = 'Update Raid';
                 createButton.removeEventListener('click', this.submit);
                 createButton.addEventListener('click', this.update);
+
             }
+            document.querySelector('.card').classList.remove('hidden');
         } catch (error) {
             console.error("Error loading the raid");
         }
@@ -199,7 +201,7 @@ class CreateRaid extends BindingClass {
 
 
     /**
-     * When the raidEvent is updated in the datastore, redirect to the view raid page.
+     * Redirects the user to the ViewRaid page after updating or creating an event.
      */
     redirectToViewRaid() {
         const raid = this.dataStore.get('raid');
