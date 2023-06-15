@@ -15,6 +15,7 @@ import raidsunlimited.exceptions.RaidSignupException;
 import raidsunlimited.exceptions.UserProfileNotFoundException;
 import raidsunlimited.models.FeedbackModel;
 import raidsunlimited.models.GameCharacter;
+import raidsunlimited.models.ParticipantModel;
 
 import java.util.List;
 
@@ -104,8 +105,20 @@ class RaidSignupActivityTest {
     }
 
     @Test
-    public void handleRequest_nonExistentUser_throwsException() {
-        //GIVEN-
+    public void handleRequest_noGameCharacter_throwsException() {
+        // GIVEN
+        RaidSignupRequest request = RaidSignupRequest.builder()
+                .withRaidId("testRaidId")
+                .withUserId("testUserId")
+                .build();
+
+        // WHEN + THEN
+        assertThrows(RaidSignupException.class, () -> raidSignupActivity.handleRequest(request));
+    }
+
+    @Test
+    public void handleRequest_emptyRaidId_throwsException() {
+        // GIVEN
         GameCharacter character = new GameCharacter.Builder()
                 .withCharName("Test")
                 .withCharClass("TestClass")
@@ -114,19 +127,40 @@ class RaidSignupActivityTest {
                 .build();
 
         RaidSignupRequest request = RaidSignupRequest.builder()
-                .withUserId("nullUser")
+                .withRaidId("")
+                .withUserId("testUserId")
+                .withGameCharacter(character)
+                .build();
+
+        // WHEN + THEN
+        assertThrows(RaidSignupException.class, () -> raidSignupActivity.handleRequest(request));
+    }
+
+    @Test
+    public void handleRequest_userProfileNotFound_throwsException() {
+        // GIVEN
+        GameCharacter character = new GameCharacter.Builder()
+                .withCharName("Test")
+                .withCharClass("TestClass")
+                .withSpecialization("TestSpec")
+                .withRole("TestRole")
+                .build();
+
+        RaidSignupRequest request = RaidSignupRequest.builder()
                 .withRaidId("testRaidId")
+                .withUserId("nonExistentUserId")
                 .withGameCharacter(character)
                 .build();
 
         when(userDao.getUserById(request.getUserId())).thenReturn(null);
 
-        //WHEN + THEN
+        // WHEN + THEN
         assertThrows(UserProfileNotFoundException.class, () -> raidSignupActivity.handleRequest(request));
     }
 
     @Test
-    public void handleRequest_nonExistentRaid_throwsException() {
+    public void handleRequest_raidAlreadyCompleted_throwsException() {
+        // GIVEN
         GameCharacter character = new GameCharacter.Builder()
                 .withCharName("Test")
                 .withCharClass("TestClass")
@@ -135,20 +169,24 @@ class RaidSignupActivityTest {
                 .build();
 
         RaidSignupRequest request = RaidSignupRequest.builder()
-                .withUserId("test")
-                .withRaidId("nullRaid")
+                .withRaidId("testRaidId")
+                .withUserId("testUserId")
                 .withGameCharacter(character)
                 .build();
 
+        RaidEvent completedRaid = new RaidEvent();
+        completedRaid.setRaidStatus("Completed");
 
         when(userDao.getUserById(request.getUserId())).thenReturn(new User());
-        when(raidDao.getRaid(request.getRaidId())).thenReturn(null);
+        when(raidDao.getRaid(request.getRaidId())).thenReturn(completedRaid);
 
-        assertThrows(RaidEventNotFoundException.class, () -> raidSignupActivity.handleRequest(request));
+        // WHEN + THEN
+        assertThrows(RaidSignupException.class, () -> raidSignupActivity.handleRequest(request));
     }
 
     @Test
-    public void handleRequest_userSignedUp_throwsException() {
+    public void handleRequest_userAlreadySignedUp_throwsException() {
+        // GIVEN
         GameCharacter character = new GameCharacter.Builder()
                 .withCharName("Test")
                 .withCharClass("TestClass")
@@ -157,24 +195,27 @@ class RaidSignupActivityTest {
                 .build();
 
         RaidSignupRequest request = RaidSignupRequest.builder()
-                .withUserId("test")
-                .withRaidId("testRaid")
+                .withRaidId("testRaidId")
+                .withUserId("testUserId")
+                .withDisplayName("testDisplay")
                 .withGameCharacter(character)
                 .build();
 
-
-        UserRaid userRaid = new UserRaid();
-        userRaid.setUserId("test");
-        userRaid.setRaidId("testRaid");
-        userRaid.setConfirmed(true);
+        UserRaid existingUserRaid = new UserRaid();
+        existingUserRaid.setUserId("testUserId");
+        existingUserRaid.setRaidId("testRaidId");
 
         RaidEvent raid = new RaidEvent();
         raid.setRaidStatus("Scheduled");
+        ParticipantModel participant = new ParticipantModel.Builder().withUserId("testUserId").build();
+        raid.setParticipants(List.of(participant));
 
         when(userDao.getUserById(request.getUserId())).thenReturn(new User());
         when(raidDao.getRaid(request.getRaidId())).thenReturn(raid);
-        when(userRaidDao.getUserRaid(request.getUserId(), request.getRaidId())).thenReturn(userRaid);
+        when(userRaidDao.getUserRaid(request.getUserId(), request.getRaidId())).thenReturn(existingUserRaid);
 
+        // WHEN + THEN
         assertThrows(RaidSignupException.class, () -> raidSignupActivity.handleRequest(request));
     }
+
 }

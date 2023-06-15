@@ -15,7 +15,6 @@ public class RoleRemovalLambda extends LambdaActivityRunner<RoleRemovalRequest, 
     public LambdaResponse handleRequest(AuthenticatedLambdaRequest<RoleRemovalRequest> input, Context context) {
         return super.runActivity(
                 () -> {
-//                    RoleRemovalRequest unauthenticatedRequest = input.fromBody(RoleRemovalRequest.class);
                     return input.fromPath(path -> {
                         String raidId = path.get("raidId"); // get raidId from path parameters
                         String userId = path.get("userId");

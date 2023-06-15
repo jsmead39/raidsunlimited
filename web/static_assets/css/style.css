@@ -224,8 +224,12 @@ a {
     margin-bottom: 5px;
 }
 
-#messagePopup {
+.hidden {
     display: none;
+}
+
+#messagePopup {
+    display: block;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -234,6 +238,10 @@ a {
     border: 1px solid var(--light-grey);
     padding: 20px;
     text-align: center;
+}
+
+#messagePopup.hidden {
+    display: none;
 }
 
 #messageText {
@@ -354,9 +362,7 @@ a {
     align-items: center;
 }
 
-.hidden {
-    display: none;
-}
+
 
 #characterFormContainer {
     display: none;

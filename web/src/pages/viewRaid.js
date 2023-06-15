@@ -10,7 +10,7 @@ class ViewRaid extends BindingClass {
     constructor() {
         super();
         this.bindClassMethods(['clientLoaded', 'mount', 'addRaidToPage', 'displayCharacters',
-            'handleCharacterSelection', 'deleteRaidEvent', 'confirmUser', 'removeUser'], this);
+            'handleCharacterSelection', 'deleteRaidEvent', 'confirmUser', 'removeUser', 'redirectToEditRaid'], this);
         this.dataStore = new DataStore();
         this.dataStore.addChangeListener(this.addRaidToPage);
         this.header = new Header(this.dataStore);
@@ -40,9 +40,9 @@ class ViewRaid extends BindingClass {
             this.displayCharacters(event));
 
         document.getElementById('delete-btn').addEventListener('click', this.deleteRaidEvent);
+        document.getElementById('edit-btn').addEventListener('click', this.redirectToEditRaid);
 
         this.header.addHeaderToPage();
-
         this.client = new RaidsUnlimitedClient();
         this.clientLoaded();
 
@@ -300,6 +300,16 @@ class ViewRaid extends BindingClass {
                 messagePopup.classList.add('hidden');
                 window.location.href = "index.html";
             }, 5000);
+        }
+    }
+
+    redirectToEditRaid() {
+        const raid = this.dataStore.get('raid');
+        console.log("raid in redirect", raid);
+        const raidId = raid.raidId;
+
+        if (raid != null) {
+            window.location.href = `/createRaid.html?id=${raidId}`;
         }
     }
 
