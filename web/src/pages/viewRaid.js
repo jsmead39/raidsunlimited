@@ -73,9 +73,10 @@ class ViewRaid extends BindingClass {
         for (participant of participants) {
             let buttonClass = participant.participantStatus ? 'remove-btn' : 'confirm-btn';
             let buttonText = participant.participantStatus ? 'Remove' : 'Confirm';
+            let displayNameCapitalized = participant.displayName.charAt(0).toUpperCase() + participant.displayName.slice(1);
             participantHtml += `
                 <tr>
-                    <td>${participant.displayName}</td>
+                    <td><a href="viewProfile.html?id=${participant.userId}">${displayNameCapitalized}</a></td>
                     <td>${participant.participantClass}</td>
                     <td>${participant.participantSpecialization}</td>
                     <td>${participant.role}</td>

@@ -82,7 +82,11 @@ body {
     box-sizing: border-box;
 }
 
+
+
 .dialog-content {
+    display: flex;
+    flex-direction: column;
     padding-top: 60px;
     box-sizing: border-box;
 }
@@ -90,12 +94,15 @@ body {
 .form-group {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     margin-bottom: 10px;
 }
 
+
+
 .form-group label {
-    flex: 0 0 150px;
+    flex-shrink: 0;
+    width: 150px;
+    text-align: right;
     margin-right: 10px;
 }
 
@@ -339,6 +346,16 @@ a {
 }
 
 #editUserProfile {
+    text-align: center;
+    margin: 0 auto;
+    width: 800px;
+    padding: 20px;
+    background: var(--dialog-bg-color);
+    color: var(--main-text-color);
+    border: 1px solid var(--light-grey);
+}
+
+#viewUserProfile {
     text-align: center;
     margin: 0 auto;
     width: 800px;
