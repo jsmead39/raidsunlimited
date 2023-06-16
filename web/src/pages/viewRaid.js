@@ -11,7 +11,7 @@ class ViewRaid extends BindingClass {
         super();
         this.bindClassMethods(['clientLoaded', 'mount', 'addRaidToPage', 'displayCharacters',
             'handleCharacterSelection', 'deleteRaidEvent', 'confirmUser', 'removeUser', 'redirectToEditRaid',
-            'changeSignupButton', 'withdrawEvent'], this);
+            'changeSignupButton', 'withdrawEvent', 'leaveFeedback'], this);
         this.dataStore = new DataStore();
         this.dataStore.addChangeListener(this.addRaidToPage);
         this.header = new Header(this.dataStore);
@@ -40,6 +40,7 @@ class ViewRaid extends BindingClass {
 
         document.getElementById('delete-btn').addEventListener('click', this.deleteRaidEvent);
         document.getElementById('edit-btn').addEventListener('click', this.redirectToEditRaid);
+
 
         this.header.addHeaderToPage();
         this.client = new RaidsUnlimitedClient();
@@ -213,10 +214,18 @@ class ViewRaid extends BindingClass {
             });
             dropdown.appendChild(characterElement);
         });
-
-        dropdown.style.left = event.clientX + 'px';
-        dropdown.style.top = event.clientY + 'px';
+        // dropdown.style.left = event.pageX + 'px';
+        // dropdown.style.top = event.pageY + 'px';
         dropdown.style.display = 'block';
+
+        // Add an event listener for the 'keyup' event on the document
+        document.addEventListener('keyup', (event) => {
+            // If the 'Escape' key is pressed
+            if (event.key === 'Escape' || event.key === 'Esc' || event.keyCode === 27) {
+                // Hide the form
+                dropdown.style.display = 'none';
+            }
+        });
     }
 
     async handleCharacterSelection(character) {
@@ -362,6 +371,10 @@ class ViewRaid extends BindingClass {
             messageText.innerText = `Error: ${error.message}`;
             messagePopup.classList.remove('hidden');
         }
+    }
+
+    async leaveFeedback() {
+        document.getElementById('feedbackModal').style.display= 'block';
     }
 
 }
