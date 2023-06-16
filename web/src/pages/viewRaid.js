@@ -106,7 +106,6 @@ class ViewRaid extends BindingClass {
     }
 
     async confirmUser(event) {
-        console.log("confirm button clicked")
         const userId = event.target.getAttribute('data-userid');
         const raidId = event.target.getAttribute('data-raidid');
         const role = event.target.getAttribute('data-role');
@@ -130,7 +129,7 @@ class ViewRaid extends BindingClass {
                     this.clientLoaded();
                 }, 3000);  // Delay of 3 seconds
             });
-
+            console.log("response in confirm", response);
             if (response.status === true) {
                 statusCell.innerText = 'Confirmed';
                 event.target.innerText = 'Remove';
@@ -163,7 +162,6 @@ class ViewRaid extends BindingClass {
                 messageText.innerText = 'An error occurred when removing';
                 messageText.classList.add('error');
                 messagePopup.classList.remove('hidden');
-                console.error(`Error: ${error.message}`);
 
                 setTimeout(() => {
                     messagePopup.classList.add('hidden');
@@ -297,7 +295,6 @@ class ViewRaid extends BindingClass {
                 messageText.innerText = `${error.message}`;
                 messageText.classList.add('error');
                 messagePopup.classList.remove('hidden');
-                console.error(`An unexpected error occurred: ${error.message}`);
 
                 setTimeout(() => {
                     messagePopup.classList.add('hidden');
