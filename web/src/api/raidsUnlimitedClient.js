@@ -17,7 +17,7 @@ export default class RaidsUnlimitedClient extends BindingClass {
 
         const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'createRaid', 'getRaid',
              'createProfile', 'getProfile', 'getProfileByEmail', 'updateProfile', 'getAllRaids', 'deleteRaidEvent',
-             'getRaidHistory', 'roleAssignment', 'roleRemoval', 'updateRaid', 'raidWithdraw'];
+             'getRaidHistory', 'roleAssignment', 'roleRemoval', 'updateRaid', 'raidWithdraw', 'createFeedback'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();

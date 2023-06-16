@@ -10,16 +10,12 @@
 </head>
 
 <body class="background">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
     <header class="header" id="header"></header>
 
-    <div id="topSection">PlaceHolder</div>
+<!--    PlaceHolder for Banner-->
+    <div id="topSection"></div>
 
-    <div id="messagePopup" class="hidden">
-        <p id="messageText"></p>
+
     </div>
     <div class="card hidden">
         <h2 id="formTitle">Raid Details</h2>
@@ -27,10 +23,12 @@
             <button id="signup-btn" class="btn btn-primary">Sign Up</button>
             <button id="delete-btn" class="btn btn-primary">Delete Raid</button>
             <button id="edit-btn" class="btn btn-primary">Edit Raid</button>
-            <button id="feedback-btn" class="btn btn-primary" data-toggle="modal"
-        data-target="#myModal">
+            <button id="feedback-btn" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
                 Leave Feedback
             </button>
+            <div id="messagePopup" class="hidden">
+                <p id="messageText"></p>
+
             </div>
         <div id="character-dropdown" class="character-dropdown"></div>
 
@@ -87,7 +85,8 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-primary" id="feedback-save" data-dismiss="modal">Save
+                                changes</button>
                         </div>
                     </div>
                 </div>

@@ -11,7 +11,7 @@ class ViewRaid extends BindingClass {
         super();
         this.bindClassMethods(['clientLoaded', 'mount', 'addRaidToPage', 'displayCharacters',
             'handleCharacterSelection', 'deleteRaidEvent', 'confirmUser', 'removeUser', 'redirectToEditRaid',
-            'changeSignupButton', 'withdrawEvent', 'leaveFeedback'], this);
+            'changeSignupButton', 'withdrawEvent', 'leaveFeedback', 'feedbackForm'], this);
         this.dataStore = new DataStore();
         this.dataStore.addChangeListener(this.addRaidToPage);
         this.header = new Header(this.dataStore);
@@ -40,6 +40,7 @@ class ViewRaid extends BindingClass {
 
         document.getElementById('delete-btn').addEventListener('click', this.deleteRaidEvent);
         document.getElementById('edit-btn').addEventListener('click', this.redirectToEditRaid);
+        document.getElementById('feedback-btn').addEventListener('click', this.feedbackForm);
 
 
         this.header.addHeaderToPage();
@@ -129,7 +130,6 @@ class ViewRaid extends BindingClass {
                 }, 5000);  // Delay of 5 seconds
             });
 
-            console.log("confirmed user response", response);
             if (response.status === true) {
                 statusCell.innerText = 'Confirmed';
                 event.target.innerText = 'Remove';
@@ -261,7 +261,7 @@ class ViewRaid extends BindingClass {
             });
             this.dataStore.set('raid', raid);
 
-            if(raid) {
+            if (raid) {
                 messageText.innerText = 'Signup successful';
                 messageText.classList.add('success');
                 messagePopup.classList.remove('hidden');
@@ -301,8 +301,8 @@ class ViewRaid extends BindingClass {
             }
         });
 
-        if(response) {
-            messageText.innerText = "Raid event was successfully deleted";
+        if (response) {
+            messageText.innerText = "Raid event was successfully deleted.";
             messageText.classList.add('success');
             messagePopup.classList.remove('hidden');
 
@@ -333,9 +333,9 @@ class ViewRaid extends BindingClass {
         this.displayCharactersHandler = (event) => this.displayCharacters(event);
         signUpButton.addEventListener('click', this.displayCharactersHandler);
 
-        if(raidModel && profileModel) {
+        if (raidModel && profileModel) {
             const isParticipant = raidModel.participants.some(participant => participant.userId === userId);
-            if(isParticipant) {
+            if (isParticipant) {
                 signUpButton.innerText = 'Withdraw';
                 signUpButton.removeEventListener('click', this.displayCharactersHandler);
                 signUpButton.addEventListener('click', this.withdrawEvent);
@@ -373,8 +373,58 @@ class ViewRaid extends BindingClass {
         }
     }
 
+    feedbackForm() {
+        const feedbackSave = document.getElementById('feedback-save');
+        feedbackSave.removeEventListener('click', this.leaveFeedback);
+        feedbackSave.addEventListener('click', this.leaveFeedback);
+
+        const ratingReset = document.getElementById('rating');
+        const commentReset = document.getElementById('comment');
+
+        ratingReset.value = '5';
+        commentReset.value = '';
+    }
+
     async leaveFeedback() {
-        document.getElementById('feedbackModal').style.display= 'block';
+        const raidModel = this.dataStore.get('raid');
+        const raidId = raidModel.raidId;
+        const userId = this.header.dataStore.get('profileModel').userId;
+        const rating = document.getElementById('rating').value;
+        const comments = document.getElementById('comment').value;
+
+        const messagePopup = document.getElementById('messagePopup');
+        const messageText = document.getElementById('messageText');
+
+        try {
+            const response = await this.client.createFeedback(userId, raidId, rating, comments, (error) => {
+
+
+                if (error) {
+                    messageText.innerText = error.message;
+                    messageText.classList.add('error');
+                    messagePopup.classList.remove('hidden');
+                    console.error(`An unexpected error occurred: ${error.message}`);
+
+                    setTimeout(() => {
+                        messagePopup.classList.add('hidden');
+                    }, 3000);
+                }
+            });
+
+
+            if (response === 200) {
+                messageText.innerText = 'Feedback submitted successfully.';
+                messageText.classList.add('success');
+                messagePopup.classList.remove('hidden');
+
+
+                setTimeout(() => {
+                    messagePopup.classList.add('hidden');
+                }, 3000);
+            }
+        } catch (error) {
+            //do nothing handled above
+        }
     }
 
 }
