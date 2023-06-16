@@ -186,7 +186,7 @@ class ViewRaid extends BindingClass {
     }
 
 
-    displayCharacters(event) {
+    displayCharacters() {
         const profileModel = this.header.dataStore.get('profileModel');
 
         const messagePopup = document.getElementById('messagePopup');
@@ -263,7 +263,7 @@ class ViewRaid extends BindingClass {
             this.dataStore.set('raid', raid);
 
             if (raid) {
-                messageText.innerText = 'Signup successful';
+                messageText.innerText = 'Raid signup successful.';
                 messageText.classList.add('success');
                 messagePopup.classList.remove('hidden');
 
@@ -274,7 +274,7 @@ class ViewRaid extends BindingClass {
                 }, 3000);  // Delay of 5 seconds
             }
         } catch (error) {
-            console.error(`An unexpected error occurred: ${error.message}`);
+
         }
     }
 
@@ -330,11 +330,11 @@ class ViewRaid extends BindingClass {
         const signUpButton = document.getElementById('signup-btn');
         const raidModel = this.dataStore.get('raid');
         const profileModel = this.header.dataStore.get('profileModel');
+        console.log("profile model in change signup");
         const userId = profileModel.userId;
 
 
         this.displayCharactersHandler = (event) => this.displayCharacters(event);
-        signUpButton.addEventListener('click', this.displayCharactersHandler);
 
         if (raidModel && profileModel) {
             const isParticipant = raidModel.participants.some(participant => participant.userId === userId);
@@ -351,6 +351,8 @@ class ViewRaid extends BindingClass {
     }
 
     async withdrawEvent() {
+        const characterDropdown = document.getElementById('character-dropdown');
+        characterDropdown.style.display = 'none';
         const raidModel = this.dataStore.get('raid');
         const raidId = raidModel.raidId;
         const userId = this.header.dataStore.get('profileModel').userId;
@@ -367,13 +369,16 @@ class ViewRaid extends BindingClass {
             });
 
             if (response.status === 200) {
-                messageText.innerText = "Success";
+                messageText.innerText = "You have been withdraw from the raid event.";
                 messagePopup.classList.add('success');
                 messagePopup.classList.remove('hidden');
             }
 
+
             setTimeout(() => {
-                window.location.href = "index.html";
+                this.clientLoaded();
+                messagePopup.classList.add('hidden');
+                // window.location.href = "index.html";
             }, 3000);
         } catch (error) {
 

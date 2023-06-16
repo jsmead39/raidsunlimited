@@ -8,6 +8,7 @@ import raidsunlimited.converters.ModelConverter;
 import raidsunlimited.dynamodb.RaidDao;
 import raidsunlimited.dynamodb.models.RaidEvent;
 import raidsunlimited.exceptions.NotRaidOwnerException;
+import raidsunlimited.exceptions.RaidEventCompletionException;
 import raidsunlimited.exceptions.RaidEventNotFoundException;
 import raidsunlimited.models.RaidModel;
 
@@ -46,6 +47,10 @@ public class RaidEventUpdateActivity {
 
         if (!raidEvent.getRaidOwner().equals(raidEventUpdateRequest.getRaidOwner())) {
             throw new NotRaidOwnerException("You must be the owner of the raid to update it");
+        }
+
+        if (raidEvent.getRaidStatus().equals("Completed") || raidEvent.getRaidStatus() == null) {
+            throw new RaidEventCompletionException("You cannot modify a raid that was already completed");
         }
 
         if (raidEventUpdateRequest.getRaidName() != null && !raidEventUpdateRequest.getRaidName().isEmpty()) {
