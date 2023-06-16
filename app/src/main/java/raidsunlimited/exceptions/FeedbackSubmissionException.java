@@ -3,7 +3,7 @@ package raidsunlimited.exceptions;
 /**
  * Exception to throw when a user tried to provide duplicate feedback.
  */
-public class DuplicateFeedbackException extends RuntimeException {
+public class FeedbackSubmissionException extends RuntimeException {
 
 
     private static final long serialVersionUID = -2936870981006554216L;
@@ -11,7 +11,7 @@ public class DuplicateFeedbackException extends RuntimeException {
     /**
      * Exception with no message or cause.
      */
-    public DuplicateFeedbackException() {
+    public FeedbackSubmissionException() {
         super();
     }
 
@@ -19,7 +19,7 @@ public class DuplicateFeedbackException extends RuntimeException {
      * Exception with a message, but no cause.
      * @param message A descriptive message for this exception.
      */
-    public DuplicateFeedbackException(String message) {
+    public FeedbackSubmissionException(String message) {
         super(message);
     }
 
@@ -27,7 +27,7 @@ public class DuplicateFeedbackException extends RuntimeException {
      * Exception with no message, but with a cause.
      * @param cause The original throwable resulting in this exception.
      */
-    public DuplicateFeedbackException(Throwable cause) {
+    public FeedbackSubmissionException(Throwable cause) {
         super(cause);
     }
 
@@ -36,7 +36,7 @@ public class DuplicateFeedbackException extends RuntimeException {
      * @param message A descriptive message for this exception.
      * @param cause The original throwable resulting in this exception.
      */
-    public DuplicateFeedbackException(String message, Throwable cause) {
+    public FeedbackSubmissionException(String message, Throwable cause) {
         super(message, cause);
     }
 }

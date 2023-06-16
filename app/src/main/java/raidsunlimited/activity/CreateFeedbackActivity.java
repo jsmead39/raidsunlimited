@@ -5,13 +5,11 @@ import org.apache.logging.log4j.Logger;
 import raidsunlimited.activity.requests.CreateFeedbackRequest;
 import raidsunlimited.activity.results.CreateFeedbackResult;
 import raidsunlimited.dynamodb.RaidDao;
-import raidsunlimited.dynamodb.UserDao;
 import raidsunlimited.dynamodb.UserRaidDao;
 import raidsunlimited.dynamodb.models.RaidEvent;
 import raidsunlimited.dynamodb.models.UserRaid;
 import raidsunlimited.exceptions.*;
 import raidsunlimited.models.FeedbackModel;
-import raidsunlimited.models.ParticipantModel;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -52,12 +50,12 @@ public class CreateFeedbackActivity {
         }
 
         if (!raid.getRaidStatus().equals("Completed")) {
-            throw new RaidEventCompletionException("You cannot provide feedback on a raid that hasn't been completed.");
+            throw new FeedbackSubmissionException("You cannot provide feedback on a raid that hasn't been completed.");
         }
 
         UserRaid raidStatus = userRaidDao.getUserRaid(userId, raidId);
         if (!raidStatus.isConfirmed()) {
-            throw new RaidSignupException("You must have attended the raid to leave feedback.");
+            throw new FeedbackSubmissionException("You must have attended the raid to leave feedback.");
         }
 
         List<FeedbackModel> feedbackModelList = raid.getFeedback();
@@ -66,7 +64,7 @@ public class CreateFeedbackActivity {
                 .anyMatch(feedback -> feedback.getUserId().equals(userId));
 
         if (isDuplicateFeedback) {
-            throw new DuplicateFeedbackException("Duplicate feedback by the same user");
+            throw new FeedbackSubmissionException("Duplicate feedback by the same user");
         }
 
         FeedbackModel feedback = new FeedbackModel.Builder().withUserId(userId)
