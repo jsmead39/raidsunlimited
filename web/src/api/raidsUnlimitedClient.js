@@ -17,7 +17,7 @@ export default class RaidsUnlimitedClient extends BindingClass {
 
         const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'createRaid', 'getRaid',
              'createProfile', 'getProfile', 'getProfileByEmail', 'updateProfile', 'getAllRaids', 'deleteRaidEvent',
-             'getRaidHistory', 'roleAssignment', 'roleRemoval', 'updateRaid', 'raidWithdraw'];
+             'getRaidHistory', 'roleAssignment', 'roleRemoval', 'updateRaid', 'raidWithdraw', 'createFeedback'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();
@@ -373,6 +373,15 @@ export default class RaidsUnlimitedClient extends BindingClass {
         }
     }
 
+    /**
+     * Remove a role from a user for a raid asynchronously.
+     *
+     * @param raidId         the ID of the raid event for which the role is being removed
+     * @param userId         the ID of the user to whom the role is being removed
+     * @param errorCallBack  the callback function to handle any errors
+     * @return a Promise that resolves to the role removal response data
+     * @throws Exception if an error occurs during the role removal process
+     */
     async roleRemoval(raidId, userId, errorCallBack) {
         try {
             const token = await this.getTokenOrThrow("You must be logged in to assign a role");
@@ -385,6 +394,32 @@ export default class RaidsUnlimitedClient extends BindingClass {
             return response.data;
         } catch (error) {
             this.handleError(error, errorCallBack);
+        }
+    }
+
+    /**
+     * Creates a feedback model for a raid asynchronously.
+     *
+     * @param raidId         the ID of the raid event for which the feedback is provided
+     * @param userId         the ID of the user who is leaving the feedback
+     * @param errorCallBack  the callback function to handle any errors
+     * @return a Promise that resolves to the create feedback response data
+     * @throws Exception if an error occurs during the create feedback process
+     */
+    async createFeedback(userId, raidId, rating, comments, errorCallback) {
+        try {
+            const token = await this.getTokenOrThrow("You must be logged in to leave feedback");
+            return await this.axiosClient.put(`raidevents/${raidId}/feedbacks`, {
+                userId: userId,
+                rating: rating,
+                comments: comments,
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+        } catch (error) {
+            this.handleError(error, errorCallback)
         }
     }
 
