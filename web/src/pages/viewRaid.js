@@ -115,10 +115,11 @@ class ViewRaid extends BindingClass {
 
         const messagePopup = document.getElementById('messagePopup');
         const messageText = document.getElementById('messageText');
-        console.log(userId, raidId, role);
+
+        let response;
 
         try {
-            const response = await this.client.roleAssignment(raidId, userId, role, (error) => {
+            response = await this.client.roleAssignment(raidId, userId, role, (error) => {
                 messageText.innerText = 'An error occurred when confirming';
                 messageText.classList.add('error');
                 messagePopup.classList.remove('hidden');
@@ -127,7 +128,7 @@ class ViewRaid extends BindingClass {
                 setTimeout(() => {
                     messagePopup.classList.add('hidden');
                     this.clientLoaded();
-                }, 5000);  // Delay of 5 seconds
+                }, 3000);  // Delay of 3 seconds
             });
 
             if (response.status === true) {
@@ -155,8 +156,10 @@ class ViewRaid extends BindingClass {
         const messagePopup = document.getElementById('messagePopup');
         const messageText = document.getElementById('messageText');
 
+        let response;
+
         try {
-            const response = await this.client.roleRemoval(raidId, userId, (error) => {
+            response = await this.client.roleRemoval(raidId, userId, (error) => {
                 messageText.innerText = 'An error occurred when removing';
                 messageText.classList.add('error');
                 messagePopup.classList.remove('hidden');
@@ -168,7 +171,6 @@ class ViewRaid extends BindingClass {
                 }, 5000);  // Delay of 5 seconds
             });
 
-            console.log("remove user response", response);
             if (response.status === false) {
                 statusCell.innerText = 'Not Confirmed';
                 event.target.innerText = 'Confirm';
@@ -239,9 +241,12 @@ class ViewRaid extends BindingClass {
         const displayName = profileModel.displayName;
 
         const dropdown = document.getElementById('character-dropdown');
+
+        let raid;
+
         try {
             dropdown.style.display = 'none';
-            const raid = await this.client.raidSignup(raidId, userId, displayName, character, (error) => {
+            raid = await this.client.raidSignup(raidId, userId, displayName, character, (error) => {
                 if (error.message.includes("already signed up")) {
                     messageText.innerText = "You are already signed up for this event";
                 } else {
@@ -255,9 +260,7 @@ class ViewRaid extends BindingClass {
                 setTimeout(() => {
                     messagePopup.classList.add('hidden');
                     this.clientLoaded();
-                }, 5000);  // Delay of 5 seconds
-
-
+                }, 3000);  // Delay of 5 seconds
             });
             this.dataStore.set('raid', raid);
 
@@ -270,7 +273,7 @@ class ViewRaid extends BindingClass {
                     messageText.innerText = '';
                     messagePopup.classList.add('hidden');
                     this.clientLoaded();
-                }, 5000);  // Delay of 5 seconds
+                }, 3000);  // Delay of 5 seconds
             }
         } catch (error) {
             console.error(`An unexpected error occurred: ${error.message}`);
@@ -287,9 +290,10 @@ class ViewRaid extends BindingClass {
             return;
         }
 
-        const response = await this.client.deleteRaidEvent(raidId, (error) => {
+        let response;
 
-            if (error) {
+        try {
+            response = await this.client.deleteRaidEvent(raidId, (error) => {
                 messageText.innerText = `${error.message}`;
                 messageText.classList.add('error');
                 messagePopup.classList.remove('hidden');
@@ -298,18 +302,20 @@ class ViewRaid extends BindingClass {
                 setTimeout(() => {
                     messagePopup.classList.add('hidden');
                 }, 5000);
+            });
+
+            if (response) {
+                messageText.innerText = "Raid event was successfully deleted.";
+                messageText.classList.add('success');
+                messagePopup.classList.remove('hidden');
+
+                setTimeout(() => {
+                    messagePopup.classList.add('hidden');
+                    window.location.href = "index.html";
+                }, 5000);
             }
-        });
+        } catch (error) {
 
-        if (response) {
-            messageText.innerText = "Raid event was successfully deleted.";
-            messageText.classList.add('success');
-            messagePopup.classList.remove('hidden');
-
-            setTimeout(() => {
-                messagePopup.classList.add('hidden');
-                window.location.href = "index.html";
-            }, 5000);
         }
     }
 
@@ -355,8 +361,13 @@ class ViewRaid extends BindingClass {
         const messagePopup = document.getElementById('messagePopup');
         const messageText = document.getElementById('messageText');
 
+        let response;
+
         try {
-            const response = await this.client.raidWithdraw(raidId, userId);
+            response = await this.client.raidWithdraw(raidId, userId, (error) => {
+                messageText.innerText = `Error: ${error.message}`;
+                messagePopup.classList.remove('hidden');
+            });
 
             if (response.status === 200) {
                 messageText.innerText = "Success";
@@ -368,8 +379,7 @@ class ViewRaid extends BindingClass {
                 window.location.href = "index.html";
             }, 3000);
         } catch (error) {
-            messageText.innerText = `Error: ${error.message}`;
-            messagePopup.classList.remove('hidden');
+
         }
     }
 
@@ -395,35 +405,26 @@ class ViewRaid extends BindingClass {
         const messagePopup = document.getElementById('messagePopup');
         const messageText = document.getElementById('messageText');
 
+        let response;
+
         try {
-            const response = await this.client.createFeedback(userId, raidId, rating, comments, (error) => {
-
-
-                if (error) {
-                    messageText.innerText = error.message;
-                    messageText.classList.add('error');
-                    messagePopup.classList.remove('hidden');
-                    console.error(`An unexpected error occurred: ${error.message}`);
-
-                    setTimeout(() => {
-                        messagePopup.classList.add('hidden');
-                    }, 3000);
-                }
+            response = await this.client.createFeedback(userId, raidId, rating, comments, (error) => {
+                messageText.innerText = `${error.message}`;
+                messageText.classList.add('error');
+                messagePopup.classList.remove('hidden');
             });
 
-
-            if (response === 200) {
-                messageText.innerText = 'Feedback submitted successfully.';
-                messageText.classList.add('success');
+            if (response.status === 200) {
+                messageText.innerText = "Feedback submitted.";
+                messagePopup.classList.add('success');
                 messagePopup.classList.remove('hidden');
-
-
-                setTimeout(() => {
-                    messagePopup.classList.add('hidden');
-                }, 3000);
             }
+
+            setTimeout(() => {
+                messagePopup.classList.add('hidden');
+            }, 3000);
         } catch (error) {
-            //do nothing handled above
+
         }
     }
 
