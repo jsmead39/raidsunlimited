@@ -85,4 +85,10 @@ public interface ServiceComponent {
      * @return RaidWithdrawActivity
      */
     RaidWithdrawActivity provideRaidWithdrawActivity();
+
+    /**
+     * Provides the relevant activity.
+     * @return CreateFeedbackActivity
+     */
+    CreateFeedbackActivity provideCreateFeedbackActivity();
 }
