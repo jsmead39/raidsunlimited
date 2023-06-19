@@ -271,6 +271,7 @@ a {
 }
 
 .profile-visible {
+    margin-top: -50px;
     display: block;
     font-size: 24px;
     color: var(--primary-color);

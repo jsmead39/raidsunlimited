@@ -210,7 +210,6 @@ class CreateRaid extends BindingClass {
      */
     redirectToViewRaid() {
         const raid = this.dataStore.get('raid');
-        console.log("raid in redirect", raid);
         const raidId = raid.raidId;
 
         if (raid != null) {
