@@ -386,6 +386,16 @@ class ViewRaid extends BindingClass {
         }
     }
 
+    /**
+     * Configures the feedback form. It removes any existing event listener from the
+     * 'Save' button to prevent multiple event handlers from being attached, and then
+     * re-attaches the event listener for submitting feedback.
+     *
+     * It also resets the rating and comment fields in the form to their default values.
+     *
+     * @function feedbackForm
+     * @returns {void}
+     */
     feedbackForm() {
         const feedbackSave = document.getElementById('feedback-save');
         feedbackSave.removeEventListener('click', this.leaveFeedback);
@@ -398,7 +408,19 @@ class ViewRaid extends BindingClass {
         commentReset.value = '';
     }
 
-    async leaveFeedback() {
+    /**
+     * Submits feedback for a particular raid.
+     * It retrieves the raid and user details from the dataStore and feedback details from the form.
+     * It then calls the `createFeedback` method on the client to send the feedback to the server.
+     * The response from the server is checked - if successful, a success message is shown; if not, the error message is shown.
+     * After displaying a success message, the message is hidden after 3 seconds.
+     *
+     * @async
+     * @function leaveFeedback
+     * @throws Will throw an error if the feedback submission fails
+     * @returns {void}
+     */
+     async leaveFeedback() {
         const raidModel = this.dataStore.get('raid');
         const raidId = raidModel.raidId;
         const userId = this.header.dataStore.get('profileModel').userId;
@@ -431,6 +453,15 @@ class ViewRaid extends BindingClass {
         }
     }
 
+    /**
+     * Retrieves the raid model from the data store and generates HTML to populate
+     * the feedback modal. It loops through each feedback in the raid model and creates
+     * a new table row for each feedback. It creates and populates a table cell for both
+     * the rating and comments, then appends these cells to the row. Finally, it appends
+     * the row to the feedback list in the modal.
+     * @function getFeedback
+     * @returns {void}
+     */
     getFeedback() {
         const raidModel = this.dataStore.get('raid');
         console.log(raidModel);
