@@ -4,6 +4,7 @@
 <head>
     <script type="text/javascript" src="assets/profile.js"></script>
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body class="background">
@@ -24,12 +25,13 @@
             <form id="userProfileForm">
                 <div class="form-group">
                     <label for="displayName">Display Name</label>
-                    <input type="text" id="displayName" name="displayName">
+                    <input type="text" id="displayName" name="displayName" placeholder="Enter your avatar name here">
                 </div>
 
                 <div class="form-group">
                     <label for="warcraftLogsLink">Warcraft Logs Link</label>
-                    <input type="url" id="warcraftLogsLink" name="warcraftLogsLink">
+                    <input type="url" id="warcraftLogsLink" name="warcraftLogsLink"
+                           placeholder="http://www.warcraftlogs.com">
                 </div>
 
 
@@ -65,6 +67,8 @@
             </p>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 </body>
 
 </html>

@@ -4,26 +4,33 @@
 <head>
     <script type="text/javascript" src="assets/homepage.js"></script>
     <link rel="stylesheet" type="text/css" href="css/style.css">
+
 </head>
 
 <body class="background">
-    <header class="header" id="header"></header>
-    <div id ="profileSetupMessage" class="profile-hidden">
-        Profile not setup. <a href="createProfile.html">Click here to set up now.</a>
+    <div id="header-container">
+        <header class="header" id="header"></header>
+        <div id ="profileSetupMessage" class="profile-hidden">
+            Profile not setup. <a href="createProfile.html">Click here to set up now.</a>
+        </div>
     </div>
-    <div class="content-center">
-        <h2>What would you like to do today?</h2>
-        <div class="card">
-            <a href="findRaid.html">
-                <div class="oval-box" id="findRaidBox">
-                    <span>Find a Raid</span>
-                </div>
-            </a>
-            <a href="createRaid.html">
-                <div class ="oval-box" id="organizeRaidBox">
-                    <span>Organize a Raid</span>
-                </div>
-            </a>
+
+    <div id="page-content">
+        <div id="banner"></div>
+        <div class="content-center">
+            <div class="card custom-card">
+                <a href="findRaid.html">
+                    <div class="oval-box" id="findRaidBox">
+                        <span>Find a Raid</span>
+                    </div>
+                </a>
+                <a href="createRaid.html">
+                    <div class ="oval-box" id="organizeRaidBox">
+                        <span>Organize a Raid</span>
+                    </div>
+                </a>
+            </div>
+            <h2>What would you like to do today?</h2>
         </div>
     </div>
 </body>

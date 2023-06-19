@@ -21,7 +21,6 @@ body {
     line-height: 1.4;
 }
 
-/* Header */
 .header {
     display: flex;
     justify-content: space-between;
@@ -31,14 +30,15 @@ body {
     top: 0;
     padding: 10px;
     width: 100%;
-    z-index: 11000;
+    z-index: 1000;
     height: 100px;
     background: var(--dialog-bg-color);
+    margin-bottom: 0;
 }
 
-.header > div {
-    display: flex;
-    align-items: center;
+#page-content {
+    position: relative;
+    margin-top: 25px;
 }
 
 .header_home {
@@ -52,6 +52,17 @@ body {
     align-items: center;
 }
 
+#banner {
+    background-color: transparent;
+    background-image: url('/header-bg.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    position: absolute;
+    top: 120px; /* Adjust the value to account for header height and margin */
+    left: 0;
+    width: 100%;
+    height: 150px;
+}
 
 
 /* Form Dialog */
@@ -80,9 +91,8 @@ body {
     left: 0;
     right: 0;
     box-sizing: border-box;
+    text-align: center;
 }
-
-
 
 .dialog-content {
     display: flex;
@@ -96,8 +106,6 @@ body {
     align-items: center;
     margin-bottom: 10px;
 }
-
-
 
 .form-group label {
     flex-shrink: 0;
@@ -124,37 +132,23 @@ a:link,a:visited,.link-color {
     text-decoration: none;
 }
 
-
-.background {
-    background-color: var(--main-bg-color);
-    margin: 0;
-    counter-reset: section;
-}
-
 .button-group {
     display: flex;
     justify-content: space-between;
 }
 
-.header_home {
-    font-size: 36px;
-    line-height: 40px;
-    height: 100px;
-    text-decoration: none;
-    color: var(--secondary-color);
-}
 
-.card {
-    margin: 20px;
+.custom-card.card {
+    background-color: var(--dialog-bg-color);
+    color: var(--main-text-color);
+    margin-top: 250px;
+    display: flex;
+    justify-content: space-around;
+    /*margin: 20px;*/
     padding: 10px 20px;
 }
 
-.validated-field:invalid {
-    outline: 2px solid var(--error-color);
-}
-.validated-field:focus:invalid {
-    color: var(--error-color);
-}
+
 
 .card-content .form-field {
     display: flex;
@@ -202,18 +196,19 @@ a {
 }
 
 .oval-box {
-    width: 200px;
-    height: 100px;
+    width: 20vw;
+    height: 20vh;
     background: var(--light-grey);
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 10px;
+    font-size: 28px;
 }
 
 .content-center {
-    padding-top: 40px;
+    padding-top: 120px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -262,10 +257,9 @@ a {
     color: var(--error-color);
 }
 
-/*.form-group h3, .form-group h2 {*/
-/*    padding-right: 20px;*/
-/*    display: inline-block;*/
-/*}*/
+.custom-background {
+    background-color: var(--main-bg-color);
+}
 
 .profile-visible {
     display: block;
@@ -339,13 +333,9 @@ a {
     background-color: var(--light-grey);
 }
 
-#topSection {
-    margin-top: 120px;
-}
-
 #editUserProfile {
     text-align: center;
-    margin: 0 auto;
+    margin-top: 200px;
     width: 800px;
     padding: 20px;
     background: var(--dialog-bg-color);
@@ -423,6 +413,9 @@ a {
     margin-bottom: 20px;
 }
 
-
+html,
+body {
+    height: 100%;
+}
 
 
