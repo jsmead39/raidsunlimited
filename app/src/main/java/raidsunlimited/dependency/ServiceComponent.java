@@ -1,7 +1,20 @@
 package raidsunlimited.dependency;
 
 import dagger.Component;
-import raidsunlimited.activity.*;
+import raidsunlimited.activity.CreateFeedbackActivity;
+import raidsunlimited.activity.CreateProfileActivity;
+import raidsunlimited.activity.CreateRaidActivity;
+import raidsunlimited.activity.DeleteRaidEventActivity;
+import raidsunlimited.activity.GetAllRaidsActivity;
+import raidsunlimited.activity.GetProfileActivity;
+import raidsunlimited.activity.GetRaidActivity;
+import raidsunlimited.activity.GetRaidHistoryActivity;
+import raidsunlimited.activity.RaidEventUpdateActivity;
+import raidsunlimited.activity.RaidSignupActivity;
+import raidsunlimited.activity.RaidWithdrawActivity;
+import raidsunlimited.activity.RoleAssignmentActivity;
+import raidsunlimited.activity.RoleRemovalActivity;
+import raidsunlimited.activity.UpdateProfileActivity;
 
 import javax.inject.Singleton;
 @Singleton

@@ -12,7 +12,6 @@ import raidsunlimited.exceptions.RaidEventCompletionException;
 import raidsunlimited.exceptions.RaidEventNotFoundException;
 import raidsunlimited.models.RaidModel;
 
-import javax.inject.Inject;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -20,6 +19,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import javax.inject.Inject;
 
 public class RaidEventUpdateActivity {
     private final Logger log = LogManager.getLogger();
@@ -77,7 +78,8 @@ public class RaidEventUpdateActivity {
             raidEvent.setRaidObjective(raidEventUpdateRequest.getRaidObjective());
         }
 
-        if (raidEventUpdateRequest.getLootDistribution() != null && !raidEventUpdateRequest.getLootDistribution().isEmpty()) {
+        if (raidEventUpdateRequest.getLootDistribution() != null &&
+                !raidEventUpdateRequest.getLootDistribution().isEmpty()) {
             raidEvent.setLootDistribution(raidEventUpdateRequest.getLootDistribution());
         }
 

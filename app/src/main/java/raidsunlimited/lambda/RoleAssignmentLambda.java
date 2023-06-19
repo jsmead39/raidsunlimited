@@ -14,22 +14,22 @@ public class RoleAssignmentLambda extends LambdaActivityRunner<RoleAssignmentReq
     @Override
     public LambdaResponse handleRequest(AuthenticatedLambdaRequest<RoleAssignmentRequest> input, Context context) {
         return super.runActivity(
-                () -> {
-                    RoleAssignmentRequest unauthenticatedRequest = input.fromBody(RoleAssignmentRequest.class);
-                    return input.fromPath(path -> {
-                        String raidId = path.get("raidId"); // get raidId from path parameters
-                        return input.fromUserClaims(claims -> {
-                            String raidOwner = claims.get("email");
-                            return RoleAssignmentRequest.builder()
+            () -> {
+                RoleAssignmentRequest unauthenticatedRequest = input.fromBody(RoleAssignmentRequest.class);
+                return input.fromPath(path -> {
+                    String raidId = path.get("raidId");
+                    return input.fromUserClaims(claims -> {
+                        String raidOwner = claims.get("email");
+                        return RoleAssignmentRequest.builder()
                                     .withRaidId(raidId)
                                     .withUserId(unauthenticatedRequest.getUserId())
                                     .withRaidRole(unauthenticatedRequest.getRaidRole())
                                     .withRaidOwner(raidOwner)
                                     .build();
-                        });
                     });
-                },
-                (request, serviceComponent) -> serviceComponent.provideRoleAssignmentActivity().handleRequest(request)
+                });
+            },
+            (request, serviceComponent) -> serviceComponent.provideRoleAssignmentActivity().handleRequest(request)
         );
     }
 }

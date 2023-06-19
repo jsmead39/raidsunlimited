@@ -14,21 +14,21 @@ public class RoleRemovalLambda extends LambdaActivityRunner<RoleRemovalRequest, 
     @Override
     public LambdaResponse handleRequest(AuthenticatedLambdaRequest<RoleRemovalRequest> input, Context context) {
         return super.runActivity(
-                () -> {
-                    return input.fromPath(path -> {
-                        String raidId = path.get("raidId"); // get raidId from path parameters
-                        String userId = path.get("userId");
-                        return input.fromUserClaims(claims -> {
-                            String raidOwner = claims.get("email");
-                            return RoleRemovalRequest.builder()
+            () -> {
+                return input.fromPath(path -> {
+                    String raidId = path.get("raidId");
+                    String userId = path.get("userId");
+                    return input.fromUserClaims(claims -> {
+                        String raidOwner = claims.get("email");
+                        return RoleRemovalRequest.builder()
                                     .withRaidId(raidId)
                                     .withUserId(userId)
                                     .withRaidOwner(raidOwner)
                                     .build();
-                        });
                     });
-                },
-                (request, serviceComponent) -> serviceComponent.provideRoleRemovalActivity().handleRequest(request)
+                });
+            },
+            (request, serviceComponent) -> serviceComponent.provideRoleRemovalActivity().handleRequest(request)
         );
     }
 }

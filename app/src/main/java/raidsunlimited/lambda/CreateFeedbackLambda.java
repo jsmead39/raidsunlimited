@@ -14,20 +14,20 @@ public class CreateFeedbackLambda extends LambdaActivityRunner<CreateFeedbackReq
     @Override
     public LambdaResponse handleRequest(AuthenticatedLambdaRequest<CreateFeedbackRequest> input, Context context) {
         return super.runActivity(
-                () -> {
-                    CreateFeedbackRequest unauthenticatedRequest = input.fromBody(CreateFeedbackRequest.class);
-                    return input.fromPath(path -> {
-                        String raidId = path.get("raidId"); // get raidId from path parameters
-                            return CreateFeedbackRequest.builder()
+            () -> {
+                CreateFeedbackRequest unauthenticatedRequest = input.fromBody(CreateFeedbackRequest.class);
+                return input.fromPath(path -> {
+                    String raidId = path.get("raidId");
+                    return CreateFeedbackRequest.builder()
                                     .withRaidId(raidId)
                                     .withComments(unauthenticatedRequest.getComments())
                                     .withRating(unauthenticatedRequest.getRating())
                                     .withUserId(unauthenticatedRequest.getUserId())
                                     .build();
 
-                    });
-                },
-                (request, serviceComponent) -> serviceComponent.provideCreateFeedbackActivity().handleRequest(request)
+                });
+            },
+            (request, serviceComponent) -> serviceComponent.provideCreateFeedbackActivity().handleRequest(request)
         );
     }
 }
