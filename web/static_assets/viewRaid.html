@@ -16,6 +16,7 @@
     <div id="topSection"></div>
 
 
+
     </div>
     <div class="card hidden">
         <h2 id="formTitle">Raid Details</h2>
@@ -25,6 +26,9 @@
             <button id="edit-btn" class="btn btn-primary">Edit Raid</button>
             <button id="feedback-btn" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
                 Leave Feedback
+            </button>
+            <button id="viewfeedback-btn" class="btn btn-primary" data-toggle="modal" data-target="#viewFeedbackModal">
+                View Feedback
             </button>
             <div id="messagePopup" class="hidden">
                 <p id="messageText"></p>
@@ -38,7 +42,6 @@
                 <p id="raid-size">Raid Size: </p>
                 <p id="raid-date">Raid Date: </p>
                 <p id="raid-time">Raid Time: </p>
-<!--                <p id="organizer-rating">Organizer Rating: </p>-->
             </div>
             <div id="raid-server" class="raid-server-status">Server: </div>
             <div id="raid-status" class="raid-server-status">Raid Status: </div>
@@ -87,6 +90,34 @@
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                             <button type="button" class="btn btn-primary" id="feedback-save" data-dismiss="modal">Save
                                 changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <!-- Modal for View Feedback-->
+            <div class="modal fade" id="viewFeedbackModal" tabindex="-1" role="dialog" aria-labelledby="viewFeedbackModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="viewFeedbackModalLabel">View Feedback</h4>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Rating</th>
+                                    <th>Comments</th>
+                                </tr>
+                                </thead>
+                                <tbody id="feedback-list">
+                                <!-- Feedback will be populated here -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>

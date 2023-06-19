@@ -11,7 +11,7 @@ class ViewRaid extends BindingClass {
         super();
         this.bindClassMethods(['clientLoaded', 'mount', 'addRaidToPage', 'displayCharacters',
             'handleCharacterSelection', 'deleteRaidEvent', 'confirmUser', 'removeUser', 'redirectToEditRaid',
-            'changeSignupButton', 'withdrawEvent', 'leaveFeedback', 'feedbackForm'], this);
+            'changeSignupButton', 'withdrawEvent', 'leaveFeedback', 'feedbackForm', 'getFeedback'], this);
         this.dataStore = new DataStore();
         this.dataStore.addChangeListener(this.addRaidToPage);
         this.header = new Header(this.dataStore);
@@ -41,6 +41,7 @@ class ViewRaid extends BindingClass {
         document.getElementById('delete-btn').addEventListener('click', this.deleteRaidEvent);
         document.getElementById('edit-btn').addEventListener('click', this.redirectToEditRaid);
         document.getElementById('feedback-btn').addEventListener('click', this.feedbackForm);
+        document.getElementById('viewfeedback-btn').addEventListener('click', this.getFeedback);
 
 
         this.header.addHeaderToPage();
@@ -428,6 +429,39 @@ class ViewRaid extends BindingClass {
         } catch (error) {
 
         }
+    }
+
+    getFeedback() {
+        const raidModel = this.dataStore.get('raid');
+        console.log(raidModel);
+
+        // Get the feedback array from the raidModel
+        const feedbacks = raidModel.feedback;
+
+        // Get a reference to the feedback-list in the modal
+        const feedbackList = document.getElementById('feedback-list');
+
+        // Clear existing feedbacks in the list
+        feedbackList.innerHTML = '';
+
+        // Loop through each feedback
+        feedbacks.forEach(feedback => {
+            // Create a table row
+            const row = document.createElement('tr');
+
+            // Create a cell for the rating and set its text
+            const ratingCell = document.createElement('td');
+            ratingCell.innerText = feedback.rating;
+            row.appendChild(ratingCell);
+
+            // Create a cell for the comments and set its text
+            const commentCell = document.createElement('td');
+            commentCell.innerText = feedback.comments;
+            row.appendChild(commentCell);
+
+            // Append the row to the feedback list
+            feedbackList.appendChild(row);
+        });
     }
 
 }
