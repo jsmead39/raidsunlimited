@@ -42,6 +42,7 @@ class ViewRaid extends BindingClass {
         document.getElementById('edit-btn').addEventListener('click', this.redirectToEditRaid);
         document.getElementById('feedback-btn').addEventListener('click', this.feedbackForm);
         document.getElementById('viewfeedback-btn').addEventListener('click', this.getFeedback);
+        console.log("feedback event listener added");
 
 
         this.header.addHeaderToPage();
@@ -130,7 +131,7 @@ class ViewRaid extends BindingClass {
                     this.clientLoaded();
                 }, 3000);  // Delay of 3 seconds
             });
-            console.log("response in confirm", response);
+
             if (response.status === true) {
                 statusCell.innerText = 'Confirmed';
                 event.target.innerText = 'Remove';
@@ -319,7 +320,6 @@ class ViewRaid extends BindingClass {
 
     redirectToEditRaid() {
         const raid = this.dataStore.get('raid');
-        console.log("raid in redirect", raid);
         const raidId = raid.raidId;
 
         if (raid != null) {
@@ -331,7 +331,6 @@ class ViewRaid extends BindingClass {
         const signUpButton = document.getElementById('signup-btn');
         const raidModel = this.dataStore.get('raid');
         const profileModel = this.header.dataStore.get('profileModel');
-        console.log("profile model in change signup");
         const userId = profileModel.userId;
 
 
@@ -421,6 +420,7 @@ class ViewRaid extends BindingClass {
      * @returns {void}
      */
      async leaveFeedback() {
+         console.log("feedback function");
         const raidModel = this.dataStore.get('raid');
         const raidId = raidModel.raidId;
         const userId = this.header.dataStore.get('profileModel').userId;

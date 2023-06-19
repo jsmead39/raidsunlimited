@@ -58,7 +58,7 @@ body {
     background-repeat: no-repeat;
     background-size: 100% auto;
     position: absolute;
-    top: 120px; /* Adjust the value to account for header height and margin */
+    top: 100px; /* Adjust the value to account for header height and margin */
     left: 0;
     width: 100%;
     height: 150px;
@@ -108,6 +108,7 @@ body {
 }
 
 .form-group label {
+    color: var(--dialog-bg-color);
     flex-shrink: 0;
     width: 150px;
     text-align: right;
@@ -118,6 +119,7 @@ body {
 .form-group input[type="email"],
 .form-group input[type="url"] {
     flex: 1 1 auto;
+    border: 1px solid red;
 }
 
 .form-group-bottom-right {
@@ -148,7 +150,9 @@ a:link,a:visited,.link-color {
     padding: 10px 20px;
 }
 
-
+.card {
+    margin-top: 225px;
+}
 
 .card-content .form-field {
     display: flex;
@@ -181,14 +185,19 @@ a {
 }
 
 .raid-details-flex {
+    margin-top: 30px;
+    font-weight: bold;
     display: flex;
+    width: 50%;
     flex-wrap: wrap;
     justify-content: space-between;
 }
 
 .raid-server-status {
+    font-weight: bold;
     width: 100%;
     margin-top: 10px;
+    margin-bottom: 20px;
 }
 
 .card-content {
@@ -367,8 +376,6 @@ a {
     align-items: center;
 }
 
-
-
 #characterFormContainer {
     display: none;
     position: fixed;
@@ -418,4 +425,12 @@ body {
     height: 100%;
 }
 
+.modal-title {
+    color: var(--dialog-bg-color);
+}
+
+validated-field:required {
+    border-color: red;
+    box-shadow: none;
+}
 

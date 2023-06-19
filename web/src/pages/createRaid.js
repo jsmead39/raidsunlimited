@@ -36,19 +36,21 @@ class CreateRaid extends BindingClass {
             const urlParams = new URLSearchParams(window.location.search);
 
             const raidId = urlParams.get('id');
+            let raid;
 
             if (raidId) {
-                const raid = await this.client.getRaid(raidId);
+                raid = await this.client.getRaid(raidId);
                 this.populateRaidData(raid);
                 this.dataStore.set('raid', raid);
-
                 const createButton = document.getElementById('create');
                 createButton.innerText = 'Update Raid';
                 createButton.removeEventListener('click', this.submit);
                 createButton.addEventListener('click', this.update);
-
             }
-            document.querySelector('.card').classList.remove('hidden');
+            const cardElement = document.querySelector('.card.hidden');
+            cardElement.classList.remove('hidden');
+            cardElement.style.display = '';
+
         } catch (error) {
             console.error("Error loading the raid");
         }
@@ -69,11 +71,14 @@ class CreateRaid extends BindingClass {
         document.getElementById('tank-input').value = raid.requiredRoles.Tank;
         document.getElementById('raid-status').value = raid.raidStatus;
 
-        const raidStatusField = document.getElementById('raid-status-field');
-        raidStatusField.style.display = 'block';
+        const formGroupElement = document.querySelector('.form-group');
+        formGroupElement.style.display = '';
+
 
         const raidStatusDropdown = document.getElementById('raid-status');
         raidStatusDropdown.value = raid.raidStatus;
+
+
     }
 
 
