@@ -21,7 +21,6 @@ body {
     line-height: 1.4;
 }
 
-/* Header */
 .header {
     display: flex;
     justify-content: space-between;
@@ -31,14 +30,15 @@ body {
     top: 0;
     padding: 10px;
     width: 100%;
-    z-index: 11000;
+    z-index: 1000;
     height: 100px;
     background: var(--dialog-bg-color);
+    margin-bottom: 0;
 }
 
-.header > div {
-    display: flex;
-    align-items: center;
+#page-content {
+    position: relative;
+    margin-top: 25px;
 }
 
 .header_home {
@@ -52,6 +52,17 @@ body {
     align-items: center;
 }
 
+#banner {
+    background-color: transparent;
+    background-image: url('/header-bg.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    position: absolute;
+    top: 100px; /* Adjust the value to account for header height and margin */
+    left: 0;
+    width: 100%;
+    height: 150px;
+}
 
 
 /* Form Dialog */
@@ -80,9 +91,8 @@ body {
     left: 0;
     right: 0;
     box-sizing: border-box;
+    text-align: center;
 }
-
-
 
 .dialog-content {
     display: flex;
@@ -98,8 +108,8 @@ body {
 }
 
 
-
 .form-group label {
+    /*color: var(--main-text-color);*/
     flex-shrink: 0;
     width: 150px;
     text-align: right;
@@ -110,12 +120,18 @@ body {
 .form-group input[type="email"],
 .form-group input[type="url"] {
     flex: 1 1 auto;
+    /*border: 1px solid red;*/
 }
 
 .form-group-bottom-right {
     display: flex;
     justify-content: flex-end;
 }
+
+form button[type="submit"] {
+    margin-top: 2em;
+}
+
 
 
 /* Link colors */
@@ -124,36 +140,24 @@ a:link,a:visited,.link-color {
     text-decoration: none;
 }
 
-
-.background {
-    background-color: var(--main-bg-color);
-    margin: 0;
-    counter-reset: section;
-}
-
 .button-group {
     display: flex;
     justify-content: space-between;
 }
 
-.header_home {
-    font-size: 36px;
-    line-height: 40px;
-    height: 100px;
-    text-decoration: none;
-    color: var(--secondary-color);
-}
 
-.card {
-    margin: 20px;
+.custom-card.card {
+    background-color: var(--dialog-bg-color);
+    color: var(--main-text-color);
+    margin-top: 250px;
+    display: flex;
+    justify-content: space-around;
+    /*margin: 20px;*/
     padding: 10px 20px;
 }
 
-.validated-field:invalid {
-    outline: 2px solid var(--error-color);
-}
-.validated-field:focus:invalid {
-    color: var(--error-color);
+.card {
+    margin-top: 225px;
 }
 
 .card-content .form-field {
@@ -187,14 +191,19 @@ a {
 }
 
 .raid-details-flex {
+    margin-top: 30px;
+    font-weight: bold;
     display: flex;
+    width: 50%;
     flex-wrap: wrap;
     justify-content: space-between;
 }
 
 .raid-server-status {
+    font-weight: bold;
     width: 100%;
     margin-top: 10px;
+    margin-bottom: 20px;
 }
 
 .card-content {
@@ -202,18 +211,19 @@ a {
 }
 
 .oval-box {
-    width: 200px;
-    height: 100px;
+    width: 20vw;
+    height: 20vh;
     background: var(--light-grey);
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 10px;
+    font-size: 28px;
 }
 
 .content-center {
-    padding-top: 40px;
+    padding-top: 120px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -262,12 +272,12 @@ a {
     color: var(--error-color);
 }
 
-/*.form-group h3, .form-group h2 {*/
-/*    padding-right: 20px;*/
-/*    display: inline-block;*/
-/*}*/
+.custom-background {
+    background-color: var(--main-bg-color);
+}
 
 .profile-visible {
+    margin-top: -50px;
     display: block;
     font-size: 24px;
     color: var(--primary-color);
@@ -339,13 +349,9 @@ a {
     background-color: var(--light-grey);
 }
 
-#topSection {
-    margin-top: 120px;
-}
-
 #editUserProfile {
     text-align: center;
-    margin: 0 auto;
+    margin-top: 200px;
     width: 800px;
     padding: 20px;
     background: var(--dialog-bg-color);
@@ -376,8 +382,6 @@ a {
     justify-content: center;
     align-items: center;
 }
-
-
 
 #characterFormContainer {
     display: none;
@@ -423,6 +427,21 @@ a {
     margin-bottom: 20px;
 }
 
+#leave-feedback-body {
+    color: var(--dialog-bg-color);
+}
 
+html,
+body {
+    height: 100%;
+}
 
+.modal-title {
+    color: var(--dialog-bg-color);
+}
+
+validated-field:required {
+    border-color: red;
+    box-shadow: none;
+}
 

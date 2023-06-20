@@ -12,9 +12,9 @@ import raidsunlimited.dynamodb.models.UserRaid;
 import raidsunlimited.models.ParticipantModel;
 import raidsunlimited.models.RaidModel;
 
-import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
 
 /**
  * Implementation of the GetRaidActivity for the RaidsUnlimited GetRaid API.
@@ -29,6 +29,7 @@ public class GetRaidActivity {
     /**
      * Instantiates a new GetRaidActivity object.
      * @param raidDao the RaidDao to access the raidevent table.
+     * @param userRaidDao the UserRaodDao to access the userRaid table.
      */
     @Inject
     public GetRaidActivity(RaidDao raidDao, UserRaidDao userRaidDao) {

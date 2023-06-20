@@ -11,7 +11,7 @@ class ViewRaid extends BindingClass {
         super();
         this.bindClassMethods(['clientLoaded', 'mount', 'addRaidToPage', 'displayCharacters',
             'handleCharacterSelection', 'deleteRaidEvent', 'confirmUser', 'removeUser', 'redirectToEditRaid',
-            'changeSignupButton', 'withdrawEvent', 'leaveFeedback', 'feedbackForm'], this);
+            'changeSignupButton', 'withdrawEvent', 'leaveFeedback', 'feedbackForm', 'getFeedback'], this);
         this.dataStore = new DataStore();
         this.dataStore.addChangeListener(this.addRaidToPage);
         this.header = new Header(this.dataStore);
@@ -41,6 +41,8 @@ class ViewRaid extends BindingClass {
         document.getElementById('delete-btn').addEventListener('click', this.deleteRaidEvent);
         document.getElementById('edit-btn').addEventListener('click', this.redirectToEditRaid);
         document.getElementById('feedback-btn').addEventListener('click', this.feedbackForm);
+        document.getElementById('viewfeedback-btn').addEventListener('click', this.getFeedback);
+        console.log("feedback event listener added");
 
 
         this.header.addHeaderToPage();
@@ -129,7 +131,7 @@ class ViewRaid extends BindingClass {
                     this.clientLoaded();
                 }, 3000);  // Delay of 3 seconds
             });
-            console.log("response in confirm", response);
+
             if (response.status === true) {
                 statusCell.innerText = 'Confirmed';
                 event.target.innerText = 'Remove';
@@ -186,7 +188,7 @@ class ViewRaid extends BindingClass {
     }
 
 
-    displayCharacters(event) {
+    displayCharacters() {
         const profileModel = this.header.dataStore.get('profileModel');
 
         const messagePopup = document.getElementById('messagePopup');
@@ -263,7 +265,7 @@ class ViewRaid extends BindingClass {
             this.dataStore.set('raid', raid);
 
             if (raid) {
-                messageText.innerText = 'Signup successful';
+                messageText.innerText = 'Raid signup successful.';
                 messageText.classList.add('success');
                 messagePopup.classList.remove('hidden');
 
@@ -274,7 +276,7 @@ class ViewRaid extends BindingClass {
                 }, 3000);  // Delay of 5 seconds
             }
         } catch (error) {
-            console.error(`An unexpected error occurred: ${error.message}`);
+
         }
     }
 
@@ -318,7 +320,6 @@ class ViewRaid extends BindingClass {
 
     redirectToEditRaid() {
         const raid = this.dataStore.get('raid');
-        console.log("raid in redirect", raid);
         const raidId = raid.raidId;
 
         if (raid != null) {
@@ -334,7 +335,6 @@ class ViewRaid extends BindingClass {
 
 
         this.displayCharactersHandler = (event) => this.displayCharacters(event);
-        signUpButton.addEventListener('click', this.displayCharactersHandler);
 
         if (raidModel && profileModel) {
             const isParticipant = raidModel.participants.some(participant => participant.userId === userId);
@@ -351,6 +351,8 @@ class ViewRaid extends BindingClass {
     }
 
     async withdrawEvent() {
+        const characterDropdown = document.getElementById('character-dropdown');
+        characterDropdown.style.display = 'none';
         const raidModel = this.dataStore.get('raid');
         const raidId = raidModel.raidId;
         const userId = this.header.dataStore.get('profileModel').userId;
@@ -367,19 +369,32 @@ class ViewRaid extends BindingClass {
             });
 
             if (response.status === 200) {
-                messageText.innerText = "Success";
+                messageText.innerText = "You have been withdraw from the raid event.";
                 messagePopup.classList.add('success');
                 messagePopup.classList.remove('hidden');
             }
 
+
             setTimeout(() => {
-                window.location.href = "index.html";
+                this.clientLoaded();
+                messagePopup.classList.add('hidden');
+                // window.location.href = "index.html";
             }, 3000);
         } catch (error) {
 
         }
     }
 
+    /**
+     * Configures the feedback form. It removes any existing event listener from the
+     * 'Save' button to prevent multiple event handlers from being attached, and then
+     * re-attaches the event listener for submitting feedback.
+     *
+     * It also resets the rating and comment fields in the form to their default values.
+     *
+     * @function feedbackForm
+     * @returns {void}
+     */
     feedbackForm() {
         const feedbackSave = document.getElementById('feedback-save');
         feedbackSave.removeEventListener('click', this.leaveFeedback);
@@ -392,7 +407,20 @@ class ViewRaid extends BindingClass {
         commentReset.value = '';
     }
 
-    async leaveFeedback() {
+    /**
+     * Submits feedback for a particular raid.
+     * It retrieves the raid and user details from the dataStore and feedback details from the form.
+     * It then calls the `createFeedback` method on the client to send the feedback to the server.
+     * The response from the server is checked - if successful, a success message is shown; if not, the error message is shown.
+     * After displaying a success message, the message is hidden after 3 seconds.
+     *
+     * @async
+     * @function leaveFeedback
+     * @throws Will throw an error if the feedback submission fails
+     * @returns {void}
+     */
+     async leaveFeedback() {
+         console.log("feedback function");
         const raidModel = this.dataStore.get('raid');
         const raidId = raidModel.raidId;
         const userId = this.header.dataStore.get('profileModel').userId;
@@ -423,6 +451,48 @@ class ViewRaid extends BindingClass {
         } catch (error) {
 
         }
+    }
+
+    /**
+     * Retrieves the raid model from the data store and generates HTML to populate
+     * the feedback modal. It loops through each feedback in the raid model and creates
+     * a new table row for each feedback. It creates and populates a table cell for both
+     * the rating and comments, then appends these cells to the row. Finally, it appends
+     * the row to the feedback list in the modal.
+     * @function getFeedback
+     * @returns {void}
+     */
+    getFeedback() {
+        const raidModel = this.dataStore.get('raid');
+        console.log(raidModel);
+
+        // Get the feedback array from the raidModel
+        const feedbacks = raidModel.feedback;
+
+        // Get a reference to the feedback-list in the modal
+        const feedbackList = document.getElementById('feedback-list');
+
+        // Clear existing feedbacks in the list
+        feedbackList.innerHTML = '';
+
+        // Loop through each feedback
+        feedbacks.forEach(feedback => {
+            // Create a table row
+            const row = document.createElement('tr');
+
+            // Create a cell for the rating and set its text
+            const ratingCell = document.createElement('td');
+            ratingCell.innerText = feedback.rating;
+            row.appendChild(ratingCell);
+
+            // Create a cell for the comments and set its text
+            const commentCell = document.createElement('td');
+            commentCell.innerText = feedback.comments;
+            row.appendChild(commentCell);
+
+            // Append the row to the feedback list
+            feedbackList.appendChild(row);
+        });
     }
 
 }

@@ -4,8 +4,8 @@
       "PutRequest": {
         "Item": {
           "userId": {"S": "user1"},
-          "displayName": {"S": "DragonSlayer"},
-          "email": {"S": "dragonslayer@test.com"},
+          "displayName": {"S": "Dyze"},
+          "email": {"S": "user1@test.com"},
           "charactersList": {"S": "[{\"charName\": \"Character 1\",\"charClass\": \"Warrior\",\"specialization\": \"Fury\",\"role\": \"DPS\"},{\"charName\": \"Character 2\",\"charClass\": \"Mage\",\"specialization\": \"Frost\",\"role\": \"DPS\"}]"},
           "logs": {"S": "https://logs.fakesite.com/user1"}
         }
@@ -15,8 +15,8 @@
       "PutRequest": {
         "Item": {
           "userId": {"S": "user2"},
-          "displayName": {"S": "MillHouseManaStorm"},
-          "email": {"S": "millhouse@test.com"},
+          "displayName": {"S": "Ratdawg"},
+          "email": {"S": "user2@test.com"},
           "charactersList": {"S": "[{\"charName\": \"Character 1\",\"charClass\": \"Warlock\",\"specialization\": \"Destruction\",\"role\": \"DPS\"},{\"charName\": \"Character 2\",\"charClass\": \"Priest\",\"specialization\": \"Shadow\",\"role\": \"Healer\"}]"},
           "logs": {"S": "https://logs.fakesite.com/user2"}
         }
@@ -26,8 +26,8 @@
       "PutRequest": {
         "Item": {
           "userId": {"S": "user3"},
-          "displayName": {"S": "StabbyMcStab"},
-          "email": {"S": "stabby@test.com"},
+          "displayName": {"S": "GuterboyRyan"},
+          "email": {"S": "user3@test.com"},
           "charactersList": {"S": "[{\"charName\": \"Character 1\",\"charClass\": \"Rogue\",\"specialization\": \"Assassination\",\"role\": \"DPS\"},{\"charName\": \"Character 2\",\"charClass\": \"Druid\",\"specialization\": \"Restoration\",\"role\": \"Healer\"}]"},
           "logs": {"S": "https://logs.fakesite.com/user3"}
         }
@@ -37,8 +37,8 @@
       "PutRequest": {
         "Item": {
           "userId": {"S": "user4"},
-          "displayName": {"S": "ShadowHunter"},
-          "email": {"S": "shadowhunter@test.com"},
+          "displayName": {"S": "Starski"},
+          "email": {"S": "user4@test.com"},
           "charactersList": {"S": "[{\"charName\": \"Character 1\",\"charClass\": \"Hunter\",\"specialization\": \"Beast Mastery\",\"role\": \"DPS\"},{\"charName\": \"Character 2\",\"charClass\": \"Shaman\",\"specialization\": \"Restoration\",\"role\": \"Healer\"}]"},
           "logs": {"S": "https://logs.fakesite.com/user4"}
         }
@@ -48,8 +48,8 @@
       "PutRequest": {
         "Item": {
           "userId": {"S": "user5"},
-          "displayName": {"S": "HolyPaladin"},
-          "email": {"S": "holypaladin@test.com"},
+          "displayName": {"S": "Xoory"},
+          "email": {"S": "user5@test.com"},
           "charactersList": {"S": "[{\"charName\": \"Character 1\",\"charClass\": \"Paladin\",\"specialization\": \"Holy\",\"role\": \"Healer\"},{\"charName\": \"Character 2\",\"charClass\": \"Warrior\",\"specialization\": \"Protection\",\"role\": \"Tank\"}]"},
           "logs": {"S": "https://logs.fakesite.com/user5"}
         }

@@ -64,7 +64,7 @@ export default class Header extends BindingClass {
                     const editProfileButton = this.createEditProfileButton(profile.profileModel.userId);
                     userInfo.appendChild(editProfileButton);
                     this.dataStore.set('profileModel', profile.profileModel);
-                    console.log(this.dataStore.get('profileModel'));
+
                 }
             });
         } else {

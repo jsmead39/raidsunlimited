@@ -20,7 +20,7 @@ public class RoleRemovalActivity {
     private final RaidDao raidDao;
 
     /**
-     * Instantiates a new RoleRemovalActivity
+     * Instantiates a new RoleRemovalActivity.
      * @param userRaidDao userRaidDao to access the userRaid table.
      * @param raidDao raidDao to access the raidDao table.
      */
@@ -41,7 +41,8 @@ public class RoleRemovalActivity {
      * @param roleRemovalRequest the role removal request, containing raid ID, user ID, and raid owner.
      * @return a RoleRemovalResult with the user ID, raid ID, and the updated confirmation status of the user.
      *
-     * @throws RaidSignupException if either the raid ID or user ID is not provided in the request, or if the user is not signed up for the raid.
+     * @throws RaidSignupException if either the raid ID or user ID is not provided in the request, or if the user is
+     * not signed up for the raid.
      * @throws NotRaidOwnerException if the raid owner in the request does not match the raid owner of the raid event.
      */
     public RoleRemovalResult handleRequest(final RoleRemovalRequest roleRemovalRequest) {

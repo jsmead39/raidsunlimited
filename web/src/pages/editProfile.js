@@ -180,6 +180,8 @@ class EditProfile extends BindingClass {
         const addCharacterButton = document.getElementById('addCharacterButton');
         const characterFormContainer = document.getElementById('characterFormContainer');
         const characterForm = document.getElementById('characterForm');
+        const characterClassDropdown = document.getElementById('characterClass');
+        const characterSpecializationDropdown = document.getElementById('characterSpecialization');
 
         if (addCharacterButton && characterFormContainer && characterForm) {
             addCharacterButton.addEventListener('click', () => {
@@ -196,6 +198,51 @@ class EditProfile extends BindingClass {
                     document.getElementById('characterFormContainer').style.display = "none";
                 }
             });
+
+            // Update specialization options based on the selected class
+            characterClassDropdown.addEventListener('change', () => {
+                const selectedClass = characterClassDropdown.value;
+                const specializationOptions = getSpecializationOptions(selectedClass);
+
+                // Clear existing options
+                characterSpecializationDropdown.innerHTML = '<option value="" disabled selected>Select a Specialization</option>';
+
+                // Add new options based on the selected class
+                specializationOptions.forEach(specialization => {
+                    const option = document.createElement('option');
+                    option.value = specialization;
+                    option.textContent = specialization;
+                    characterSpecializationDropdown.appendChild(option);
+                });
+            });
+
+            // Function to get specialization options based on the selected class
+            const getSpecializationOptions = (selectedClass) => {
+                switch (selectedClass) {
+                    case 'Death Knight':
+                        return ['Blood', 'Frost', 'Unholy'];
+                    case 'Druid':
+                        return ['Balance', 'Feral', 'Restoration'];
+                    case 'Hunter':
+                        return ['Beast Mastery', 'Marksmanship', 'Survival'];
+                    case 'Mage':
+                        return ['Arcane', 'Fire', 'Frost'];
+                    case 'Paladin':
+                        return ['Holy', 'Protection', 'Retribution'];
+                    case 'Priest':
+                        return ['Discipline', 'Holy', 'Shadow'];
+                    case 'Rogue':
+                        return ['Assassination', 'Combat', 'Subtlety'];
+                    case 'Shaman':
+                        return ['Elemental', 'Enhancement', 'Restoration'];
+                    case 'Warlock':
+                        return ['Affliction', 'Demonology', 'Destruction'];
+                    case 'Warrior':
+                        return ['Arms', 'Fury', 'Protection'];
+                    default:
+                        return [];
+                }
+            };
         }
     }
 

@@ -16,8 +16,8 @@ import raidsunlimited.exceptions.UserProfileNotFoundException;
 import raidsunlimited.models.ParticipantModel;
 import raidsunlimited.models.RaidModel;
 
-import javax.inject.Inject;
 import java.util.List;
+import javax.inject.Inject;
 
 public class RaidWithdrawActivity {
     private final Logger log = LogManager.getLogger();

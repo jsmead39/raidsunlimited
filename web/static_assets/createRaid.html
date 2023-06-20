@@ -4,77 +4,121 @@
 <head>
     <script type="text/javascript" src="assets/createRaid.js"></script>
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
-<body class="background">
+<body class="background custom-background">
     <header class="header" id="header"></header>
     <div id="topSection">PlaceHolder</div>
     <div id="messagePopup" class="hidden">
         <p id="messageText"></p>
     </div>
 
-    <div class="card hidden">
-        <h2 id="formTitle">Create Raid</h2>
-        <form class="card-content" id="create-raid-form">
+    <div id="banner"></div>
+    <div class="container" id="page-content">
 
-            <input type="hidden" id="raid-id" value="">
-            <p class="form-field" id="raid-status-field" style="display: none;">
-                <label>Raid Status</label>
-                <select id="raid-status">
-                    <option value="Scheduled">Scheduled</option>
-                    <option value="Completed">Completed</option>
-                </select>
-            </p>
-            <p class="form-field">
-                <label>Raid Name</label>
-                <input type="text" required class="validated-field" id="raid-name" placeholder="Enter Raid Name"
-                       autofocus>
-            </p>
-            <p class="form-field">
-                <label>Server</label>
-                <input type="text" required id="raid-server">
-            </p>
-            <p class="form-field">
-                <label>Raid Date</label>
-                <input type="date" required id="raid-date">
-            </p>
-            <p class="form-field">
-                <label>Raid Time (PST)</label>
-                <input type="time" required id="raid-time" placeholder ="Enter a time">
-            </p>
-            <p class="form-field">
-                <label>Raid Size</label>
-                <input type="number" required id="raid-size" placeholder="Enter Raid Size">
-            </p>
-            <p class="form-field">
-                <label>Raid Objective</label>
-                <input type="text" required id="raid-objective" placeholder="i.e Progression/Farm">
-            </p>
-            <p class="form-field">
-                <label>Loot Distribution</label>
-                <input type="text" required id="loot-distribution" placeholder="MS/OS, GDKP, Soft-Reserve">
-            </p>
-            <p class="form-field">
-                <label>Required Roles</label>
-            <div class="role-field">
-                <label for="dps-input">DPS</label>
-                <input type="number" required id="dps-input" class="role-input" placeholder="Number">
-            </div>
-            <div class="role-field">
-                <label for="healer-input">Healer</label>
-                <input type="number" required id="healer-input" class="role-input" placeholder="Number">
-            </div>
-            <div class="role-field">
-                <label for="tank-input">Tank</label>
-                <input type="number" required id="tank-input" class="role-input" placeholder="Number">
-            </div>
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card hidden" style="display: none;">
+                    <h2 id="formTitle" class="card-header">Create Raid</h2>
+                    <div class="card-body">
+                        <form id="create-raid-form">
+                            <input type="hidden" id="raid-id" value="">
+                            <div class="form-group" style="display: none;">
+                                <label for="raid-status">Raid Status</label>
+                                <select id="raid-status" class="form-control">
+                                    <option value="Scheduled">Scheduled</option>
+                                    <option value="Completed">Completed</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="raid-name">Raid Name</label>
+                                <input type="text" required class="form-control validated-field" id="raid-name" placeholder="Enter Raid Name" autofocus>
+                            </div>
+                            <div class="form-group">
+                                <label for="raid-server">Server</label>
+                                <select id="raid-server" class="form-control" required>
+                                    <option value="Arugal">Arugal</option>
+                                    <option value="Ashkandi">Ashkandi</option>
+                                    <option value="Atiesh">Atiesh</option>
+                                    <option value="Azuresong">Azuresong</option>
+                                    <option value="Benediction">Benediction</option>
+                                    <option value="Bloodsail Buccaneers">Bloodsail Buccaneers</option>
+                                    <option value="Eranikus">Eranikus</option>
+                                    <option value="Faerlina">Faerlina</option>
+                                    <option value="Grobbulus">Grobbulus</option>
+                                    <option value="Mankrik">Mankrik</option>
+                                    <option value="Old Blanchy">Old Blanchy</option>
+                                    <option value="Pagle">Pagle</option>
+                                    <option value="Remulos">Remulos</option>
+                                    <option value="Sulfuras">Sulfuras</option>
+                                    <option value="Westfall">Westfall</option>
+                                    <option value="Whitemane">Whitemane</option>
+                                    <option value="Windseeker">Windseeker</option>
+                                </select>
+                            </div>
 
-            </p>
-            <p>
-                <a href="#" class="button" id="create">Create Raid</a>
-            </p>
-        </form>
+                            <div class="form-group">
+                                <label for="raid-date">Raid Date</label>
+                                <input type="date" required class="form-control" id="raid-date">
+                            </div>
+                            <div class="form-group">
+                                <label for="raid-time">Raid Time (PST)</label>
+                                <input type="time" required class="form-control" id="raid-time" placeholder="Enter a time">
+                            </div>
+                            <div class="form-group">
+                                <label for="raid-size">Raid Size</label>
+                                <select id="raid-size" class="form-control">
+                                    <option value="10">10</option>
+                                    <option value="25">25</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="raid-objective">Raid Objective</label>
+                                <select id="raid-objective" class="form-control" required>
+                                    <option value="Progression">Progression</option>
+                                    <option value="Farm">Farm</option>
+                                    <option value="Achievement Run">Achievement Run</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="loot-distribution">Loot Distribution</label>
+                                <select id="loot-distribution" class="form-control" required>
+                                    <option value="GDKP">GDKP</option>
+                                    <option value="MS/OS">MS/OS</option>
+                                    <option value="Soft-Reserve">Soft-Reserve</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Required Roles</label>
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="dps-input">DPS</label>
+                                        <input type="number" required class="form-control role-input" id="dps-input" placeholder="Number">
+                                    </div>
+                                    <div class="col">
+                                        <label for="healer-input">Healer</label>
+                                        <input type="number" required class="form-control role-input" id="healer-input" placeholder="Number">
+                                    </div>
+                                    <div class="col">
+                                        <label for="tank-input">Tank</label>
+                                        <input type="number" required class="form-control role-input" id="tank-input" placeholder="Number">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary" id="create">Create Raid</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 </body>
 
 </html>

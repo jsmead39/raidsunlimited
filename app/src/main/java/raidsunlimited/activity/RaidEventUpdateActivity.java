@@ -8,10 +8,10 @@ import raidsunlimited.converters.ModelConverter;
 import raidsunlimited.dynamodb.RaidDao;
 import raidsunlimited.dynamodb.models.RaidEvent;
 import raidsunlimited.exceptions.NotRaidOwnerException;
+import raidsunlimited.exceptions.RaidEventCompletionException;
 import raidsunlimited.exceptions.RaidEventNotFoundException;
 import raidsunlimited.models.RaidModel;
 
-import javax.inject.Inject;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -19,6 +19,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import javax.inject.Inject;
 
 public class RaidEventUpdateActivity {
     private final Logger log = LogManager.getLogger();
@@ -48,6 +50,10 @@ public class RaidEventUpdateActivity {
             throw new NotRaidOwnerException("You must be the owner of the raid to update it");
         }
 
+        if (raidEvent.getRaidStatus().equals("Completed") || raidEvent.getRaidStatus() == null) {
+            throw new RaidEventCompletionException("You cannot modify a raid that was already completed");
+        }
+
         if (raidEventUpdateRequest.getRaidName() != null && !raidEventUpdateRequest.getRaidName().isEmpty()) {
             raidEvent.setRaidName(raidEventUpdateRequest.getRaidName());
         }
@@ -72,7 +78,8 @@ public class RaidEventUpdateActivity {
             raidEvent.setRaidObjective(raidEventUpdateRequest.getRaidObjective());
         }
 
-        if (raidEventUpdateRequest.getLootDistribution() != null && !raidEventUpdateRequest.getLootDistribution().isEmpty()) {
+        if (raidEventUpdateRequest.getLootDistribution() != null &&
+                !raidEventUpdateRequest.getLootDistribution().isEmpty()) {
             raidEvent.setLootDistribution(raidEventUpdateRequest.getLootDistribution());
         }
 

@@ -49,6 +49,7 @@ class RaidEventUpdateActivityTest {
 
         // Mock raidDao.getRaid() to return a raid event
         RaidEvent existingRaidEvent = new RaidEvent();
+        existingRaidEvent.setRaidStatus("Scheduled");
         existingRaidEvent.setRaidOwner(raidOwner);
         when(raidDao.getRaid(raidId)).thenReturn(existingRaidEvent);
 
@@ -64,7 +65,7 @@ class RaidEventUpdateActivityTest {
                 .withLootDistribution(lootDistribution)
                 .withRequiredRoles(requiredRoles)
                 .withRaidOwner(raidOwner)
-                .withRaidStatus("Completed")
+                .withRaidStatus("Scheduled")
                 .build();
 
         // Call the handleRequest method
