@@ -56,65 +56,66 @@
                 <tbody id="participant-table-body">
                 </tbody>
             </table>
+        </div>
+    </div>
 
-        <!-- Modal for Leave Feedback-->
-            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="myModalLabel">Feedback Form</h4>
+
+<!-- Modal for Leave Feedback-->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Feedback Form</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="feedbackForm">
+                        <div class="form-group">
+                            <label for="rating">Rating:</label>
+                            <select class="form-control" id="rating" name="rating">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
                         </div>
-                        <div class="modal-body">
-                            <form id="feedbackForm">
-                                <div class="form-group">
-                                    <label for="rating">Rating:</label>
-                                    <select class="form-control" id="rating" name="rating">
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="comment">Comments:</label>
-                                    <textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
-                                </div>
-                            </form>
+                        <div class="form-group">
+                            <label for="comment">Comments:</label>
+                            <textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" id="feedback-save" data-dismiss="modal">Save
-                                changes</button>
-                        </div>
-                    </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="feedback-save" data-dismiss="modal">Save
+                        changes</button>
                 </div>
             </div>
+        </div>
+    </div>
 
-        <!-- Modal for View Feedback-->
-            <div class="modal fade" id="viewFeedbackModal" tabindex="-1" role="dialog" aria-labelledby="viewFeedbackModalLabel">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="viewFeedbackModalLabel">View Feedback</h4>
-                        </div>
-                        <div class="modal-body" id="leave-feedback-body">
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <th>Rating</th>
-                                    <th>Comments</th>
-                                </tr>
-                                </thead>
-                                <tbody id="feedback-list">
-                                <!-- Feedback will be populated here -->
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
-                    </div>
+<!-- Modal for View Feedback-->
+    <div class="modal fade" id="viewFeedbackModal" tabindex="-1" role="dialog" aria-labelledby="viewFeedbackModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="viewFeedbackModalLabel">View Feedback</h4>
+                </div>
+                <div class="modal-body" id="leave-feedback-body">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Rating</th>
+                            <th>Comments</th>
+                        </tr>
+                        </thead>
+                        <tbody id="feedback-list">
+                        <!-- Feedback will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -122,9 +123,5 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
 </body>
-
-
-
 </html>
