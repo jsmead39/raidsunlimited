@@ -33,7 +33,21 @@ public class CreateFeedbackActivity {
         this.raidDao = raidDao;
     }
 
-
+    /**
+     * Handles requests for creating feedback for a given raid.
+     * The method validates the raid ID and user ID provided in the request.
+     * The method checks whether the raid has been completed and whether the user has attended the raid.
+     * If both conditions are met and the user hasn't left feedback for the raid yet, the feedback is created and added
+     * to the raid.
+     *
+     * @param createFeedbackRequest The object containing the feedback details, raid ID, and user ID.
+     * @return CreateFeedbackResult The result object containing the created feedback.
+     *
+     * @throws InvalidAttributeException If the raid ID or user ID is null or empty.
+     * @throws RaidEventNotFoundException If no raid can be found with the provided ID.
+     * @throws FeedbackSubmissionException If the raid hasn't been completed, the user didn't attend the raid, or the
+     * user has already left feedback.
+     */
     public CreateFeedbackResult handleRequest(final CreateFeedbackRequest createFeedbackRequest) {
         log.info("Handle Request received {}", createFeedbackRequest);
 

@@ -15,15 +15,14 @@ import raidsunlimited.exceptions.RaidEventNotFoundException;
 import raidsunlimited.models.FeedbackModel;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.openMocks;
 
 class CreateFeedbackActivityTest {
@@ -120,8 +119,8 @@ class CreateFeedbackActivityTest {
     void handleRequest_raidNotCompleted_throwsException() {
         // GIVEN
         String testRaidId = "testRaidId";
-        CreateFeedbackRequest request = CreateFeedbackRequest.builder().
-                withRaidId(testRaidId)
+        CreateFeedbackRequest request = CreateFeedbackRequest.builder()
+                .withRaidId(testRaidId)
                 .withUserId("testUserId")
                 .build();
 
@@ -141,8 +140,8 @@ class CreateFeedbackActivityTest {
         String testRaidId = "testRaidId";
         String testUserId = "testUserId";
         CreateFeedbackRequest request = CreateFeedbackRequest.builder()
-                .withRaidId(testRaidId).
-                withUserId(testUserId)
+                .withRaidId(testRaidId)
+                .withUserId(testUserId)
                 .build();
 
         RaidEvent testRaidEvent = new RaidEvent();

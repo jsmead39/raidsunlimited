@@ -12,7 +12,9 @@ import raidsunlimited.dynamodb.models.UserRaid;
 import raidsunlimited.exceptions.NotRaidOwnerException;
 import raidsunlimited.exceptions.RaidSignupException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -26,12 +28,12 @@ class RoleRemovalActivityTest {
     @Mock
     UserRaidDao userRaidDao;
 
-    private RoleRemovalActivity RoleRemovalActivity;
+    private RoleRemovalActivity roleRemovalActivity;
 
     @BeforeEach
     void setUp() {
         openMocks(this);
-        RoleRemovalActivity = new RoleRemovalActivity(userRaidDao, raidDao);
+        roleRemovalActivity = new RoleRemovalActivity(userRaidDao, raidDao);
     }
 
     @Test
@@ -56,7 +58,7 @@ class RoleRemovalActivityTest {
                   .build();
 
         //WHEN
-        RoleRemovalResult result = RoleRemovalActivity.handleRequest(request);
+        RoleRemovalResult result = roleRemovalActivity.handleRequest(request);
 
         //THEN
         verify(userRaidDao).saveToEvent(any(UserRaid.class));
@@ -68,13 +70,13 @@ class RoleRemovalActivityTest {
     @Test
     void handleRequest_raidIdEmpty_throwsException() {
         RoleRemovalRequest request = new RoleRemovalRequest.Builder().withRaidId("").build();
-        assertThrows(RaidSignupException.class, () -> RoleRemovalActivity.handleRequest(request));
+        assertThrows(RaidSignupException.class, () -> roleRemovalActivity.handleRequest(request));
     }
 
     @Test
     void handleRequest_userIdEmpty_throwsException() {
         RoleRemovalRequest request = new RoleRemovalRequest.Builder().withUserId("").build();
-        assertThrows(RaidSignupException.class, () -> RoleRemovalActivity.handleRequest(request));
+        assertThrows(RaidSignupException.class, () -> roleRemovalActivity.handleRequest(request));
     }
 
     @Test
@@ -92,7 +94,7 @@ class RoleRemovalActivityTest {
 
 
         //WHEN + THEN
-        assertThrows(NotRaidOwnerException.class, () -> RoleRemovalActivity.handleRequest(request));
+        assertThrows(NotRaidOwnerException.class, () -> roleRemovalActivity.handleRequest(request));
     }
 
     @Test
@@ -115,6 +117,6 @@ class RoleRemovalActivityTest {
 
 
         //WHEN + THEN
-        assertThrows(RaidSignupException.class, () -> RoleRemovalActivity.handleRequest(request));
+        assertThrows(RaidSignupException.class, () -> roleRemovalActivity.handleRequest(request));
     }
 }

@@ -115,7 +115,7 @@ class RaidEventUpdateActivityTest {
         // Create the request
         RaidEventUpdateRequest request = RaidEventUpdateRequest.builder()
                 .withRaidId(raidId)
-                .withRaidOwner(differentOwner) // Different owner than the raid event
+                .withRaidOwner(differentOwner)
                 .build();
 
         // Mock raidDao.getRaid() to return a raid event

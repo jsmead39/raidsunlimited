@@ -9,7 +9,7 @@ public class RaidSignupResult {
         this.raidModel = raidModel;
     }
 
-    public RaidModel getraidModel() {
+    public RaidModel getRaidModel() {
         return raidModel;
     }
 
