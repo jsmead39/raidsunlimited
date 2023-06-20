@@ -37,6 +37,26 @@ public class RaidEventUpdateActivity {
         this.raidDao = raidDao;
     }
 
+    /**
+     * Handles requests to update a specific raid event.
+     * <p>
+     * Validates if the raid event to be updated exists, if the requester is the owner of the raid event,
+     * and if the raid event is not already completed or null.
+     * <p>
+     * If these conditions are met, the request to update the raid event is processed.
+     * The raid event details (such as name, server, date, time, size, objective, loot distribution, required roles,
+     * status)
+     * can be updated if they are not null and not empty.
+     * <p>
+     * Once the updates are made, the updated raid event is saved and returned as the result.
+     *
+     * @param raidEventUpdateRequest The object containing the update details for a raid event.
+     * @return RaidEventUpdateResult The result object containing the updated raid event.
+     *
+     * @throws RaidEventNotFoundException If no raid can be found with the provided ID.
+     * @throws NotRaidOwnerException If the user requesting the update is not the owner of the raid.
+     * @throws RaidEventCompletionException If the raid event is already completed or null.
+     */
     public RaidEventUpdateResult handleRequest(RaidEventUpdateRequest raidEventUpdateRequest) {
         log.info("Handle request received {}", raidEventUpdateRequest);
 

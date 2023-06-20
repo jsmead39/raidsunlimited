@@ -5,16 +5,14 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import raidsunlimited.activity.requests.GetRaidHistoryRequest;
 import raidsunlimited.activity.results.GetRaidHistoryResult;
-import raidsunlimited.converters.ModelConverter;
 import raidsunlimited.dynamodb.RaidDao;
 import raidsunlimited.dynamodb.UserDao;
 import raidsunlimited.dynamodb.UserRaidDao;
 import raidsunlimited.dynamodb.models.RaidEvent;
-import raidsunlimited.dynamodb.models.UserRaid;
 import raidsunlimited.dynamodb.models.User;
+import raidsunlimited.dynamodb.models.UserRaid;
 import raidsunlimited.exceptions.InvalidAttributeException;
 import raidsunlimited.exceptions.UserProfileNotFoundException;
-import raidsunlimited.models.RaidModel;
 
 import java.util.ArrayList;
 import java.util.List;
