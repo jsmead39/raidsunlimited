@@ -16,6 +16,7 @@ import raidsunlimited.models.FeedbackModel;
 import java.util.List;
 import javax.inject.Inject;
 
+
 public class CreateFeedbackActivity {
     private final Logger log = LogManager.getLogger();
     private final UserRaidDao userRaidDao;
@@ -31,6 +32,7 @@ public class CreateFeedbackActivity {
         this.userRaidDao = userRaidDao;
         this.raidDao = raidDao;
     }
+
 
     public CreateFeedbackResult handleRequest(final CreateFeedbackRequest createFeedbackRequest) {
         log.info("Handle Request received {}", createFeedbackRequest);

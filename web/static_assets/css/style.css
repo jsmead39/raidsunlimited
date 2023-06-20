@@ -107,8 +107,9 @@ body {
     margin-bottom: 10px;
 }
 
+
 .form-group label {
-    color: var(--dialog-bg-color);
+    /*color: var(--main-text-color);*/
     flex-shrink: 0;
     width: 150px;
     text-align: right;
@@ -119,13 +120,18 @@ body {
 .form-group input[type="email"],
 .form-group input[type="url"] {
     flex: 1 1 auto;
-    border: 1px solid red;
+    /*border: 1px solid red;*/
 }
 
 .form-group-bottom-right {
     display: flex;
     justify-content: flex-end;
 }
+
+form button[type="submit"] {
+    margin-top: 2em;
+}
+
 
 
 /* Link colors */
