@@ -421,6 +421,10 @@ a {
     margin-bottom: 20px;
 }
 
+#leave-feedback-body {
+    color: var(--dialog-bg-color);
+}
+
 html,
 body {
     height: 100%;
