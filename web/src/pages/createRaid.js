@@ -13,7 +13,6 @@ class CreateRaid extends BindingClass {
         this.bindClassMethods(['mount', 'submit', 'redirectToViewRaid', 'clientLoaded', 'populateRaidData',
             'getFormValues', 'update'], this);
         this.dataStore = new DataStore();
-        // this.dataStore.addChangeListener(this.redirectToViewRaid);
         this.header = new Header(this.dataStore);
     }
 
@@ -116,6 +115,11 @@ class CreateRaid extends BindingClass {
                 changeButton.innerText = origButtonText;
                 messageText.innerText = `Error: ${error.message}`;
                 messagePopup.classList.remove('hidden');
+
+                    setTimeout(() => {
+                        messagePopup.classList.add('hidden');
+                    }, 3000);
+
             });
         this.dataStore.set('raid', raid);
 

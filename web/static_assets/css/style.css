@@ -253,6 +253,7 @@ a {
     border: 1px solid var(--light-grey);
     padding: 20px;
     text-align: center;
+    z-index: 100;
 }
 
 #messagePopup.hidden {
@@ -443,5 +444,9 @@ body {
 validated-field:required {
     border-color: red;
     box-shadow: none;
+}
+
+input[readonly] {
+    background-color: var(--light-grey);
 }
 
