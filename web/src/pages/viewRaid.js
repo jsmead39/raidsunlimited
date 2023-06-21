@@ -29,7 +29,7 @@ class ViewRaid extends BindingClass {
             const raid = await this.client.getRaid(raidId);
             this.dataStore.set('raid', raid);
         } catch (error) {
-            console.error("Error loading client data: ", error);
+            console.error("No user to load");
         }
     }
 
@@ -42,13 +42,11 @@ class ViewRaid extends BindingClass {
         document.getElementById('edit-btn').addEventListener('click', this.redirectToEditRaid);
         document.getElementById('feedback-btn').addEventListener('click', this.feedbackForm);
         document.getElementById('viewfeedback-btn').addEventListener('click', this.getFeedback);
-        console.log("feedback event listener added");
-
+        document.getElementById('signup-btn').addEventListener('click', this.displayCharacters);
 
         this.header.addHeaderToPage();
         this.client = new RaidsUnlimitedClient();
         this.clientLoaded();
-
     }
 
     addRaidToPage() {
@@ -420,7 +418,6 @@ class ViewRaid extends BindingClass {
      * @returns {void}
      */
      async leaveFeedback() {
-         console.log("feedback function");
         const raidModel = this.dataStore.get('raid');
         const raidId = raidModel.raidId;
         const userId = this.header.dataStore.get('profileModel').userId;

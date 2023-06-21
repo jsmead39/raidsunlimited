@@ -15,7 +15,6 @@ class Homepage extends BindingClass {
         // Create a enw datastore with an initial "empty" state.
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
-        console.log("Homepage constructor");
     }
 
     mount() {
@@ -36,7 +35,6 @@ class Homepage extends BindingClass {
                 profileSetupMessage.classList.remove('profile-hidden');
                 profileSetupMessage.classList.add('profile-visible');
             }
-            console.log("Userprofile in loadUserProfile", response);
         } catch (error) {
             console.error("User is not logged in to retrieve a profile", error);
         }

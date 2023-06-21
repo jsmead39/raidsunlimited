@@ -66,7 +66,7 @@ class CreateRaid extends BindingClass {
         document.getElementById('raid-size').value = raid.raidSize;
         document.getElementById('raid-objective').value = raid.raidObjective;
         document.getElementById('loot-distribution').value = raid.lootDistribution;
-        document.getElementById('dps-input').value = raid.requiredRoles.DPS;
+        document.getElementById('dps-input').value = raid.requiredRoles.Dps;
         document.getElementById('healer-input').value = raid.requiredRoles.Healer;
         document.getElementById('tank-input').value = raid.requiredRoles.Tank;
         document.getElementById('raid-status').value = raid.raidStatus;
