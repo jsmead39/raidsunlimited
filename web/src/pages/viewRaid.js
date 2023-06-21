@@ -214,8 +214,6 @@ class ViewRaid extends BindingClass {
             });
             dropdown.appendChild(characterElement);
         });
-        // dropdown.style.left = event.pageX + 'px';
-        // dropdown.style.top = event.pageY + 'px';
         dropdown.style.display = 'block';
 
         // Add an event listener for the 'keyup' event on the document
@@ -318,10 +316,23 @@ class ViewRaid extends BindingClass {
 
     redirectToEditRaid() {
         const raid = this.dataStore.get('raid');
+        const raidOwner = raid.raidOwner;
         const raidId = raid.raidId;
+        const profileModel = this.header.dataStore.get('profileModel');
 
-        if (raid != null) {
+        if (profileModel && raidOwner === profileModel.email) {
             window.location.href = `/createRaid.html?id=${raidId}`;
+        } else {
+            const messagePopup = document.getElementById('messagePopup');
+            const messageText = document.getElementById('messageText');
+            messageText.innerText = `You must own the raid to make changes.`;
+            messageText.classList.add('error');
+            messagePopup.classList.remove('hidden');
+
+            setTimeout(() => {
+                messagePopup.classList.add('hidden');
+                messagePopup.style.display = 'none';
+            }, 3000);
         }
     }
 
@@ -376,7 +387,7 @@ class ViewRaid extends BindingClass {
             setTimeout(() => {
                 this.clientLoaded();
                 messagePopup.classList.add('hidden');
-                // window.location.href = "index.html";
+                window.location.href = "index.html";
             }, 3000);
         } catch (error) {
 
@@ -434,6 +445,12 @@ class ViewRaid extends BindingClass {
                 messageText.innerText = `${error.message}`;
                 messageText.classList.add('error');
                 messagePopup.classList.remove('hidden');
+
+                setTimeout(() => {
+                    messagePopup.classList.add('hidden');
+                    messagePopup.style.display = 'none';
+                }, 3000);
+
             });
 
             if (response.status === 200) {
@@ -444,6 +461,7 @@ class ViewRaid extends BindingClass {
 
             setTimeout(() => {
                 messagePopup.classList.add('hidden');
+                messagePopup.style.display = 'none';
             }, 3000);
         } catch (error) {
 
@@ -461,7 +479,6 @@ class ViewRaid extends BindingClass {
      */
     getFeedback() {
         const raidModel = this.dataStore.get('raid');
-        console.log(raidModel);
 
         // Get the feedback array from the raidModel
         const feedbacks = raidModel.feedback;
