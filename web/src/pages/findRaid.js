@@ -19,7 +19,6 @@ class FindRaid extends BindingClass {
      */
     async clientLoaded() {
         const raids = await this.client.getAllRaids();
-        console.log("raids in client loaded", raids);
         this.dataStore.set('raids', raids);
         this.displayRaids(raids);
 
@@ -63,7 +62,6 @@ class FindRaid extends BindingClass {
         });
 
         raids.raidModelList.forEach(raid => {
-            console.log(raid);
             const row = document.createElement('tr');
 
             const raidNameCell = document.createElement('td');

@@ -9,13 +9,10 @@ import DataStore from '../util/DataStore';
 class Homepage extends BindingClass {
     constructor() {
         super();
-
         this.bindClassMethods(['mount', 'loadUserProfile'], this);
-
-        // Create a enw datastore with an initial "empty" state.
+        // Create a new datastore with an initial "empty" state.
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
-        console.log("Homepage constructor");
     }
 
     mount() {
@@ -26,19 +23,21 @@ class Homepage extends BindingClass {
 
     async loadUserProfile() {
         const identity = await this.client.getIdentity();
-        const email = identity.email;
-        try {
-            const profileSetupMessage = document.getElementById('profileSetupMessage');
-            const response = await this.client.getProfileByEmail(email);
-            if (response) {
-                this.dataStore.set('profile', response);
-            } else {
-                profileSetupMessage.classList.remove('profile-hidden');
-                profileSetupMessage.classList.add('profile-visible');
+
+        if (identity != null) {
+            const email = identity.email;
+            try {
+                const profileSetupMessage = document.getElementById('profileSetupMessage');
+                const response = await this.client.getProfileByEmail(email);
+                if (response) {
+                    this.dataStore.set('profile', response);
+                } else {
+                    profileSetupMessage.classList.remove('profile-hidden');
+                    profileSetupMessage.classList.add('profile-visible');
+                }
+            } catch (error) {
+                console.error("User is not logged in to retrieve a profile", error);
             }
-            console.log("Userprofile in loadUserProfile", response);
-        } catch (error) {
-            console.error("User is not logged in to retrieve a profile", error);
         }
     }
 }

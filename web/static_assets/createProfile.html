@@ -4,7 +4,6 @@
 <head>
     <script type="text/javascript" src="assets/profile.js"></script>
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body class="background">
@@ -36,29 +35,52 @@
 
 
                 <div class="form-group" id="charactersSection">
-                    <label>List of Characters</label>
-                    <button type="button" id="addCharacterButton">Add a Character</button>
-                    <div id="characterList" class="character-list">
-
+                    <div class="characters-header">
+                        <label>List of Characters</label>
+                        <button type="button" id="addCharacterButton">Add a Character</button>
                     </div>
+                    <div id="characterList" class="character-list"></div>
                 </div>
 
 
             </form>
 
             <div id="characterFormContainer" class="hidden">
-                <form id="characterForm">
+                Hit escape to exit.
+                <form id="characterForm" autocomplete="off">
+                    <h1 class="form-title">Add a Character</h1>
                     <label for="characterName">Name:</label>
-                    <input type="text" id="characterName" name="characterName">
+                    <input type="text" id="characterName" name="characterName" required>
 
                     <label for="characterClass">Class:</label>
-                    <input type="text" id="characterClass" name="characterClass">
+                    <select id="characterClass" name="characterClass" required>
+                        <option value="" disabled selected>Select a Class</option>
+                        <option value="Death Knight">Death Knight</option>
+                        <option value="Druid">Druid</option>
+                        <option value="Hunter">Hunter</option>
+                        <option value="Mage">Mage</option>
+                        <option value="Paladin">Paladin</option>
+                        <option value="Priest">Priest</option>
+                        <option value="Rogue">Rogue</option>
+                        <option value="Shaman">Shaman</option>
+                        <option value="Warlock">Warlock</option>
+                        <option value="Warrior">Warrior</option>
+                    </select>
 
                     <label for="characterSpecialization">Specialization:</label>
-                    <input type="text" id="characterSpecialization" name="characterSpecialization">
+                    <select id="characterSpecialization" name="characterSpecialization" required>
+                        <option value="" disabled selected>Select a Specialization</option>
+                    </select>
 
                     <label for="characterRole">Role:</label>
-                    <input type="text" id="characterRole" name="characterRole">
+                    <select id="characterRole" name="characterRole" required>
+                        <option value="" disabled selected>Select a Role</option>
+                        <option value="DPS">DPS</option>
+                        <option value="Tank">Tank</option>
+                        <option value="Healer">Healer</option>
+                    </select>
+
+
                     <button type="submit">Save Character</button>
                 </form>
             </div>
@@ -67,8 +89,7 @@
             </p>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
 </body>
 
 </html>

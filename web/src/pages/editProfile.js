@@ -115,7 +115,6 @@ class EditProfile extends BindingClass {
             messagePopup.classList.remove('hidden');
             this.dataStore.set('profile', response.data.profile);
         } catch (error) {
-            console.log(error);
             changeButton.innerText = origButtonText;
             messageText.innerText = `Error: ${error.message}`;
             messageText.classList.add('error');

@@ -29,7 +29,7 @@ class ViewRaid extends BindingClass {
             const raid = await this.client.getRaid(raidId);
             this.dataStore.set('raid', raid);
         } catch (error) {
-            console.error("Error loading client data: ", error);
+            console.error("No user to load");
         }
     }
 
@@ -42,13 +42,11 @@ class ViewRaid extends BindingClass {
         document.getElementById('edit-btn').addEventListener('click', this.redirectToEditRaid);
         document.getElementById('feedback-btn').addEventListener('click', this.feedbackForm);
         document.getElementById('viewfeedback-btn').addEventListener('click', this.getFeedback);
-        console.log("feedback event listener added");
-
+        document.getElementById('signup-btn').addEventListener('click', this.displayCharacters);
 
         this.header.addHeaderToPage();
         this.client = new RaidsUnlimitedClient();
         this.clientLoaded();
-
     }
 
     addRaidToPage() {
@@ -121,7 +119,7 @@ class ViewRaid extends BindingClass {
 
         try {
             response = await this.client.roleAssignment(raidId, userId, role, (error) => {
-                messageText.innerText = 'An error occurred when confirming';
+                messageText.innerText = 'An error occurred when confirming.';
                 messageText.classList.add('error');
                 messagePopup.classList.remove('hidden');
                 console.error(`Error: ${error.message}`);
@@ -129,7 +127,7 @@ class ViewRaid extends BindingClass {
                 setTimeout(() => {
                     messagePopup.classList.add('hidden');
                     this.clientLoaded();
-                }, 3000);  // Delay of 3 seconds
+                }, 2000);  // Delay of 3 seconds
             });
 
             if (response.status === true) {
@@ -161,7 +159,7 @@ class ViewRaid extends BindingClass {
 
         try {
             response = await this.client.roleRemoval(raidId, userId, (error) => {
-                messageText.innerText = 'An error occurred when removing';
+                messageText.innerText = 'An error occurred when removing.';
                 messageText.classList.add('error');
                 messagePopup.classList.remove('hidden');
 
@@ -216,8 +214,6 @@ class ViewRaid extends BindingClass {
             });
             dropdown.appendChild(characterElement);
         });
-        // dropdown.style.left = event.pageX + 'px';
-        // dropdown.style.top = event.pageY + 'px';
         dropdown.style.display = 'block';
 
         // Add an event listener for the 'keyup' event on the document
@@ -250,7 +246,7 @@ class ViewRaid extends BindingClass {
                 if (error.message.includes("already signed up")) {
                     messageText.innerText = "You are already signed up for this event";
                 } else {
-                    messageText.innerText = 'An error occurred when signing up';
+                    messageText.innerText = 'An error occurred when signing up.';
                 }
                 messageText.classList.add('error');
                 messagePopup.classList.remove('hidden');
@@ -260,7 +256,7 @@ class ViewRaid extends BindingClass {
                 setTimeout(() => {
                     messagePopup.classList.add('hidden');
                     this.clientLoaded();
-                }, 3000);  // Delay of 5 seconds
+                }, 2000);  // Delay of 5 seconds
             });
             this.dataStore.set('raid', raid);
 
@@ -273,7 +269,7 @@ class ViewRaid extends BindingClass {
                     messageText.innerText = '';
                     messagePopup.classList.add('hidden');
                     this.clientLoaded();
-                }, 3000);  // Delay of 5 seconds
+                }, 2000);  // Delay of 5 seconds
             }
         } catch (error) {
 
@@ -320,10 +316,22 @@ class ViewRaid extends BindingClass {
 
     redirectToEditRaid() {
         const raid = this.dataStore.get('raid');
+        const raidOwner = raid.raidOwner;
         const raidId = raid.raidId;
+        const profileModel = this.header.dataStore.get('profileModel');
 
-        if (raid != null) {
+        if (profileModel && raidOwner === profileModel.email) {
             window.location.href = `/createRaid.html?id=${raidId}`;
+        } else {
+            const messagePopup = document.getElementById('messagePopup');
+            const messageText = document.getElementById('messageText');
+            messageText.innerText = `You must own the raid to make changes.`;
+            messageText.classList.add('error');
+            messagePopup.classList.remove('hidden');
+
+            setTimeout(() => {
+                messagePopup.classList.add('hidden');
+            }, 2000);
         }
     }
 
@@ -378,8 +386,8 @@ class ViewRaid extends BindingClass {
             setTimeout(() => {
                 this.clientLoaded();
                 messagePopup.classList.add('hidden');
-                // window.location.href = "index.html";
-            }, 3000);
+                window.location.href = "index.html";
+            }, 2000);
         } catch (error) {
 
         }
@@ -420,10 +428,9 @@ class ViewRaid extends BindingClass {
      * @returns {void}
      */
      async leaveFeedback() {
-         console.log("feedback function");
         const raidModel = this.dataStore.get('raid');
         const raidId = raidModel.raidId;
-        const userId = this.header.dataStore.get('profileModel').userId;
+        const userId = this.header.dataStore.get('profileModel')?.userId;
         const rating = document.getElementById('rating').value;
         const comments = document.getElementById('comment').value;
 
@@ -437,6 +444,11 @@ class ViewRaid extends BindingClass {
                 messageText.innerText = `${error.message}`;
                 messageText.classList.add('error');
                 messagePopup.classList.remove('hidden');
+
+                setTimeout(() => {
+                    messagePopup.classList.add('hidden');
+                }, 2000);
+
             });
 
             if (response.status === 200) {
@@ -447,7 +459,7 @@ class ViewRaid extends BindingClass {
 
             setTimeout(() => {
                 messagePopup.classList.add('hidden');
-            }, 3000);
+            }, 2000);
         } catch (error) {
 
         }
@@ -464,7 +476,6 @@ class ViewRaid extends BindingClass {
      */
     getFeedback() {
         const raidModel = this.dataStore.get('raid');
-        console.log(raidModel);
 
         // Get the feedback array from the raidModel
         const feedbacks = raidModel.feedback;

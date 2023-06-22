@@ -13,7 +13,6 @@ class CreateRaid extends BindingClass {
         this.bindClassMethods(['mount', 'submit', 'redirectToViewRaid', 'clientLoaded', 'populateRaidData',
             'getFormValues', 'update'], this);
         this.dataStore = new DataStore();
-        // this.dataStore.addChangeListener(this.redirectToViewRaid);
         this.header = new Header(this.dataStore);
     }
 
@@ -66,7 +65,7 @@ class CreateRaid extends BindingClass {
         document.getElementById('raid-size').value = raid.raidSize;
         document.getElementById('raid-objective').value = raid.raidObjective;
         document.getElementById('loot-distribution').value = raid.lootDistribution;
-        document.getElementById('dps-input').value = raid.requiredRoles.DPS;
+        document.getElementById('dps-input').value = raid.requiredRoles.Dps;
         document.getElementById('healer-input').value = raid.requiredRoles.Healer;
         document.getElementById('tank-input').value = raid.requiredRoles.Tank;
         document.getElementById('raid-status').value = raid.raidStatus;
@@ -116,6 +115,11 @@ class CreateRaid extends BindingClass {
                 changeButton.innerText = origButtonText;
                 messageText.innerText = `Error: ${error.message}`;
                 messagePopup.classList.remove('hidden');
+
+                    setTimeout(() => {
+                        messagePopup.classList.add('hidden');
+                    }, 3000);
+
             });
         this.dataStore.set('raid', raid);
 

@@ -61,7 +61,7 @@ class ViewProfile extends BindingClass {
 
             const tbody = charactersTable.querySelector('tbody') ||
                 charactersTable.appendChild(document.createElement('tbody'));
-            console.log(response);
+
             response.profileModel.characterList.forEach(character => {
                 const dataRow = document.createElement('tr');
                 [character.charName, character.charClass, character.specialization, character.role].forEach(value => {
